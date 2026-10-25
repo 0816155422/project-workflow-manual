@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คู่มือระบบจัดการงาน — โครงการ HAP</title>
+  <style>
+    :root {
+      --primary: #165DFF;
+      --neutral-50: #f9fafb;
+      --neutral-100: #f3f4f6;
+      --neutral-200: #e5e7eb;
+      --neutral-700: #374151;
+      --neutral-800: #1f2937;
+      --neutral-900: #111827;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--neutral-800);
+      background: #fff;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    header { border-bottom: 1px solid var(--neutral-200); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    h1 { font-size: 1.8rem; color: var(--neutral-900); margin-bottom: 0.3rem; }
+    h2 { font-size: 1.35rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--primary); border-bottom: 1px solid var(--neutral-100); padding-bottom: 0.3rem; }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.6rem; color: var(--neutral-700); }
+    p { margin-bottom: 0.8rem; }
+    code { background: var(--neutral-100); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+    pre { background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius); padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+    pre code { background: transparent; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.925rem; }
+    th, td { border: 1px solid var(--neutral-200); padding: 0.6rem 0.8rem; text-align: left; vertical-align: top; }
+    th { background: var(--neutral-50); font-weight: 600; }
+    .toc { background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; }
+    .toc ul { list-style-position: inside; line-height: 1.8; columns: 2; }
+    .toc a { color: var(--primary); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .note { border-left: 3px solid var(--primary); background: #e8f3ff; padding: 0.8rem 1rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .schema-label { display: inline-block; background: var(--primary); color: white; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 3px; margin-right: 0.5rem; }
+    .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--neutral-200); font-size: 0.85rem; color: #6b7280; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📄 คู่มือระบบจัดการงาน — โครงการ HAP</h1>
+    <p><strong>เวอร์ชัน:</strong> 1.1 | <strong>วันที่แก้ไข:</strong> 2026-10-25 | <strong>สถานะ:</strong> มาตรฐานหลัก — ห้ามแก้ไขโดยไม่ผ่านการอนุมัติ</p>
+    <p><strong>ใช้สำหรับ:</strong> ChatGPT Project Memory / AI Workflow / GitHub Repository</p>
+  </header>
+
+  <nav class="toc">
+    <h3>📑 สารบัญ — คลิกเพื่อข้ามไปส่วนต่างๆ</h3>
+    <ul>
+      <li><a href="#section-structure">1. โครงสร้างพื้นที่จัดเก็บ</a></li>
+      <li><a href="#section-status">2. คำจำกัดความสถานะ</a></li>
+      <li><a href="#section-schemas">3. รูปแบบเอกสารงาน (Schema)</a></li>
+      <li><a href="#section-workflow">4. ขั้นตอนการปฏิบัติงาน</a></li>
+      <li><a href="#section-rules">5. ข้อห้ามและหลักการพื้นฐาน</a></li>
+      <li><a href="#section-glossary">6. Glossary คำศัพท์ v1.1</a></li>
+      <li><a href="#section-raci">7. ผู้รับผิดชอบและสิทธิ์การอนุมัติ (RACI) v1.1</a></li>
+      <li><a href="#section-naming">8. Naming Convention v1.1</a></li>
+      <li><a href="#section-decision-tree">9. Decision Tree สถานะ v1.1</a></li>
+      <li><a href="#section-escalation">10. Escalation & Backup Policy v1.1</a></li>
+      <li><a href="#section-ai-reference">📋 คำสั่งสำหรับ AI</a></li>
+    </ul>
+  </nav>
+
+  <section id="section-structure">
+    <h2>1. โครงสร้างพื้นที่จัดเก็บ</h2>
+    <p><strong>หลักการ:</strong> ต้นฉบับไม่เคยถูกเขียนทับ → เพิ่มรุ่นใหม่เมื่อมีการเปลี่ยน → เก็บทุกเวอร์ชัน ไม่ลบ</p>
+    <table>
+      <tr>
+        <th>ไดเรกทอรี</th>
+        <th>วัตถุประสงค์</th>
+        <th>กฎการใช้งาน</th>
+        <th>สิทธิ์เขียน</th>
+        <th>เก็บรุ่น</th>
+      </tr>
+      <tr><td><code>00_CONTROL/</code></td><td>กติกากลาง, แบบฟอร์ม, คำจำกัดความสถานะ, ขั้นตอนมาตรฐานระบบ</td><td>อ่านอย่างเดียว — ห้ามแก้ไขโดยไม่มีการอนุมัติและบันทึกเหตุผล</td><td><code>readonly</code></td><td>true</td></tr>
+      <tr><td><code>01_INBOX/</code></td><td>บันทึกโจทย์ผู้ใช้ตามถ้อยคำเดิม; เก็บไฟล์และเอกสารต้นฉบับที่ได้รับ</td><td>คัดลอกข้อความตรงตัว ห้ามแก้ไข ตีความ หรือสรุปแทนเจ้าของข้อความ บันทึกเวลาและแหล่งที่มาทุกรายการ</td><td><code>append</code></td><td>true</td></tr>
+      <tr><td><code>02_EVIDENCE/</code></td><td>เก็บข้อมูลดิบ ผลสืบค้น เนื้อหาเอกสารต้นฉบับ พร้อมแหล่งอ้างอิง รุ่น และวันที่เข้าถึง</td><td>ข้อมูลทุกรายการต้องระบุแหล่งที่มา รุ่นหรือหมายเลขฉบับ และวันที่ หากไม่มีแหล่งอ้างอิงที่ยืนยันได้ ให้ระบุสถานะ NOT_FOUND</td><td><code>append</code></td><td>true</td></tr>
+      <tr><td><code>03_WORK_PACKAGES/</code></td><td>แยกเก็บงานย่อยตามส่วนงาน แต่ละรายการประกอบด้วยรหัสงาน โจทย์ย่อย รายการที่ต้องทำ ผลลัพธ์ระหว่างทาง และปัญหาที่พบ</td><td>ทุกไฟล์ต้องมีรหัสงานกำกับ หนึ่งไฟล์ต่อหนึ่งงานย่อย ไม่รวมงานหลายอย่างในไฟล์เดียว</td><td><code>write</code></td><td>true</td></tr>
+      <tr><td><code>04_SYNTHESIS/</code></td><td>รวบรวมและจัดระเบียบผลลัพธ์จาก 03_WORK_PACKAGES เชื่อมโยงข้อมูล เรียงลำดับ จัดกลุ่ม</td><td>ห้ามเติมข้อมูลใหม่หรือตีความเพิ่มเติม หากพบช่องว่างระหว่างข้อมูล ให้ระบุสถานะ MISSING พร้อมระบุส่วนที่ขาดอย่างชัดเจน</td><td><code>append</code></td><td>true</td></tr>
+      <tr><td><code>05_REVIEW/</code></td><td>บันทึกผลการตรวจสอบแยกออกจากพื้นที่ทำงาน แยกเป็น 3 ประเภท: PASS / REVIEW_ISSUES / INSUFFICIENT_EVIDENCE</td><td>ผู้ตรวจต้องเป็นบุคคลหรือกระบวนการที่แยกต่างหากจากผู้ดำเนินงาน ห้ามตรวจงานของตนเอง</td><td><code>write</code></td><td>true</td></tr>
+      <tr><td><code>06_RELEASE/</code></td><td>เก็บเฉพาะผลงานฉบับสมบูรณ์ที่ผ่านการตรวจสอบและได้รับการอนุมัติแล้วเท่านั้น บันทึกเลขที่อนุมัติ วันที่ และหมายเลขรุ่น</td><td>เมื่อย้ายมาแล้ว ห้ามแก้ไขเนื้อหา สิทธิ์อ่านอย่างเดียว ยกเว้นการย้ายเวอร์ชันใหม่ที่ได้รับอนุมัติ</td><td><code>readonly</code></td><td>true</td></tr>
+      <tr><td><code>99_ARCHIVE/</code></td><td>เก็บรุ่นเก่า ฉบับที่ถูกแทนที่ และงานที่ระงับ ด้วยเหตุผลใดๆ พร้อมบันทึกเหตุผลที่ย้ายมาและวันที่</td><td>ห้ามลบถาวร ย้ายมาที่นี่ได้อย่างเดียว ไม่ใช่พื้นที่ทำงานปัจจุบัน</td><td><code>archived</code></td><td>true</td></tr>
+    </table>
+  </section>
+
+  <section id="section-status">
+    <h2>2. คำจำกัดความสถานะ</h2>
+    <table>
+      <tr><th>รหัสสถานะ</th><th>ความหมาย</th><th>การดำเนินการที่ต้องปฏิบัติ</th></tr>
+      <tr><td><code>CONFIRMED</code></td><td>มีหลักฐานยืนยันจากแหล่งที่น่าเชื่อถือ ข้อมูลชัดเจนครบถ้วน</td><td>อ้างอิงแหล่งที่มา ใช้งานได้</td></tr>
+      <tr><td><code>UNKNOWN</code></td><td>มีช่องว่างหรือข้อมูลไม่ครบถ้วน ไม่สามารถระบุได้ชัดเจน แต่ทราบว่าขาดส่วนไหน</td><td>ระบุรายการที่ขอข้อมูลเพิ่ม อย่าสมมติค่าเติมเข้าไป</td></tr>
+      <tr><td><code>NOT_FOUND</code></td><td>ตรวจสอบแหล่งที่มาที่มีแล้ว แต่ไม่พบข้อมูลที่เกี่ยวข้อง</td><td>ระบุรายการแหล่งที่ตรวจสอบแล้ว และผลลัพธ์ที่ได้ อย่าสรุปว่าไม่มีอยู่จริงทั่วโลก</td></tr>
+      <tr><td><code>MISSING</code></td><td>ข้อมูลหรือผลงานส่วนก่อนหน้ายังไม่มี ไม่สามารถดำเนินงานส่วนถัดไปได้</td><td>บันทึกสิ่งที่ขาด หยุดงานชั่วคราว แจ้งผู้เกี่ยวข้อง</td></tr>
+      <tr><td><code>BLOCKED</code></td><td>หยุดการดำเนินงานชั่วคราวด้วยเหตุผลที่ยืนยันได้ เช่น รอข้อมูล รออนุมัติ หรือรอผลงานส่วนอื่น</td><td>ระบุสาเหตุที่ชัดเจน รายการสิ่งที่ต้องได้รับก่อนดำเนินต่อ และสถานะงานที่พึ่งพา</td></tr>
+      <tr><td><code>PASS</code></td><td>ผลงานตรงตามเกณฑ์ มีหลักฐานครบถ้วน ถูกต้อง ผ่านการตรวจสอบ</td><td>ย้ายไป 06_RELEASE ตามขั้นตอน บันทึกเลขที่อนุมัติและวันที่</td></tr>
+      <tr><td><code>REVIEW_ISSUES</code></td><td>ผลงานมีจุดที่ต้องแก้ไขหรือปรับปรุง แต่โครงสร้างโดยรวมสมบูรณ์</td><td>ระบุจุดที่ต้องแก้ไข ข้อเสนอแนะ และส่งกลับไปยัง 03_WORK_PACKAGES</td></tr>
+      <tr><td><code>INSUFFICIENT_EVIDENCE</code></td><td>ดำเนินงานตามที่มีแล้ว แต่หลักฐานไม่เพียงพอที่จะยืนยันความถูกต้องของผลลัพธ์</td><td>ระบุรายการหลักฐานที่ขาด ห้ามสรุปผลในส่วนที่ยังไม่มีการยืนยัน</td></tr>
+    </table>
+  </section>
+
+  <section id="section-schemas">
+    <h2>3. รูปแบบเอกสารงาน (Schema)</h2>
+
+    <h3><span class="schema-label">Schema 1</span>TaskDocument — บันทึกก่อนเริ่มงาน</h3>
+    <p><strong>ใช้ที่:</strong> ก่อนเริ่มงาน ทุกครั้งที่รับโจทย์ใหม่ | <strong>บันทึกที่:</strong> <code>03_WORK_PACKAGES/TASK-ID.md</code></p>
+    <pre><code>{
+  "schemaVersion": "1.1",
+  "taskId": "YYYYMMDD-XXX",
+  "source": {
+    "author": "ชื่อผู้ส่ง",
+    "receivedAt": "ISO8601 วันที่เวลา",
+    "originalText": "คัดลอกคำพูดผู้ใช้ตรงๆ ห้ามแก้ไข"
+  },
+  "scope": {
+    "objective": ["รายการเป้าหมายที่ชัดเจน"],
+    "inclusions": ["สิ่งที่ต้องทำภายในงานนี้"],
+    "exclusions": ["สิ่งที่ไม่อยู่ในขอบเขตงานนี้"]
+  },
+  "inputs": [
+    {
+      "reference": "ชื่อไฟล์/แหล่งข้อมูล",
+      "source": "ที่มาของข้อมูล",
+      "status": "CONFIRMED|UNKNOWN|NOT_FOUND|MISSING",
+      "notes": "รายละเอียดเพิ่มเติม"
+    }
+  ],
+  "outputsExpected": ["รายการผลลัพธ์ที่จะส่งมอบเมื่อเสร็จงาน"],
+  "acceptanceCriteria": ["เงื่อนไขที่ต้องครบถ้วนก่อนส่งตรวจ"],
+  "dependencies": {
+    "pending": ["TASK-ID ที่รออยู่"],
+    "completed": ["TASK-ID ที่เสร็จแล้ว"],
+    "blocked": ["TASK-ID ที่ติดขัด"]
+  },
+  "openQuestions": [
+    {
+      "item": "สิ่งที่ต้องการทราบ/ข้อมูลที่ขาด",
+      "status": "UNKNOWN|MISSING|BLOCKED",
+      "request": "ข้อมูลที่ต้องการจากผู้ใช้"
+    }
+  ]
+}</code></pre>
+
+    <h3><span class="schema-label">Schema 2</span>ProgressReport — รายงานเมื่อทำงานเสร็จ</h3>
+    <p><strong>ใช้ที่:</strong> ทุกครั้งที่ทำงานเสร็จก่อนส่งตรวจ | <strong>บันทึกที่:</strong> <code>04_SYNTHESIS/TASK-ID-report.md</code></p>
+    <pre><code>{
+  "schemaVersion": "1.1",
+  "taskId": "YYYYMMDD-XXX",
+  "readSources": [
+    {
+      "reference": "ชื่อไฟล์/แหล่งที่อ่าน",
+      "extractedParts": ["ส่วนของข้อมูลที่นำมาใช้งานจริง"]
+    }
+  ],
+  "conditionsApplied": ["ขอบเขต/ข้อจำกัด/กติกาที่นำมาใช้"],
+  "evidenceSummary": [
+    {
+      "statement": "ข้อความหรือข้อมูล",
+      "sourceRef": "ชื่อแหล่งอ้างอิง",
+      "status": "CONFIRMED|UNKNOWN|NOT_FOUND|MISSING"
+    }
+  ],
+  "workCompleted": [
+    {
+      "item": "รายการงานที่ทำเสร็จ",
+      "resultRef": "ชื่อไฟล์ผลลัพธ์",
+      "completedAt": "ISO8601 วันที่เวลา"
+    }
+  ],
+  "workPending": [
+    {
+      "item": "รายการที่ยังไม่ได้ทำ",
+      "reason": "เหตุผลที่ยังไม่ทำ",
+      "blockedBy": ["TASK-ID ที่ต้องรอ"]
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "สิ่งที่ต้องทำต่อ",
+      "targetDirectory": "ที่เก็บผลลัพธ์ถัดไป",
+      "dependsOn": ["TASK-ID ที่ต้องรอ"]
+    }
+  ]
+}</code></pre>
+
+    <h3><span class="schema-label">Schema 3</span>ReviewRecord — บันทึกผลการตรวจสอบ</h3>
+    <p><strong>ใช้ที่:</strong> เมื่อตรวจงานเสร็จ | <strong>บันทึกที่:</strong> <code>05_REVIEW/TASK-ID-review.md</code></p>
+    <pre><code>{
+  "schemaVersion": "1.1",
+  "taskId": "YYYYMMDD-XXX",
+  "reviewedAt": "ISO8601 วันที่เวลา",
+  "reviewer": "ชื่อผู้ตรวจ",
+  "result": "PASS|REVIEW_ISSUES|INSUFFICIENT_EVIDENCE",
+  "findings": [
+    {
+      "location": "ส่วนหรือบรรทัดที่ตรวจพบ",
+      "observation": "สิ่งที่พบ",
+      "severity": "info|warning|required",
+      "resolution": "คำสั่ง/ข้อเสนอแนะ"
+    }
+  ],
+  "decision": "ข้อสรุปการตรวจ",
+  "approvedBy": "ชื่อผู้อนุมัติ",
+  "approvedAt": "ISO8601 วันที่เวลา",
+  "movedTo": "06_RELEASE/เส้นทางไฟล์ฉบับส่งมอบ"
+}</code></pre>
+  </section>
+
+  <section id="section-workflow">
+    <h2>4. ขั้นตอนการปฏิบัติงาน</h2>
+    <table>
+      <tr><th>ขั้นที่</th><th>ชื่อขั้นตอน</th><th>การดำเนินการ</th><th>บันทึกที่</th><th>ส่งต่อไปที่</th></tr>
+      <tr><td><strong>1</strong></td><td>รับโจทย์ → บันทึก TaskDocument</td><td>กำหนด TASK-ID (YYYYMMDD-XXX); บันทึกคำผู้ใช้ตรงๆ; ระบุขอบเขต/แหล่งที่มา/สิ่งที่ขาด</td><td>01_INBOX/ → ย้ายไป 03_WORK_PACKAGES/</td><td>03_WORK_PACKAGES/</td></tr>
+      <tr><td><strong>2</strong></td><td>ดำเนินงานตามขอบเขต</td><td>ใช้เฉพาะข้อมูลที่มีแหล่งอ้างอิง; ทุกข้อมูลระบุสถานะ; พบช่องว่าง → UNKNOWN/MISSING; แบ่งงานขนานหรือลำดับตามความพึ่งพา</td><td>03_WORK_PACKAGES/TASK-ID.md</td><td>04_SYNTHESIS/</td></tr>
+      <tr><td><strong>3</strong></td><td>รวบรวม → เขียน ProgressReport → ส่งตรวจ</td><td>รวบรวมจาก 03 เท่านั้น; ห้ามเติมข้อมูล; เชื่อมโยงข้อมูล; สร้างรายงาน; ส่งพร้อมอ้างอิงทั้งหมด</td><td>04_SYNTHESIS/TASK-ID-report.md</td><td>05_REVIEW/</td></tr>
+      <tr><td><strong>4</strong></td><td>ตรวจสอบ → บันทึก ReviewRecord → จัดส่ง</td><td>ผู้ตรวจต้องไม่ใช่ผู้ทำงาน; ตรวจความครบถ้วน/หลักฐาน; บันทึกผล; ผ่าน → ย้ายไป 06_RELEASE; มีปัญหา → ส่งกลับ 03</td><td>05_REVIEW/TASK-ID-review.md</td><td>06_RELEASE/ หรือ 03_WORK_PACKAGES/</td></tr>
+    </table>
+    <h3>รายละเอียดแต่ละขั้นตอน</h3>
+    <h4>ขั้นที่ 1: ก่อนเริ่มงาน</h4>
+    <ul>
+      <li>กำหนดรหัสงานในรูปแบบ <code>YYYYMMDD-XXX</code></li>
+      <li>บันทึกข้อความต้นฉบับจากผู้ใช้โดยตรง ห้ามแก้ไข ถอดความ หรือปรับปรุงถ้อยคำ</li>
+      <li>ระบุวัตถุประสงค์อย่างชัดเจน แยกสิ่งที่ต้องทำและสิ่งที่ไม่อยู่ในขอบเขต</li>
+      <li>รายการแหล่งข้อมูลที่มีอยู่และสถานะความพร้อมใช้งาน</li>
+      <li>ระบุผลลัพธ์ที่คาดหวังและเกณฑ์การยอมรับ</li>
+      <li>บันทึกงานที่ต้องรอผลจากส่วนอื่น</li>
+      <li>ระบุรายการสิ่งที่ยังไม่ทราบหรือข้อมูลที่ขาด พร้อมสถานะ</li>
+    </ul>
+    <h4>ขั้นที่ 2: ดำเนินงาน</h4>
+    <ul>
+      <li>ใช้เฉพาะข้อมูลที่มีแหล่งอ้างอิงใน 02_EVIDENCE หรือแหล่งที่ระบุไว้ชัดเจน</li>
+      <li>ทุกข้อความที่ไม่ใช่ความเห็นของผู้ปฏิบัติงานต้องมีการอ้างอิงแหล่งที่มา</li>
+      <li>หากพบข้อมูลไม่ครบถ้วนหรือไม่สามารถยืนยันได้ ให้ระบุสถานะทันที</li>
+      <li>แบ่งงานย่อยตามความเหมาะสม: งานที่ไม่ต้องอาศัยข้อมูลจากส่วนอื่นสามารถดำเนินงานขนานกันได้</li>
+      <li>ผู้ประสานงานรวบรวมผลลัพธ์ ตรวจสอบความครบถ้วน และส่งต่อ</li>
+    </ul>
+    <h4>ขั้นที่ 3: รวบรวมและส่งตรวจ</h4>
+    <ul>
+      <li>รวบรวมผลลัพธ์จาก 03_WORK_PACKAGES เท่านั้น</li>
+      <li>จัดระเบียบ เชื่อมโยง และเรียงลำดับข้อมูล</li>
+      <li>ห้ามตีความหรือสรุปในส่วนที่ไม่มีหลักฐานสนับสนุน</li>
+      <li>สร้างรายงานความก้าวหน้าตามรูปแบบ ProgressReport</li>
+      <li>ส่งไปยัง 05_REVIEW พร้อมเอกสารอ้างอิงทั้งหมด</li>
+    </ul>
+    <h4>ขั้นที่ 4: ตรวจสอบและอนุมัติ</h4>
+    <ul>
+      <li>ผู้ตรวจต้องเป็นบุคคลหรือกระบวนการที่แยกต่างหากจากผู้ดำเนินงาน</li>
+      <li>ตรวจสอบความถูกต้อง ความครบถ้วน และการมีหลักฐานสนับสนุน</li>
+      <li>บันทึกผลการตรวจตามรูปแบบ ReviewRecord</li>
+      <li><strong>PASS:</strong> ย้ายสำเนาไปยัง 06_RELEASE เก็บต้นฉบับที่เดิม</li>
+      <li><strong>REVIEW_ISSUES:</strong> บันทึกจุดที่ต้องแก้ไข ส่งกลับไปยัง 03_WORK_PACKAGES</li>
+      <li><strong>INSUFFICIENT_EVIDENCE:</strong> บันทึกรายการหลักฐานที่ต้องการเพิ่มเติม</li>
+    </ul>
+  </section>
+
+  <section id="section-rules">
+    <h2>5. ข้อห้ามและหลักการพื้นฐาน</h2>
+    <table>
+      <tr><th>รหัสกฎ</th><th>หลักการ</th><th>สิ่งที่ห้ามปฏิบัติ</th><th>สิ่งที่ต้องปฏิบัติแทน</th></tr>
+      <tr><td><code>RULE-001</code></td><td>ห้ามสรุปจากความจำโดยไม่มีแหล่งอ้างอิง</td><td>อ้างว่า "จำได้ว่า", "เคยพูดกันว่า" หรือสรุปเนื้อหาโดยไม่ระบุเอกสารอ้างอิง</td><td>อ้างอิงชื่อไฟล์ ตำแหน่ง และวันที่ทุกครั้ง หากไม่มีแหล่งให้ระบุสถานะ NOT_FOUND</td></tr>
+      <tr><td><code>RULE-002</code></td><td>ห้ามเขียนทับต้นฉบับ</td><td>แก้ไข ปรับปรุง หรือลดข้อความที่บันทึกเป็นต้นฉบับ</td><td>บันทึกฉบับใหม่เพิ่มเข้าไป พร้อมระบุวันที่และรุ่น ย้ายฉบับเก่าไปที่ 99_ARCHIVE</td></tr>
+      <tr><td><code>RULE-003</code></td><td>ห้ามเติมข้อมูลเพื่อความสมบูรณ์</td><td>ใช้ถ้อยคำเช่น "น่าจะเป็น", "คาดว่า", "โดยสรุปแล้ว" ในส่วนที่ไม่มีหลักฐาน</td><td>ระบุสถานะ UNKNOWN หรือ NOT_FOUND พร้อมคำอธิบายว่าทราบเท่าที่มีข้อมูลเท่านั้น</td></tr>
+      <tr><td><code>RULE-004</code></td><td>ห้ามปฏิเสธงานโดยไม่มีเหตุผล</td><td>ตั้งสถานะ BLOCKED ด้วยเหตุผล "ไม่เกี่ยวข้อง" หรือ "ไม่ใช่งานของส่วนนี้"</td><td>ระบุสาเหตุที่ตรวจสอบยืนยันได้ เช่น ขาดข้อมูล รออนุมัติ หรือรอผลงานส่วนอื่น พร้อมรายการสิ่งที่ต้องการ</td></tr>
+      <tr><td><code>RULE-005</code></td><td>ห้ามตรวจงานตัวเอง</td><td>รับรองหรือยืนยันความถูกต้องของผลงานที่ตนเองเป็นผู้จัดทำ</td><td>ส่งงานไปยังกระบวนการตรวจสอบที่แยกต่างหาก</td></tr>
+      <tr><td><code>RULE-006</code></td><td>ห้ามลบประวัติ</td><td>ลบเอกสารหรือข้อมูลที่เคยบันทึกแล้ว</td><td>ย้ายไฟล์ไปยัง 99_ARCHIVE พร้อมบันทึกเหตุผลและวันที่ย้าย</td></tr>
+    </table>
+  </section>
+
+  <section id="section-glossary">
+    <h2>6. Glossary คำศัพท์ v1.1</h2>
+    <ul>
+      <li><strong>TaskDocument</strong>: เอกสารบันทึกโจทย์และขอบเขตงาน ก่อนเริ่มดำเนินงาน</li>
+      <li><strong>ProgressReport</strong>: รายงานความก้าวหน้าและผลลัพธ์ที่ทำเสร็จ</li>
+      <li><strong>ReviewRecord</strong>: บันทึกผลการตรวจสอบและอนุมัติ</li>
+      <li><strong>Source reference</strong>: การอ้างอิงแหล่งที่มาของข้อมูล</li>
+      <li><strong>Provenance</strong>: ที่มาและประวัติของข้อมูล</li>
+      <li><strong>Append-only</strong>: การบันทึกแบบเพิ่มอย่างเดียว ไม่แก้ไขหรือลบ</li>
+      <li><strong>Maker-checker</strong>: หลักการแยกผู้ทำและผู้ตรวจ</li>
+      <li><strong>Escalation</strong>: การยกระดับปัญหาหรือส่งต่อผู้มีอำนาจตัดสินใจ</li>
+      <li><strong>RACI</strong>: Responsible / Accountable / Consulted / Informed</li>
+    </ul>
+  </section>
+
+  <section id="section-raci">
+    <h2>7. ผู้รับผิดชอบและสิทธิ์การอนุมัติ (RACI) v1.1</h2>
+    <table>
+      <tr><th>ไดเรกทอรี / กิจกรรม</th><th>ผู้ปฏิบัติ (R)</th><th>ผู้อนุมัติ (A)</th><th>ผู้ให้คำปรึกษา (C)</th><th>ผู้รับทราบ (I)</th></tr>
+      <tr><td>00_CONTROL/</td><td>ผู้ดูแลระบบ (Admin)</td><td>ผู้บริหารโครงการ (PM)</td><td>ทีมกำกับดูแล</td><td>ทุกทีม</td></tr>
+      <tr><td>01_INBOX/</td><td>ผู้รับงาน</td><td>—</td><td>—</td><td>ผู้ประสานงาน</td></tr>
+      <tr><td>02_EVIDENCE/</td><td>นักวิจัย/ผู้สืบค้น</td><td>หัวหน้าทีมวิจัย</td><td>ผู้เชี่ยวชาญเฉพาะด้าน</td><td>ผู้ประสานงาน</td></tr>
+      <tr><td>03_WORK_PACKAGES/</td><td>ผู้ปฏิบัติงานย่อย</td><td>หัวหน้างานย่อย</td><td>—</td><td>ผู้ประสานงาน</td></tr>
+      <tr><td>04_SYNTHESIS/</td><td>ผู้สังเคราะห์</td><td>หัวหน้าทีมสังเคราะห์</td><td>ผู้ตรวจสอบ</td><td>ผู้ประสานงาน</td></tr>
+      <tr><td>05_REVIEW/</td><td>ผู้ตรวจสอบ</td><td>ผู้อนุมัติ (แยกจากผู้ทำ)</td><td>—</td><td>ผู้บริหารโครงการ</td></tr>
+      <tr><td>06_RELEASE/</td><td>ผู้ดูแลระบบ</td><td>ผู้บริหารโครงการ</td><td>—</td><td>ทุกทีม</td></tr>
+      <tr><td>99_ARCHIVE/</td><td>ผู้ดูแลระบบ</td><td>ผู้บริหารโครงการ</td><td>—</td><td>ทุกทีม</td></tr>
+    </table>
+  </section>
+
+  <section id="section-naming">
+    <h2>8. Naming Convention v1.1</h2>
+    <table>
+      <tr><th>ไดเรกทอรี</th><th>รูปแบบชื่อไฟล์</th><th>ตัวอย่าง</th></tr>
+      <tr><td>00_CONTROL/</td><td><code>&lt;ชื่อเอกสาร&gt;-v&lt;major&gt;.&lt;minor&gt;.html</code></td><td><code>project-workflow-manual-v1.1.html</code></td></tr>
+      <tr><td>01_INBOX/</td><td><code>INBOX-YYYYMMDD-HHMM-&lt;ผู้ส่ง&gt;.md</code></td><td><code>INBOX-20261025-0930-clientA.md</code></td></tr>
+      <tr><td>02_EVIDENCE/</td><td><code>EVID-YYYYMMDD-XXX-&lt;หัวข้อสั้น&gt;.md</code></td><td><code>EVID-20261025-001-market-data.md</code></td></tr>
+      <tr><td>03_WORK_PACKAGES/</td><td><code>TASK-YYYYMMDD-XXX.md</code></td><td><code>TASK-20261025-001.md</code></td></tr>
+      <tr><td>04_SYNTHESIS/</td><td><code>TASK-YYYYMMDD-XXX-report.md</code></td><td><code>TASK-20261025-001-report.md</code></td></tr>
+      <tr><td>05_REVIEW/</td><td><code>TASK-YYYYMMDD-XXX-review.md</code></td><td><code>TASK-20261025-001-review.md</code></td></tr>
+      <tr><td>06_RELEASE/</td><td><code>REL-YYYYMMDD-XXX-v&lt;major&gt;.&lt;minor&gt;.md</code></td><td><code>REL-20261025-001-v1.0.md</code></td></tr>
+      <tr><td>99_ARCHIVE/</td><td><code>ARCH-YYYYMMDD-&lt;ชื่อไฟล์เดิม&gt;</code></td><td><code>ARCH-20261026-TASK-20261025-001.md</code></td></tr>
+    </table>
+  </section>
+
+  <section id="section-decision-tree">
+    <h2>9. Decision Tree สถานะ v1.1</h2>
+    <pre>เริ่ม: ข้อมูล/ผลงานไม่สมบูรณ์
+│
+├─ ตรวจสอบแหล่งข้อมูลที่มีอยู่แล้วหรือไม่?
+│   │
+│   ├─ ไม่ได้ตรวจสอบ → ต้องตรวจสอบก่อน (ห้ามสรุป)
+│   │
+│   └─ ตรวจสอบแล้ว
+│       │
+│       ├─ พบข้อมูลแต่ยังไม่ครบถ้วน → UNKNOWN
+│       │
+│       ├─ ไม่พบข้อมูลในแหล่งที่ตรวจ → NOT_FOUND
+│       │
+│       └─ ข้อมูลส่วนก่อนหน้ายังไม่มี → MISSING
+│
+└─ มีเหตุให้หยุดชั่วคราวที่ยืนยันได้หรือไม่?
+    │
+    ├─ รอข้อมูล/รออนุมัติ/รอผลงานอื่น → BLOCKED
+    │
+    └─ ไม่มีเหตุ → ดำเนินงานต่อด้วยข้อมูลที่มี</pre>
+    <p><strong>UNKNOWN:</strong> พบข้อมูลแต่ไม่ครบ รู้ว่าขาดอะไร</p>
+    <p><strong>NOT_FOUND:</strong> ตรวจแหล่งแล้วไม่พบ</p>
+    <p><strong>MISSING:</strong> ผลงานส่วนก่อนหน้ายังไม่มี</p>
+    <p><strong>BLOCKED:</strong> หยุดชั่วคราวด้วยเหตุที่ยืนยันได้</p>
+  </section>
+
+  <section id="section-escalation">
+    <h2>10. Escalation & Backup Policy v1.1</h2>
+    <h3>10.1 Escalation Path</h3>
+    <table>
+      <tr><th>ระยะเวลา</th><th>การดำเนินการ</th><th>ผู้รับผิดชอบ</th></tr>
+      <tr><td>≤ 2 วันทำการ</td><td>ผู้ปฏิบัติติดตามสถานะและบันทึกใน TaskDocument</td><td>ผู้ปฏิบัติงาน</td></tr>
+      <tr><td>3–5 วันทำการ</td><td>แจ้งหัวหน้างานย่อย + บันทึกเหตุผลใน ProgressReport</td><td>หัวหน้างานย่อย</td></tr>
+      <tr><td>6–10 วันทำการ</td><td>ยกระดับถึงผู้บริหารโครงการ + พิจารณาทางเลือกทดแทน</td><td>ผู้บริหารโครงการ</td></tr>
+      <tr><td>&gt; 10 วันทำการ</td><td>พิจารณาระงับงาน → ย้ายไป 99_ARCHIVE พร้อมบันทึกเหตุผล</td><td>ผู้บริหารโครงการ</td></tr>
+    </table>
+    <h3>10.2 Backup Policy</h3>
+    <ul>
+      <li>GitHub repository ทำหน้าที่เป็น primary backup — ต้องมี remote สำรองอย่างน้อย 1 แห่ง</li>
+      <li>สำรองข้อมูลเต็มรูปแบบ (full backup) อย่างน้อยเดือนละ 1 ครั้ง</li>
+      <li>ตรวจสอบความสามารถในการ restore ทุกไตรมาส</li>
+      <li>ห้ามลบ backup แม้แต่งานจะถูก archive แล้ว</li>
+    </ul>
+    <h3>10.3 Conflict Resolution</h3>
+    <ul>
+      <li>หนึ่งไฟล์ใน 03_WORK_PACKAGES/ ต้องมีเจ้าของไฟล์เดียว</li>
+      <li>หากต้องทำงานขนาน ให้แยกเป็น TASK-ID ใหม่ ไม่แก้ไฟล์เดิม</li>
+      <li>ก่อนแก้ไฟล์ ให้ pull ล่าสุดและตรวจสอบ version ก่อน push</li>
+      <li>หากเกิด conflict ใน 04_SYNTHESIS/ ให้ผู้ประสานงานเป็นผู้ตัดสินและบันทึกเหตุผล</li>
+    </ul>
+  </section>
+
+  <section id="section-ai-reference">
+    <h2>📋 คำสั่งสำหรับ AI — คัดลอกส่วนนี้ไปวางใน Project Instructions</h2>
+    <div class="note">
+      <p><strong>คำสั่ง:</strong> "ใช้ข้อมูลจากเอกสาร project-workflow-manual.html ฉบับล่าสุดเป็นข้อกำหนดหลักในการปฏิบัติงานทุกครั้ง ดึงข้อมูลจากส่วนต่างๆ ตามโครงสร้างที่ระบุไว้ในสารบัญ ห้ามตีความหรือสร้างข้อมูลนอกเหนือจากที่ระบุในเอกสาร หากต้องการอ้างอิงส่วนใด ให้อ้างอิงตามหัวข้อและรหัสส่วนที่กำหนดไว้"</p>
+    </div>
+    <h3>Self-check Prompt (ใหม่ v1.1)</h3>
+    <ol>
+      <li>ทุกข้อความใน ProgressReport มี sourceRef ครบหรือไม่?</li>
+      <li>มีข้อความใดที่ใช้ถ้อยคำ "น่าจะ", "คาดว่า", "โดยสรุป" ในส่วนที่ไม่มีหลักฐานหรือไม่?</li>
+      <li>สถานะที่ใช้ตรงกับ Decision Tree หรือไม่?</li>
+      <li>ชื่อไฟล์ตรงตาม Naming Convention หรือไม่?</li>
+      <li>ได้บันทึก schemaVersion ในเอกสารแล้วหรือไม่?</li>
+      <li>มีข้อมูลใดที่ "เติมเอง" เพื่อให้ดูสมบูรณ์หรือไม่?</li>
+    </ol>
+    <h3>วิธีใช้งานไฟล์นี้:</h3>
+    <ol>
+      <li><strong>บันทึก:</strong> คัดลอกโค้ดทั้งหน้านี้ → บันทึกเป็นไฟล์ชื่อ: <code>project-workflow-manual-v1.1.html</code></li>
+      <li><strong>เก็บที่:</strong> อัปโหลดขึ้น GitHub ที่พาธ: <code>00_CONTROL/project-workflow-manual-v1.1.html</code></li>
+      <li><strong>ใช้กับ AI:</strong> เปิดไฟล์นี้ในเบราว์เซอร์ → คัดเนื้อหาส่วนที่ต้องการ → วางใน Project Instructions</li>
+      <li><strong>เมื่อต้องการอัปเดต:</strong> แก้ไขเนื้อหาในไฟล์นี้โดยตรง → บันทึกเวอร์ชันใหม่ → อัปโหลดขึ้น GitHub ไม่เขียนทับเวอร์ชันเก่า</li>
+    </ol>
+  </section>
+
+  <div class="footer">
+    <p><strong>เอกสารฉบับที่:</strong> v1.1 | <strong>จัดทำเมื่อ:</strong> 2026-10-25 | <strong>แก้ไขล่าสุด:</strong> 2026-10-25 | <strong>รูปแบบ:</strong> HTML แบบรวมทุกส่วนในไฟล์เดียว</p>
+    <p>พาธเก็บในโครงการ: <code>00_CONTROL/project-workflow-manual-v1.1.html</code></p>
+    <p>หมายเหตุ: เอกสารนี้เป็นเวอร์ชันปรับปรุงจาก v1.0 โดยไม่ลบเนื้อหาเดิม เพิ่มเฉพาะส่วนขยายและปรับ schema เล็กน้อย</p>
+  </div>
+</body>
+</html>
