@@ -1,0 +1,9 @@
+{
+  "siteName": "Project Workflow Manual",
+  "description": "Static dashboard for approved shared memory and workflow documentation",
+  "currentPagesSource": "hap-aicc/",
+  "readOnly": true,
+  "browserWriteBackEnabled": false,
+  "primaryWorkflow": "hap-aicc-pages.yml",
+  "note": "Do not switch Pages source without reviewing deployment workflows and repository Settings > Pages."
+}
