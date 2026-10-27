@@ -19,6 +19,18 @@ on:
         required: false
         type: string
         default: ""
+  workflow_call:
+    inputs:
+      operation:
+        description: "Read-only operation"
+        required: false
+        type: string
+        default: repository_status
+      path:
+        description: "Repository path for list_files/read_file"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -32,8 +44,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          OPERATION: ${{ github.event.inputs.operation || 'repository_status' }}
-          REQUEST_PATH: ${{ github.event.inputs.path || '' }}
+          OPERATION: ${{ inputs.operation || github.event.inputs.operation || 'repository_status' }}
+          REQUEST_PATH: ${{ inputs.path || github.event.inputs.path || '' }}
         shell: bash
         run: |
           set -euo pipefail
