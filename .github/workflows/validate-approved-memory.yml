@@ -3,10 +3,10 @@ name: Validate Shared Memory
 on:
   pull_request:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**"]
+    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh"]
   push:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**"]
+    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh"]
   workflow_dispatch:
 
 permissions:
@@ -19,26 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate JSON configuration
-        shell: bash
-        run: |
-          set -euo pipefail
-          while IFS= read -r -d '' file; do
-            echo "Checking JSON: $file"
-            jq empty "$file"
-          done < <(find config platforms data public static-site -type f -name '*.json' -print0 2>/dev/null || true)
+      - name: Validate JSON and scan likely secrets
+        run: npm run validate:memory
 
-      - name: Check for likely secrets
+      - name: Explain scan limitations
         shell: bash
         run: |
-          set -euo pipefail
-          mapfile -d '' files < <(find shared pending config platforms data -type f \( -name '*.md' -o -name '*.json' -o -name '*.txt' \) -print0 2>/dev/null || true)
-          if (( ${#files[@]} == 0 )); then
-            echo "No memory/config files to scan."
-            exit 0
-          fi
-          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*[A-Za-z0-9/_+=.-]{16,}' "${files[@]}"; then
-            echo "::error::Potential credential detected. Remove it and rotate the credential if it was real."
-            exit 1
-          fi
-          echo "No likely secrets detected by the heuristic scan."
+          echo "Secret scanning is heuristic only; a human must review pending content before approval." >> "$GITHUB_STEP_SUMMARY"
