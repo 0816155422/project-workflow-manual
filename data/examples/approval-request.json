@@ -1,0 +1,9 @@
+{
+  "id":"APR-EXAMPLE-001",
+  "sourcePath":"pending/sample-approved-memory.md",
+  "targetPath":"shared/knowledge/notes/sample-approved-memory.md",
+  "decision":"needs_revision",
+  "reviewer":"example-reviewer",
+  "note":"Example record only; not an actual approval.",
+  "date":"2026-10-28T00:00:00Z"
+}
