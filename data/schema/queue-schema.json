@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Pending Queue Item","type":"object","required":["id","sourcePath","status"],
+  "properties":{
+    "id":{"type":"string"},"sourcePath":{"type":"string","pattern":"^pending/"},
+    "targetPath":{"type":["string","null"]},
+    "status":{"enum":["pending","in_review","approved","rejected","synced"]},
+    "submittedBy":{"type":["string","null"]},"reviewer":{"type":["string","null"]}
+  },"additionalProperties":false
+}
