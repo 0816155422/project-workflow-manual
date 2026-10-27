@@ -1,0 +1,7 @@
+{
+  "name":"Project Workflow Manual",
+  "short_name":"Workflow Manual",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "description":"Read-only static interface for the shared memory workflow"
+}
