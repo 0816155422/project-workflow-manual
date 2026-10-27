@@ -1,0 +1,9 @@
+{
+  "id":"MEM-EXAMPLE-001",
+  "title":"Example memory record",
+  "content":"Synthetic example only; replace with reviewed facts.",
+  "source":"https://example.com/",
+  "createdAt":"2026-10-28T00:00:00Z",
+  "status":"pending",
+  "classification":"public"
+}
