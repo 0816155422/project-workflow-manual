@@ -1,0 +1,77 @@
+name: Repository Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate source and dashboard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Verify required project files
+        run: |
+          test -f package.json
+          test -f api/mcp.js
+          test -f hap-aicc/index.html
+          test -f .github/workflows/hap-aicc-pages.yml
+          node -e "const p=require('./package.json'); if(!p.dependencies || !p.dependencies['@modelcontextprotocol/sdk'] || !p.dependencies.zod) process.exit(1); console.log('package metadata OK')"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Check API JavaScript syntax
+        run: node --check api/mcp.js
+
+      - name: Validate dashboard HTML structure
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Checker(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.errors = []
+                  self.html = 0
+                  self.head = 0
+                  self.body = 0
+                  self.title = 0
+              def handle_starttag(self, tag, attrs):
+                  if tag == "html": self.html += 1
+                  if tag == "head": self.head += 1
+                  if tag == "body": self.body += 1
+                  if tag == "title": self.title += 1
+
+          path = Path("hap-aicc/index.html")
+          text = path.read_text(encoding="utf-8")
+          parser = Checker()
+          parser.feed(text)
+          parser.close()
+          assert parser.html == 1, "expected exactly one html root"
+          assert parser.head == 1, "expected exactly one head"
+          assert parser.body == 1, "expected exactly one body"
+          assert parser.title == 1, "expected exactly one title"
+          assert "HAP/AICC" in text, "dashboard title/content missing"
+          print("Dashboard HTML structural checks passed")
+          PY
