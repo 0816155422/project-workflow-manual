@@ -1,18 +1,7 @@
 {
-  "policyName": "Project Workflow Manual Repository Policy",
-  "version": "1.0.0",
-  "sourceOfTruth": "approved version-controlled files",
-  "repositoryMode": "static knowledge archive, not a live database",
-  "pagesMode": "read-only static UI",
-  "writeMode": "GitHub Actions with explicit human approval",
-  "forbiddenContent": [
-    "secrets",
-    "API tokens",
-    "passwords",
-    "private keys",
-    "credentials",
-    "sensitive personal data"
-  ],
-  "manualReviewRequired": true,
-  "secretScanIsHeuristic": true
+  "policyName":"Project Workflow Manual Repository Policy","version":"1.0.0",
+  "sourceOfTruth":"approved version-controlled files","repositoryMode":"static knowledge archive, not a live database",
+  "pagesMode":"read-only static UI","writeMode":"GitHub Actions with explicit human approval",
+  "forbiddenContent":["secrets","API tokens","passwords","private keys","credentials","sensitive personal data"],
+  "manualReviewRequired":true,"secretScanIsHeuristic":true
 }
