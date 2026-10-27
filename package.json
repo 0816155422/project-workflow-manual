@@ -1,12 +1,10 @@
 {
-  "name": "hap-aicc-project-workflow-mcp",
-  "version": "1.0.0",
+  "name": "project-workflow-manual",
   "private": true,
-  "description": "Authenticated MCP API for the HAP/AICC project workflow repository with durable GitHub audit logs.",
-  "main": "api/mcp.js",
-  "engines": { "node": ">=20" },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
-    "zod": "^3.24.2"
+  "version": "1.0.0",
+  "description": "Static shared AI memory workspace and GitHub Actions approval workflow",
+  "scripts": {
+    "validate:json": "find config data platforms public static-site -type f -name '*.json' -print0 2>/dev/null | xargs -0 -r -n1 jq empty",
+    "validate:memory": "bash scripts/validate-memory.sh"
   }
 }
