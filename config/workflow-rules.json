@@ -1,12 +1,6 @@
 {
-  "version": "1.0.0",
-  "defaultBranch": "main",
-  "pendingPrefix": "pending/",
-  "approvedPrefix": "shared/",
-  "allowedExtensions": [".md", ".json", ".txt"],
-  "requireManualApproval": true,
-  "refuseOverwrite": true,
-  "writeBackMethod": "GitHub Actions workflow_dispatch",
-  "auditLog": "logs/approval-log.md",
-  "notes": "This file documents policy; workflow enforcement remains authoritative."
+  "version":"1.0.0","defaultBranch":"main","pendingPrefix":"pending/","approvedPrefix":"shared/",
+  "allowedExtensions":[".md",".json",".txt"],"requireManualApproval":true,"refuseOverwrite":true,
+  "writeBackMethod":"GitHub Actions workflow_dispatch","auditLog":"logs/approval-log.md",
+  "notes":"Policy documentation; workflow enforcement remains authoritative."
 }
