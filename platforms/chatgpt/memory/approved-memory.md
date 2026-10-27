@@ -1,5 +1,11 @@
-# Approved memory — ChatGPT export
+# ChatGPT Approved Memory Snapshot
 
-**Status:** TEMPLATE — no approved facts supplied yet.
+Status: TEMPLATE — not yet exported or approved.
 
-Add only human-approved shared facts with source, review date, and approval reference. Do not copy private memory or chat history automatically.
+## Approved items
+No items recorded.
+
+## Provenance
+- Source shared files:
+- Export date (UTC):
+- Reviewer:
