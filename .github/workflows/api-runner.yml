@@ -70,7 +70,7 @@ jobs:
                 exit 1
               fi
               [[ "$REQUEST_PATH" != *".."* && "$REQUEST_PATH" != *"\\"* && "$REQUEST_PATH" != /* ]] || { echo "::error::Unsafe path"; exit 1; }
-              [[ "$REQUEST_PATH" == "." || "$REQUEST_PATH" == "/" ]] && REQUEST_PATH=""
+              if [[ "$REQUEST_PATH" == "." || "$REQUEST_PATH" == "/" ]]; then REQUEST_PATH=""; fi
               gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" --jq 'if type == "array" then .[] | "- " + .type + ": " + .path else "- " + .type + ": " + .path end' >> "$GITHUB_STEP_SUMMARY"
               ;;
             read_file)
