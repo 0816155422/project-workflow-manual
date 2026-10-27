@@ -3,10 +3,10 @@ name: Validate Shared Memory
 on:
   pull_request:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**"]
+    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**"]
   push:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**"]
+    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**"]
   workflow_dispatch:
 
 permissions:
@@ -26,13 +26,13 @@ jobs:
           while IFS= read -r -d '' file; do
             echo "Checking JSON: $file"
             jq empty "$file"
-          done < <(find config platforms -type f -name '*.json' -print0 2>/dev/null || true)
+          done < <(find config platforms data public static-site -type f -name '*.json' -print0 2>/dev/null || true)
 
       - name: Check for likely secrets
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -d '' files < <(find shared pending config platforms -type f \( -name '*.md' -o -name '*.json' -o -name '*.txt' \) -print0 2>/dev/null || true)
+          mapfile -d '' files < <(find shared pending config platforms data -type f \( -name '*.md' -o -name '*.json' -o -name '*.txt' \) -print0 2>/dev/null || true)
           if (( ${#files[@]} == 0 )); then
             echo "No memory/config files to scan."
             exit 0
