@@ -35,9 +35,9 @@ jobs:
 
       - name: Validate request and copy approved file
         env:
-          SOURCE_PATH: \${{ inputs.source_path }}
-          TARGET_PATH: \${{ inputs.target_path }}
-          APPROVAL_NOTE: \${{ inputs.approval_note }}
+          SOURCE_PATH: ${{ inputs.source_path }}
+          TARGET_PATH: ${{ inputs.target_path }}
+          APPROVAL_NOTE: ${{ inputs.approval_note }}
         shell: bash
         run: |
           set -euo pipefail
@@ -48,7 +48,7 @@ jobs:
           [[ -f "$SOURCE_PATH" ]] || { echo "::error::Pending source file does not exist"; exit 1; }
           [[ "$SOURCE_PATH" == *.md || "$SOURCE_PATH" == *.json || "$SOURCE_PATH" == *.txt ]] || { echo "::error::Only Markdown, JSON, or TXT files can be synced"; exit 1; }
           [[ "$TARGET_PATH" == *.md || "$TARGET_PATH" == *.json || "$TARGET_PATH" == *.txt ]] || { echo "::error::Only Markdown, JSON, or TXT destinations are allowed"; exit 1; }
-          [[ -n "$APPROVAL_NOTE" && "\${#APPROVAL_NOTE}" -le 300 ]] || { echo "::error::Approval note must be 1-300 characters"; exit 1; }
+          [[ -n "$APPROVAL_NOTE" && ${#APPROVAL_NOTE} -le 300 ]] || { echo "::error::Approval note must be 1-300 characters"; exit 1; }
 
           mkdir -p "$(dirname "$TARGET_PATH")" logs
           if [[ -e "$TARGET_PATH" ]]; then
@@ -56,7 +56,7 @@ jobs:
             exit 1
           fi
 
-          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(["'"'"']?(api[_-]?key|access[_-]?token|password|client_secret)["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9/_+=.-]{16,})' "$SOURCE_PATH"; then
+          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*[A-Za-z0-9/_+=.-]{16,}' "$SOURCE_PATH"; then
             echo "::error::Potential credential detected; approval sync blocked."
             exit 1
           fi
@@ -79,8 +79,8 @@ jobs:
         run: |
           {
             echo "## Approved memory sync complete"
-            echo "- Source: \`${{ inputs.source_path }}\`"
-            echo "- Destination: \`${{ inputs.target_path }}\`"
-            echo "- Initiated by: \`${{ github.actor }}\`"
+            echo "- Source: ${{ inputs.source_path }}"
+            echo "- Destination: ${{ inputs.target_path }}"
+            echo "- Initiated by: ${{ github.actor }}"
             echo "- This workflow is manual; running it is the explicit approval action."
           } >> "$GITHUB_STEP_SUMMARY"
