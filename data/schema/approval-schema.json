@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Approval Record","type":"object","required":["id","sourcePath","targetPath","decision","reviewer"],
+  "properties":{
+    "id":{"type":"string"},"sourcePath":{"type":"string","pattern":"^pending/"},
+    "targetPath":{"type":"string","pattern":"^shared/"},
+    "decision":{"enum":["approved","rejected","needs_revision"]},"reviewer":{"type":"string"},
+    "note":{"type":"string","maxLength":300},"date":{"type":["string","null"],"format":"date-time"}
+  },"additionalProperties":false
+}
