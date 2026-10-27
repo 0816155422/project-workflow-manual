@@ -1,5 +1,11 @@
-# Approved memory — Gemini export
+# Gemini Approved Memory Snapshot
 
-**Status:** TEMPLATE — no approved facts supplied yet.
+Status: TEMPLATE — not yet exported or approved.
 
-Only add human-approved shared facts with sources, review dates, and approval references. Never import chat history automatically.
+## Approved items
+No items recorded.
+
+## Provenance
+- Source shared files:
+- Export date (UTC):
+- Reviewer:
