@@ -1,0 +1,1 @@
+// Read-only static-site placeholder. No repository writes are performed in the browser.
