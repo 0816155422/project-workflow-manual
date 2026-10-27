@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Memory Record","type":"object","required":["id","title","content","status"],
+  "properties":{
+    "id":{"type":"string","minLength":1},"title":{"type":"string","minLength":1},
+    "content":{"type":"string"},"source":{"type":["string","null"]},
+    "createdAt":{"type":["string","null"],"format":"date-time"},
+    "status":{"enum":["pending","approved","rejected","archived"]},
+    "classification":{"enum":["public","internal","sensitive"]}
+  },"additionalProperties":false
+}
