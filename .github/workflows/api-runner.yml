@@ -1,0 +1,102 @@
+name: GitHub Actions API Runner
+
+# Invoke through GitHub Actions API (workflow_dispatch), or call from another
+# workflow with workflow_call. This is on-demand, not a continuously hosted HTTP endpoint.
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Operation to run"
+        required: true
+        type: choice
+        options:
+          - repository_status
+          - list_files
+          - read_file
+        default: repository_status
+      path:
+        description: "Repository path (used by list_files/read_file)"
+        required: false
+        type: string
+        default: ""
+  workflow_call:
+    inputs:
+      operation:
+        description: "Operation to run"
+        required: true
+        type: string
+        default: repository_status
+      path:
+        description: "Repository path (used by list_files/read_file)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-actions-api-runner-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  run-operation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validate request
+        env:
+          OPERATION: ${{ inputs.operation }}
+          REQUEST_PATH: ${{ inputs.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$OPERATION" in
+            repository_status|list_files|read_file) ;;
+            *) echo "::error::Unsupported operation"; exit 1 ;;
+          esac
+          if [[ "$OPERATION" == "read_file" && -z "$REQUEST_PATH" ]]; then
+            echo "::error::path is required for read_file"; exit 1
+          fi
+          if [[ "$OPERATION" == "list_files" && -z "$REQUEST_PATH" ]]; then
+            echo "::error::path is required for list_files (use . for repository root)"; exit 1
+          fi
+
+      - name: Run requested operation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OPERATION: ${{ inputs.operation }}
+          REQUEST_PATH: ${{ inputs.path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "## GitHub Actions API Runner"
+            echo
+            echo "- Repository: $GH_REPO"
+            echo "- Operation: $OPERATION"
+            if [[ -n "$REQUEST_PATH" ]]; then echo "- Path: $REQUEST_PATH"; fi
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          case "$OPERATION" in
+            repository_status)
+              gh api "repos/$GH_REPO" --jq '"- Default branch: " + .default_branch + "\n- Visibility: " + .visibility + "\n- Updated: " + .updated_at + "\n- URL: " + .html_url' >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            list_files)
+              gh api "repos/$GH_REPO/contents/$REQUEST_PATH" \
+                --jq 'if type == "array" then .[] | "- " + .type + ": " + .path else "- " + .type + ": " + .path end' >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            read_file)
+              echo '### File content' >> "$GITHUB_STEP_SUMMARY"
+              echo '~~~text' >> "$GITHUB_STEP_SUMMARY"
+              gh api "repos/$GH_REPO/contents/$REQUEST_PATH" --jq '.content' | tr -d '\n' | base64 --decode >> "$GITHUB_STEP_SUMMARY"
+              echo >> "$GITHUB_STEP_SUMMARY"
+              echo '~~~' >> "$GITHUB_STEP_SUMMARY"
+              ;;
+          esac
+
+      - name: Publish result
+        if: always()
+        run: echo "Workflow result: ${{ job.status }}"
