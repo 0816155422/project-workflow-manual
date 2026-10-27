@@ -1,16 +1,11 @@
-# AI collaboration guide
+# AI Collaboration Guide
 
-## Starting a session
-Give the AI the repository URL and exact approved files relevant to the task. Ask it to list sources used and identify missing context. Do not assume repository access unless a connected tool or uploaded file provides it.
+This repository supports multi-AI collaboration through approved files, not automatic memory merging.
 
-## Switching platforms
-Export only the context needed for the task, review for privacy, then provide the same selected files to the next platform. Do not export full chat histories by default.
-
-## Returning changes
-Ask for proposed file content or a diff, rationale, and sources. Human review is required before content becomes approved shared memory.
-
-## Conflict resolution
-If sources disagree, do not silently merge them. Record sources and dates, then ask the repository owner to decide.
-
-## Limitations
-An allowlist is a policy document, not technical access control. GitHub Pages is static hosting, not a secure authenticated write backend. A write API needs authentication, least privilege, validation, audit policy, and deployment review.
+- Treat reviewed files under `shared/` as authoritative shared context.
+- Treat `pending/` as unapproved drafts.
+- Platform directories contain manually curated snapshots and prompt templates.
+- Export platform snapshots explicitly and record source, date, and reviewer.
+- Do not import arbitrary chat history automatically.
+- Do not store secrets, credentials, or sensitive personal information.
+- Be transparent about uncertainty and never claim an action succeeded without evidence.
