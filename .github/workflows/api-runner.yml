@@ -1,8 +1,15 @@
 name: GitHub Actions API Runner
 
-# Invoke through GitHub Actions API (workflow_dispatch), or call from another
-# workflow with workflow_call. This is on-demand, not a continuously hosted HTTP endpoint.
+# Invoke manually or from another workflow. Push/PR runs execute the safe read-only
+# repository_status operation as a smoke test; this is not a persistent HTTP endpoint.
 on:
+  push:
+    branches:
+      - main
+      - feat/github-actions-api-runner
+  pull_request:
+    paths:
+      - .github/workflows/api-runner.yml
   workflow_dispatch:
     inputs:
       operation:
