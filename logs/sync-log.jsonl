@@ -1,0 +1,1 @@
+{"record_type":"schema_note","note":"Append one JSON object per explicit, user-initiated transfer. This line is documentation, not a sync event; do not treat it as proof of a transfer."}
