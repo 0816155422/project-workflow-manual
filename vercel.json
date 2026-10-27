@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "functions": {
+    "api/mcp.js": { "maxDuration": 60 }
+  },
+  "rewrites": [
+    { "source": "/mcp", "destination": "/api/mcp" },
+    { "source": "/mcp/health", "destination": "/api/mcp/health" }
+  ]
+}
