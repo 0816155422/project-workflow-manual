@@ -1,38 +1,44 @@
-# Project Workflow Manual
+# Shared AI Memory Workspace
 
-Repository for the HAP project workflow, governance, evidence tracking, review, and release standards.
+พื้นที่ทำงานร่วมกันระหว่างมนุษย์กับ AI หลายแพลตฟอร์ม โดยใช้ไฟล์ Git เป็นความรู้ที่มีเวอร์ชัน ตรวจสอบที่มาได้ และผ่านการอนุมัติก่อนแชร์ ไม่ใช่ฐานข้อมูล real-time และไม่ใช่ที่เก็บ secret
 
-This repository stores the standard operating documentation used for project memory, AI workflow, and GitHub repository operations.
+## หลักการ
+- shared/ เก็บข้อมูลโครงการและความรู้ที่กำหนดสถานะและแหล่งที่มา
+- platforms/ เก็บ prompts, configs และ snapshots สำหรับ ChatGPT, Jamin, Claude, Gemini และแพลตฟอร์มอื่น
+- private/ เป็นเพียงคำเตือนให้เก็บข้อมูลส่วนตัวไว้นอก Git; ห้าม commit ไฟล์ส่วนตัว
+- config/ กำหนด privacy policy และ allowlist เชิงเอกสาร
+- logs/ เก็บ metadata การอนุมัติ/การทำงานที่จำเป็น ไม่เก็บเนื้อหาลับ
+- archives/ เก็บเอกสารเก่าที่ผ่านการตรวจสอบแล้ว โดยไม่ถือว่าเป็นข้อมูลปัจจุบัน
+- docs/ อธิบาย workflow และวิธีทำงานร่วมกัน
 
-## Current standard
-- `00_CONTROL/project-workflow-manual-v1.1.html`
+## ทำไมใช้ repository เป็น shared memory
+Git เก็บประวัติการเปลี่ยนแปลงและช่วยตรวจสอบ diff/ย้อนเวอร์ชันได้ เหมาะกับความรู้ที่ไม่เปลี่ยนทุกวินาที แต่ไม่รับประกัน real-time sync, ความถูกต้อง หรือการเชื่อมต่อกับบัญชี AI โดยอัตโนมัติ
 
-## Notes
-- The repository follows the workflow rules and status model defined in the project manual.
-- Versioned documents are preserved and not overwritten without approval.
-- Root-level legacy files are retained for historical reference.
+## กฎการใช้
+1. ใช้เฉพาะไฟล์ที่ผู้ใช้ระบุหรือไฟล์ shared/ ที่มีสถานะ APPROVED
+2. ห้ามนำแชตเก่าหรือความจำส่วนตัวของ AI มาเป็นข้อมูลหลักโดยอัตโนมัติ
+3. AI เสนอการเปลี่ยนแปลงได้ แต่ผู้ใช้/ผู้ตรวจต้องอนุมัติ
+4. ห้าม commit token, API key, password, credentials หรือข้อมูลส่วนบุคคล/อ่อนไหว
+5. ทุกการเขียนต้องตรวจสอบ read-back และ commit/PR
+6. ไฟล์ใน repository สาธารณะอาจเปิดเผยต่อสาธารณะ
 
-## GitHub Actions repository API
+## เริ่มต้นใช้งาน
+1. อ่าน MEMORY_MANIFEST.md และ docs/workflow.md
+2. ตรวจ config/privacy-policy.json และ config/allowed-platforms.json
+3. เติม shared/core/ และ shared/projects/ ด้วยสถานะ PROPOSED
+4. เมื่อผู้ใช้ตรวจสอบแล้ว เปลี่ยนเป็น APPROVED พร้อมแหล่งที่มาและหลักฐานการอนุมัติ
+5. เลือกไฟล์ที่จำเป็นส่งให้ AI แต่ละแพลตฟอร์มด้วยตนเอง; ไม่มี auto-sync จากแชต
+6. ส่งข้อเสนอแก้ไขกลับเป็น diff/PR และตรวจสอบผลใน GitHub
 
-The `.github/workflows/api-runner.yml` workflow supports both reading and writing repository files without adding an external hosting platform.
+## Dashboard และ API
+- Dashboard source: hap-aicc/index.html
+- GitHub Pages workflow: .github/workflows/deploy-pages.yml
+- GitHub Actions read/write runner: .github/workflows/api-runner.yml
+- MCP HTTP API implementation: MCP_API.md
 
-Supported operations:
-- `repository_status` — repository metadata.
-- `list_files` — list a directory's contents.
-- `read_file` — read a file.
-- `write_file` — create or update a file with a commit message.
+หน้า GitHub Pages เป็น static site จึงแสดงข้อมูล/ลิงก์ได้ แต่ไม่ควรใส่ token ใน HTML และไม่สามารถเป็น secure write backend ด้วยตัวเองได้ ส่วน MCP HTTP API เป็นบริการแยกและจะใช้ได้ก็ต่อเมื่อ deploy และตั้งค่า secret อย่างปลอดภัย การมีไฟล์ API ใน repo ไม่ได้หมายความว่า endpoint ทำงานแล้ว
 
-To run it, open **Actions → GitHub Actions API Runner → Run workflow** and choose the operation. For `write_file`, provide the repository-relative path, complete file content, commit message, and optionally the target branch. Writes use the workflow's `GITHUB_TOKEN`, require `contents: write`, and append metadata-only audit records to `logs/mcp-audit.jsonl`. File contents are not copied into the audit log.
+## โครงสร้างหลัก
+README.md, MEMORY_MANIFEST.md, config/, shared/core/, shared/projects/, shared/knowledge/, platforms/{chatgpt,jamin,claude,gemini,others}/, private/, logs/, archives/old-context/, docs/, templates/, hap-aicc/index.html
 
-For safety, writes reject absolute paths, traversal, `.env` files, `.github/workflows/`, and the audit log itself. Review the target branch and diff before merging any changes.
-
-## HAP/AICC MCP HTTP API
-
-An authenticated MCP Streamable HTTP API implementation is in `api/mcp.js`. It exposes repository status, file listing, file reading, file writing, and audit-log inspection.
-
-- API details: [MCP_API.md](MCP_API.md)
-- Dashboard HTML: [hap-aicc/index.html](hap-aicc/index.html)
-- Archived original dashboard source: [source/hap-aicc-original.html](source/hap-aicc-original.html)
-- MCP audit log: [logs/mcp-audit.jsonl](logs/mcp-audit.jsonl)
-
-The HTTP MCP endpoint is a separate service and is not currently hosted. The GitHub Actions workflow above is the available GitHub-native read/write interface; it does not pretend to be a persistent HTTP MCP endpoint. No secrets belong in this repository.
+สถานะที่ใช้: PROPOSED, APPROVED, REJECTED, SUPERSEDED, ARCHIVED. AI-generated content is not approved merely because it is stored in Git.
