@@ -44,6 +44,21 @@ details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:1
 <body>
 <header><div class="wrap"><h1>HAP/AICC — Interactive Master Record</h1><p class="subtitle">ไฟล์เดี่ยวสำหรับ AI/คนอ่านและเติมต่อ: HTML + CSS + Markdown + Source payload</p><nav><a href="#status">สถานะ</a><a href="#continue">วิธีต่อโดยไม่ลบของเก่า</a><a href="#master">Checklist/Work Log</a><a href="#source-register">ทะเบียน Source</a><a href="#sources">Source ฉบับเต็ม</a></nav></div></header>
 <div class="wrap">
+<section class="card" id="shared-ai-workspace">
+<h2>Shared AI Memory Workspace</h2>
+<p>พื้นที่ความรู้ร่วมสำหรับ AI หลายแพลตฟอร์ม โดยใช้ไฟล์ที่ตรวจสอบและอนุมัติแล้วเป็นแหล่งอ้างอิง ไม่ใช่ live database และไม่มีการนำแชตเก่าเข้ามาอัตโนมัติ</p>
+<div class="contents">
+<a href="https://github.com/0816155422/project-workflow-manual/blob/main/README.md">README — เริ่มต้นใช้งาน</a>
+<a href="https://github.com/0816155422/project-workflow-manual/blob/main/MEMORY_MANIFEST.md">Memory Manifest — กฎ shared memory</a>
+<a href="https://github.com/0816155422/project-workflow-manual/tree/main/shared">Shared knowledge และ project files</a>
+<a href="https://github.com/0816155422/project-workflow-manual/tree/main/platforms">AI platform templates</a>
+<a href="https://github.com/0816155422/project-workflow-manual/tree/main/config">Privacy policy และ allowlist</a>
+<a href="https://github.com/0816155422/project-workflow-manual/blob/main/docs/workflow.md">Workflow และ approval steps</a>
+<a href="https://github.com/0816155422/project-workflow-manual/blob/main/templates/memory-snapshot-template.md">Memory snapshot template</a>
+<a href="https://github.com/0816155422/project-workflow-manual/blob/main/templates/prompt-export-template.md">Prompt export template</a>
+</div>
+<p class="small">ข้อควรจำ: GitHub Pages เป็น static website การเขียนไฟล์ต้องทำผ่าน workflow/API ที่ได้รับอนุญาตแยกต่างหาก และต้องตรวจสอบผลหลังเขียนทุกครั้ง</p>
+</section>
 <section id="status" class="card"><span class="badge">AI-DRAFT / WORKING RECORD / NOT SOURCE-VERIFIED</span><div class="notice"><strong>ข้อสำคัญ:</strong> รายงาน AI และเอกสารสังเคราะห์ยังไม่ใช่หลักฐานต้นฉบับของโครงการ; ข้อความที่ผู้ใช้รายงานต้องแยกจาก Source-Verified; ไฟล์นี้แยกจากระบบจัดเก็บออนไลน์; ผู้ใช้เลือก hosting/storage เอง</div><div class="status-grid"><div class="status blocked"><b>PROJECT_ID</b>NOT_ISSUED</div><div class="status blocked"><b>WP-00</b>BLOCKED / NOT_PASSED</div><div class="status"><b>WP-01</b>NOT_STARTED</div><div class="status blocked"><b>External project write</b>NOT_WRITTEN</div></div><p class="small">Lifecycle 6 เดินหน้า + 6 ย้อนกลับ = baseline ที่ผู้ใช้รายงานว่าเป็น skill คงที่; package phases 0–3 และ WP-00–WP-13 เป็นคนละโครงสร้าง ห้ามรวมกัน.</p></section>
 <section id="continue" class="card"><h2>วิธีทำงานต่อโดยไม่ลบประวัติ</h2><ol><li>อ่านสถานะ/Checkpoint ล่าสุด และดู Source annex ก่อนเริ่มงานใหม่</li><li>ทำเฉพาะขั้นที่ได้รับอนุญาต; ขณะนี้ WP-01 ยังห้ามเริ่มจนกว่า WP-00 ผ่าน Gate</li><li>ต่อท้ายส่วน <code>Append-only activity log</code> ใน Markdown master: วันที่, Source/ข้อมูลที่อ่าน, งานที่ทำ, ผลที่เขียนจริง, read-back, Gate, blocker, ขั้นถัดไป</li><li>ห้ามลบหรือเขียนทับรายการเก่า; การแก้ไขให้เพิ่ม correction/new version และอ้างกลับรายการเดิม</li><li>แยก <code>USER-REPORTED</code>, <code>SOURCE-VERIFIED</code>, <code>AI-DRAFT/DERIVED</code>, <code>PROPOSED</code>, <code>UNVERIFIED</code> และ <code>BLOCKED</code></li><li>ถ้าเขียนปลายทางไม่ได้หรือไม่มี read-back ให้รายงาน <code>NOT_WRITTEN</code>; ห้ามกล่าวว่า “บันทึกแล้ว”</li></ol><p class="small">ข้อความในหน้า Markdown และ Source annex ด้านล่างเป็น payload สำหรับห้องถัดไป ไม่ต้องเปิดแชทเก่าเพื่อหาไฟล์ที่แนบในแชทเดิม</p></section>
 <section id="append-log" class="card editor-card">
