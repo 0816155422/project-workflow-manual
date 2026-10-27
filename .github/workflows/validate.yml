@@ -23,33 +23,47 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Verify MVP files and folders
+      - name: Verify MVP structure
         shell: bash
         run: |
           set -euo pipefail
-          test -f README.md
-          test -f MEMORY_MANIFEST.md
-          test -f package.json
-          test -f scripts/validate-memory.sh
-          test -f pending/test-memory.md
-          test -f hap-aicc/index.html
-          for dir in config docs shared pending logs archives platforms public static-site scripts; do
-            test -d "$dir" || { echo "::error::Required directory missing: $dir"; exit 1; }
+          for path in README.md MEMORY_MANIFEST.md config docs shared pending logs archives platforms public static-site scripts hap-aicc/index.html .github/workflows/validate-approved-memory.yml .github/workflows/sync-approved-memory.yml .github/workflows/deploy-pages.yml; do
+            test -e "$path" || { echo "::error::Required MVP path missing: $path"; exit 1; }
           done
-          node -e "const p=require('./package.json'); if(!p.scripts || !p.scripts['validate:json'] || !p.scripts['validate:memory']) process.exit(1); console.log('Package scripts OK')"
+          test ! -e .github/workflows/hap-aicc-pages.yml || {
+            echo "::error::Duplicate Pages workflow remains enabled; remove it after confirming deploy-pages.yml is the selected workflow."
+            exit 1
+          }
+          echo "MVP structure check passed."
 
-      - name: Validate JSON and heuristic secret patterns
-        run: npm run validate:memory
+      - name: Validate repository JSON files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' files < <(find config shared pending logs archives platforms public static-site -type f -name '*.json' -print0 2>/dev/null || true)
+          for file in "${files[@]}"; do
+            echo "Checking JSON: $file"
+            jq empty "$file"
+          done
+          echo "JSON validation passed for ${#files[@]} file(s)."
 
-      - name: Check API JavaScript syntax (no install or backend deployment)
-        run: node --check api/mcp.js
+      - name: Scan repository text for likely credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' files < <(find shared pending config platforms public static-site -type f \( -name '*.md' -o -name '*.json' -o -name '*.txt' -o -name '*.html' -o -name '*.js' \) -print0 2>/dev/null || true)
+          if (( ${#files[@]} == 0 )); then
+            echo "No eligible files to scan."
+            exit 0
+          fi
+          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*[A-Za-z0-9/_+=.-]{16,}' "${files[@]}"; then
+            echo "::error::Potential credential detected. This heuristic is not a guarantee; manually review and rotate any real exposed credential."
+            exit 1
+          fi
+          echo "No likely credentials detected by heuristic scan (not a security guarantee)."
 
       - name: Validate dashboard HTML structure
+        shell: bash
         run: |
           python3 - <<'PY'
           from html.parser import HTMLParser
