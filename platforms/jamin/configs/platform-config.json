@@ -1,0 +1,11 @@
+{
+  "platform": "jamin",
+  "mode": "manual",
+  "auto_import_chat_history": false,
+  "auto_sync": false,
+  "allowed_shared_status": [
+    "APPROVED"
+  ],
+  "writeback_requires_human_review": true,
+  "never_store_secrets": true
+}
