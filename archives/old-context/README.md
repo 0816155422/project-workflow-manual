@@ -1,3 +1,3 @@
-# Archived old context
+# Old Context Archive
 
-Place only intentionally preserved historical documents here after privacy review. Mark each item with source, date, status, and reason. Archived content is not current approved memory and must not be automatically imported. Never archive secrets or sensitive personal data.
+Use this folder for reviewed, non-sensitive historical context only. Label each item with a date and status. Historical content is not automatically current or approved.
