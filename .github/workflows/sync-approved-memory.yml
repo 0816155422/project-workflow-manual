@@ -76,11 +76,16 @@ jobs:
 
       - name: Summarize sync
         if: success()
+        env:
+          SOURCE_PATH: ${{ inputs.source_path }}
+          TARGET_PATH: ${{ inputs.target_path }}
+          INITIATED_BY: ${{ github.actor }}
+        shell: bash
         run: |
           {
             echo "## Approved memory sync complete"
-            echo "- Source: ${{ inputs.source_path }}"
-            echo "- Destination: ${{ inputs.target_path }}"
-            echo "- Initiated by: ${{ github.actor }}"
+            echo "- Source: $SOURCE_PATH"
+            echo "- Destination: $TARGET_PATH"
+            echo "- Initiated by: $INITIATED_BY"
             echo "- This workflow is manual; running it is the explicit approval action."
           } >> "$GITHUB_STEP_SUMMARY"
