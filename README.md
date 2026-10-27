@@ -12,16 +12,27 @@ This repository stores the standard operating documentation used for project mem
 - Versioned documents are preserved and not overwritten without approval.
 - Root-level legacy files are retained for historical reference.
 
+## GitHub Actions repository API
 
-## HAP/AICC MCP API
+The `.github/workflows/api-runner.yml` workflow supports both reading and writing repository files without adding an external hosting platform.
 
-An authenticated MCP Streamable HTTP API implementation is available in `api/mcp.js`.
+Supported operations:
+- `repository_status` — repository metadata.
+- `list_files` — list a directory's contents.
+- `read_file` — read a file.
+- `write_file` — create or update a file with a commit message.
 
-- API and deployment guide: [MCP_API.md](MCP_API.md)
+To run it, open **Actions → GitHub Actions API Runner → Run workflow** and choose the operation. For `write_file`, provide the repository-relative path, complete file content, commit message, and optionally the target branch. Writes use the workflow's `GITHUB_TOKEN`, require `contents: write`, and append metadata-only audit records to `logs/mcp-audit.jsonl`. File contents are not copied into the audit log.
+
+For safety, writes reject absolute paths, traversal, `.env` files, `.github/workflows/`, and the audit log itself. Review the target branch and diff before merging any changes.
+
+## HAP/AICC MCP HTTP API
+
+An authenticated MCP Streamable HTTP API implementation is in `api/mcp.js`. It exposes repository status, file listing, file reading, file writing, and audit-log inspection.
+
+- API details: [MCP_API.md](MCP_API.md)
 - Dashboard HTML: [hap-aicc/index.html](hap-aicc/index.html)
 - Archived original dashboard source: [source/hap-aicc-original.html](source/hap-aicc-original.html)
 - MCP audit log: [logs/mcp-audit.jsonl](logs/mcp-audit.jsonl)
 
-The MCP service exposes repository status, file listing, file reading, file writing, and audit-log inspection. It is designed to append metadata-only JSONL audit records to this repository. File writes and durable audit logging require a repository-scoped GitHub token stored as the Vercel `GITHUB_TOKEN` secret. The MCP endpoint additionally requires a Vercel `MCP_API_KEY` secret. No secrets belong in this repository.
-
-The source and deployment configuration are committed, but the live MCP endpoint is not yet provisioned: Vercel currently cannot link this repository, and the required GitHub token has not been configured. See [MCP_API.md](MCP_API.md) for the remaining deployment steps.
+The HTTP MCP endpoint is a separate service and is not currently hosted. The GitHub Actions workflow above is the available GitHub-native read/write interface; it does not pretend to be a persistent HTTP MCP endpoint. No secrets belong in this repository.
