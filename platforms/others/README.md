@@ -1,3 +1,3 @@
-# Other platforms
+# Other Platforms
 
-Before adding a platform, document its purpose, data handling, allowed sources, approval process, and export method. Default to disabled/manual until reviewed. Never enable automatic chat-history import.
+For an additional AI platform, create a directory with a README, memory snapshot, prompt templates, and sync rules. Use only explicitly approved shared memory and document provenance. Do not assume automatic synchronization.
