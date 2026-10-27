@@ -1,0 +1,6 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; line-height: 1.6; }
+header { border-bottom: 1px solid #8886; margin-bottom: 1.5rem; padding-bottom: 1rem; }
+section { border: 1px solid #8886; border-radius: .75rem; padding: 1rem; margin: 1rem 0; }
+.notice { padding: .8rem; border-left: 4px solid #b8860b; background: #8881; }
+a { overflow-wrap: anywhere; }
