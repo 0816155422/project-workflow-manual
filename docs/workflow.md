@@ -1,18 +1,11 @@
-# Workflow
+# Workflow Overview
 
-1. Select exact files the human authorizes the AI to use.
-2. Read and summarize sources, status, and uncertainty.
-3. Propose a patch or complete file content.
-4. Human reviews provenance, privacy, and scope.
-5. Record approval/status.
-6. Commit via reviewed GitHub commit or pull request.
-7. Read the committed file back and verify.
-8. Record only necessary metadata.
-9. Archive superseded content without treating it as current.
+1. Draft content is written into `pending/`.
+2. **Validate Shared Memory** checks JSON syntax in configured areas and scans selected files for likely secrets.
+3. A human reviews source, accuracy, privacy, and necessity.
+4. A maintainer manually runs **Sync Approved Memory** with a source under `pending/`, a new destination under `shared/`, and an approval note.
+5. The workflow validates paths and file type, refuses an existing destination, copies the file into `shared/`, appends an entry to `logs/approval-log.md`, and commits to `main`.
+6. GitHub Pages serves static UI; it does not write to the repository.
+7. Confirm success from the Actions run, commit history, audit log, and published page.
 
-## Status labels
-- PROPOSED: awaiting human review.
-- APPROVED: explicitly approved by a human.
-- REJECTED: not accepted.
-- SUPERSEDED: replaced by a newer approved version.
-- ARCHIVED: historical reference.
+Secret detection is heuristic and must be supplemented by manual review. Platform snapshots require explicit export and are not automatically synchronized.
