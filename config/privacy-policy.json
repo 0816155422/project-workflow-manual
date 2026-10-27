@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "classification": "public-repository-safe-content-only",
+  "rules": {
+    "secrets_allowed": false,
+    "tokens_allowed": false,
+    "api_keys_allowed": false,
+    "passwords_allowed": false,
+    "credentials_allowed": false,
+    "sensitive_personal_data_allowed": false,
+    "private_memory_committed": false,
+    "approved_shared_memory_only": true,
+    "auto_sync_from_chat_history": false,
+    "automatic_context_import": false,
+    "logs_may_contain_file_contents": false,
+    "public_repo_warning": true
+  },
+  "approval": {
+    "required_for_shared_memory": true,
+    "approver": "human repository owner or delegated reviewer",
+    "required_metadata": [
+      "status",
+      "source",
+      "review_date",
+      "approval_reference"
+    ],
+    "valid_statuses": [
+      "PROPOSED",
+      "APPROVED",
+      "REJECTED",
+      "SUPERSEDED",
+      "ARCHIVED"
+    ]
+  },
+  "incident_response": [
+    "Revoke/rotate any exposed secret immediately; deleting a file alone is insufficient.",
+    "Record only non-sensitive incident metadata."
+  ]
+}
