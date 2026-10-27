@@ -16,8 +16,9 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate source and dashboard
+    name: Validate repository and static dashboard
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,18 +28,25 @@ jobs:
         with:
           node-version: 22
 
-      - name: Verify required project files
+      - name: Verify MVP files and folders
+        shell: bash
         run: |
+          set -euo pipefail
+          test -f README.md
+          test -f MEMORY_MANIFEST.md
           test -f package.json
-          test -f api/mcp.js
+          test -f scripts/validate-memory.sh
+          test -f pending/test-memory.md
           test -f hap-aicc/index.html
-          test -f .github/workflows/hap-aicc-pages.yml
-          node -e "const p=require('./package.json'); if(!p.dependencies || !p.dependencies['@modelcontextprotocol/sdk'] || !p.dependencies.zod) process.exit(1); console.log('package metadata OK')"
+          for dir in config docs shared pending logs archives platforms public static-site scripts; do
+            test -d "$dir" || { echo "::error::Required directory missing: $dir"; exit 1; }
+          done
+          node -e "const p=require('./package.json'); if(!p.scripts || !p.scripts['validate:json'] || !p.scripts['validate:memory']) process.exit(1); console.log('Package scripts OK')"
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Validate JSON and heuristic secret patterns
+        run: npm run validate:memory
 
-      - name: Check API JavaScript syntax
+      - name: Check API JavaScript syntax (no install or backend deployment)
         run: node --check api/mcp.js
 
       - name: Validate dashboard HTML structure
@@ -50,11 +58,7 @@ jobs:
           class Checker(HTMLParser):
               def __init__(self):
                   super().__init__(convert_charrefs=True)
-                  self.errors = []
-                  self.html = 0
-                  self.head = 0
-                  self.body = 0
-                  self.title = 0
+                  self.html = self.head = self.body = self.title = 0
               def handle_starttag(self, tag, attrs):
                   if tag == "html": self.html += 1
                   if tag == "head": self.head += 1
