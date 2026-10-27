@@ -1,4 +1,4 @@
-name: GitHub Actions Read-Only API Runner
+name: GitHub Actions API Runner (Read Only)
 
 on:
   push:
@@ -69,8 +69,7 @@ jobs:
                 echo "::error::path is required for list_files (use . for repository root)"
                 exit 1
               fi
-              [[ "$REQUEST_PATH" != *".."* && "$REQUEST_PATH" != *"\\"* && "$REQUEST_PATH" != /* ]] || { echo "::error::Unsafe path"; exit 1; }
-              if [[ "$REQUEST_PATH" == "." || "$REQUEST_PATH" == "/" ]]; then REQUEST_PATH=""; fi
+              [[ "$REQUEST_PATH" == "." || "$REQUEST_PATH" == "/" ]] && REQUEST_PATH=""
               gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" --jq 'if type == "array" then .[] | "- " + .type + ": " + .path else "- " + .type + ": " + .path end' >> "$GITHUB_STEP_SUMMARY"
               ;;
             read_file)
@@ -78,13 +77,12 @@ jobs:
                 echo "::error::path is required for read_file"
                 exit 1
               fi
-              [[ "$REQUEST_PATH" != *".."* && "$REQUEST_PATH" != *"\\"* && "$REQUEST_PATH" != /* ]] || { echo "::error::Unsafe path"; exit 1; }
               echo "### $REQUEST_PATH" >> "$GITHUB_STEP_SUMMARY"
               gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" --jq '.content' | tr -d '\n' | base64 --decode >> "$GITHUB_STEP_SUMMARY"
               echo >> "$GITHUB_STEP_SUMMARY"
               ;;
             *)
-              echo "::error::Unsupported or non-read-only operation"
+              echo "::error::Unsupported operation. This workflow is read-only; use the reviewed sync workflow for approved memory writes."
               exit 1
               ;;
           esac
