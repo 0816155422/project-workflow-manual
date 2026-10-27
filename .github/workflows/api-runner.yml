@@ -1,4 +1,4 @@
-name: GitHub Actions API Runner
+name: GitHub Actions Read-Only API Runner
 
 on:
   push:
@@ -9,26 +9,16 @@ on:
   workflow_dispatch:
     inputs:
       operation:
-        description: "Repository operation"
+        description: "Read-only repository operation"
         required: true
         type: choice
-        options: [repository_status, list_files, read_file, write_file]
+        options: [repository_status, list_files, read_file]
         default: repository_status
       path:
         description: "Repository-relative path"
         required: false
         type: string
         default: ""
-      content:
-        description: "Full UTF-8 content for write_file"
-        required: false
-        type: string
-        default: ""
-      message:
-        description: "Commit message for write_file"
-        required: false
-        type: string
-        default: "Update file via API runner"
       branch:
         description: "Target branch (defaults to workflow branch)"
         required: false
@@ -37,7 +27,7 @@ on:
   workflow_call:
     inputs:
       operation:
-        description: "Repository operation"
+        description: "Read-only repository operation"
         required: false
         type: string
         default: repository_status
@@ -46,16 +36,6 @@ on:
         required: false
         type: string
         default: ""
-      content:
-        description: "Full UTF-8 content for write_file"
-        required: false
-        type: string
-        default: ""
-      message:
-        description: "Commit message for write_file"
-        required: false
-        type: string
-        default: "Update file via API runner"
       branch:
         description: "Target branch (defaults to workflow branch)"
         required: false
@@ -63,21 +43,19 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   run-operation:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Run repository operation
+      - name: Run read-only repository operation
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           OPERATION: ${{ inputs.operation || github.event.inputs.operation || 'repository_status' }}
           REQUEST_PATH: ${{ inputs.path || github.event.inputs.path || '' }}
-          FILE_CONTENT: ${{ inputs.content || github.event.inputs.content || '' }}
-          COMMIT_MESSAGE: ${{ inputs.message || github.event.inputs.message || 'Update file via API runner' }}
           TARGET_BRANCH: ${{ inputs.branch || github.event.inputs.branch || github.ref_name }}
         shell: bash
         run: |
@@ -91,6 +69,7 @@ jobs:
                 echo "::error::path is required for list_files (use . for repository root)"
                 exit 1
               fi
+              [[ "$REQUEST_PATH" != *".."* && "$REQUEST_PATH" != *"\\"* && "$REQUEST_PATH" != /* ]] || { echo "::error::Unsafe path"; exit 1; }
               [[ "$REQUEST_PATH" == "." || "$REQUEST_PATH" == "/" ]] && REQUEST_PATH=""
               gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" --jq 'if type == "array" then .[] | "- " + .type + ": " + .path else "- " + .type + ": " + .path end' >> "$GITHUB_STEP_SUMMARY"
               ;;
@@ -99,46 +78,13 @@ jobs:
                 echo "::error::path is required for read_file"
                 exit 1
               fi
+              [[ "$REQUEST_PATH" != *".."* && "$REQUEST_PATH" != *"\\"* && "$REQUEST_PATH" != /* ]] || { echo "::error::Unsafe path"; exit 1; }
               echo "### $REQUEST_PATH" >> "$GITHUB_STEP_SUMMARY"
               gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" --jq '.content' | tr -d '\n' | base64 --decode >> "$GITHUB_STEP_SUMMARY"
               echo >> "$GITHUB_STEP_SUMMARY"
               ;;
-            write_file)
-              if [[ -z "$REQUEST_PATH" || ${#COMMIT_MESSAGE} -lt 3 || ${#COMMIT_MESSAGE} -gt 180 ]]; then
-                echo "::error::write_file requires path and a commit message of 3-180 characters"
-                exit 1
-              fi
-              if [[ "$REQUEST_PATH" == /* || "$REQUEST_PATH" == *\\* || "$REQUEST_PATH" == "." || "$REQUEST_PATH" == ".." || "$REQUEST_PATH" == ../* || "$REQUEST_PATH" == */../* || "$REQUEST_PATH" == */.. || "$REQUEST_PATH" == .github/workflows/* || "$REQUEST_PATH" == .env || "$REQUEST_PATH" == .env.* || "$REQUEST_PATH" == */.env || "$REQUEST_PATH" == */.env.* || "$REQUEST_PATH" == logs/mcp-audit.jsonl ]]; then
-                echo "::error::Protected or unsafe path"
-                exit 1
-              fi
-              FILE_SHA=""
-              if FILE_JSON=$(gh api "repos/$GH_REPO/contents/$REQUEST_PATH?ref=$TARGET_BRANCH" 2>/dev/null); then
-                FILE_SHA=$(printf '%s' "$FILE_JSON" | jq -r '.sha // empty')
-              fi
-              CONTENT_B64=$(printf '%s' "$FILE_CONTENT" | base64 -w 0)
-              BODY=$(jq -n --arg message "$COMMIT_MESSAGE" --arg content "$CONTENT_B64" --arg branch "$TARGET_BRANCH" --arg sha "$FILE_SHA" '{message:$message,content:$content,branch:$branch} + (if $sha == "" then {} else {sha:$sha} end)')
-              RESULT=$(printf '%s' "$BODY" | gh api --method PUT "repos/$GH_REPO/contents/$REQUEST_PATH" --input -)
-              COMMIT_SHA=$(printf '%s' "$RESULT" | jq -r '.commit.sha')
-              echo "### Write successful" >> "$GITHUB_STEP_SUMMARY"
-              echo "- Path: $REQUEST_PATH" >> "$GITHUB_STEP_SUMMARY"
-              echo "- Branch: $TARGET_BRANCH" >> "$GITHUB_STEP_SUMMARY"
-              echo "- Commit: $COMMIT_SHA" >> "$GITHUB_STEP_SUMMARY"
-              # Durable audit metadata only; never store file contents.
-              AUDIT_PATH="logs/mcp-audit.jsonl"
-              AUDIT_SHA=""
-              AUDIT_CONTENT=""
-              if AUDIT_JSON=$(gh api "repos/$GH_REPO/contents/$AUDIT_PATH?ref=$TARGET_BRANCH" 2>/dev/null); then
-                AUDIT_SHA=$(printf '%s' "$AUDIT_JSON" | jq -r '.sha // empty')
-                AUDIT_CONTENT=$(printf '%s' "$AUDIT_JSON" | jq -r '.content // ""' | tr -d '\n' | base64 --decode)
-              fi
-              AUDIT_LINE=$(jq -cn --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg actor "$GITHUB_ACTOR" --arg tool "write_file" --arg path "$REQUEST_PATH" --arg branch "$TARGET_BRANCH" --arg commit "$COMMIT_SHA" '{timestamp:$timestamp,actor:$actor,tool:$tool,path:$path,branch:$branch,status:"success",commit:$commit}')
-              AUDIT_B64=$(printf '%s\n%s' "$AUDIT_CONTENT" "$AUDIT_LINE" | base64 -w 0)
-              AUDIT_BODY=$(jq -n --arg message "Audit: write_file $REQUEST_PATH" --arg content "$AUDIT_B64" --arg branch "$TARGET_BRANCH" --arg sha "$AUDIT_SHA" '{message:$message,content:$content,branch:$branch} + (if $sha == "" then {} else {sha:$sha} end)')
-              printf '%s' "$AUDIT_BODY" | gh api --method PUT "repos/$GH_REPO/contents/$AUDIT_PATH" --input - >/dev/null
-              ;;
             *)
-              echo "::error::Unsupported operation"
+              echo "::error::Unsupported or non-read-only operation"
               exit 1
               ;;
           esac
