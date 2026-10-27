@@ -3,7 +3,7 @@ name: Validate Shared Memory
 on:
   pull_request:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh"]
+    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh", ".github/workflows/validate-approved-memory.yml"]
   push:
     branches: [main]
     paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh"]
