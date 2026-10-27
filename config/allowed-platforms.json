@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Manual allowlist only; does not grant account access or enable sync.",
+  "default_policy": "manual_user_initiated_only",
+  "platforms": [
+    {
+      "id": "chatgpt",
+      "enabled": true,
+      "auto_sync": false,
+      "allowed_data": [
+        "shared_approved",
+        "explicitly_selected_templates"
+      ]
+    },
+    {
+      "id": "jamin",
+      "enabled": true,
+      "auto_sync": false,
+      "allowed_data": [
+        "shared_approved",
+        "explicitly_selected_templates"
+      ]
+    },
+    {
+      "id": "claude",
+      "enabled": true,
+      "auto_sync": false,
+      "allowed_data": [
+        "shared_approved",
+        "explicitly_selected_templates"
+      ]
+    },
+    {
+      "id": "gemini",
+      "enabled": true,
+      "auto_sync": false,
+      "allowed_data": [
+        "shared_approved",
+        "explicitly_selected_templates"
+      ]
+    },
+    {
+      "id": "others",
+      "enabled": false,
+      "auto_sync": false,
+      "allowed_data": [],
+      "requires_review": true
+    }
+  ],
+  "rules": [
+    "Enabled means manual use only, not connected/authenticated.",
+    "Never import chat history automatically.",
+    "Only APPROVED shared files are shared facts.",
+    "Review every export before committing."
+  ]
+}
