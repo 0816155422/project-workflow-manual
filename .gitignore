@@ -14,3 +14,17 @@ _book
 *.epub
 *.mobi
 *.pdf
+
+# Local private workspace data — never commit
+private/**
+!private/README.md
+*.local
+.env
+.env.*
+!.env.example
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
