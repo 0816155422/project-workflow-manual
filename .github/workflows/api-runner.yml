@@ -26,19 +26,6 @@ on:
         required: false
         type: string
         default: ""
-  workflow_call:
-    inputs:
-      operation:
-        description: "Operation to run"
-        required: true
-        type: string
-        default: repository_status
-      path:
-        description: "Repository path (used by list_files/read_file)"
-        required: false
-        type: string
-        default: ""
-
 permissions:
   contents: read
 
@@ -53,8 +40,8 @@ jobs:
     steps:
       - name: Validate request
         env:
-          OPERATION: ${{ inputs.operation }}
-          REQUEST_PATH: ${{ inputs.path }}
+          OPERATION: ${{ inputs.operation || github.event.inputs.operation || 'repository_status' }}
+          REQUEST_PATH: ${{ inputs.path || github.event.inputs.path || '' }}
         shell: bash
         run: |
           set -euo pipefail
