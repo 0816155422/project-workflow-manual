@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-10-28T10:44:00+07:00",
+  "updatedAt": "2026-10-28",
   "workflow": "Validate OpenAI research evidence",
   "runId": "40625614203",
   "status": "success",
@@ -13,5 +13,22 @@
     "note": "No workflow was dispatched for ResumeStateGuard creation; the existing last-run workflow record remains unchanged and is not presented as evidence for this operation.",
     "pluginUrl": "https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb",
     "repositorySkillCommit": "2bfba72371207a76d70f4a357f5e85ef20765d10"
+  },
+  "resumeStateGuardOperation": {
+    "status": "Proven",
+    "pluginVersion": "0.1.1",
+    "pluginId": "plugins_6ae16fa499b481918c69d68e0c72ecbb",
+    "pluginReleaseId": "pluginrel_6ae1712fe9d88191b456b28f0298be25",
+    "pluginUrl": "https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb",
+    "repositorySkillCommit": "2fc7a79bbc987dcd92fececab36cbbce7c3a1526",
+    "repositorySkillBlobSha": "f92a9b319b5c9a7fa013a38a9a4908d52ce269df",
+    "immutableCheckpointCommit": "f1a4512d642cd11c5e534bbd4dcf73020426d5b1",
+    "immutableCheckpointBlobSha": "21687f1592ffd397a8cd1336060e491ca6ffd87f",
+    "operationLogCommit": "4bb795c26700efb2ee25ffe2063818ada13b8b36",
+    "operationLogBlobSha": "710b5dd5899178de4e5e45d34546d44252d6fd0d",
+    "workflowEvidenceLogCommit": "8d2e549e8872b89b8138906e8e7bdfc363de6959",
+    "workflowEvidenceLogBlobSha": "edf14dbef1d0d718d040fc1eb0064f4b9c866701",
+    "workflowDispatched": false,
+    "note": "This operation updated the private plugin and repository state/evidence-control layer only. No GitHub Actions workflow was dispatched. The prior workflow fields above remain the observed historical run record and are not evidence of pipeline success."
   }
 }
