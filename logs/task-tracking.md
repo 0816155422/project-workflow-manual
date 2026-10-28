@@ -37,3 +37,30 @@ Each status transition is a new entry; do not overwrite previous entries.
 - source of evidence: GitHub Contents API.
 - next_step: Keep final dataset paths absent and leave UI in awaiting-approval state until valid real source data is available.
 - blocker: No real source records or explicit approval.
+
+## TASK-PWA-002 — Operational records and safety gate (status update)
+- task_id: `TASK-PWA-002`
+- objective: Establish manifest, phase ledger, operation/task logs, and approval template.
+- status: **Proven** — create operations returned commit SHAs; final read-back is part of verification.
+- created_at: `2026-10-28T02:35:00Z`
+- updated_at: `2026-10-28T02:35:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence: Commits `34d34c96c5cbd4d0f086b26d672d1a8a266e239f`, `3fff5569d6569de19cc0badd8f2e9eef9ae55457`, `45315ca50e98ccb90ad5e15fd9938936d7f1f6a8`, `c8b17f9cad24f61fb436c56f8346a9d892f47fc4`, `6c969ef30eabfac3548075d4ebbe787d978b1ca5`.
+- source of evidence: GitHub Contents API.
+- next_step: Read back records and verify append-only log contains observed workflow outcomes.
+- blocker: none for creating records; integration remains incomplete.
+
+## TASK-PWA-003 — Course data validation and UI state (status update)
+- task_id: `TASK-PWA-003`
+- objective: Do not promote unverified records; ensure missing data is explicit.
+- status: **Blocked** — no verified real records are available.
+- created_at: `2026-10-28T02:35:00Z`
+- updated_at: `2026-10-28T02:35:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Pending source cleanup commit `95f8e3d0cf8691e5c68dea7f10122e827477f423`.
+  - Validation run [40621830468](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830468) failed closed with `records must be a non-empty array.`
+  - Ingest run [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) failed on the same missing-data condition; no write-back occurred.
+- source of evidence: GitHub Actions run metadata, job steps, decoded logs and repository file read-back.
+- next_step: Obtain real course records with provenance; run validation; only then consider explicit manual approval.
+- blocker: No verified data and no approval; sync must remain untriggered.
