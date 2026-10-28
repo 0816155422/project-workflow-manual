@@ -1,0 +1,10 @@
+Source title: A shared playbook for trustworthy third party evaluations
+Publisher: OpenAI
+Published: 2026-05-29
+Canonical URL: https://openai.com/index/trustworthy-third-party-evaluations-foundations/
+
+Research note: OpenAI discusses independent third-party evaluations of frontier-model capabilities and safeguards. The article emphasizes that tool use, multi-step tasks, and the surrounding environment can affect evaluation outcomes.
+
+Verbatim excerpt (14 words): “Independent, trusted third party evaluations play a critical role in strengthening the safety ecosystem.”
+
+Provenance: Page title, date, summary, and excerpt checked against the official OpenAI page on 2026-10-28. The excerpt is intentionally short; this file is a research note, not a full-page reproduction.
