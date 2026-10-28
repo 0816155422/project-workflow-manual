@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261028-002",
-  "createdAt": "2026-10-28T03:36:00Z",
+  "checkpointId": "CKPT-20261028-003",
+  "createdAt": "2026-10-28T10:44:00+07:00",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
-  "observedHeadSha": "5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7",
+  "observedHeadSha": "2bfba72371207a76d70f4a357f5e85ef20765d10",
   "resumeFrom": "phase_5_approval_gated_sync",
   "overallStatus": "Blocked",
   "phaseStatus": {
@@ -98,9 +98,27 @@
     "https://github.com/0816155422/project-workflow-manual/blob/main/pending/course/course-source.json",
     "https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897",
     "https://github.com/0816155422/project-workflow-manual/blob/main/logs/operation-log.md",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/workflow-evidence.md"
+    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/workflow-evidence.md",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/state/checkpoints/CKPT-20261028-003.json",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/skills/resume-state-guard/SKILL.md",
+    "https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb"
   ],
-  "integrityNote": "Latest pointer updated after creating immutable checkpoint CKPT-20261028-002. Previous checkpoint history and append-only logs preserved.",
-  "summary": "Resume audit checkpoint: real course source is empty and approval fields are null; no course validation, sync, or logger run was triggered.",
-  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before sync."
+  "integrityNote": "Immutable checkpoint CKPT-20261028-003 created and read back before updating this latest pointer; older checkpoint files and history preserved.",
+  "summary": "ResumeStateGuard plugin and repository skill are created and read back. Course data remains blocked because pending source is empty and approval fields are null.",
+  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "timestamp": "2026-10-28T10:44:00+07:00",
+  "checkpointSummary": {
+    "checkpoint_no": 3,
+    "timestamp": "2026-10-28T10:44:00+07:00",
+    "phase": "phase_5_approval_gated_sync",
+    "status": "Blocked",
+    "summary": "ResumeStateGuard installed; course-data processing remains blocked on missing real records and approval.",
+    "evidence": [
+      "Plugin creation result: plugins_6ae16fa499b481918c69d68e0c72ecbb / pluginrel_6ae16fa728988191a2af8fa644c328be",
+      "Repository skill commit 2bfba72371207a76d70f4a357f5e85ef20765d10 and read-back blob SHA 3f88da213b9e9af6e9273da1041263899e2379c9",
+      "Immutable checkpoint commit ca3b077ce93f6294cbe4d22b66446fb7fb832fcb and read-back blob SHA 4fa5adad17e3966b81b0d5fdf203c044b87632d3",
+      "pending/course/course-source.json blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295: records=[], approvedBy=null, approvedAt=null"
+    ],
+    "next_phase": "phase_5_approval_gated_sync"
+  }
 }
