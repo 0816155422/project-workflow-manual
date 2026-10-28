@@ -198,3 +198,15 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - commit SHA: `eb64abd81671e1adf47b965bdd08733998a81512`
 - evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40623296976
 - note: The run was read-only and did not approve or sync pending data.
+
+## 2026-10-28T03:20:00Z — State bootstrap audit (workflow evidence references only)
+- task_id: `TASK-STATE-RESUME-001`
+- timestamp: `2026-10-28T03:20:00Z`
+- actor: `0816155422` (repository integration identity observed in connected GitHub account)
+- task: Record the latest relevant confirmed workflow evidence while bootstrapping resumable state
+- status: **Proven** for the referenced prior runs; current course-data validation and sync **Blocked**
+- workflow name: `Validate OpenAI research evidence`
+- run ID: `40625614203`
+- commit SHA: `97e582145e1f3e8b7bde26b5d3de60df74d4b090`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203
+- note: This run passed validation of the OpenAI research evidence index only. It does not prove course-data validation, sync, usage logger execution, frontend rendering, or deployment. Prior course validation run `40621830468` failed closed on the empty records array; no sync was dispatched. This is an append-only evidence note about observed runs, not a claim that a new workflow was run for this task.
