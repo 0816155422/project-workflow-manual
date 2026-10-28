@@ -253,3 +253,12 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - Immutable checkpoint 004 read-back blob `21687f1592ffd397a8cd1336060e491ca6ffd87f`; repository skill read-back blob `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
 - Plugin manifests: JSON parsed, version `0.1.1`, discoverability `PRIVATE`; release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
 - No workflow name/run ID applies because no workflow was dispatched. Do not treat this note as runtime evidence.
+
+## 2026-10-28T10:38:22.892Z — Generate Append-only Usage and Workflow Evidence
+- Status: Inconclusive
+- Run ID: 40673700097
+- Commit SHA: 040b4d912236511bc4c5cab7b42f7c610d65a335
+- Evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40673700097
+- Actor: 0816155422
+- Task: scheduled evidence capture
+- Note: Scheduled evidence capture; consult linked run for final conclusion.

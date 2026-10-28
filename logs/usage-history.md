@@ -14,3 +14,12 @@ This file records actual workflow-run evidence only. Entries are appended by `sc
 - next_step: Allow a scheduled run or explicitly dispatch the usage logger workflow; then verify its run ID, resulting commit and appended entries.
 - blocker: No logger execution evidence yet.
 - note: This is a status note, not a fabricated usage event.
+
+## 2026-10-28T10:38:22.892Z — scheduled evidence capture
+- Actor: 0816155422
+- Status: Inconclusive
+- Workflow: Generate Append-only Usage and Workflow Evidence
+- Run ID: 40673700097
+- Commit SHA: 040b4d912236511bc4c5cab7b42f7c610d65a335
+- Evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40673700097
+- Note: Scheduled evidence capture; consult linked run for final conclusion.
