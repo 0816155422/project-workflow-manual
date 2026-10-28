@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261028-003",
+  "checkpoint_no": 3,
+  "createdAt": "2026-10-28T10:43:00+07:00",
+  "timestamp": "2026-10-28T10:43:00+07:00",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "main",
+  "phase": "phase_5_approval_gated_sync",
+  "status": "Blocked",
+  "overallStatus": "Blocked",
+  "summary": "Created private ResumeStateGuard plugin and documented resume protocol; course-data pipeline remains blocked because pending source contains no records and approval fields are null.",
+  "evidence": [
+    "Private ChatGPT plugin created: https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb (plugin ID plugins_6ae16fa499b481918c69d68e0c72ecbb, release pluginrel_6ae16fa728988191a2af8fa644c328be)",
+    "Read-back: pending/course/course-source.json blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295 contains records=[], approvedBy=null, approvedAt=null",
+    "Preflight read-back completed for all six required state/log files from main",
+    "No workflow was dispatched during this operation"
+  ],
+  "next_phase": "phase_5_approval_gated_sync",
+  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "missingInputs": [
+    "real_course_records",
+    "source_url_provenance",
+    "approval_note"
+  ]
+}
