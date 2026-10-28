@@ -22,7 +22,8 @@
     "State/session-state.json read-back blob SHA 8cb8578ad34533ac22cf3b7622cadb8ff0287251.",
     "State/phase-status.json read-back blob SHA 824d14e5f5e25f08dbacb016d6f2437572d96952.",
     "State/last-run.json read-back blob SHA b4737c986caf09c7c756cf94829a52f6ac8900eb.",
-    "Plugin manifests read back and parsed as JSON; both report version 0.1.1 and plugin discoverability remains PRIVATE."
+    "Plugin manifests read back and parsed as JSON; both report version 0.1.1 and plugin discoverability remains PRIVATE.",
+    "Final session-state.json read-back blob SHA 564a9311a537ff11e05f4fb72ad3e1dbfc2cdefa; status remains Blocked and current phase remains phase_5_approval_gated_sync."
   ],
   "next_phase": "phase_5_approval_gated_sync",
   "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
@@ -32,7 +33,7 @@
   },
   "readBackVerification": {
     "state/checkpoints/CKPT-20261028-004.json": "21687f1592ffd397a8cd1336060e491ca6ffd87f",
-    "state/session-state.json": "8cb8578ad34533ac22cf3b7622cadb8ff0287251",
+    "state/session-state.json": "564a9311a537ff11e05f4fb72ad3e1dbfc2cdefa",
     "state/phase-status.json": "824d14e5f5e25f08dbacb016d6f2437572d96952",
     "state/last-run.json": "b4737c986caf09c7c756cf94829a52f6ac8900eb",
     "logs/operation-log.md": "fdc4bacc5f0ad2909b889d7133369081084988d4",
