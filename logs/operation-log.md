@@ -57,3 +57,15 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API commit/read-back results and GitHub Actions REST API run/job logs.
 - next_step: Perform final read-back and compare current main HEAD against the latest Pages run SHA. No sync is to be dispatched.
 - blocker: No real course records, no approved target data, no usage logger run, and no Pages run for the latest documentation/log commit.
+
+## OP-20261028-004 — Create append-only operational report
+- task_id: `TASK-PWA-005`
+- objective: Publish a durable status report with explicit Proven / Not proven / Blocked / Inconclusive distinctions and real GitHub evidence.
+- status: **Proven** — report creation returned commit SHA.
+- created_at: `2026-10-28T02:39:30Z`
+- updated_at: `2026-10-28T02:39:30Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence: `docs/checklists/operational-report-2026-10-28.md`, commit `4610e24a031b5c5a9a758d2b480eba60680d9db6`.
+- source of evidence: GitHub Contents API create-file response; read-back verification pending.
+- next_step: Read back the report and required operational files, then compare current main SHA to deployment evidence.
+- blocker: End-to-end pipeline remains blocked by missing real course records and no approval.
