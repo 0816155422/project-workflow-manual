@@ -28,3 +28,7 @@ private/**
 Thumbs.db
 .vscode/
 .idea/
+
+# Course pipeline local test outputs
+coverage/
+*.log
