@@ -158,3 +158,19 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - files affected: new `state/session-state.json`, `state/phase-status.json`, `state/last-run.json`, `state/checkpoints/latest.json`, `state/checkpoints/README.md`; this entry is appended to prior history.
 - next_step: Obtain provenance-backed real course records and explicit authorized approval. Then validate, manually dispatch approval-gated sync, and capture run/commit/read-back evidence. Do not fabricate records or dispatch sync without approval.
 - blocker: No verified real pending course records and no explicit approval were found.
+
+
+## OP-20261028-007 — Resume-state read and blocker checkpoint
+- task_id: `PRJ-WF-2026-10-28-01`
+- objective: Resume from committed state, inspect the pending course source and current Actions evidence, and record only the next safe action.
+- status: **Blocked** — no verified real course records or explicit authorized approval were found.
+- created_at: `2026-10-28T03:36:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Read back `state/session-state.json`, `state/phase-status.json`, `state/last-run.json`, `state/checkpoints/latest.json`, `logs/operation-log.md`, and `logs/workflow-evidence.md` from branch `main`.
+  - `pending/course/course-source.json` blob `90c325b0694e1ecc89b411787a4ae4fdd19b9295` contains `records: []`, `approvedBy: null`, and `approvedAt: null`; it explicitly says not to approve or sync until real provenance-backed records are added.
+  - Latest observed repository HEAD before this checkpoint: `5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7`.
+  - Repository Validation run [40626365897](https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897) succeeded for SHA `5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7`; this is generic repository validation, not proof of course-data validation or sync.
+  - No new validation, approval-gated sync, or usage-logger run was triggered in this operation.
+- changes: State/evidence checkpoint update only; no course records created, no approval inferred, no sync dispatched.
+- next_safe_action: Obtain real course records with source URL/provenance and an explicit authorized approval note; then validate before any sync.
