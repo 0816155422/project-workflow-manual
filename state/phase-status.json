@@ -1,44 +1,48 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-10-28T10:44:00+07:00",
+  "updatedAt": "2026-10-28",
   "phases": {
     "phase_1_repo_and_state_audit": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         "Repository tree read from GitHub API",
         "state/session-state.json, state/phase-status.json, state/last-run.json, state/checkpoints/latest.json returned 404 before initialization",
         "logs/operation-log.md and logs/workflow-evidence.md read back"
       ],
-      "notes": "Existing append-only logs and prior task history preserved. No state files existed at audit time."
+      "notes": "Existing append-only logs and prior task history preserved. No state files existed at audit time.",
+      "legacyStatus": "completed"
     },
     "phase_2_foundation": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         ".github/workflows, scripts, logs, docs, hap-aicc, pending, shared already existed in repository tree",
         "state and state/checkpoints created with this checkpoint"
       ],
-      "notes": "No existing directories were reset or removed."
+      "notes": "No existing directories were reset or removed.",
+      "legacyStatus": "completed"
     },
     "phase_3_contract_and_policy": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         "docs/data-contract.md read back",
         "docs/approval-policy.md read back",
         "docs/reporting-rules.md read back"
       ],
-      "notes": "Existing contracts retained; they require real evidence and manual approval."
+      "notes": "Existing contracts retained; they require real evidence and manual approval.",
+      "legacyStatus": "completed"
     },
     "phase_4_validation": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         ".github/workflows/validate-course-data.yml read back",
         "scripts/validate-course-data.mjs read back",
         "Prior Actions run 40621830468 logged as failing closed on empty records"
       ],
-      "notes": "Validation infrastructure exists. Dataset validation remains blocked because no non-empty real records were proven. Latest successful repository validation run 40625614282 does not itself prove course dataset validity."
+      "notes": "Validation infrastructure exists. Dataset validation remains blocked because no non-empty real records were proven. Latest successful repository validation run 40625614282 does not itself prove course dataset validity.",
+      "legacyStatus": "completed"
     },
     "phase_5_approval_gated_sync": {
-      "status": "blocked",
+      "status": "Blocked",
       "evidence": [
         ".github/workflows/sync-approved-memory.yml read back",
         "scripts/sync-course-data.mjs read back",
@@ -46,49 +50,60 @@
         "Read-back: pending/course/course-source.json blob 90c325b0694e1ecc89b411787a4ae4fdd19b9295; records=[], approvedBy=null, approvedAt=null.",
         "Generic Repository Validation run 40626365897 is not course-data validation evidence."
       ],
-      "notes": "Still blocked: pending/course/course-source.json has records=[] and no approval marker. Resume audit read-back confirms no real provenance-backed course records or explicit authorized approval."
+      "notes": "Still blocked: pending/course/course-source.json has records=[] and no approval marker. Resume audit read-back confirms no real provenance-backed course records or explicit authorized approval.",
+      "legacyStatus": "blocked"
     },
     "phase_6_usage_logging": {
-      "status": "not_proven",
+      "status": "Not proven",
       "evidence": [
         ".github/workflows/generate-usage-log.yml read back",
         "scripts/generate-usage-log.mjs read back",
         "Existing logs/workflow-evidence.md read back"
       ],
-      "notes": "No new usage logger run was triggered or verified in this resume audit."
+      "notes": "No new usage logger run was triggered or verified in this resume audit.",
+      "legacyStatus": "not_proven"
     },
     "phase_7_frontend": {
-      "status": "not_proven",
+      "status": "Not proven",
       "evidence": [
         "hap-aicc/index.html read back",
         "hap-aicc/app.js read back",
         "hap-aicc/styles.css read back"
       ],
-      "notes": "No approved real dataset exists; rendering approved course records remains unproven."
+      "notes": "No approved real dataset exists; rendering approved course records remains unproven.",
+      "legacyStatus": "not_proven"
     },
     "phase_8_readback_verification": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         "All relevant workflow, script, policy, and frontend paths read back from GitHub Contents API",
         "Repository tree and GitHub Actions run list read back"
       ],
-      "notes": "State files and final log updates must be read back after this commit sequence."
+      "notes": "State files and final log updates must be read back after this commit sequence.",
+      "legacyStatus": "completed"
     },
     "phase_9_final_report": {
-      "status": "completed",
+      "status": "Proven",
       "evidence": [
         "State summary records phase statuses and linked prior workflow evidence"
       ],
-      "notes": "Overall result is Blocked for end-to-end course data processing; validation infrastructure exists and rejects empty data."
+      "notes": "Overall result is Blocked for end-to-end course data processing; validation infrastructure exists and rejects empty data.",
+      "legacyStatus": "completed"
     },
     "resume_state_guard": {
-      "status": "proven",
+      "status": "Proven",
       "evidence": [
         "Private plugin created with plugin ID plugins_6ae16fa499b481918c69d68e0c72ecbb and release pluginrel_6ae16fa728988191a2af8fa644c328be",
         "Repository skill read back from skills/resume-state-guard/SKILL.md; blob SHA 3f88da213b9e9af6e9273da1041263899e2379c9; creation commit 2bfba72371207a76d70f4a357f5e85ef20765d10",
-        "Immutable checkpoint read back from state/checkpoints/CKPT-20261028-003.json; blob SHA 4fa5adad17e3966b81b0d5fdf203c044b87632d3; creation commit ca3b077ce93f6294cbe4d22b66446fb7fb832fcb"
+        "Immutable checkpoint read back from state/checkpoints/CKPT-20261028-003.json; blob SHA 4fa5adad17e3966b81b0d5fdf203c044b87632d3; creation commit ca3b077ce93f6294cbe4d22b66446fb7fb832fcb",
+        "Plugin updated to v0.1.1, release pluginrel_6ae1712fe9d88191b456b28f0298be25.",
+        "Repository skill updated and read back; commit 2fc7a79bbc987dcd92fececab36cbbce7c3a1526, blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df.",
+        "Immutable checkpoint CKPT-20261028-004 read back; blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f."
       ],
-      "notes": "Resume protocol is installed as a private ChatGPT plugin and repository skill. Course-data pipeline remains blocked independently."
+      "notes": "Resume protocol is installed as a private ChatGPT plugin and repository skill. Course-data pipeline remains blocked independently.",
+      "legacyStatus": "proven"
     }
-  }
+  },
+  "status": "Blocked",
+  "statusSemantics": "New status fields use exactly Proven, Not proven, Blocked, or Inconclusive. legacyStatus preserves the previous label for audit; evidence and notes are retained."
 }
