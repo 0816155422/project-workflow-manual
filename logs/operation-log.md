@@ -39,3 +39,21 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API commit results, Actions run metadata and decoded validation job logs.
 - blocker: No verified real course/activity records; validation and ingest correctly fail on empty records.
 - next_step: Read back all required paths and inspect latest Actions run outcomes. Do not invoke the manual sync workflow.
+
+## OP-20261028-003 — Evidence review, README documentation, and final status ledger
+- task_id: `TASK-PWA-005`
+- objective: Document the pipeline and append actual GitHub Actions outcomes, including failures and deployment SHA limits.
+- status: **Proven** for documented changes and run observations; integration **Blocked** by missing real course records.
+- created_at: `2026-10-28T02:38:00Z`
+- updated_at: `2026-10-28T02:38:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - README update commit: `9c1da08858fdd4976ce2bc3306213c46310d3604`.
+  - Usage status note commit: `f09def9e36c338fe859df050c02deca12a6fc3b5`.
+  - Workflow evidence append commit: `1efc87d48236ecbd039cf331398ed0ab6043553d`.
+  - Task tracking append commit: `64e4308926a2db472e410f6ae76b2058244c7fd1`.
+  - Phase status append commit: `d9fd820c82df7f680f641214c1e967159d70a78a`.
+  - Validation failure [40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907), ingest failure [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477), Pages success [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897), and repository validation success [40621846957](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846957).
+- source of evidence: GitHub Contents API commit/read-back results and GitHub Actions REST API run/job logs.
+- next_step: Perform final read-back and compare current main HEAD against the latest Pages run SHA. No sync is to be dispatched.
+- blocker: No real course records, no approved target data, no usage logger run, and no Pages run for the latest documentation/log commit.
