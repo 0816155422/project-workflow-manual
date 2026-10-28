@@ -1,12 +1,32 @@
-name: Validate Shared Memory
+name: Validate Shared Memory and Course Data
 
 on:
   pull_request:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh", ".github/workflows/validate-approved-memory.yml"]
+    paths:
+      - "shared/**"
+      - "pending/**"
+      - "config/**"
+      - "platforms/**"
+      - "data/**"
+      - "public/**"
+      - "static-site/**"
+      - "hap-aicc/data/**"
+      - "scripts/validate-memory.sh"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/validate-approved-memory.yml"
   push:
     branches: [main]
-    paths: ["shared/**", "pending/**", "config/**", "platforms/**", "data/**", "public/**", "static-site/**", "scripts/validate-memory.sh"]
+    paths:
+      - "shared/**"
+      - "pending/**"
+      - "config/**"
+      - "platforms/**"
+      - "data/**"
+      - "hap-aicc/data/**"
+      - "scripts/validate-memory.sh"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/validate-approved-memory.yml"
   workflow_dispatch:
 
 permissions:
@@ -15,14 +35,35 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-
-      - name: Validate JSON and scan likely secrets
+      - name: Validate existing shared memory rules
         run: npm run validate:memory
-
-      - name: Explain scan limitations
+      - name: Validate pending course source
+        run: node scripts/validate-course-data.mjs pending/course/course-source.json
+      - name: Validate final datasets if present
         shell: bash
         run: |
-          echo "Secret scanning is heuristic only; a human must review pending content before approval." >> "$GITHUB_STEP_SUMMARY"
+          set -euo pipefail
+          for file in shared/course/course-data.json data/course/course-data.json hap-aicc/data/course-data.json; do
+            if [[ -f "$file" ]]; then
+              echo "Validating $file"
+              node scripts/validate-course-data.mjs "$file"
+            else
+              echo "Not present (expected before approval): $file"
+            fi
+          done
+      - name: Write validation summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Validation evidence"
+            echo "- Repository: $GITHUB_REPOSITORY"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Commit SHA: $GITHUB_SHA"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- Secret scanning is heuristic only; human review is required before approval."
+            echo "- Validation is not approval and does not execute write-back."
+          } >> "$GITHUB_STEP_SUMMARY"
