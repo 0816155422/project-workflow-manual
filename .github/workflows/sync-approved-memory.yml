@@ -1,18 +1,20 @@
-name: Sync Approved Memory
+name: Sync Approved Course Data
 
 on:
   workflow_dispatch:
     inputs:
       source_path:
-        description: "Pending file path (must be under pending/)"
+        description: "Pending source path (must be under pending/)"
         required: true
+        default: "pending/course/course-source.json"
         type: string
       target_path:
-        description: "Destination path (must be under shared/)"
+        description: "New canonical target (shared/course/course-data.json or data/course/course-data.json)"
         required: true
+        default: "shared/course/course-data.json"
         type: string
       approval_note:
-        description: "Short approval note for the audit log"
+        description: "Explicit single-line approval note (1-300 characters)"
         required: true
         type: string
 
@@ -20,20 +22,19 @@ permissions:
   contents: write
 
 concurrency:
-  group: approved-memory-sync
+  group: approved-course-data-sync
   cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           ref: main
-
-      - name: Validate request and copy approved file
+      - name: Validate approval request and source path
         env:
           SOURCE_PATH: ${{ inputs.source_path }}
           TARGET_PATH: ${{ inputs.target_path }}
@@ -41,58 +42,55 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          [[ "$SOURCE_PATH" == pending/* ]] || { echo "::error::Source must be under pending/"; exit 1; }
-          [[ "$TARGET_PATH" == shared/* ]] || { echo "::error::Destination must be under shared/"; exit 1; }
-          [[ "$SOURCE_PATH" != *".."* && "$TARGET_PATH" != *".."* ]] || { echo "::error::Path traversal is not allowed"; exit 1; }
-          [[ "$SOURCE_PATH" != *"\\"* && "$TARGET_PATH" != *"\\"* ]] || { echo "::error::Backslashes are not allowed in paths"; exit 1; }
+          [[ "$SOURCE_PATH" == pending/* ]] || { echo "::error::Source must start with pending/"; exit 1; }
+          [[ "$TARGET_PATH" == shared/* || "$TARGET_PATH" == data/* ]] || { echo "::error::Target must start with shared/ or data/"; exit 1; }
+          [[ "$SOURCE_PATH" != *".."* && "$TARGET_PATH" != *".."* ]] || { echo "::error::Path traversal is blocked"; exit 1; }
+          [[ "$SOURCE_PATH" != *"\"* && "$TARGET_PATH" != *"\"* ]] || { echo "::error::Backslashes are blocked"; exit 1; }
+          [[ "$SOURCE_PATH" == *.json && "$TARGET_PATH" == *.json ]] || { echo "::error::Only JSON is supported for course sync"; exit 1; }
+          [[ "$TARGET_PATH" == "shared/course/course-data.json" || "$TARGET_PATH" == "data/course/course-data.json" ]] || { echo "::error::Unsupported target path"; exit 1; }
           [[ -n "$APPROVAL_NOTE" && ${#APPROVAL_NOTE} -le 300 ]] || { echo "::error::Approval note must be 1-300 characters"; exit 1; }
-          [[ "$APPROVAL_NOTE" != *$'\n'* && "$APPROVAL_NOTE" != *$'\r'* ]] || { echo "::error::Approval note must be a single line"; exit 1; }
-
-          [[ "$SOURCE_PATH" == *.md || "$SOURCE_PATH" == *.json || "$SOURCE_PATH" == *.txt ]] || { echo "::error::Only Markdown, JSON, or TXT files can be synced"; exit 1; }
-          [[ "$TARGET_PATH" == *.md || "$TARGET_PATH" == *.json || "$TARGET_PATH" == *.txt ]] || { echo "::error::Only Markdown, JSON, or TXT destinations are allowed"; exit 1; }
-
-          # Reject symlinks in source path and source file.
-          source_current=""
-          IFS='/' read -r -a source_parts <<< "$SOURCE_PATH"
-          for part in "${source_parts[@]}"; do
-            source_current="${source_current:+$source_current/}$part"
-            [[ ! -L "$source_current" ]] || { echo "::error::Symlinks are not allowed in the source path"; exit 1; }
+          [[ "$APPROVAL_NOTE" != *$'\n'* && "$APPROVAL_NOTE" != *$'\r'* ]] || { echo "::error::Approval note must be one line"; exit 1; }
+          [[ -f "$SOURCE_PATH" && ! -L "$SOURCE_PATH" ]] || { echo "::error::Source must exist and be a regular, non-symlink file"; exit 1; }
+          for p in "$SOURCE_PATH" "$(dirname "$SOURCE_PATH")" "$(dirname "$TARGET_PATH")"; do
+            [[ ! -L "$p" ]] || { echo "::error::Symlinked path component is blocked: $p"; exit 1; }
           done
-          [[ -f "$SOURCE_PATH" ]] || { echo "::error::Pending source file does not exist or is not a regular file"; exit 1; }
-
-          # Reject symlinked destination path components before creating directories.
-          target_dir="$(dirname -- "$TARGET_PATH")"
-          target_current=""
-          IFS='/' read -r -a target_parts <<< "$target_dir"
-          for part in "${target_parts[@]}"; do
-            target_current="${target_current:+$target_current/}$part"
-            [[ ! -L "$target_current" ]] || { echo "::error::Symlinks are not allowed in the destination path"; exit 1; }
-          done
-          [[ ! -L "$TARGET_PATH" && ! -e "$TARGET_PATH" ]] || { echo "::error::Destination already exists; overwrite is blocked"; exit 1; }
-
-          # Re-run the relevant validation at approval time; heuristic scan is not a security guarantee.
-          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*[A-Za-z0-9/_+=.-]{16,}' "$SOURCE_PATH"; then
-            echo "::error::Potential credential detected; approval sync blocked."
+          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|refresh[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*["'\''"]?[A-Za-z0-9/_+=.-]{8,}' "$SOURCE_PATH"; then
+            echo "::error::Potential secret-like content detected; approval sync blocked."
             exit 1
           fi
-          if [[ "$SOURCE_PATH" == *.json ]]; then jq empty "$SOURCE_PATH"; fi
-          if [[ "$TARGET_PATH" == *.json ]]; then jq empty "$SOURCE_PATH"; fi
-
-          mkdir -p "$target_dir" logs
-          [[ ! -L "$target_dir" && ! -L "$TARGET_PATH" && ! -e "$TARGET_PATH" ]] || { echo "::error::Destination path changed or exists; refusing to write"; exit 1; }
-          cp -- "$SOURCE_PATH" "$TARGET_PATH"
-          printf '\n- %s — approved by %s; source: %s; destination: %s\n  - Note: %s\n' \
-            "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$GITHUB_ACTOR" "$SOURCE_PATH" "$TARGET_PATH" "$APPROVAL_NOTE" \
-            >> logs/approval-log.md
-
+          node scripts/validate-course-data.mjs "$SOURCE_PATH"
+      - name: Create approved data mirrors (create-only)
+        env:
+          SOURCE_PATH: ${{ inputs.source_path }}
+          TARGET_PATH: ${{ inputs.target_path }}
+          APPROVAL_NOTE: ${{ inputs.approval_note }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          APPROVED_AT: ${{ github.run_started_at }}
+        run: node scripts/sync-course-data.mjs
+      - name: Append approval audit entry
+        env:
+          SOURCE_PATH: ${{ inputs.source_path }}
+          TARGET_PATH: ${{ inputs.target_path }}
+          APPROVAL_NOTE: ${{ inputs.approval_note }}
+          INITIATED_BY: ${{ github.actor }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '\n- Timestamp: %s\n  - Status: sync changes prepared; final run conclusion is the linked GitHub Actions run\n  - Actor: %s\n  - Source: %s\n  - Requested target: %s\n  - Mirrors: shared/course/course-data.json; data/course/course-data.json; hap-aicc/data/course-data.json\n  - Run ID: %s\n  - Input commit SHA: %s\n  - Evidence URL: %s/%s/actions/runs/%s\n  - Approval note: %s\n' \
+            "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$INITIATED_BY" "$SOURCE_PATH" "$TARGET_PATH" "$GITHUB_RUN_ID" "$GITHUB_SHA" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$APPROVAL_NOTE" >> logs/approval-log.md
+          printf '\n## %s — Sync Approved Course Data\n- Status: Inconclusive until the linked run reaches a final conclusion\n- Actor: %s\n- Run ID: %s\n- Input commit SHA: %s\n- Evidence URL: %s/%s/actions/runs/%s\n- Task: create approved course dataset and mirrors\n- Note: final result must be read from the linked run; workflow definition is not execution proof\n' \
+            "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$INITIATED_BY" "$GITHUB_RUN_ID" "$GITHUB_SHA" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> logs/workflow-evidence.md
+      - name: Commit approved dataset and audit records
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- "$TARGET_PATH" logs/approval-log.md
-          git commit -m "Approve shared memory: $TARGET_PATH"
+          git add -- shared/course/course-data.json data/course/course-data.json hap-aicc/data/course-data.json logs/approval-log.md logs/workflow-evidence.md
+          git commit -m "Approve course data via manual workflow run $GITHUB_RUN_ID"
           git push origin HEAD:main
-
-      - name: Summarize sync
-        if: success()
+      - name: Summarize approval action
+        if: always()
         env:
           SOURCE_PATH: ${{ inputs.source_path }}
           TARGET_PATH: ${{ inputs.target_path }}
@@ -100,9 +98,12 @@ jobs:
         shell: bash
         run: |
           {
-            echo "## Approved memory sync complete"
+            echo "## Approval-gated course sync"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Input commit SHA: $GITHUB_SHA"
+            echo "- Actor: $INITIATED_BY"
             echo "- Source: $SOURCE_PATH"
-            echo "- Destination: $TARGET_PATH"
-            echo "- Initiated by: $INITIATED_BY"
-            echo "- This workflow is manual; running it is the explicit approval action."
+            echo "- Requested target: $TARGET_PATH"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- This manual workflow is the approval action. No workflow was dispatched by the implementation task."
           } >> "$GITHUB_STEP_SUMMARY"
