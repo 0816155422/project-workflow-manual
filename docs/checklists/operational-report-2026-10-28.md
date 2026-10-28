@@ -86,3 +86,26 @@ Provide real course/activity source data with provenance in `pending/course/cour
 - `docs/checklists/operational-report-2026-10-28.md` (this report)
 
 This report is append-only. A later status change must be recorded as a new report or entry; do not overwrite this report.
+
+## Addendum A — Explicit status taxonomy
+- Addendum ID: `PWA-RPT-20261028-002-A`
+- Date/Time: `2026-10-28T02:40:00Z`
+- Reporter: GitHub-connected repository automation agent
+- Repository: `0816155422/project-workflow-manual`
+- Branch: `main`
+- Scope: clarify all required status classifications without rewriting the original report.
+- Objective: make the report's status taxonomy explicit and append-only.
+- Source of truth: GitHub repository content and Actions run evidence listed above.
+- Evidence sources: report read-back and the linked GitHub Actions runs in the original report.
+- Repository status: **Proven** — report file read back; final course data files remain absent.
+- Workflow status: **Blocked** for course validation/ingest due empty pending records; **Proven** for general repository validation success on its recorded SHA.
+- Deployment status: **Proven** only for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`; deployment of later main HEAD is **Not proven**.
+- Write-back / sync status: **Blocked** until real source data and explicit approval exist; no sync run was dispatched.
+- Security & approval review: manual-only sync guard is defined; external reviewer/branch protection settings are **Not proven**.
+- Proven: workflow definitions and real run outcomes were read back from GitHub.
+- Not proven: approved dataset, sync success, usage logger run, UI rendering of approved records, and deployment of current main HEAD.
+- Blocked: no verified course/activity records are available; strict validation correctly rejects an empty records array.
+- Inconclusive: end-to-end integration as a whole, because the required chain from real source through approval, usage evidence, and commit-matched deployment is incomplete.
+- Conclusion: this addendum clarifies status labels only; it does not change the implementation or claim additional execution.
+- Next safe action: supply real course data with provenance, validate, then seek explicit approval before dispatching sync.
+- source of evidence: GitHub Contents API and Actions run metadata.
