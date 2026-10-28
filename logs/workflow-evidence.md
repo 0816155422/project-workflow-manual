@@ -210,3 +210,15 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - commit SHA: `97e582145e1f3e8b7bde26b5d3de60df74d4b090`
 - evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203
 - note: This run passed validation of the OpenAI research evidence index only. It does not prove course-data validation, sync, usage logger execution, frontend rendering, or deployment. Prior course validation run `40621830468` failed closed on the empty records array; no sync was dispatched. This is an append-only evidence note about observed runs, not a claim that a new workflow was run for this task.
+
+
+## Resume audit — 2026-10-28T03:36:00Z
+- task_id: `PRJ-WF-2026-10-28-01`
+- status: **Blocked**
+- observed source: `pending/course/course-source.json`
+- source blob SHA: `90c325b0694e1ecc89b411787a4ae4fdd19b9295`
+- observed content facts: `records=[]`, `approvedBy=null`, `approvedAt=null`; no real course records or approval evidence.
+- latest observed workflow: [Repository Validation #40626365897](https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897)
+- workflow conclusion: `success` for SHA `5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7`; this does not establish course validation, approval, sync, or frontend data rendering.
+- no workflow was dispatched during this resume audit.
+- next safe action: collect provenance-backed real records and explicit authorized approval; rerun course validation before sync.
