@@ -73,3 +73,16 @@ Use one of:
 - Ready for next step
 
 Explain the evidence behind the conclusion, identify what remains Not proven or Inconclusive, and state the next verification step. “Ready for next step” does not mean an unverified operation has completed.
+
+
+## 9. Required subsystem statuses
+Every end-to-end course data report must separately state one of: Proven, Not proven, Blocked, or Inconclusive for:
+- pending source and its blob/commit SHA
+- validation and ingest workflow runs
+- manual approval/sync run and approval note
+- final data target existence and commit
+- approval log, usage log, and workflow evidence
+- UI rendering against the approved dataset
+- Pages deployment run, page URL, and deployed commit SHA
+
+Do not convert an absent workflow run into a success claim. A run must be linked by its actual run ID and URL, and its head SHA must be checked. Preserve failed, cancelled, skipped, and inconclusive outcomes in subsequent append-only entries.
