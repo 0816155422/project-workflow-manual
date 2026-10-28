@@ -140,3 +140,21 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API read-back and GitHub Actions run/job-step metadata.
 - next_step: Continue only with real course records and explicit approval; the successful repository checks do not prove course sync or latest Pages deployment.
 - blocker: Pending records are empty; sync, usage logger, and current-HEAD Pages deployment remain unproven.
+
+## OP-20261028-003 — State bootstrap and resume audit
+- task_id: `TASK-STATE-RESUME-001`
+- objective: Read existing state before changes, preserve prior history, and initialize resumable state only because the four required state files were absent.
+- status: **Proven** for repository audit and state-file creation; end-to-end course pipeline **Blocked**.
+- created_at: `2026-10-28T03:20:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - `state/session-state.json`, `state/phase-status.json`, `state/last-run.json`, and `state/checkpoints/latest.json` each returned 404 before initialization.
+  - Existing `logs/operation-log.md` and `logs/workflow-evidence.md` were read before changes and retained.
+  - State initialization commits: `c2de4b4e349f17aee704b8edf12549fa71b6c585`, `908928160cf3a1f5db40f44513f585e34c556268`, `a4dd06a6f4a0c861562314ea527496f69d7d7071`, `f6d706989e4e72d9efe757860203a0ebfde6f39f`, `5680156582b35589a79b0e7f5497d18bffbe2562`.
+  - Existing workflow definitions and data policies were read back from GitHub.
+  - Prior pending-data validation run [40621830468](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830468) failed closed because the records array was empty; no sync is authorized.
+  - Latest confirmed OpenAI evidence validator run [40625614203](https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203) succeeded for commit `97e582145e1f3e8b7bde26b5d3de60df74d4b090`; this is not course-data validation.
+- phase_status: Phase 1 completed; Phase 2 completed; Phase 3 completed; Phase 4 validation infrastructure completed but data validation remains blocked; Phase 5 blocked; Phase 6 not_proven for a new logger run; Phase 7 not_proven for approved-data rendering; Phase 8 read-back performed; Phase 9 report recorded.
+- files affected: new `state/session-state.json`, `state/phase-status.json`, `state/last-run.json`, `state/checkpoints/latest.json`, `state/checkpoints/README.md`; this entry is appended to prior history.
+- next_step: Obtain provenance-backed real course records and explicit authorized approval. Then validate, manually dispatch approval-gated sync, and capture run/commit/read-back evidence. Do not fabricate records or dispatch sync without approval.
+- blocker: No verified real pending course records and no explicit approval were found.
