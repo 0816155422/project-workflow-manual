@@ -18,3 +18,24 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - files affected by this operation: none; this entry records the baseline audit only.
 - blocker: Pending source included sample-looking data, and no real approved course dataset was found.
 - next_step: Remove sample data without promoting it; establish task/phase records; rely on future Actions runs for validation evidence.
+
+## OP-20261028-002 — Project records, approval template, and fail-closed source cleanup
+- task_id: `TASK-PWA-002` / `TASK-PWA-003`
+- objective: Add auditable project records and approval template; remove unverified sample course data; preserve missing-data state.
+- status: **Proven** for file writes/read-back pending final verification; data pipeline **Blocked** until real records are supplied.
+- created_at: `2026-10-28T02:35:00Z`
+- updated_at: `2026-10-28T02:35:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence commits:
+  - `34d34c96c5cbd4d0f086b26d672d1a8a266e239f` — `docs/project-manifest.md`
+  - `3fff5569d6569de19cc0badd8f2e9eef9ae55457` — `docs/phase-status.md`
+  - `45315ca50e98ccb90ad5e15fd9938936d7f1f6a8` — `logs/operation-log.md`
+  - `c8b17f9cad24f61fb436c56f8346a9d892f47fc4` — `logs/task-tracking.md`
+  - `6c969ef30eabfac3548075d4ebbe787d978b1ca5` — `templates/approval-gate.md`
+  - `95f8e3d0cf8691e5c68dea7f10122e827477f423` — removed unverified sample record; pending source now has an empty records array.
+  - `ffcd9aff710d9cca1fb487d1a58bfcb6cda5ee49` and `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5` — tracked empty final destination directories without creating data files.
+  - `5965f9a6c373b261610ca9d865d675bfad863429` — usage logger workflow uses runtime timestamp rather than repository metadata timestamp.
+  - `8eebe6bb37b35253206403a441893cbdd7e6d8d6` — appended real workflow evidence.
+- source of evidence: GitHub Contents API commit results, Actions run metadata and decoded validation job logs.
+- blocker: No verified real course/activity records; validation and ingest correctly fail on empty records.
+- next_step: Read back all required paths and inspect latest Actions run outcomes. Do not invoke the manual sync workflow.
