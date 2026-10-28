@@ -1,0 +1,60 @@
+name: Validate Course Data
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "pending/course/**"
+      - "shared/course/**"
+      - "data/course/**"
+      - "hap-aicc/data/**"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/validate-course-data.yml"
+  push:
+    branches: [main]
+    paths:
+      - "pending/course/**"
+      - "shared/course/**"
+      - "data/course/**"
+      - "hap-aicc/data/**"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/validate-course-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pending source (empty or unproven data must fail)
+        run: node scripts/validate-course-data.mjs pending/course/course-source.json
+      - name: Validate approved mirrors when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in shared/course/course-data.json data/course/course-data.json hap-aicc/data/course-data.json; do
+            if [[ -f "$file" ]]; then
+              echo "Validating $file"
+              node scripts/validate-course-data.mjs "$file"
+            else
+              echo "NOT PRESENT: $file"
+            fi
+          done
+      - name: Record validation evidence
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Course data validation evidence"
+            echo "- Repository: $GITHUB_REPOSITORY"
+            echo "- Workflow: $GITHUB_WORKFLOW"
+            echo "- Status: ${{ job.status }}"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Commit SHA: $GITHUB_SHA"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- A failed validation blocks approval/sync; no synthetic records are generated."
+          } >> "$GITHUB_STEP_SUMMARY"
