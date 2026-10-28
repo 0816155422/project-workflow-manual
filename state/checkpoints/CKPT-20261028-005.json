@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261028-005",
+  "checkpoint_no": 5,
+  "timestamp": "2026-10-28T23:08:00+07:00",
+  "phase": "phase_5_approval_gated_sync",
+  "status": "Inconclusive",
+  "summary": "ResumeStateGuard re-read completed. The course-data pipeline remains Blocked; a stale workflow-evidence SHA in checkpoint 004/latest pointer differs from the current GitHub Contents API read-back, so the discrepancy is recorded rather than silently rewritten.",
+  "evidence": [
+    "state/session-state.json read-back blob SHA 564a9311a537ff11e05f4fb72ad3e1dbfc2cdefa; currentPhase phase_5_approval_gated_sync and overallStatus Blocked.",
+    "state/phase-status.json read-back blob SHA 824d14e5f5e25f08dbacb016d6f2437572d96952; phase_5_approval_gated_sync status Blocked.",
+    "state/last-run.json read-back blob SHA b4737c986caf09c7c756cf94829a52f6ac8900eb; recorded historical run is not evidence of course validation or sync.",
+    "state/checkpoints/latest.json pre-update blob SHA ccf8ba06face2cc6b8d5ac860753e4f3d0fedc18 pointed to CKPT-20261028-004.",
+    "Prior immutable checkpoint state/checkpoints/CKPT-20261028-004.json preserved; blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f.",
+    "pending/course/course-source.json read-back blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295; records=[], approvedBy=null, approvedAt=null.",
+    "logs/operation-log.md append-only entry OP-20261028-010 read back; blob SHA 60422cdbf5748ed4040a38daf320888b83618c94.",
+    "logs/workflow-evidence.md no-run observation appended and read back; blob SHA 48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c.",
+    "Evidence discrepancy: checkpoint 004/latest pointer previously cited workflow-evidence SHA 82f86cb41765d69dacdd9b8c27bcb258a8bbed84; current pre-append read-back was bf0cbad753e6c0200dcc1ef70bc366a2be59ba1b. Current appended log SHA is 48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c.",
+    "No GitHub Actions workflow was dispatched. No course data, approval metadata, sync outputs, frontend, or deployment logic was changed."
+  ],
+  "next_phase": "phase_5_approval_gated_sync",
+  "next_action": "Reconcile the stale evidence reference by updating the latest pointer with the current log SHA after checkpoint read-back; then obtain verified real course records and explicit authorized approval before validation or sync."
+}
