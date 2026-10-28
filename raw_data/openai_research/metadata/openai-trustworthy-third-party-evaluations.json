@@ -1,0 +1,20 @@
+{
+  "source_id": "openai-trustworthy-third-party-evaluations",
+  "source_url": "https://openai.com/index/trustworthy-third-party-evaluations-foundations/",
+  "title": "A shared playbook for trustworthy third party evaluations",
+  "publisher": "OpenAI",
+  "date": "2026-05-29",
+  "category": "evaluation",
+  "tags": [
+    "evaluation",
+    "safety",
+    "third-party",
+    "benchmark"
+  ],
+  "summary": "OpenAI discusses how independent evaluations can provide evidence about frontier-model capabilities and safety mitigations, and why evaluations should account for tools and multi-step environments.",
+  "excerpt": "Independent, trusted third party evaluations play a critical role in strengthening the safety ecosystem.",
+  "verification_status": "Verified",
+  "confidence_level": "high",
+  "ingested_at": "2026-10-28T10:13:00+07:00",
+  "notes": "Official OpenAI page checked on 2026-10-28. Confidence refers to source provenance, not independent validation of all claims."
+}
