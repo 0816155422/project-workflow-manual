@@ -262,3 +262,14 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - Actor: 0816155422
 - Task: scheduled evidence capture
 - Note: Scheduled evidence capture; consult linked run for final conclusion.
+
+
+## 2026-10-28T23:08:00+07:00 — ResumeStateGuard state re-read (not a workflow run)
+- task_id: `PRJ-WF-2026-10-28-01`
+- status: **Inconclusive** for state-evidence consistency; course-data pipeline **Blocked**.
+- source: GitHub Contents API read-back of required state files, latest immutable checkpoint, course pending source, contracts, and append-only logs.
+- observed phase/status: `phase_5_approval_gated_sync` / `Blocked`.
+- pending source: `pending/course/course-source.json`, blob SHA `90c325b0694e1ecc89b411787a4ae4fdd19b9295`; `records=[]`, `approvedBy=null`, `approvedAt=null`.
+- consistency discrepancy: latest pointer evidence lists workflow-evidence log SHA `82f86cb41765d69dacdd9b8c27bcb258a8bbed84`; current read-back SHA observed before this entry was `bf0cbad753e6c0200dcc1ef70bc366a2be59ba1b`. Both observations are retained for reconciliation.
+- workflow name / run ID / commit SHA: **Not applicable — no workflow was dispatched for this operation.**
+- next safe action: Reconcile evidence references in a new checkpoint without rewriting prior checkpoints; collect verified real course records and explicit authorized approval before validation/sync.
