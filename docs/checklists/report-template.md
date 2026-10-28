@@ -132,3 +132,16 @@
 
 ## Evidence Reference Format
 For each material claim, include a direct URL or repository path, run ID, commit SHA, and observation timestamp where available. Do not describe a check as successful unless the referenced evidence supports that exact claim.
+
+
+## Required Status Vocabulary for Each Subsystem
+
+Use exactly one of these labels for each relevant finding:
+- Proven
+- Not proven
+- Blocked
+- Inconclusive
+
+Report these separately: repository status; validation workflow status; ingest workflow status; approval/sync status; target-file existence; approval-log status; usage-log status; workflow-evidence status; UI data-render status; deployment status and deployed commit SHA.
+
+Never fill a missing value with a guess. Use “Not observed” or “Not proven” and include the next safe verification action.
