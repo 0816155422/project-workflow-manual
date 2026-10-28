@@ -12,11 +12,11 @@
   "summary": "ResumeStateGuard current-state audit recorded in immutable checkpoint 005. The checkpoint pointer now references the current append-only log read-backs; course-data pipeline remains Blocked due missing real source records and authorized approval.",
   "evidence": [
     "Immutable checkpoint CKPT-20261028-005 read back and JSON parsed; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
-    "Append-only operation log OP-20261028-010 read back; blob SHA 60422cdbf5748ed4040a38daf320888b83618c94.",
-    "Append-only workflow evidence no-run observation read back; current blob SHA 48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c.",
     "Prior immutable checkpoint CKPT-20261028-004 retained; blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f.",
     "pending/course/course-source.json remains empty and unapproved; blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295.",
-    "No GitHub Actions workflow was dispatched."
+    "No GitHub Actions workflow was dispatched.",
+    "Current append-only operation log read-back blob SHA f7896778aad0a68c7a20a501dd5f56a4a2f4624a; includes OP-20261028-010 and OP-20261028-011.",
+    "Current append-only workflow evidence log read-back blob SHA 48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c; includes explicit no-workflow-dispatched observation."
   ],
   "next_phase": "phase_5_approval_gated_sync",
   "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
@@ -26,7 +26,7 @@
   },
   "readBackVerification": {
     "state/checkpoints/CKPT-20261028-005.json": "c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28",
-    "logs/operation-log.md": "60422cdbf5748ed4040a38daf320888b83618c94",
+    "logs/operation-log.md": "f7896778aad0a68c7a20a501dd5f56a4a2f4624a",
     "logs/workflow-evidence.md": "48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c",
     "pending/course/course-source.json": "90c325b0694e1ecc89b411787a4ae4fdd19b9295"
   }
