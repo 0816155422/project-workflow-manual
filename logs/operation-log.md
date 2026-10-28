@@ -81,3 +81,24 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API.
 - next_step: Final read-back of report, operational logs, workflow definitions and current branch/deployment SHA.
 - blocker: Pipeline remains blocked by absence of verified real course records.
+
+## OP-20261028-006 — Final GitHub read-back verification
+- task_id: `TASK-PWA-006`
+- objective: Verify required implementation files, explicit status taxonomy, absent final datasets, and current main/deployment evidence before reporting.
+- status: **Proven** for the read-back observations below; end-to-end integration remains **Blocked**.
+- created_at: `2026-10-28T02:42:00Z`
+- updated_at: `2026-10-28T02:42:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Current main SHA immediately before this log entry: `b4e3a7e61be05d05b4ce8dafd4e246c893877055`.
+  - Repository Validation run [40622392344](https://github.com/0816155422/project-workflow-manual/actions/runs/40622392344) concluded `success` for that SHA.
+  - Operational report `docs/checklists/operational-report-2026-10-28.md` read back and contains Proven, Not proven, Blocked, Inconclusive, and Next safe action sections.
+  - Required operation/task/workflow/usage logs read back and contain task_id, objective, status, created_at, updated_at, evidence, next_step, blocker, and source-of-evidence fields.
+  - Pending source read back as `status=pending` with `records=[]`.
+  - `hap-aicc/data/usage-log.json` read back with `entries=[]`; no logger execution is claimed.
+  - Final data files `shared/course/course-data.json`, `data/course/course-data.json`, and `hap-aicc/data/course-data.json` returned 404 / absent.
+  - Latest observed Pages run [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) succeeded for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`, which differs from the observed main SHA.
+  - No sync or usage logger run was found in the most recent 100 Actions runs returned by GitHub API.
+- source of evidence: GitHub Contents API read-back, repository branch metadata, Actions run metadata and job steps.
+- next_step: Await real course records with provenance; validation must pass before explicit manual approval. Do not dispatch sync until the human intends to approve that source and target.
+- blocker: No verified real records, no approved dataset, no sync execution, no usage logger run, and no Pages run matching the latest main revision.
