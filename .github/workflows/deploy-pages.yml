@@ -1,5 +1,7 @@
 name: Deploy HAP/AICC Web Dashboard
 
+# Keep commit-bound deployment proof in the Actions summary/artifact; committing from this run would create a newer, undeployed main SHA.
+
 on:
   push:
     branches: [main]
