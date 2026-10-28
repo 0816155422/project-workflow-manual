@@ -1,11 +1,6 @@
 name: Deploy HAP/AICC Web Dashboard
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "hap-aicc/**"
-      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +10,7 @@ permissions:
 
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -24,17 +19,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Validate site data before deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f hap-aicc/data/course-data.json ]]; then
+            node scripts/validate-course-data.mjs hap-aicc/data/course-data.json
+          else
+            echo "Awaiting approved dataset; static site will display a visible pending state."
+          fi
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./hap-aicc
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
