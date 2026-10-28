@@ -1,0 +1,66 @@
+name: Generate Append-only Usage and Workflow Evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Short task description for this real workflow run"
+        required: true
+        default: "append-only evidence capture"
+        type: string
+      note:
+        description: "Context note; do not include secrets"
+        required: true
+        default: "Evidence generated from this GitHub Actions run."
+        type: string
+  schedule:
+    - cron: "17 4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: append-only-evidence-log
+  cancel-in-progress: false
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Append real run metadata
+        env:
+          EVIDENCE_ACTOR: ${{ github.actor }}
+          EVIDENCE_TASK: ${{ inputs.task || 'scheduled evidence capture' }}
+          EVIDENCE_STATUS: Inconclusive
+          EVIDENCE_NOTE: ${{ inputs.note || 'Scheduled evidence capture; consult linked run for final conclusion.' }}
+          EVIDENCE_TIMESTAMP: ${{ github.event.repository.updated_at || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$EVIDENCE_TIMESTAMP" ]]; then EVIDENCE_TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"; fi
+          echo "EVIDENCE_TIMESTAMP=$EVIDENCE_TIMESTAMP" >> "$GITHUB_ENV"
+          node scripts/generate-usage-log.mjs
+      - name: Commit appended evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- logs/usage-history.md logs/workflow-evidence.md hap-aicc/data/usage-log.json
+          git commit -m "Append workflow usage evidence run $GITHUB_RUN_ID"
+          git push origin HEAD:main
+      - name: Summarize evidence
+        if: always()
+        run: |
+          {
+            echo "## Append-only evidence log"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Input commit SHA: $GITHUB_SHA"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- The log records the workflow's input SHA; the logger commit is a separate commit."
+            echo "- No course approval or sync is performed by this workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
