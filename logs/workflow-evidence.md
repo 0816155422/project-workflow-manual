@@ -244,3 +244,12 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - workflow name / run ID / workflow commit SHA: **Not applicable — no workflow was dispatched for this operation.** This is operational evidence, not a fabricated workflow run record.
 - read-back checks completed so far: immutable checkpoint exists, parses as JSON, and contains checkpoint_no=4, phase, allowed status, summary, evidence, and next_phase; repository SKILL.md read back and contains all five core function contracts plus per-write read-back requirements.
 - next: append-only log/state updates and full final read-back of all scoped files.
+
+
+## State-layer verification note — 2026-10-28 (not a workflow run)
+- Source: GitHub Contents API read-back and Plugin Creator manifest read-back.
+- Status: **Proven** for scoped state/skill/plugin writes; pipeline **Blocked**.
+- State files written and parsed after read-back: `state/session-state.json` blob `8cb8578ad34533ac22cf3b7622cadb8ff0287251`; `state/phase-status.json` blob `824d14e5f5e25f08dbacb016d6f2437572d96952`; `state/last-run.json` blob `b4737c986caf09c7c756cf94829a52f6ac8900eb`; `state/checkpoints/latest.json` initial pointer blob `0f02583a3c1b38ff3c84dc7140fb31e4684c38c2`.
+- Immutable checkpoint 004 read-back blob `21687f1592ffd397a8cd1336060e491ca6ffd87f`; repository skill read-back blob `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
+- Plugin manifests: JSON parsed, version `0.1.1`, discoverability `PRIVATE`; release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
+- No workflow name/run ID applies because no workflow was dispatched. Do not treat this note as runtime evidence.
