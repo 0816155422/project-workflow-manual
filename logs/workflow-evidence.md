@@ -222,3 +222,13 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - workflow conclusion: `success` for SHA `5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7`; this does not establish course validation, approval, sync, or frontend data rendering.
 - no workflow was dispatched during this resume audit.
 - next safe action: collect provenance-backed real records and explicit authorized approval; rerun course validation before sync.
+
+
+## Operational note — 2026-10-28T10:44:00+07:00 — ResumeStateGuard setup (not a workflow run)
+- task_id: `PRJ-WF-2026-10-28-01`
+- status: **Proven** for plugin and repository skill creation; course-data pipeline **Blocked**.
+- plugin evidence: https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb (release `pluginrel_6ae16fa728988191a2af8fa644c328be`).
+- repository skill: `skills/resume-state-guard/SKILL.md`, commit `2bfba72371207a76d70f4a357f5e85ef20765d10`, read-back blob SHA `3f88da213b9e9af6e9273da1041263899e2379c9`.
+- workflow name / run ID / workflow commit SHA: **Not applicable — no workflow was dispatched for this operation.** This entry is explicitly not a GitHub Actions run record.
+- blocker evidence: `pending/course/course-source.json` read-back has `records=[]`, `approvedBy=null`, `approvedAt=null` (blob SHA `90c325b0694e1ecc89b411787a4ae4fdd19b9295`).
+- next safe action: collect real source records with provenance and explicit authorized approval; validate before sync.
