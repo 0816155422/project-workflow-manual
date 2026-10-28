@@ -64,3 +64,27 @@ Each status transition is a new entry; do not overwrite previous entries.
 - source of evidence: GitHub Actions run metadata, job steps, decoded logs and repository file read-back.
 - next_step: Obtain real course records with provenance; run validation; only then consider explicit manual approval.
 - blocker: No verified data and no approval; sync must remain untriggered.
+
+## TASK-PWA-004 — Usage logger evidence
+- task_id: `TASK-PWA-004`
+- objective: Verify usage logging through real workflow execution and append-only output.
+- status: **Not proven**
+- created_at: `2026-10-28T02:37:00Z`
+- updated_at: `2026-10-28T02:37:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence: `hap-aicc/data/usage-log.json` has an empty entries array; no logger run observed in the current Actions window.
+- source of evidence: GitHub Contents API and Actions runs list.
+- next_step: Wait for the schedule or manually dispatch the logger workflow, then verify run and append-only records.
+- blocker: No execution evidence.
+
+## TASK-PWA-005 — End-to-end integration gate
+- task_id: `TASK-PWA-005`
+- objective: Confirm all required conditions for real course sync and deployment.
+- status: **Blocked / Inconclusive**
+- created_at: `2026-10-28T02:37:00Z`
+- updated_at: `2026-10-28T02:37:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence: Validation [40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907) and ingest [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) failed closed because no records exist; deployment [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) succeeded for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`, not the current main head.
+- source of evidence: GitHub Actions API and repository contents.
+- next_step: Obtain real source records with provenance, validate them, then seek explicit approval for a new target path. Do not dispatch sync yet.
+- blocker: No verified records, no approved dataset, no sync execution, no usage logger execution, and no deployment evidence for the latest main HEAD.
