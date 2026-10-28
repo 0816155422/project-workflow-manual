@@ -1,11 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-10-28T03:36:00Z",
+  "updatedAt": "2026-10-28T10:44:00+07:00",
   "workflow": "Validate OpenAI research evidence",
   "runId": "40625614203",
   "status": "success",
   "conclusion": "success",
   "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
   "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203",
-  "note": "This is the latest confirmed relevant successful workflow run observed in the audit. It validates OpenAI research evidence, not course data. Resume audit note: no workflow was triggered in this operation. Latest observed run remains generic Repository Validation run 40626365897 (success) for SHA 5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7; not evidence of course validation, approval, or sync."
+  "note": "This is the latest confirmed relevant successful workflow run observed in the audit. It validates OpenAI research evidence, not course data. Resume audit note: no workflow was triggered in this operation. Latest observed run remains generic Repository Validation run 40626365897 (success) for SHA 5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7; not evidence of course validation, approval, or sync.",
+  "resumeGuardOperation": {
+    "status": "Proven",
+    "note": "No workflow was dispatched for ResumeStateGuard creation; the existing last-run workflow record remains unchanged and is not presented as evidence for this operation.",
+    "pluginUrl": "https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb",
+    "repositorySkillCommit": "2bfba72371207a76d70f4a357f5e85ef20765d10"
+  }
 }
