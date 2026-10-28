@@ -1,0 +1,15 @@
+#course-data-app{--course-ink:#172b35;--course-muted:#526873;--course-line:#d8e1e5;--course-bg:#f7fafb;color:var(--course-ink)}
+#course-data-app .course-state{padding:12px 14px;border-radius:9px;background:#fff3d6;border-left:4px solid #b7791f;margin:12px 0}
+#course-data-app .course-state[data-kind="approved"]{background:#e7f6ed;border-color:#23834d}
+#course-data-app .course-state[data-kind="blocked"],#course-data-app .course-state[data-kind="rejected"]{background:#fde9e6;border-color:#b83227}
+#course-data-app .course-records{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-top:16px}
+#course-data-app .course-record{border:1px solid var(--course-line);border-radius:12px;padding:16px;background:#fff;min-width:0}
+#course-data-app .course-record h3{margin:8px 0;font-size:1.1rem;overflow-wrap:anywhere}
+#course-data-app .course-meta{color:var(--course-muted);font-size:.92rem;overflow-wrap:anywhere}
+#course-data-app .course-badge{display:inline-block;border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:700;text-transform:capitalize;background:#e8eef2;color:#334155}
+#course-data-app .course-badge[data-status="approved"],#course-data-app .course-badge[data-status="completed"]{background:#dcfce7;color:#166534}
+#course-data-app .course-badge[data-status="pending"]{background:#fef3c7;color:#92400e}
+#course-data-app .course-badge[data-status="blocked"],#course-data-app .course-badge[data-status="rejected"]{background:#fee2e2;color:#991b1b}
+#course-data-app .course-badge[data-status="in_progress"]{background:#dbeafe;color:#1d4ed8}
+#course-data-app .course-record a{overflow-wrap:anywhere}
+#course-data-app .course-small{font-size:.85rem;color:var(--course-muted)}
