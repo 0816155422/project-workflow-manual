@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "total_sources": 3,
+  "total_verified": 3,
+  "total_unverified": 0,
+  "categories": [
+    "model",
+    "research",
+    "safety",
+    "evaluation",
+    "multimodal",
+    "agents",
+    "policy",
+    "product",
+    "ecosystem",
+    "benchmark"
+  ],
+  "source_count_by_category": {
+    "safety": 2,
+    "evaluation": 1
+  },
+  "last_updated": "2026-10-28T10:13:00+07:00",
+  "repo_path": "raw_data/openai_research/",
+  "storage_policy": "append-only; do not overwrite existing source records or raw snapshots",
+  "verification_note": "Counts describe the three source records included in this initial ingestion batch; verification is based on matching each URL, title, date, and short excerpt against the official OpenAI page on 2026-10-28."
+}
