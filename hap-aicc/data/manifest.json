@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "source": "course-ui",
+  "status": "pending",
+  "datasetPath": "data/course-data.json",
+  "approvalRequired": true,
+  "updatedAt": "2026-10-28T00:00:00Z",
+  "note": "No approved dataset has been written. The UI must show Awaiting approved dataset until the manual approval-gated sync creates the file."
+}
