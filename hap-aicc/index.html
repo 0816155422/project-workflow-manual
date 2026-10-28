@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="HAP/AICC single-file working checklist, append-only work log, embedded Markdown, and source archive">
 <title>HAP/AICC — Interactive Master Record</title>
+<link rel="stylesheet" href="styles.css">
 <style>
 :root{--bg:#f3f6f7;--paper:#fff;--ink:#172b35;--muted:#526873;--line:#d8e1e5;--accent:#0d6578;--accent-soft:#e2f1f4;--warn:#7a4b00;--warn-bg:#fff3d6;--blocked:#8d3027;--blocked-bg:#fde9e6;--ok:#1d6647;--code:#f1f4f6;--shadow:0 8px 26px rgba(25,50,62,.08)}
 *{box-sizing:border-box} html,body{max-width:100%;overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
@@ -387,7 +388,15 @@ details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:1
 <li><strong>สถานะโครงการที่ตรวจได้จากบริบทปัจจุบัน:</strong> <code>PROJECT_ID = NOT_ISSUED</code>; WP-00 <code>BLOCKED / NOT_PASSED</code> เพราะยังไม่มี Registry/project storage ที่เข้าถึงได้; WP-01 <code>NOT_STARTED</code>; ไม่มีการเขียนไป GitHub/NotebookLM/Registry (<code>NOT_WRITTEN</code>). หน้า Notion นี้เป็นพื้นที่เดียวที่เข้าถึงได้ในแชทนี้ ไม่ใช่การยืนยันว่าเขียนลงคลังโครงการภายนอกแล้ว</li>
 <li><strong>สิ่งที่ยังไม่ได้ทำ:</strong> ยังไม่ได้ไล่เก็บดัชนี OpenAI Research Index จนครบหรือสรุปจำนวนหน้า/โครงการ; ยังไม่ได้ยืนยันชื่อ/เงื่อนไขของ Lifecycle ทั้ง 12 จากต้นฉบับที่เป็นเจ้าของ; ยังไม่ได้ตรวจสิทธิ์บัญชี/Connector/API; ยังไม่ได้ผ่าน Gate ของ WP-00. ห้ามเริ่ม WP-01 จนกว่า WP-00 จะผ่าน</li>
 <li><strong>วิธีต่อจากนี้โดยไม่ลบของเก่า:</strong> เปิดหน้าเดียวนี้; อ่าน Checkpoint และ Markdown ที่ฝังไว้; ทำเฉพาะขั้นถัดไปที่อนุญาต; ต่อท้าย <code>Append-only activity log</code> ด้วยวันที่, ข้อมูลที่อ่าน, งานที่ทำ, ผลที่เขียนจริง, read-back, สถานะ Gate, blockers และ next permitted step. ห้ามลบ/เขียนทับรายการเดิม; ถ้าแก้ ให้เพิ่ม correction/new version ที่ชี้กลับไปยังรายการเดิม</li>
-</ul></main><details><summary>เปิด/แก้ Markdown master เพื่อส่งต่อและบันทึก</summary><button class="copy" type="button" onclick="copyArea('master-markdown',this)">คัดลอก Markdown master</button><textarea id="master-markdown" class="master-source" data-base-hash="60d97ee5c18029cfa884cf0b9690a8f8c685de697641e8d6ef1ce1970ad16c9c" spellcheck="false"># HAP/AICC — Single Working Page
+</ul>
+<section class="card" id="course-data-app" aria-labelledby="course-data-title">
+  <h2 id="course-data-title">Course / Activity Data Integration</h2>
+  <p class="small">Source: repository JSON at <code>hap-aicc/data/course-data.json</code>. Validation is not approval; only the manual approval-gated sync can create this dataset.</p>
+  <div class="course-state" data-course-state role="status" aria-live="polite">Awaiting approved dataset</div>
+  <div class="course-records" data-course-records></div>
+  <p class="course-small">Evidence links open the corresponding GitHub Actions run. Missing or invalid data is shown as a visible status rather than replaced with sample UI data.</p>
+</section>
+</main><details><summary>เปิด/แก้ Markdown master เพื่อส่งต่อและบันทึก</summary><button class="copy" type="button" onclick="copyArea('master-markdown',this)">คัดลอก Markdown master</button><textarea id="master-markdown" class="master-source" data-base-hash="60d97ee5c18029cfa884cf0b9690a8f8c685de697641e8d6ef1ce1970ad16c9c" spellcheck="false"># HAP/AICC — Single Working Page
 
 &lt;b&gt;Document state:&lt;/b&gt; &lt;code&gt;WORKING DRAFT / AI-DRAFT MATERIAL CONSOLIDATED / NOT SOURCE-VERIFIED&lt;/code&gt;&lt;br /&gt;&lt;b&gt;Purpose:&lt;/b&gt; Keep the end-to-end action checklist, AI error patterns, project decisions, and current checkpoint in one page. This page consolidates prior AI-generated responses and user corrections; it is not a substitute for the project's external registry or repository.
 
@@ -3905,4 +3914,5 @@ RESPONSE SECTIONS: STORED_EVIDENCE | DERIVED_ANALYSIS | OUTPUT_ARTIFACT | CHECKP
   });
 })();
 </script>
+<script src="app.js" defer></script>
 </body></html>
