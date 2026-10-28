@@ -69,3 +69,15 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API create-file response; read-back verification pending.
 - next_step: Read back the report and required operational files, then compare current main SHA to deployment evidence.
 - blocker: End-to-end pipeline remains blocked by missing real course records and no approval.
+
+## OP-20261028-005 — Append explicit status taxonomy to report
+- task_id: `TASK-PWA-005`
+- objective: Ensure the durable report explicitly separates Proven, Not proven, Blocked, and Inconclusive without rewriting prior report text.
+- status: **Proven** — addendum creation returned commit SHA.
+- created_at: `2026-10-28T02:40:00Z`
+- updated_at: `2026-10-28T02:40:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence: `docs/checklists/operational-report-2026-10-28.md`, addendum commit `ec77de1520b4ffa27db5e5b729a9630570562316`.
+- source of evidence: GitHub Contents API.
+- next_step: Final read-back of report, operational logs, workflow definitions and current branch/deployment SHA.
+- blocker: Pipeline remains blocked by absence of verified real course records.
