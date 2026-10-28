@@ -84,3 +84,20 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - observed result: `success`.
 - note: This workflow's success does not override the separate course-data validation failure and does not prove course sync or usage logging.
 - source of evidence: GitHub Actions API run metadata.
+
+## 2026-10-28T02:37:00Z — Operational evidence snapshot
+- task_id: `TASK-PWA-005`
+- objective: Record current workflow/data/deployment state from actual GitHub evidence.
+- status: **Inconclusive** for end-to-end integration; **Blocked** for approved data promotion.
+- created_at: `2026-10-28T02:37:00Z`
+- updated_at: `2026-10-28T02:37:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Validation failure [40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907) on SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5` because the pending source has no verified records.
+  - Ingest failure [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) on SHA `95f8e3d0cf8691e5c68dea7f10122e827477f423` for the same reason.
+  - Pages deployment success [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`.
+  - Repository validation success [40621846957](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846957) on SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`.
+  - Usage log still has no real logger-run entry; no sync run was dispatched.
+- source of evidence: GitHub Actions REST API run/job metadata, decoded validation logs, and GitHub Contents API.
+- next_step: Verify final repository file read-back and current main SHA; do not claim deployment of a later SHA or approved data integration.
+- blocker: No real source records and no manual approval; current main has advanced beyond the latest observed Pages deployment SHA.
