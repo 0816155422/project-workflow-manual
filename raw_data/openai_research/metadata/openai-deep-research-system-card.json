@@ -1,0 +1,20 @@
+{
+  "source_id": "openai-deep-research-system-card",
+  "source_url": "https://openai.com/index/deep-research-system-card/",
+  "title": "Deep research System Card",
+  "publisher": "OpenAI",
+  "date": "2025-02-25",
+  "category": "safety",
+  "tags": [
+    "agents",
+    "safety",
+    "evaluation",
+    "system-card"
+  ],
+  "summary": "OpenAI describes pre-release safety work for deep research, including external red-teaming, Preparedness Framework evaluations, and mitigations for identified risks.",
+  "excerpt": "This report outlines the safety work carried out prior to releasing deep research.",
+  "verification_status": "Verified",
+  "confidence_level": "high",
+  "ingested_at": "2026-10-28T10:13:00+07:00",
+  "notes": "Official OpenAI page checked on 2026-10-28. Confidence refers to source provenance, not independent validation of all claims."
+}
