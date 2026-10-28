@@ -218,3 +218,15 @@ The following scoped state writes were each read back immediately and JSON-parse
 - Repository skill `skills/resume-state-guard/SKILL.md`: commit `2fc7a79bbc987dcd92fececab36cbbce7c3a1526`, read-back blob SHA `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
 - Plugin manifest read-back: both manifests parse as JSON and report version `0.1.1`; plugin remains private. Plugin release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
 - No business/runtime workflow was dispatched. The course-data pipeline remains `Blocked`.
+
+
+## OP-20261028-010 — ResumeStateGuard state re-read
+- task_id: `PRJ-WF-2026-10-28-01`
+- scope: Read current repository state and identify the next safe action; no business/runtime changes.
+- status: **Inconclusive** for state-evidence consistency; course-data pipeline remains **Blocked**.
+- timestamp: `2026-10-28T23:08:00+07:00`
+- observed current phase: `phase_5_approval_gated_sync`; recorded overall status: `Blocked`.
+- blocker: `pending/course/course-source.json` currently reads `records=[]`, `approvedBy=null`, `approvedAt=null`; no verified real records, source provenance, or approval were supplied.
+- state consistency finding: `state/checkpoints/latest.json` records workflow-evidence log read-back SHA `82f86cb41765d69dacdd9b8c27bcb258a8bbed84`, while the current Contents API read-back of `logs/workflow-evidence.md` returns blob SHA `bf0cbad753e6c0200dcc1ef70bc366a2be59ba1b`. Preserve both observations; do not silently rewrite history.
+- workflow activity: No GitHub Actions workflow was dispatched during this operation.
+- next_safe_action: Reconcile stale evidence references through a new append-only checkpoint and sequential read-back; obtain real course source data and authorized approval before validation/sync.
