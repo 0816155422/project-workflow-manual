@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-10-28T03:20:00Z",
+  "updatedAt": "2026-10-28T03:36:00Z",
   "phases": {
     "phase_1_repo_and_state_audit": {
       "status": "completed",
@@ -42,9 +42,11 @@
       "evidence": [
         ".github/workflows/sync-approved-memory.yml read back",
         "scripts/sync-course-data.mjs read back",
-        "docs/approval-policy.md read back"
+        "docs/approval-policy.md read back",
+        "Read-back: pending/course/course-source.json blob 90c325b0694e1ecc89b411787a4ae4fdd19b9295; records=[], approvedBy=null, approvedAt=null.",
+        "Generic Repository Validation run 40626365897 is not course-data validation evidence."
       ],
-      "notes": "No verified real pending records or explicit human approval provided. No sync was dispatched and no approved dataset was created."
+      "notes": "Still blocked: pending/course/course-source.json has records=[] and no approval marker. Resume audit read-back confirms no real provenance-backed course records or explicit authorized approval."
     },
     "phase_6_usage_logging": {
       "status": "not_proven",
@@ -53,7 +55,7 @@
         "scripts/generate-usage-log.mjs read back",
         "Existing logs/workflow-evidence.md read back"
       ],
-      "notes": "Logging implementation exists, but a new logger run for this task was not dispatched or verified."
+      "notes": "No new usage logger run was triggered or verified in this resume audit."
     },
     "phase_7_frontend": {
       "status": "not_proven",
@@ -62,7 +64,7 @@
         "hap-aicc/app.js read back",
         "hap-aicc/styles.css read back"
       ],
-      "notes": "Frontend implementation exists, but no approved real course dataset is present; rendering approved records is therefore not proven."
+      "notes": "No approved real dataset exists; rendering approved course records remains unproven."
     },
     "phase_8_readback_verification": {
       "status": "completed",
