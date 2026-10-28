@@ -123,3 +123,20 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API read-back, main branch ref, GitHub Actions runs and job-step metadata.
 - next_step: Obtain real course/activity source records with provenance, run validation, then require a separate explicit human approval before dispatching sync.
 - blocker: No verified records; final dataset files absent; no observed sync execution; no usage logger execution; no deployment run matching the audited HEAD.
+
+
+## OP-20261028-003 — Verify operational audit commit
+- task_id: `PWA-OPS-003`
+- objective: Verify that the operational report and append-only records were read back and the audit commit passed repository automation.
+- status: **Proven** for read-back and general repository validation on the audit commit; overall data integration remains **Blocked**.
+- created_at: `2026-10-28T02:51:00Z`
+- updated_at: `2026-10-28T02:51:00Z`
+- actor or system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Audit report `docs/checklists/operational-report-2026-10-28-002.md` read back from `main` with blob SHA `32d93ed54c282aa3ba8789ec57d55b8f94a24952`.
+  - Audit commit: `eb64abd81671e1adf47b965bdd08733998a81512`.
+  - Repository Validation [run 40623297089](https://github.com/0816155422/project-workflow-manual/actions/runs/40623297089) concluded `success` for `eb64abd81671e1adf47b965bdd08733998a81512`; its steps for structure, repository JSON, credential heuristic scan, and dashboard HTML structure all concluded `success`.
+  - Read-only API Runner [run 40623296976](https://github.com/0816155422/project-workflow-manual/actions/runs/40623296976) concluded `success` for `eb64abd81671e1adf47b965bdd08733998a81512`.
+- source of evidence: GitHub Contents API read-back and GitHub Actions run/job-step metadata.
+- next_step: Continue only with real course records and explicit approval; the successful repository checks do not prove course sync or latest Pages deployment.
+- blocker: Pending records are empty; sync, usage logger, and current-HEAD Pages deployment remain unproven.

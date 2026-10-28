@@ -175,3 +175,26 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - commit SHA: Not applicable
 - evidence URL: https://github.com/0816155422/project-workflow-manual/actions
 - note: The query window is limited to the latest 100 returned runs; do not interpret this as exhaustive historical absence. Usage JSON remains empty, and no sync was dispatched in this operation.
+
+
+## Observed run — Repository Validation for operational audit
+- timestamp: `2026-10-28T02:50:44Z`
+- actor: `0816155422` (GitHub Actions run metadata)
+- task: Validate the operational audit report and append-only records
+- status: **Proven — success**
+- workflow name: `Repository Validation`
+- run ID: `40623297089`
+- commit SHA: `eb64abd81671e1adf47b965bdd08733998a81512`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40623297089
+- note: Job steps for MVP structure, repository JSON, heuristic credential scan, and dashboard HTML structure all succeeded. This does not prove course data validation or sync.
+
+## Observed run — Read-only API Runner for operational audit
+- timestamp: `2026-10-28T02:50:44Z`
+- actor: `0816155422` (GitHub Actions run metadata)
+- task: Read-only repository operation after audit report commit
+- status: **Proven — success**
+- workflow name: `GitHub Actions API Runner (Read Only)`
+- run ID: `40623296976`
+- commit SHA: `eb64abd81671e1adf47b965bdd08733998a81512`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40623296976
+- note: The run was read-only and did not approve or sync pending data.

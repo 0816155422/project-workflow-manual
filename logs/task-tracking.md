@@ -101,3 +101,16 @@ Each status transition is a new entry; do not overwrite previous entries.
 - source of evidence: GitHub API read-back and Actions run/job metadata.
 - next_step: Add only verified real source data; re-run validation; if validation passes and a human intends approval, manually dispatch the sync workflow and verify the resulting commit/files/logs.
 - blocker: No real source records or explicit approval. No sync dispatch was performed.
+
+
+## TASK-PWA-007 — Validate the audit-record commit
+- task_id: `TASK-PWA-007`
+- objective: Confirm read-back and automated checks for the operational audit report commit.
+- status: **Proven** for audit-file read-back and repository validation; **Blocked** for end-to-end course data pipeline.
+- created_at: `2026-10-28T02:51:00Z`
+- updated_at: `2026-10-28T02:51:00Z`
+- actor or system identity: GitHub-connected repository automation agent.
+- evidence: Report `docs/checklists/operational-report-2026-10-28-002.md` read back (blob SHA `32d93ed54c282aa3ba8789ec57d55b8f94a24952`). Repository Validation [40623297089](https://github.com/0816155422/project-workflow-manual/actions/runs/40623297089) and read-only runner [40623296976](https://github.com/0816155422/project-workflow-manual/actions/runs/40623296976) both concluded success for commit `eb64abd81671e1adf47b965bdd08733998a81512`.
+- source of evidence: GitHub Contents API and Actions API/job steps.
+- next_step: Preserve the current pending/blocked state until real records are supplied; validate them and require explicit approval before sync.
+- blocker: No source records with provenance, no successful sync run, no usage logger run, and no Pages deployment matching the latest branch revision.
