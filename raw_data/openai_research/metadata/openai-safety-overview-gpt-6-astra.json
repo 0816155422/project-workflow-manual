@@ -1,0 +1,20 @@
+{
+  "source_id": "openai-safety-overview-gpt-6-astra",
+  "source_url": "https://openai.com/index/safety-overview-gpt-6-astra/",
+  "title": "Safety overview: GPT-6 Astra",
+  "publisher": "OpenAI",
+  "date": "2026-09-03",
+  "category": "safety",
+  "tags": [
+    "model",
+    "safety",
+    "cybersecurity",
+    "preparedness"
+  ],
+  "summary": "OpenAI's safety overview reports that GPT-6 Astra reached the Critical cybersecurity capability level under its Preparedness Framework and describes strengthened protections and internal safeguards.",
+  "excerpt": "GPT-6 Astra is a significant step up in cyber capabilities and meets our Critical threshold.",
+  "verification_status": "Verified",
+  "confidence_level": "high",
+  "ingested_at": "2026-10-28T10:13:00+07:00",
+  "notes": "Official OpenAI page checked on 2026-10-28. Confidence refers to source provenance, not independent validation of all claims."
+}
