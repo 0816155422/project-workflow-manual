@@ -4,19 +4,6 @@
   "status": "pending",
   "approvedBy": null,
   "approvedAt": null,
-  "records": [
-    {
-      "id": "course-001",
-      "title": "Workflow Integration Review",
-      "category": "operations",
-      "status": "pending",
-      "updatedAt": "2026-10-28T00:00:00Z",
-      "owner": "AI Review",
-      "evidence": {
-        "runId": "40615331536",
-        "commitSha": "fcf88afe0ec9bbccf5742a84f309318aca88e0bd",
-        "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40615331536"
-      }
-    }
-  ]
+  "records": [],
+  "note": "No verified real course/activity records are available yet. This empty pending document intentionally fails record validation. Do not approve or sync until real source data with provenance is added."
 }
