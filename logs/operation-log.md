@@ -174,3 +174,21 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
   - No new validation, approval-gated sync, or usage-logger run was triggered in this operation.
 - changes: State/evidence checkpoint update only; no course records created, no approval inferred, no sync dispatched.
 - next_safe_action: Obtain real course records with source URL/provenance and an explicit authorized approval note; then validate before any sync.
+
+
+## OP-20261028-008 — Install ResumeStateGuard and checkpoint current blocker
+- task_id: `PRJ-WF-2026-10-28-01`
+- objective: Create the private ResumeStateGuard plugin and repository skill, resume from existing state, and record evidence without running any workflow or inventing course data.
+- status: **Proven** for plugin/skill creation and read-back; course-data pipeline **Blocked**.
+- created_at: `2026-10-28T10:44:00+07:00`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Private plugin: https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb (plugin ID `plugins_6ae16fa499b481918c69d68e0c72ecbb`, release `pluginrel_6ae16fa728988191a2af8fa644c328be`).
+  - Repository skill `skills/resume-state-guard/SKILL.md`, creation commit `2bfba72371207a76d70f4a357f5e85ef20765d10`, read-back blob SHA `3f88da213b9e9af6e9273da1041263899e2379c9`.
+  - Immutable checkpoint `state/checkpoints/CKPT-20261028-003.json`, creation commit `ca3b077ce93f6294cbe4d22b66446fb7fb832fcb`, read-back blob SHA `4fa5adad17e3966b81b0d5fdf203c044b87632d3`.
+  - Pending source read-back: `records=[]`, `approvedBy=null`, `approvedAt=null`; blob SHA `90c325b0694e1ecc89b411787a4ae4fdd19b9295`.
+- source of evidence: Plugin Creator result and GitHub Contents API create/read-back responses.
+- workflow activity: No GitHub Actions workflow was dispatched for this operation.
+- changes: Added repository ResumeStateGuard skill and immutable checkpoint; preserved existing checkpoint files and prior log entries.
+- blocker: No verified real course records, source URL/provenance, or explicit authorized approval.
+- next_safe_action: Collect real provenance-backed course records and explicit authorized approval; validate before any sync.
