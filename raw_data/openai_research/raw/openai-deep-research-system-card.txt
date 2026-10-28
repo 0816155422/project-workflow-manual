@@ -1,0 +1,10 @@
+Source title: Deep research System Card
+Publisher: OpenAI
+Published: 2025-02-25
+Canonical URL: https://openai.com/index/deep-research-system-card/
+
+Research note: OpenAI's page describes pre-release safety work, external red teaming, Preparedness Framework evaluations, and mitigations for risk areas including prompt injection, privacy, code execution, bias, and hallucinations.
+
+Verbatim excerpt (17 words): “This report outlines the safety work carried out prior to releasing deep research including external red teaming”
+
+Provenance: Page title, date, summary, and excerpt checked against the official OpenAI page on 2026-10-28. The excerpt is intentionally short; this file is a research note, not a full-page reproduction.
