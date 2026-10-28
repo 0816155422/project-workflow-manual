@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261028-002",
+  "createdAt": "2026-10-28T03:36:00Z",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "main",
+  "observedHeadSha": "5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7",
+  "resumeFrom": "phase_5_approval_gated_sync",
+  "overallStatus": "Blocked",
+  "summary": "Resume audit confirms pending course source remains empty and has no approval; stop before validation/sync until real provenance-backed records are supplied.",
+  "evidenceRefs": [
+    "https://github.com/0816155422/project-workflow-manual/blob/main/pending/course/course-source.json",
+    "https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/operation-log.md",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/workflow-evidence.md"
+  ],
+  "logCommits": {
+    "operationLog": "80f384c9f968b464daf32867dcad591870ed2892",
+    "workflowEvidence": "f32aff37a4a974172b2c04eec787a1f542876a1d"
+  },
+  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before sync.",
+  "integrityNote": "New immutable checkpoint file. No course records, approvals, or workflow outcomes were fabricated."
+}
