@@ -37,12 +37,9 @@ jobs:
           EVIDENCE_TASK: ${{ inputs.task || 'scheduled evidence capture' }}
           EVIDENCE_STATUS: Inconclusive
           EVIDENCE_NOTE: ${{ inputs.note || 'Scheduled evidence capture; consult linked run for final conclusion.' }}
-          EVIDENCE_TIMESTAMP: ${{ github.event.repository.updated_at || '' }}
         shell: bash
         run: |
           set -euo pipefail
-          if [[ -z "$EVIDENCE_TIMESTAMP" ]]; then EVIDENCE_TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"; fi
-          echo "EVIDENCE_TIMESTAMP=$EVIDENCE_TIMESTAMP" >> "$GITHUB_ENV"
           node scripts/generate-usage-log.mjs
       - name: Commit appended evidence
         shell: bash
