@@ -1,0 +1,10 @@
+Source title: Safety overview: GPT-6 Astra
+Publisher: OpenAI
+Published: 2026-09-03
+Canonical URL: https://openai.com/index/safety-overview-gpt-6-astra/
+
+Research note: OpenAI states that GPT-6 Astra met its Critical threshold for cybersecurity capability under the Preparedness Framework. The page describes strengthened protections and internal development safeguards.
+
+Verbatim excerpt (15 words): “GPT-6 Astra is a significant step up in cyber capabilities and meets our Critical threshold.”
+
+Provenance: Page title, date, summary, and excerpt checked against the official OpenAI page on 2026-10-28. The excerpt is intentionally short; this file is a research note, not a full-page reproduction.
