@@ -1,6 +1,14 @@
 name: Deploy HAP/AICC Web Dashboard
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "hap-aicc/**"
+      - "shared/course/**"
+      - "data/course/**"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -18,17 +26,22 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - name: Validate site data before deployment
+      - name: Checkout exact triggering commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Validate approved dataset if present
         shell: bash
         run: |
           set -euo pipefail
           if [[ -f hap-aicc/data/course-data.json ]]; then
             node scripts/validate-course-data.mjs hap-aicc/data/course-data.json
           else
-            echo "Awaiting approved dataset; static site will display a visible pending state."
+            echo "Awaiting approved dataset; deployment may publish the UI's visible pending state."
           fi
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v3
@@ -37,3 +50,53 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Create deployment evidence artifact
+        if: success()
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          RUN_ID: ${{ github.run_id }}
+          COMMIT_SHA: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const evidence = {
+            timestamp: new Date().toISOString(),
+            status: "Proven",
+            workflow: process.env.WORKFLOW_NAME,
+            runId: process.env.RUN_ID,
+            commitSha: process.env.COMMIT_SHA,
+            repository: process.env.REPOSITORY,
+            evidenceUrl: `${process.env.SERVER_URL}/${process.env.REPOSITORY}/actions/runs/${process.env.RUN_ID}`,
+            pageUrl: process.env.PAGE_URL,
+            note: "This artifact is created only after the deploy step succeeds; verify the run conclusion and head SHA independently."
+          };
+          fs.writeFileSync("deployment-evidence.json", JSON.stringify(evidence, null, 2) + "\n");
+          NODE
+      - name: Upload deployment evidence
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-deployment-evidence-${{ github.run_id }}
+          path: deployment-evidence.json
+          if-no-files-found: error
+      - name: Write deployment status summary
+        if: always()
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
+        shell: bash
+        run: |
+          {
+            echo "## GitHub Pages deployment evidence"
+            echo "- Workflow: $GITHUB_WORKFLOW"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Checked-out commit SHA: $GITHUB_SHA"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- Deploy step outcome: ${DEPLOY_OUTCOME:-unknown}"
+            echo "- Page URL: ${PAGE_URL:-not available}"
+            echo "- Deployment evidence artifact is uploaded only when the deploy step succeeds."
+            echo "- This run proves deployment only for the recorded commit SHA; it does not prove later commits are deployed."
+          } >> "$GITHUB_STEP_SUMMARY"
