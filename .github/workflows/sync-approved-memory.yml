@@ -45,7 +45,7 @@ jobs:
           [[ "$SOURCE_PATH" == pending/* ]] || { echo "::error::Source must start with pending/"; exit 1; }
           [[ "$TARGET_PATH" == shared/* || "$TARGET_PATH" == data/* ]] || { echo "::error::Target must start with shared/ or data/"; exit 1; }
           [[ "$SOURCE_PATH" != *".."* && "$TARGET_PATH" != *".."* ]] || { echo "::error::Path traversal is blocked"; exit 1; }
-          [[ "$SOURCE_PATH" != *"\"* && "$TARGET_PATH" != *"\"* ]] || { echo "::error::Backslashes are blocked"; exit 1; }
+          [[ "$SOURCE_PATH" != *\\* && "$TARGET_PATH" != *\\* ]] || { echo "::error::Backslashes are blocked"; exit 1; }
           [[ "$SOURCE_PATH" == *.json && "$TARGET_PATH" == *.json ]] || { echo "::error::Only JSON is supported for course sync"; exit 1; }
           [[ "$TARGET_PATH" == "shared/course/course-data.json" || "$TARGET_PATH" == "data/course/course-data.json" ]] || { echo "::error::Unsupported target path"; exit 1; }
           [[ -n "$APPROVAL_NOTE" && ${#APPROVAL_NOTE} -le 300 ]] || { echo "::error::Approval note must be 1-300 characters"; exit 1; }
@@ -54,10 +54,7 @@ jobs:
           for p in "$SOURCE_PATH" "$(dirname "$SOURCE_PATH")" "$(dirname "$TARGET_PATH")"; do
             [[ ! -L "$p" ]] || { echo "::error::Symlinked path component is blocked: $p"; exit 1; }
           done
-          if grep -nE -i 'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(api[_-]?key|access[_-]?token|refresh[_-]?token|password|client_secret)[[:space:]]*[:=][[:space:]]*["'\''"]?[A-Za-z0-9/_+=.-]{8,}' "$SOURCE_PATH"; then
-            echo "::error::Potential secret-like content detected; approval sync blocked."
-            exit 1
-          fi
+          # The Node validator performs the heuristic secret scan and strict JSON/schema validation.
           node scripts/validate-course-data.mjs "$SOURCE_PATH"
       - name: Create approved data mirrors (create-only)
         env:
