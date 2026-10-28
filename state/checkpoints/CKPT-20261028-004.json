@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261028-004",
+  "checkpoint_no": 4,
+  "timestamp": "2026-10-28",
+  "phase": "resume_state_guard_hardening",
+  "status": "Blocked",
+  "summary": "Hardening ResumeStateGuard read/write protocol and repository state verification. Pipeline remains blocked; no business/runtime logic touched.",
+  "evidence": [
+    "Preflight read-back from main: all six required state/log files exist; state/session-state.json blob SHA 970062fc6d9a74e21bf09d45a64c0956ee8e4213.",
+    "Preflight read-back: state/phase-status.json blob SHA c514d10ee291a18d7ef134e20796f596eeaee2af.",
+    "Preflight read-back: state/last-run.json blob SHA b630093dc7d5f9dbf5c535f136f98346d4fb2e34.",
+    "Preflight read-back: state/checkpoints/latest.json blob SHA ba3dada808c7c9a807afd2799356595c9a1e13b4.",
+    "Preflight read-back: logs/operation-log.md blob SHA 23535554ebdabcedc98392deb6c1957ca1dfb039.",
+    "Preflight read-back: logs/workflow-evidence.md blob SHA 59630e05bc3bcd2a0d6364a3cccab0d5356694e6.",
+    "Plugin current release read from Plugin Creator: pluginrel_6ae16fa728988191a2af8fa644c328be, version 0.1.0, private USER scope.",
+    "Current phase indicates approval-gated sync remains blocked; generic repository validation runs are not course-data validation evidence."
+  ],
+  "next_phase": "resume_state_guard_hardening",
+  "next_action": "Update plugin skill and repository state protocol, then read back every changed file and verify historical checkpoint preservation."
+}
