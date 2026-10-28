@@ -206,3 +206,15 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - workflow activity: No GitHub Actions workflow was dispatched for this state-layer update; no run ID is claimed.
 - blocker preserved: Course pipeline remains blocked by missing real records/provenance/authorized approval; this operation did not change course data or runtime logic.
 - next safe action: Finish state/log read-back verification; next pipeline action remains to collect real source-backed records and approval before validation/sync.
+
+
+## State-layer write/read-back ledger — 2026-10-28
+The following scoped state writes were each read back immediately and JSON-parsed:
+- `state/checkpoints/latest.json` initial pointer update: commit `4fd3087980d11a2c7b343391b1d60a23708354f3`, read-back blob SHA `0f02583a3c1b38ff3c84dc7140fb31e4684c38c2`; pointed to immutable checkpoint 004 and preserved pointer to checkpoint 003.
+- `state/session-state.json`: commit `a520d0c8c23e303864726e949a24bdeabd3ebf21`, read-back blob SHA `8cb8578ad34533ac22cf3b7622cadb8ff0287251`; current pipeline status remains `Blocked`.
+- `state/phase-status.json`: commit `58f6d3a71cf440f7813b94be47a8230a3c1764e6`, read-back blob SHA `824d14e5f5e25f08dbacb016d6f2437572d96952`; all new/current status fields use the allowed taxonomy and legacy labels are retained as `legacyStatus`.
+- `state/last-run.json`: commit `af4c18cfece67c5ff2c5f196b16e9043e158ab41`, read-back blob SHA `b4737c986caf09c7c756cf94829a52f6ac8900eb`; historical workflow run `40625614203` remains unchanged and no new workflow run is claimed.
+- `state/checkpoints/CKPT-20261028-004.json`: immutable checkpoint commit `f1a4512d642cd11c5e534bbd4dcf73020426d5b1`, read-back blob SHA `21687f1592ffd397a8cd1336060e491ca6ffd87f`.
+- Repository skill `skills/resume-state-guard/SKILL.md`: commit `2fc7a79bbc987dcd92fececab36cbbce7c3a1526`, read-back blob SHA `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
+- Plugin manifest read-back: both manifests parse as JSON and report version `0.1.1`; plugin remains private. Plugin release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
+- No business/runtime workflow was dispatched. The course-data pipeline remains `Blocked`.
