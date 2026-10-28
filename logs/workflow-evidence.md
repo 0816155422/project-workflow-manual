@@ -43,3 +43,44 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - observed job result: `success`; checkout, Pages configuration, upload, deploy, artifact upload, and summary steps all concluded `success`.
 - note: This proves deployment only for the recorded SHA. It does not prove a later commit is deployed or that an approved course dataset exists.
 - source of evidence: GitHub Actions run metadata and job steps.
+
+## 2026-10-28T02:35:37Z — Validation run after directory scaffolding
+- task_id: `TASK-PWA-003`
+- timestamp: `2026-10-28T02:35:37Z`
+- actor: `0816155422`
+- task: Validate shared memory and pending course data on the directory-scaffolding commit
+- status: **Blocked** — pending source intentionally contains no records because no real source data was verified
+- workflow: `Validate Shared Memory and Course Data`
+- run ID: `40621846907`
+- commit SHA: `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907
+- observed result: `failure`; the run must not be hidden or represented as a passing validation.
+- source of evidence: GitHub Actions API run metadata and job steps.
+
+## 2026-10-28T02:35:37Z — Pages deployment on directory-scaffolding commit
+- task_id: `TASK-PWA-DEPLOY-001`
+- timestamp: `2026-10-28T02:35:37Z`
+- actor: `0816155422`
+- task: Deploy HAP/AICC static frontend
+- status: **Proven** for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5` only
+- workflow: `Deploy HAP/AICC Web Dashboard`
+- run ID: `40621846897`
+- commit SHA: `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897
+- observed result: `success`.
+- note: Current main later advanced to `2e6b774aaf0cd47e0d42c9eb96099261596f2cf5` through documentation/log updates. The deployment run does not prove deployment of that later SHA. The static frontend commit was included in the deployed revision; approved course data is still absent.
+- source of evidence: GitHub Actions API run metadata.
+
+## 2026-10-28T02:35:37Z — Repository validation on directory-scaffolding commit
+- task_id: `TASK-PWA-001`
+- timestamp: `2026-10-28T02:35:37Z`
+- actor: `0816155422`
+- task: Run repository validation workflow
+- status: **Proven** for the repository validator job only
+- workflow: `Repository Validation`
+- run ID: `40621846957`
+- commit SHA: `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621846957
+- observed result: `success`.
+- note: This workflow's success does not override the separate course-data validation failure and does not prove course sync or usage logging.
+- source of evidence: GitHub Actions API run metadata.
