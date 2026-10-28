@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261028-001",
-  "createdAt": "2026-10-28T03:20:00Z",
+  "checkpointId": "CKPT-20261028-002",
+  "createdAt": "2026-10-28T03:36:00Z",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
-  "observedHeadSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
+  "observedHeadSha": "5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7",
   "resumeFrom": "phase_5_approval_gated_sync",
   "overallStatus": "Blocked",
   "phaseStatus": {
@@ -93,7 +93,14 @@
   "evidenceRefs": [
     "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203",
     "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614282",
-    "https://github.com/0816155422/project-workflow-manual/actions/runs/40621830468"
+    "https://github.com/0816155422/project-workflow-manual/actions/runs/40621830468",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/state/checkpoints/CKPT-20261028-002.json",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/pending/course/course-source.json",
+    "https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/operation-log.md",
+    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/workflow-evidence.md"
   ],
-  "integrityNote": "This checkpoint is a new snapshot. Previous operation logs and workflow evidence entries were preserved."
+  "integrityNote": "Latest pointer updated after creating immutable checkpoint CKPT-20261028-002. Previous checkpoint history and append-only logs preserved.",
+  "summary": "Resume audit checkpoint: real course source is empty and approval fields are null; no course validation, sync, or logger run was triggered.",
+  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before sync."
 }
