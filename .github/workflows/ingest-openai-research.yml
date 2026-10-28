@@ -1,0 +1,28 @@
+name: Validate OpenAI research evidence
+
+on:
+  push:
+    paths:
+      - 'raw_data/openai_research/**'
+      - 'scripts/validate-openai-research.mjs'
+      - '.github/workflows/ingest-openai-research.yml'
+  pull_request:
+    paths:
+      - 'raw_data/openai_research/**'
+      - 'scripts/validate-openai-research.mjs'
+      - '.github/workflows/ingest-openai-research.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate source records and provenance
+        run: node scripts/validate-openai-research.mjs
