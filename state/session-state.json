@@ -3,7 +3,7 @@
   "repository": "0816155422/project-workflow-manual",
   "repositoryId": 1432201372,
   "branch": "main",
-  "updatedAt": "2026-10-28T03:36:00Z",
+  "updatedAt": "2026-10-28T10:44:00+07:00",
   "currentPhase": "phase_5_approval_gated_sync",
   "overallStatus": "Blocked",
   "lastRun": {
@@ -13,13 +13,17 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Obtain a real provenance-backed pending course dataset and explicit authorized approval; then run course validation before manually dispatching the approval-gated sync workflow.",
+  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
     "A successful generic repository validation run does not prove course data validation, sync, frontend rendering, or deployment.",
     "Resume audit 2026-10-28T03:36:00Z: pending/course/course-source.json read back with records=[], approvedBy=null, approvedAt=null; no course validation, sync, or logger workflow was triggered.",
     "Latest observed generic Repository Validation run 40626365897 succeeded for SHA 5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7; this does not prove course-data validation or sync.",
-    "Append-only evidence recorded in logs/operation-log.md commit 80f384c9f968b464daf32867dcad591870ed2892 and logs/workflow-evidence.md commit f32aff37a4a974172b2c04eec787a1f542876a1d."
+    "Append-only evidence recorded in logs/operation-log.md commit 80f384c9f968b464daf32867dcad591870ed2892 and logs/workflow-evidence.md commit f32aff37a4a974172b2c04eec787a1f542876a1d.",
+    "ResumeStateGuard private plugin created: https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb; release pluginrel_6ae16fa728988191a2af8fa644c328be.",
+    "Repository skill skills/resume-state-guard/SKILL.md created and read back; commit 2bfba72371207a76d70f4a357f5e85ef20765d10.",
+    "Immutable checkpoint state/checkpoints/CKPT-20261028-003.json created and read back; commit ca3b077ce93f6294cbe4d22b66446fb7fb832fcb.",
+    "Pending source read-back still shows records=[], approvedBy=null, approvedAt=null (blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295). No workflow was dispatched."
   ]
 }
