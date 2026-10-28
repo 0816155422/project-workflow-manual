@@ -32,3 +32,21 @@
 - source of evidence: GitHub repository contents and GitHub Actions API/logs.
 - blocker: No real source data; final dataset paths intentionally remain absent.
 - next_step: Verify all files and latest workflow outcomes; keep manual sync untriggered until real source data and explicit approval exist.
+
+## Entry PH-20261028-003 — Evidence review and fail-closed result
+- task_id: `TASK-PWA-004` / `TASK-PWA-005`
+- objective: Review actual validation, ingest, deployment and usage evidence; ensure missing data is not represented as success.
+- status: **Proven** for observed run outcomes; overall end-to-end integration **Blocked**.
+- created_at: `2026-10-28T02:37:00Z`
+- updated_at: `2026-10-28T02:37:00Z`
+- actor/system identity: GitHub-connected repository automation agent.
+- evidence:
+  - Validation [40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907): `failure`, pending records empty.
+  - Ingest [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477): `failure`, no write-back.
+  - Pages deploy [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897): `success` for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5` only.
+  - General repository validation [40621846957](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846957): `success` for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5` only.
+  - Usage logger execution: **Not proven**; JSON log remains empty.
+  - Sync execution: **Not proven**; no manual sync run was dispatched.
+- source of evidence: GitHub Actions run metadata, job step outcomes and logs, repository contents.
+- blocker: No verified course records and no explicit approval action.
+- next_step: Supply real records with provenance; require a passing validation run; then, only if the human intends approval, manually dispatch the sync workflow. Verify target files, approval log and usage log after execution. Do not claim current HEAD deployment until a matching deploy run exists.
