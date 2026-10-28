@@ -1,53 +1,87 @@
 ---
 name: resume-state-guard
-description: Use before every task in this repository to resume from committed state, perform only the next safe action, and record append-only evidence.
+description: Use before every task in the configured repository. Read state first, resume from the recorded next safe action, preserve checkpoint history, and verify every write by read-back.
 ---
 
 # ResumeStateGuard
 
-This repository's committed state is the source of truth. Before every task, use the GitHub connector to read these exact paths on `main`:
-- `state/session-state.json`
-- `state/phase-status.json`
-- `state/last-run.json`
-- `state/checkpoints/latest.json`
-- `logs/operation-log.md`
-- `logs/workflow-evidence.md`
+## Purpose and scope
+Resume repository work from committed state without restarting from zero. This skill controls only repository state, checkpoint history, evidence logging, and truthful status reporting. Do not broaden scope into business logic or runtime behavior unless explicitly requested. The committed repository state is the source of truth, but every read/write claim must be grounded in the connected repository API.
 
-Then read any source, workflow, script, or output file required by the current phase. Never assume repository HTML or a workflow definition proves runtime behavior.
+## Required files — read all six before every task
+1. `state/session-state.json`
+2. `state/phase-status.json`
+3. `state/last-run.json`
+4. `state/checkpoints/latest.json`
+5. `logs/operation-log.md`
+6. `logs/workflow-evidence.md`
 
-## Required methods
+Also read the immutable checkpoint named by `latest.json` when it points to one. Read only additional files needed for the active next action. If any required file is missing, inspect both logs first, preserve all existing content, initialize only missing files, create a new immutable checkpoint, and read back each created file. Never infer missing-file status without an actual not-found response.
+
+## Allowed status values
+Use exactly one of these status values for every new or normalized status field:
+- `Proven`
+- `Not proven`
+- `Blocked`
+- `Inconclusive`
+
+Do not write `success`, `completed`, `failed`, `not_proven`, or lowercase variants into new status fields. When reading legacy state, preserve historical values as observed, map them for reporting, and record any ambiguity rather than silently rewriting history. `Proven` requires specific evidence and successful relevant read-back. Missing required inputs or approvals means `Blocked`. Missing runtime evidence means `Not proven`. Conflicting or ambiguous evidence means `Inconclusive`.
+
+## Core function contracts
 
 ### `readCurrentState()`
-Return `current_phase`, `last_verified_phase`, `status`, `next_action`, `blocker`, `missing_inputs`, and `evidence_ref` from read-back state. Do not invent missing values. If state files are absent, inspect existing logs first, initialize only missing files, and record that fact in a new checkpoint.
+Read all six required files plus the checkpoint referenced by `latest.json`. Return this shape using only observed values:
+```json
+{
+  "current_phase": null,
+  "last_verified_phase": null,
+  "status": "Inconclusive",
+  "next_action": null,
+  "blocker": null,
+  "missing_inputs": [],
+  "evidence_ref": []
+}
+```
+The nulls/empty arrays above illustrate the return shape; they are not permission to invent repository values. Derive fields from session state, phase status, last run, latest checkpoint, and logs. If state sources conflict, set returned status to `Inconclusive`, preserve conflicting evidence references, and choose a non-destructive next action.
 
 ### `getNextAction()`
-Continue from the recorded phase and next action. Skip phases already proven unless new evidence invalidates them. If required input is missing, stop at the blocker and name the minimum safe next action. Do not restart from zero or bypass validation/approval gates.
-
-### `saveEvidence()`
-Append only observed evidence: workflow name, real run ID, conclusion, commit SHA, evidence URL, validation output, source URL/provenance, and read-back result as applicable. A workflow definition is not a run. A generic repository validation success does not prove course validation, sync, frontend rendering, or deployment of current HEAD. If no run exists, say so; never invent a run ID or success.
+Call `readCurrentState()` first. Return only the recorded next safe action. Skip phases whose observed status is `Proven` unless newer evidence invalidates that proof. If the active phase is `Blocked`, return the minimum action needed to resolve its actual blocker; do not bypass gates or invent data. If required state is absent or unreadable, return `Blocked` or `Not proven` and name the missing path/read-back issue.
 
 ### `saveCheckpoint()`
-Create a new immutable file such as `state/checkpoints/CKPT-YYYYMMDD-NNN.json` first, with checkpoint number/ID, timestamp, phase, status, summary, evidence, and next phase/action. Only after its commit is returned may you update `state/checkpoints/latest.json`. Never delete or replace historical checkpoint files.
+1. Read current state and inspect checkpoint history before writing.
+2. Choose a unique, monotonically increasing checkpoint number/ID; never reuse an existing path.
+3. Create a new immutable file under `state/checkpoints/`, with at least `checkpoint_no`, `timestamp`, `phase`, `status`, `summary`, `evidence`, and `next_phase`.
+4. Read the new file back from the repository. Confirm it exists, parses as JSON, and required fields match the submitted values.
+5. Only after that read-back succeeds, update `state/checkpoints/latest.json` to reference the new immutable checkpoint. Read latest.json back and verify the pointer matches.
+6. Never delete or rewrite an older immutable checkpoint. If a write/read-back fails, do not claim the checkpoint was saved; record `Not proven` or `Blocked` after safely capturing the failure.
 
-### `markStatus()`
-Use exactly one of these user-facing statuses: `Proven`, `Not proven`, `Blocked`, `Inconclusive`. `Proven` requires concrete evidence and relevant read-back. Missing real data or approval means `Blocked`; missing runtime evidence means `Not proven`; conflicting evidence means `Inconclusive`.
+### `saveEvidence()`
+Append to `logs/workflow-evidence.md` or an approved structured evidence file; never replace prior entries. Each entry should include, when applicable and observed: timestamp and task/operation; workflow name or source; run ID only if an actual run ID exists; result/status summary; source URL or commit SHA; relevant file path; evidence URL and read-back result. If no workflow ran, state explicitly that no workflow was dispatched and do not invent a run ID. A workflow definition, page HTML, or generic repository-validation success does not prove domain validation, sync, frontend data rendering, or deployment.
 
-## Safe sequence
+### `markStatus(status, evidence)`
+Accept only `Proven`, `Not proven`, `Blocked`, or `Inconclusive`; reject any other value. Never set `Proven` without concrete, relevant evidence and successful read-back. If evidence is absent, choose `Not proven` or `Blocked`; if sources conflict, choose `Inconclusive`. Store evidence references next to the status.
 
-1. Read all six required state/log files before every task.
-2. Inspect current phase, proven phases, last run, blockers, and next action.
-3. Perform only the next safe action; never fabricate course records, provenance, approval, commits, workflow runs, or results.
-4. Append to both logs. Never remove or rewrite historical entries.
-5. Create an immutable checkpoint before changing current state; update the latest pointer only after the immutable checkpoint commit is confirmed.
-6. Update state files sequentially, using the latest blob SHA for each write. Never race writes to the same path.
-7. Read back every changed file and the checkpoint; record commit/blob SHAs. If read-back fails, status is `Not proven`.
-8. Never dispatch approval-gated sync unless real provenance-backed records pass validation and explicit authorized approval is verified.
-9. Never expose secrets or credentials.
+## Required usage order
+1. `readCurrentState()`
+2. `getNextAction()`
+3. Perform only the next safe, in-scope action
+4. `saveEvidence()` for observed results, including failures and no-run observations
+5. `saveCheckpoint()` to a new immutable file, then update latest pointer
+6. Update state files sequentially; never concurrently update the same path
+7. Read back each file immediately after writing; verify existence and JSON parsing where applicable
+8. Read back all changed files and all six required state/log files before final report
+9. Report evidence-backed status, blocker, missing inputs, file paths/SHAs, and one next safe action
 
-## Current known blocker (revalidate on every invocation)
-
-The latest observed read-back of `pending/course/course-source.json` had `records: []`, `approvedBy: null`, and `approvedAt: null` (blob SHA `90c325b0694e1ecc89b411787a4ae4fdd19b9295`). Therefore do not approve or sync based on this snapshot. Obtain real course records with source URL/provenance and an explicit authorized approval, then validate before sync.
+## State and write safety
+- Read state before every task.
+- Never overwrite prior checkpoint content or silently replace state.
+- Create/read back a new immutable checkpoint before changing current state.
+- Append to logs; preserve prior log lines, failures, and evidence.
+- Use current blob SHA for updates and sequential writes.
+- After every file write, read it back from the repository. For JSON, parse it and compare required fields; for Markdown, confirm the appended entry is present and prior content remains.
+- If read-back fails, mark that write verification `Not proven` or `Blocked`; do not proceed as if it succeeded.
+- Never expose secrets, tokens, API keys, or credentials.
+- Never claim repository pipeline, sync, frontend, or deployment success based only on plugin creation or static files.
 
 ## Final report
-
-Report overall status, current phase, last verified phase, evidence references, blocked/not-proven phases, missing inputs, changed files and verified SHAs, and one clear next safe action. Never claim success without actual workflow logs, validation output, or file read-back verification.
+Use only the allowed status values. Report what changed; exact paths and verified commit/blob SHAs; current phase and last verified phase; blockers/missing inputs; read-back verification results; whether prior checkpoints remain intact; and the next safe action. Keep plugin/state-layer status separate from business-pipeline status.
