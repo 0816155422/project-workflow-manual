@@ -10,6 +10,7 @@ on:
       - "shared/course/**"
       - "data/course/**"
       - "scripts/validate-course-data.mjs"
+      - "scripts/sync-course-data.mjs"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
