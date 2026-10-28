@@ -17,6 +17,7 @@ if ([source, target].some(p => p.includes("..") || p.includes("\\") || /[\\r\\n]
 if (!source.endsWith(".json") || !target.endsWith(".json")) fail("only JSON files are supported.");
 if (!["shared/course/course-data.json", "data/course/course-data.json"].includes(target)) fail("target must be shared/course/course-data.json or data/course/course-data.json.");
 if (!note.trim() || note.length > 300 || /[\r\n]/.test(note)) fail("approval note must be a single line of 1-300 characters.");
+if (scanSecrets(note).length) fail("approval note contains secret-like content.");
 if (!actor.trim()) fail("actor is required.");
 if (!/^\d{4}-\d{2}-\d{2}T/.test(timestamp) || Number.isNaN(Date.parse(timestamp))) fail("approval timestamp is invalid.");
 for (const candidate of [source, target, "shared/course/course-data.json", "data/course/course-data.json", "hap-aicc/data/course-data.json"]) {
