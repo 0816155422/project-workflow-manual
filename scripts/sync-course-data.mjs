@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import { validateDocument } from "./validate-course-data.mjs";
+import { validateDocument, scanSecrets } from "./validate-course-data.mjs";
 
 function fail(message) { console.error(`BLOCKED: ${message}`); process.exit(1); }
 const args = Object.fromEntries(process.argv.slice(2).map((arg, index, all) => arg.startsWith("--") ? [arg.slice(2), all[index + 1]] : null).filter(Boolean));
@@ -10,9 +10,11 @@ const target = args.target || process.env.TARGET_PATH || "";
 const note = args.approvalNote || process.env.APPROVAL_NOTE || "";
 const actor = args.actor || process.env.GITHUB_ACTOR || "";
 const timestamp = args.timestamp || process.env.APPROVED_AT || new Date().toISOString();
+if (process.env.GITHUB_ACTIONS !== "true" || process.env.GITHUB_EVENT_NAME !== "workflow_dispatch") fail("sync must run only inside the manually dispatched GitHub Actions approval workflow.");
 if (!source.startsWith("pending/")) fail("source must start with pending/.");
 if (!(target.startsWith("shared/") || target.startsWith("data/"))) fail("target must start with shared/ or data/.");
-if ([source, target].some(p => p.includes("..") || p.includes("\\") || p.startsWith("/") || p.split("/").some(part => !part || part === "."))) fail("unsafe path syntax.");
+if ([source, target].some(p => p.includes("..") || p.includes("\\") || /[\\r\\n]/.test(p) || p.startsWith("/") || p.split("/").some(part => !part || part === "."))) fail("unsafe path syntax.");
+if (!source.endsWith(".json") || !target.endsWith(".json")) fail("only JSON files are supported.");
 if (!["shared/course/course-data.json", "data/course/course-data.json"].includes(target)) fail("target must be shared/course/course-data.json or data/course/course-data.json.");
 if (!note.trim() || note.length > 300 || /[\r\n]/.test(note)) fail("approval note must be a single line of 1-300 characters.");
 if (!actor.trim()) fail("actor is required.");
