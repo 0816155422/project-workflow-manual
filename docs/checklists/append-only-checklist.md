@@ -112,6 +112,20 @@ Copy the entire section below and append it at the end for each new check. Give 
 
 ---
 
+## Course Pipeline Verification Fields
+
+For each new entry, record the following individually with one of the statuses Proven / Not proven / Blocked / Inconclusive:
+- Pending source file and source SHA
+- Validation workflow run ID, conclusion, head SHA, and URL
+- Manual approval workflow definition and actual run ID (if any)
+- Final target file path and commit SHA
+- Approval-log entry evidence
+- Usage-log entry evidence
+- Workflow-evidence entry evidence
+- UI dataset fetch/render evidence
+- Pages deployment run ID, conclusion, deployed SHA, and page URL
+- Whether deployed SHA matches the repository revision being claimed
+
 ## Historical Entries
 
 > Append new completed entries below this line. Never edit prior entries to make them match a later result. Record a status change in a new entry and reference the earlier Entry ID.
