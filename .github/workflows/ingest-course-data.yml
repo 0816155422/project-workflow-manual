@@ -1,0 +1,41 @@
+name: Ingest and Validate Pending Course Data
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "pending/course/**"
+      - "scripts/validate-course-data.mjs"
+      - ".github/workflows/ingest-course-data.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: course-data-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Validate pending course source (no write-back)
+        run: node scripts/validate-course-data.mjs pending/course/course-source.json
+      - name: Record non-writing ingest result
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Course data ingest (read-only)"
+            echo "- Repository: $GITHUB_REPOSITORY"
+            echo "- Branch/ref: $GITHUB_REF"
+            echo "- Commit SHA: $GITHUB_SHA"
+            echo "- Run ID: $GITHUB_RUN_ID"
+            echo "- Evidence URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "- This workflow validates pending input only; it never approves, copies, or writes final data."
+            echo "- Job status at summary time: ${{ job.status }}"
+          } >> "$GITHUB_STEP_SUMMARY"
