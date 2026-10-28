@@ -232,3 +232,15 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - workflow name / run ID / workflow commit SHA: **Not applicable — no workflow was dispatched for this operation.** This entry is explicitly not a GitHub Actions run record.
 - blocker evidence: `pending/course/course-source.json` read-back has `records=[]`, `approvedBy=null`, `approvedAt=null` (blob SHA `90c325b0694e1ecc89b411787a4ae4fdd19b9295`).
 - next safe action: collect real source records with provenance and explicit authorized approval; validate before sync.
+
+
+## Operational evidence — 2026-10-28 — ResumeStateGuard hardening (not a workflow run)
+- task_id: `PRJ-WF-2026-10-28-01`
+- status: **Proven** for plugin and repository skill update/read-back; course-data pipeline **Blocked**.
+- source: Plugin Creator update result and GitHub Contents API write/read-back responses.
+- plugin version: `0.1.1`; plugin ID `plugins_6ae16fa499b481918c69d68e0c72ecbb`; release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
+- repository skill path: `skills/resume-state-guard/SKILL.md`; write commit `2fc7a79bbc987dcd92fececab36cbbce7c3a1526`; read-back blob SHA `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
+- checkpoint path: `state/checkpoints/CKPT-20261028-004.json`; write commit `f1a4512d642cd11c5e534bbd4dcf73020426d5b1`; read-back blob SHA `21687f1592ffd397a8cd1336060e491ca6ffd87f`.
+- workflow name / run ID / workflow commit SHA: **Not applicable — no workflow was dispatched for this operation.** This is operational evidence, not a fabricated workflow run record.
+- read-back checks completed so far: immutable checkpoint exists, parses as JSON, and contains checkpoint_no=4, phase, allowed status, summary, evidence, and next_phase; repository SKILL.md read back and contains all five core function contracts plus per-write read-back requirements.
+- next: append-only log/state updates and full final read-back of all scoped files.
