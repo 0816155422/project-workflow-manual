@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "repository": "0816155422/project-workflow-manual",
+  "repositoryId": 1432201372,
+  "branch": "main",
+  "updatedAt": "2026-10-28T03:20:00Z",
+  "currentPhase": "phase_5_approval_gated_sync",
+  "overallStatus": "Blocked",
+  "lastRun": {
+    "workflow": "Validate OpenAI research evidence",
+    "runId": "40625614203",
+    "status": "success",
+    "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
+    "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
+  },
+  "nextAction": "Obtain a real provenance-backed pending course dataset and explicit authorized approval; then run validation and manually dispatch the approval-gated sync workflow.",
+  "notes": [
+    "No state files existed before this audit; initialized without deleting prior logs.",
+    "No real approved course dataset is present, so sync remains blocked.",
+    "A successful generic repository validation run does not prove course data validation, sync, frontend rendering, or deployment."
+  ]
+}
