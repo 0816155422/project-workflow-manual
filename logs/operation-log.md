@@ -192,3 +192,17 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - changes: Added repository ResumeStateGuard skill and immutable checkpoint; preserved existing checkpoint files and prior log entries.
 - blocker: No verified real course records, source URL/provenance, or explicit authorized approval.
 - next_safe_action: Collect real provenance-backed course records and explicit authorized approval; validate before any sync.
+
+
+## OP-20261028-009 — ResumeStateGuard protocol hardening
+- task_id: `PRJ-WF-2026-10-28-01`
+- scope: ResumeStateGuard plugin and repository state/evidence-control layer only.
+- status: **Proven** for plugin/skill update and read-back; overall course-data pipeline remains **Blocked**.
+- timestamp: `2026-10-28` (date precision only; no exact clock time asserted).
+- changes: Plugin updated to version `0.1.1`; repository skill `skills/resume-state-guard/SKILL.md` updated with strict status taxonomy, core function contracts, ordered usage protocol, immutable checkpoint behavior, and mandatory per-write read-back.
+- plugin: https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb ; release `pluginrel_6ae1712fe9d88191b456b28f0298be25`.
+- skill write commit: `2fc7a79bbc987dcd92fececab36cbbce7c3a1526`; read-back blob SHA: `f92a9b319b5c9a7fa013a38a9a4908d52ce269df`.
+- immutable checkpoint: `state/checkpoints/CKPT-20261028-004.json`; create commit `f1a4512d642cd11c5e534bbd4dcf73020426d5b1`; read-back blob SHA `21687f1592ffd397a8cd1336060e491ca6ffd87f`.
+- workflow activity: No GitHub Actions workflow was dispatched for this state-layer update; no run ID is claimed.
+- blocker preserved: Course pipeline remains blocked by missing real records/provenance/authorized approval; this operation did not change course data or runtime logic.
+- next safe action: Finish state/log read-back verification; next pipeline action remains to collect real source-backed records and approval before validation/sync.
