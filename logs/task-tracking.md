@@ -88,3 +88,16 @@ Each status transition is a new entry; do not overwrite previous entries.
 - source of evidence: GitHub Actions API and repository contents.
 - next_step: Obtain real source records with provenance, validate them, then seek explicit approval for a new target path. Do not dispatch sync yet.
 - blocker: No verified records, no approved dataset, no sync execution, no usage logger execution, and no deployment evidence for the latest main HEAD.
+
+
+## TASK-PWA-006 — Re-audit operational state and record evidence
+- task_id: `TASK-PWA-006`
+- objective: Verify repository/workflow state, document actual Actions evidence, and keep all operational records append-only.
+- status: **Proven** for audit/read-back; **Blocked** for end-to-end course data promotion; **Not proven** for sync, usage logging, and latest-HEAD deployment.
+- created_at: `2026-10-28T02:45:00Z`
+- updated_at: `2026-10-28T02:45:00Z`
+- actor or system identity: GitHub-connected repository automation agent.
+- evidence: Audited `main` HEAD `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`; [Repository Validation 40622462278](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462278) and [read-only runner 40622462365](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462365) were successful for that SHA. [Course validation 40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907) and [ingest 40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) failed closed due to empty pending records. [Pages run 40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) succeeded for a different SHA. Final dataset paths were absent and the usage JSON entries array was empty.
+- source of evidence: GitHub API read-back and Actions run/job metadata.
+- next_step: Add only verified real source data; re-run validation; if validation passes and a human intends approval, manually dispatch the sync workflow and verify the resulting commit/files/logs.
+- blocker: No real source records or explicit approval. No sync dispatch was performed.

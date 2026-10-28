@@ -46,3 +46,16 @@ Validation must produce real run evidence; manual sync must produce a successful
 - No sync workflow was dispatched. Final dataset files remain absent by design.
 - The previous successful Pages run [40618194726](https://github.com/0816155422/project-workflow-manual/actions/runs/40618194726) proves deployment only for its recorded SHA, not any later commit.
 - Current overall status: **Blocked** for approved-data integration; **Not proven** for end-to-end sync; **Inconclusive** for deployment of the current HEAD until a matching run is observed.
+
+
+## Operational audit snapshot — 2026-10-28T02:45:00Z
+- task_id: `PWA-OPS-002`
+- objective: Establish the evidence-backed current state from GitHub repository contents and Actions metadata.
+- status: **Blocked** for end-to-end course data integration; component definitions are **Proven** to exist.
+- created_at: `2026-10-28T02:45:00Z`
+- updated_at: `2026-10-28T02:45:00Z`
+- actor or system identity: GitHub-connected repository automation agent.
+- evidence: Main HEAD at audit start `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`; general Repository Validation [40622462278](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462278) and read-only runner [40622462365](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462365) succeeded for that SHA. Course validation [40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907) and ingest [40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) failed closed because the pending source has no records. Pages [40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) succeeded for a different SHA.
+- source of evidence: GitHub Contents API and Actions API/job steps.
+- next_step: Wait for real source data with provenance, then validate. Human approval and a new successful sync run are required before final data paths can exist.
+- blocker: Empty pending source; no approved dataset; no observed sync/logger run; no deployment proof for the audited HEAD.

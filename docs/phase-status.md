@@ -50,3 +50,25 @@
 - source of evidence: GitHub Actions run metadata, job step outcomes and logs, repository contents.
 - blocker: No verified course records and no explicit approval action.
 - next_step: Supply real records with provenance; require a passing validation run; then, only if the human intends approval, manually dispatch the sync workflow. Verify target files, approval log and usage log after execution. Do not claim current HEAD deployment until a matching deploy run exists.
+
+
+## Entry PH-20261028-002 — Current operational evidence audit
+- task_id: `PWA-OPS-002`
+- phase name: Audit, evidence reconciliation, and append-only reporting
+- objective: Reconcile actual repository state with workflow run evidence and record a safe next action.
+- files changed: `logs/operation-log.md`, `logs/task-tracking.md`, `logs/workflow-evidence.md`, `docs/project-manifest.md`, `docs/phase-status.md`, and new `docs/checklists/operational-report-2026-10-28-002.md`.
+- status: **Proven** for file/workflow read-back; **Blocked** for approved data pipeline; **Not proven** for sync and current-HEAD deployment.
+- created_at: `2026-10-28T02:45:00Z`
+- updated_at: `2026-10-28T02:45:00Z`
+- actor or system identity: GitHub-connected repository automation agent.
+- evidence:
+  - `main` audit-start SHA: `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`
+  - [Repository Validation 40622462278](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462278): success at audit-start SHA.
+  - [Read-only runner 40622462365](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462365): success at audit-start SHA.
+  - [Course validation 40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907): failure due to empty records.
+  - [Ingest 40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477): failure due to empty records.
+  - [Pages deploy 40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897): success for an older SHA, not the audit-start SHA.
+  - Final dataset paths absent; pending source empty; usage log entries empty.
+- risk / blocker: No verified course/activity data is available. Sync was not dispatched. Any commit made for this audit will advance main and requires its own later deployment proof.
+- next safe action: Provide provenance-backed real records, require passing validation, then obtain explicit human approval and verify target files, approval log, usage evidence, and a deployment run whose SHA matches the revision claimed as deployed.
+- source of evidence: GitHub repository contents, branch ref, Actions run metadata and job steps.

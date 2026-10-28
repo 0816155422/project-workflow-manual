@@ -101,3 +101,77 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - source of evidence: GitHub Actions REST API run/job metadata, decoded validation logs, and GitHub Contents API.
 - next_step: Verify final repository file read-back and current main SHA; do not claim deployment of a later SHA or approved data integration.
 - blocker: No real source records and no manual approval; current main has advanced beyond the latest observed Pages deployment SHA.
+
+
+## Evidence observation — 2026-10-28T02:45:00Z — Operational audit
+- task_id: `PWA-OPS-002`
+- objective: Record current repository and Actions evidence without manufacturing run records.
+- status: **Inconclusive** for end-to-end integration.
+- created_at: `2026-10-28T02:45:00Z`
+- updated_at: `2026-10-28T02:45:00Z`
+- actor or system identity: GitHub-connected repository automation agent; exact run actors are available from each linked GitHub run.
+- source of evidence: GitHub Actions runs API, job-step metadata, and Contents API.
+
+### Observed run — Repository Validation
+- timestamp: `2026-10-28T02:41:58Z`
+- actor: `0816155422` (GitHub Actions run metadata)
+- task: Validate repository on audited main head
+- status: **Proven — success**
+- workflow name: `Repository Validation`
+- run ID: `40622462278`
+- commit SHA: `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40622462278
+- note: This is general repository validation, not proof of approved course sync or Pages deployment.
+
+### Observed run — GitHub Actions API Runner (Read Only)
+- timestamp: `2026-10-28T02:41:58Z`
+- actor: `0816155422` (GitHub Actions run metadata)
+- task: Read-only repository API runner
+- status: **Proven — success**
+- workflow name: `GitHub Actions API Runner (Read Only)`
+- run ID: `40622462365`
+- commit SHA: `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40622462365
+- note: Read-only runner success does not prove write-back or deployment.
+
+### Observed run — Validate Shared Memory and Course Data
+- timestamp: `2026-10-28T02:35:37Z`
+- actor: See linked GitHub run metadata
+- task: Validate pending course data
+- status: **Proven — failure / expected fail-closed condition**
+- workflow name: `Validate Shared Memory and Course Data`
+- run ID: `40621846907`
+- commit SHA: `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907
+- note: Job steps show existing shared-memory validation passed, pending course source validation failed, and final dataset validation was skipped. Pending records were empty; this is not a passing course validation.
+
+### Observed run — Ingest and Validate Pending Course Data
+- timestamp: `2026-10-28T02:35:26Z`
+- actor: See linked GitHub run metadata
+- task: Read-only ingest/validation
+- status: **Proven — failure / no write-back**
+- workflow name: `Ingest and Validate Pending Course Data`
+- run ID: `40621830477`
+- commit SHA: `95f8e3d0cf8691e5c68dea7f10122e827477f423`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477
+- note: Validation step failed because no records exist; the workflow is documented as non-writing.
+
+### Observed run — Deploy HAP/AICC Web Dashboard
+- timestamp: `2026-10-28T02:35:37Z`
+- actor: See linked GitHub run metadata
+- task: Publish static HAP/AICC dashboard
+- status: **Proven — success for the recorded SHA only**
+- workflow name: `Deploy HAP/AICC Web Dashboard`
+- run ID: `40621846897`
+- commit SHA: `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897
+- note: The SHA differs from audited main HEAD `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`; latest-HEAD deployment is **Not proven**.
+
+### No-run observations
+- status: **Not proven**
+- task: Check for sync and usage logger execution
+- workflow name: `Sync Approved Course Data` / `Generate Append-only Usage and Workflow Evidence`
+- run ID: Not observed in the latest 100 runs returned by the API
+- commit SHA: Not applicable
+- evidence URL: https://github.com/0816155422/project-workflow-manual/actions
+- note: The query window is limited to the latest 100 returned runs; do not interpret this as exhaustive historical absence. Usage JSON remains empty, and no sync was dispatched in this operation.

@@ -102,3 +102,24 @@ Never edit or remove a prior entry. Append a new entry for every subsequent oper
 - source of evidence: GitHub Contents API read-back, repository branch metadata, Actions run metadata and job steps.
 - next_step: Await real course records with provenance; validation must pass before explicit manual approval. Do not dispatch sync until the human intends to approve that source and target.
 - blocker: No verified real records, no approved dataset, no sync execution, no usage logger run, and no Pages run matching the latest main revision.
+
+
+## OP-20261028-002 — Evidence-based operational audit and append-only status update
+- task_id: `PWA-OPS-002`
+- objective: Re-audit the repository from GitHub read-back and append the current proven / not proven / blocked state without promoting pending data.
+- status: **Proven** for repository read-back and recorded Actions outcomes; **Blocked** for approved-data integration; **Not proven** for sync and latest-HEAD deployment.
+- created_at: `2026-10-28T02:45:00Z`
+- updated_at: `2026-10-28T02:45:00Z`
+- actor or system identity: GitHub-connected repository automation agent; GitHub run actor for the latest observed Actions runs is `0816155422`.
+- evidence:
+  - Observed `main` HEAD at audit start: `d348cf518653e4fbbe999bfa9aead9251e2a4cf1`.
+  - Repository Validation [run 40622462278](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462278) concluded `success` for that SHA.
+  - Read-only API Runner [run 40622462365](https://github.com/0816155422/project-workflow-manual/actions/runs/40622462365) concluded `success` for that SHA.
+  - Course validation [run 40621846907](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846907) concluded `failure` because the pending records array is empty.
+  - Non-writing ingest [run 40621830477](https://github.com/0816155422/project-workflow-manual/actions/runs/40621830477) concluded `failure` on the same empty-data precondition.
+  - Pages deployment [run 40621846897](https://github.com/0816155422/project-workflow-manual/actions/runs/40621846897) concluded `success` for SHA `6c6d5a0885994e9b9c0b56c2fffbd0e40f25d7f5`, which is not the audited `main` HEAD.
+  - `pending/course/course-source.json` has `records: []` and explicitly says real provenance is unavailable. `shared/course/course-data.json`, `data/course/course-data.json`, and `hap-aicc/data/course-data.json` were absent on read-back.
+  - `hap-aicc/data/usage-log.json` has an empty `entries` array. No sync or usage-logger run was found in the latest 100 Actions runs returned by the API; this is not a claim about all historical runs.
+- source of evidence: GitHub Contents API read-back, main branch ref, GitHub Actions runs and job-step metadata.
+- next_step: Obtain real course/activity source records with provenance, run validation, then require a separate explicit human approval before dispatching sync.
+- blocker: No verified records; final dataset files absent; no observed sync execution; no usage logger execution; no deployment run matching the audited HEAD.
