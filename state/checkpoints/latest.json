@@ -1,124 +1,27 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261028-003",
-  "createdAt": "2026-10-28T10:44:00+07:00",
+  "checkpointId": "CKPT-20261028-004",
+  "checkpoint_no": 4,
+  "checkpointPath": "state/checkpoints/CKPT-20261028-004.json",
+  "timestamp": "2026-10-28",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
-  "observedHeadSha": "2bfba72371207a76d70f4a357f5e85ef20765d10",
-  "resumeFrom": "phase_5_approval_gated_sync",
-  "overallStatus": "Blocked",
-  "phaseStatus": {
-    "schemaVersion": "1.0",
-    "updatedAt": "2026-10-28T03:20:00Z",
-    "phases": {
-      "phase_1_repo_and_state_audit": {
-        "status": "completed",
-        "evidence": [
-          "Repository tree read from GitHub API",
-          "state/session-state.json, state/phase-status.json, state/last-run.json, state/checkpoints/latest.json returned 404 before initialization",
-          "logs/operation-log.md and logs/workflow-evidence.md read back"
-        ],
-        "notes": "Existing append-only logs and prior task history preserved. No state files existed at audit time."
-      },
-      "phase_2_foundation": {
-        "status": "completed",
-        "evidence": [
-          ".github/workflows, scripts, logs, docs, hap-aicc, pending, shared already existed in repository tree",
-          "state and state/checkpoints created with this checkpoint"
-        ],
-        "notes": "No existing directories were reset or removed."
-      },
-      "phase_3_contract_and_policy": {
-        "status": "completed",
-        "evidence": [
-          "docs/data-contract.md read back",
-          "docs/approval-policy.md read back",
-          "docs/reporting-rules.md read back"
-        ],
-        "notes": "Existing contracts retained; they require real evidence and manual approval."
-      },
-      "phase_4_validation": {
-        "status": "completed",
-        "evidence": [
-          ".github/workflows/validate-course-data.yml read back",
-          "scripts/validate-course-data.mjs read back",
-          "Prior Actions run 40621830468 logged as failing closed on empty records"
-        ],
-        "notes": "Validation infrastructure exists. Dataset validation remains blocked because no non-empty real records were proven. Latest successful repository validation run 40625614282 does not itself prove course dataset validity."
-      },
-      "phase_5_approval_gated_sync": {
-        "status": "blocked",
-        "evidence": [
-          ".github/workflows/sync-approved-memory.yml read back",
-          "scripts/sync-course-data.mjs read back",
-          "docs/approval-policy.md read back"
-        ],
-        "notes": "No verified real pending records or explicit human approval provided. No sync was dispatched and no approved dataset was created."
-      },
-      "phase_6_usage_logging": {
-        "status": "not_proven",
-        "evidence": [
-          ".github/workflows/generate-usage-log.yml read back",
-          "scripts/generate-usage-log.mjs read back",
-          "Existing logs/workflow-evidence.md read back"
-        ],
-        "notes": "Logging implementation exists, but a new logger run for this task was not dispatched or verified."
-      },
-      "phase_7_frontend": {
-        "status": "not_proven",
-        "evidence": [
-          "hap-aicc/index.html read back",
-          "hap-aicc/app.js read back",
-          "hap-aicc/styles.css read back"
-        ],
-        "notes": "Frontend implementation exists, but no approved real course dataset is present; rendering approved records is therefore not proven."
-      },
-      "phase_8_readback_verification": {
-        "status": "completed",
-        "evidence": [
-          "All relevant workflow, script, policy, and frontend paths read back from GitHub Contents API",
-          "Repository tree and GitHub Actions run list read back"
-        ],
-        "notes": "State files and final log updates must be read back after this commit sequence."
-      },
-      "phase_9_final_report": {
-        "status": "completed",
-        "evidence": [
-          "State summary records phase statuses and linked prior workflow evidence"
-        ],
-        "notes": "Overall result is Blocked for end-to-end course data processing; validation infrastructure exists and rejects empty data."
-      }
-    }
-  },
-  "evidenceRefs": [
-    "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203",
-    "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614282",
-    "https://github.com/0816155422/project-workflow-manual/actions/runs/40621830468",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/state/checkpoints/CKPT-20261028-002.json",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/pending/course/course-source.json",
-    "https://github.com/0816155422/project-workflow-manual/actions/runs/40626365897",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/operation-log.md",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/logs/workflow-evidence.md",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/state/checkpoints/CKPT-20261028-003.json",
-    "https://github.com/0816155422/project-workflow-manual/blob/main/skills/resume-state-guard/SKILL.md",
-    "https://chatgpt.com/plugins/plugins_6ae16fa499b481918c69d68e0c72ecbb"
+  "phase": "resume_state_guard_hardening",
+  "status": "Blocked",
+  "operationStatus": "Proven",
+  "summary": "ResumeStateGuard updated to v0.1.1; immutable checkpoint created. Pipeline remains blocked by missing real course records/provenance/approval.",
+  "evidence": [
+    "Plugin updated: plugins_6ae16fa499b481918c69d68e0c72ecbb release pluginrel_6ae1712fe9d88191b456b28f0298be25 version 0.1.1.",
+    "Repository skill commit 2fc7a79bbc987dcd92fececab36cbbce7c3a1526; read-back blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df.",
+    "Immutable checkpoint commit f1a4512d642cd11c5e534bbd4dcf73020426d5b1; read-back blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f.",
+    "Append-only operation log commit 4bb795c26700efb2ee25ffe2063818ada13b8b36; read-back blob SHA 710b5dd5899178de4e5e45d34546d44252d6fd0d.",
+    "Append-only workflow evidence log commit 8d2e549e8872b89b8138906e8e7bdfc363de6959; read-back blob SHA edf14dbef1d0d718d040fc1eb0064f4b9c866701.",
+    "No workflow was dispatched by this operation."
   ],
-  "integrityNote": "Immutable checkpoint CKPT-20261028-003 created and read back before updating this latest pointer; older checkpoint files and history preserved.",
-  "summary": "ResumeStateGuard plugin and repository skill are created and read back. Course data remains blocked because pending source is empty and approval fields are null.",
-  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
-  "timestamp": "2026-10-28T10:44:00+07:00",
-  "checkpointSummary": {
-    "checkpoint_no": 3,
-    "timestamp": "2026-10-28T10:44:00+07:00",
-    "phase": "phase_5_approval_gated_sync",
-    "status": "Blocked",
-    "summary": "ResumeStateGuard installed; course-data processing remains blocked on missing real records and approval.",
-    "evidence": [
-      "Plugin creation result: plugins_6ae16fa499b481918c69d68e0c72ecbb / pluginrel_6ae16fa728988191a2af8fa644c328be",
-      "Repository skill commit 2bfba72371207a76d70f4a357f5e85ef20765d10 and read-back blob SHA 3f88da213b9e9af6e9273da1041263899e2379c9",
-      "Immutable checkpoint commit ca3b077ce93f6294cbe4d22b66446fb7fb832fcb and read-back blob SHA 4fa5adad17e3966b81b0d5fdf203c044b87632d3",
-      "pending/course/course-source.json blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295: records=[], approvedBy=null, approvedAt=null"
-    ],
-    "next_phase": "phase_5_approval_gated_sync"
+  "next_phase": "phase_5_approval_gated_sync",
+  "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261028-003",
+    "checkpointPath": "state/checkpoints/CKPT-20261028-003.json"
   }
 }
