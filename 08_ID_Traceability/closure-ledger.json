@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "ledger_name": "Project Workflow Manual Work Closure Ledger",
+  "closure_states": ["OPEN", "CLOSED", "RETURNED"],
+  "records": []
+}
