@@ -114,3 +114,22 @@ Each status transition is a new entry; do not overwrite previous entries.
 - source of evidence: GitHub Contents API and Actions API/job steps.
 - next_step: Preserve the current pending/blocked state until real records are supplied; validate them and require explicit approval before sync.
 - blocker: No source records with provenance, no successful sync run, no usage logger run, and no Pages deployment matching the latest branch revision.
+
+
+## TASK-PWA-008 — ID system design
+- task_id: `TASK-PWA-008`
+- objective: Complete and close the ID system design for project, workflow cycle, work item, artifact, and Atom/Data Unit identities, including registry, adapter, and closure semantics.
+- status: **CLOSED — ID DESIGN ONLY**
+- created_at: `2026-11-04`
+- closed_at: `2026-11-04`
+- actor/system identity: GitHub-connected repository automation agent acting on the user's instruction.
+- evidence:
+  - `08_ID_Traceability/README.md`
+  - `08_ID_Traceability/id-contract.md`
+  - `08_ID_Traceability/id-adapter-contract.md`
+  - `08_ID_Traceability/closure-contract.md`
+  - `08_ID_Traceability/id-registry.json`
+  - `08_ID_Traceability/closure-ledger.json`
+  - All six files were read back from `feature/init-gh-native-structure`; registry and ledger JSON parsed successfully.
+- closure boundary: This closes only the ID system design work item. IRIS research and other research tasks remain open. No project-level or research-level closure is implied.
+- next_step: Use the completed ID design for subsequent project work; do not reopen this design item unless the user instructs a change.
