@@ -13,6 +13,18 @@
       "version": null,
       "readback_ref": "docs/project-manifest.md",
       "relationships": []
+    },
+    {
+      "id": "TASK-PWA-008",
+      "entity_type": "WorkItem",
+      "source_ref": "logs/task-tracking.md#TASK-PWA-008",
+      "identity_status": "ISSUED",
+      "content_hash": null,
+      "version": null,
+      "readback_ref": "08_ID_Traceability/",
+      "relationships": [
+        "PWA-2026-10-28"
+      ]
     }
   ]
 }
