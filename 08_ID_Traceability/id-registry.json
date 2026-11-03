@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "registry_name": "Project Workflow Manual ID Registry",
+  "identity_rule": "Atom/Data Unit IDs are unique and immutable",
+  "hash_algorithm": "SHA-256",
+  "entries": []
+}
