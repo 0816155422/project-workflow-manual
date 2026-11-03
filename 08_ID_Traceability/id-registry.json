@@ -1,7 +1,18 @@
 {
   "schema_version": "1.0",
   "registry_name": "Project Workflow Manual ID Registry",
-  "identity_rule": "Atom/Data Unit IDs are unique and immutable",
+  "identity_rule": "Each Project, WorkflowCycle, WorkItem, Artifact, and Atom/Data Unit has a unique immutable ID",
   "hash_algorithm": "SHA-256",
-  "entries": []
+  "entries": [
+    {
+      "id": "PWA-2026-10-28",
+      "entity_type": "Project",
+      "source_ref": "docs/project-manifest.md#Project-ID",
+      "identity_status": "EXISTING",
+      "content_hash": null,
+      "version": null,
+      "readback_ref": "docs/project-manifest.md",
+      "relationships": []
+    }
+  ]
 }
