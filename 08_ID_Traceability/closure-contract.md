@@ -1,45 +1,54 @@
-# Work and Cycle Closure Contract
+# Work Item, Workflow Cycle, and Project Closure
 
 ## Purpose
 
-Connect issued IDs to the completion and closure of work items in the existing workflow. This contract does not add a new workflow stage.
+Connect registered IDs to completion and closure at the correct level in the existing workflow. This contract does not add a new workflow stage.
 
-## Closure unit
+## Closure levels
 
-A closure record applies to a specific identified work item or cycle. It does not implicitly close its parent, sibling items, or the whole project.
+Closure is recorded separately for:
 
-## Conditions to close a work item
+- Work Item
+- Workflow Cycle
+- Project
 
-A work item may be marked CLOSED only when all applicable conditions below are satisfied:
+A closure at one level does not automatically close another level.
 
-1. The work item has a registered, stable ID.
-2. Its originating work form and scope are identified.
-3. Its required inputs and outputs are linked by their existing IDs or source references.
-4. Its defined completion conditions are satisfied.
-5. The resulting content/version and content hash are recorded where applicable.
-6. The saved result can be read back and matched to the recorded identity.
-7. No required dependency for this work item remains open or blocked.
+**Cycle Complete does not mean Project Complete.**
 
-The closure record stores the basis for closure. It does not create a separate Audit activity.
+## Work Item Closure
+
+A Work Item may be marked CLOSED only when its own defined completion conditions are satisfied and its result is linked to the relevant registered IDs.
+
+The closure record identifies the Work Item, its originating work form, scope, linked inputs/outputs, and the basis on which its own completion conditions were met.
+
+## Workflow Cycle Closure
+
+A Workflow Cycle may be marked CLOSED only against that cycle's defined completion conditions. Its closure is recorded against the Workflow Cycle ID and linked Work Item IDs.
+
+Closing a cycle does not automatically close the Project or any other cycle.
+
+## Project Closure
+
+Project Closure is a separate decision recorded against the Project ID and the Project's own defined completion conditions. A completed cycle alone is not sufficient to mark the Project CLOSED.
 
 ## Failure and return behavior
 
-- If a work item fails, return it to the work form where the failure occurred.
+- If a Work Item fails, return it to the work form where the failure occurred.
 - If the failure is at the origin of the cycle, return to the first part of that cycle.
-- Do not close a failed item.
-- Do not mark a parent cycle or project CLOSED solely because one child item is CLOSED.
+- Do not close a failed Work Item, Workflow Cycle, or Project.
+- Preserve prior closure records when work is changed or reopened; represent the later state as a new record/version rather than erasing history.
 
 ## Closure states
 
-- `OPEN`: work is not closed.
-- `CLOSED`: the applicable completion conditions have been met and recorded.
-- `RETURNED`: work failed and has been returned to its originating work form or the first part of its cycle.
-
-A later change to a CLOSED item must be represented as a new version/change record. Do not erase the prior closure event.
+- `OPEN`: the entity is not closed.
+- `CLOSED`: its applicable completion conditions have been met and recorded.
+- `RETURNED`: the work failed and has been returned to its originating work form or the first part of its cycle.
 
 ## Required closure record fields
 
-- `work_id`
+- `entity_type`: WorkItem, WorkflowCycle, or Project.
+- `entity_id`: the registered ID being closed.
 - `work_form`
 - `origin_ref`
 - `scope`
@@ -52,4 +61,4 @@ A later change to a CLOSED item must be represented as a new version/change reco
 - `return_to` (required only when RETURNED)
 - `related_ids`
 
-No closure record may be fabricated to make the repository appear complete.
+The closure record stores the basis for the closure. It does not create a separate Audit activity. No closure record may be fabricated to make the repository appear complete.
