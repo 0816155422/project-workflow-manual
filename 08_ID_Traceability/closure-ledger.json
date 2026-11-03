@@ -26,5 +26,41 @@
     "return_to",
     "related_ids"
   ],
-  "records": []
+  "records": [
+    {
+      "entity_type": "WorkItem",
+      "entity_id": "TASK-PWA-008",
+      "work_form": "ID System Design",
+      "origin_ref": "08_ID_Traceability/",
+      "scope": "Design of project, workflow-cycle, work-item, artifact, and Atom/Data Unit identity; ID registry structure; ID Adapter responsibilities; and separate Work Item, Workflow Cycle, and Project closure semantics.",
+      "input_refs": [
+        "docs/project-manifest.md#Project-ID",
+        "08_ID_Traceability/id-contract.md",
+        "08_ID_Traceability/id-adapter-contract.md",
+        "08_ID_Traceability/closure-contract.md"
+      ],
+      "output_refs": [
+        "08_ID_Traceability/README.md",
+        "08_ID_Traceability/id-contract.md",
+        "08_ID_Traceability/id-adapter-contract.md",
+        "08_ID_Traceability/closure-contract.md",
+        "08_ID_Traceability/id-registry.json",
+        "08_ID_Traceability/closure-ledger.json"
+      ],
+      "completion_conditions": [
+        "ID entity scope and identity boundaries are documented",
+        "Existing Project ID is preserved in the registry",
+        "ID Adapter responsibilities are documented",
+        "Work Item, Workflow Cycle, and Project closure are distinct",
+        "Design files are read back from the target branch"
+      ],
+      "closure_state": "CLOSED",
+      "closure_basis": "The six ID design files were read back from feature/init-gh-native-structure. Both JSON files parsed successfully. The existing Project ID PWA-2026-10-28 was preserved. This closure applies only to the ID system design work item; it does not close IRIS research, other research work, implementation, or the parent project.",
+      "closed_at": "2026-11-04",
+      "return_to": null,
+      "related_ids": [
+        "PWA-2026-10-28"
+      ]
+    }
+  ]
 }
