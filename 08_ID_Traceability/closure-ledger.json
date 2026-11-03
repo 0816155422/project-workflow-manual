@@ -1,6 +1,30 @@
 {
   "schema_version": "1.0",
   "ledger_name": "Project Workflow Manual Work Closure Ledger",
-  "closure_states": ["OPEN", "CLOSED", "RETURNED"],
+  "supported_entity_types": [
+    "WorkItem",
+    "WorkflowCycle",
+    "Project"
+  ],
+  "closure_states": [
+    "OPEN",
+    "CLOSED",
+    "RETURNED"
+  ],
+  "required_record_fields": [
+    "entity_type",
+    "entity_id",
+    "work_form",
+    "origin_ref",
+    "scope",
+    "input_refs",
+    "output_refs",
+    "completion_conditions",
+    "closure_state",
+    "closure_basis",
+    "closed_at",
+    "return_to",
+    "related_ids"
+  ],
   "records": []
 }
