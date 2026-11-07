@@ -4,7 +4,7 @@
   "repositoryId": 1432201372,
   "branch": "reconstruction/operating-work-lifecycle-state",
   "updatedAt": "2026-11-08",
-  "currentPhase": "system_translation_extraction",
+  "currentPhase": "cross_platform_workspace_lifecycle",
   "overallStatus": "Blocked",
   "lastRun": {
     "workflow": "Validate OpenAI research evidence",
@@ -13,7 +13,7 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
+  "nextAction": "Obtain authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace access if available, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
@@ -29,13 +29,14 @@
     "Created immutable checkpoint CKPT-20261028-004 and read it back; prior checkpoint CKPT-20261028-003 retained.",
     "Repository skill read-back confirms all five core function contracts, allowed status taxonomy, immutable checkpoint order, and read-back after each write.",
     "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment.",
-    "2026-11-08: Implementation Completion started from CKPT-20261108-007. Working-branch IRIS lifecycle runtime, checkpoint resume, handoff packet, MCP entry point and local/CI tests added. Live host integration and authoritative data lifecycle remain blocked."
+    "2026-11-08: Implementation Completion started from CKPT-20261108-007. Working-branch IRIS lifecycle runtime, checkpoint resume, handoff packet, MCP entry point and local/CI tests added. Live host integration and authoritative data lifecycle remain blocked.",
+    "2026-11-08: Cross-platform Workspace Lifecycle coordination package added on designated working branch. GitHub Actions run 42414689846 passed 13 isolated Fake Adapter tests. Native ChatGPT/GitHub host binding, Codespace, and Raw Database integration remain blocked; no live cross-platform runtime integration is claimed."
   ],
   "status": "Inconclusive",
-  "current_phase": "system_translation_extraction",
-  "last_verified_phase": "iris_local_and_github_actions_tests",
-  "next_action": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
-  "blocker": "Full representation remains incomplete because exact prior-conversation source locators, dedicated SMPE artifacts, actual handoff/room packets, Raw Database and Temporary Workspace implementation locations, and several lifecycle transitions are not available in the inspected repository/source trees. Existing IRIS implementation host/runtime limitations remain separately blocked.",
+  "current_phase": "cross_platform_workspace_lifecycle",
+  "last_verified_phase": "workspace_lifecycle_isolated_tests",
+  "next_action": "Obtain authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace access if available, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E.",
+  "blocker": "Live ChatGPT host binding, GitHub runtime adapter host-client binding, Codespace access, and authorized durable Raw Database location/write contract are not proven. The current package and Fake Adapter tests are proven independently.",
   "missing_inputs": [
     "main_ai_mcp_host_binding_and_invocation_evidence",
     "authoritative_shared_external_state_target",
@@ -76,7 +77,11 @@
     "state/checkpoints/CKPT-20261108-010.json (blob 4f8803200a886109043b02271bfe30e5b5e3e45c)",
     "state/checkpoints/latest.json (blob 83cc99d5bd77eb028e47fbe454f2e91b2874db71)",
     "logs/operation-log.md (blob 6aea28f64f2a0d7f165a4aeabd86857f29462340)",
-    "logs/workflow-evidence.md (blob 210df315108b75dbe36b2b6df4b7a276a902260b)"
+    "logs/workflow-evidence.md (blob 210df315108b75dbe36b2b6df4b7a276a902260b)",
+    "state/checkpoints/CKPT-20261108-011.json (blob SHA e192352ad2a32dcc9beb8dbe434de1c54e1fd609)",
+    "GitHub Actions run 42414689846 (13 passed, 0 failed)",
+    "workspace_lifecycle/records/implementation-record.md",
+    "workspace_lifecycle/records/test-result.md"
   ],
   "currentReconstructionFocus": "System Translation: Operating Structure + Work Lifecycle + State Network",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
@@ -88,9 +93,9 @@
     "creationCommitSha": "97ce2c72cde8497678e54882e1f041de517ad2e8"
   },
   "currentCheckpoint": {
-    "checkpointId": "CKPT-20261108-010",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-010.json",
-    "blobSha": "4f8803200a886109043b02271bfe30e5b5e3e45c"
+    "checkpointId": "CKPT-20261108-011",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-011.json",
+    "blobSha": "e192352ad2a32dcc9beb8dbe434de1c54e1fd609"
   },
   "reconstructionNextAction": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
   "canonicalPromotion": "NO",
@@ -157,6 +162,23 @@
     "conflicts": 7,
     "workflowDispatched": false,
     "runtimeExecuted": false,
+    "mainModified": false,
+    "mainMerge": "NO",
+    "canonicalPromotion": "NO"
+  },
+  "workspaceLifecycle": {
+    "status": "Inconclusive",
+    "implementationRecord": "workspace_lifecycle/records/implementation-record.md",
+    "testResultRecord": "workspace_lifecycle/records/test-result.md",
+    "testedCommit": "cce74615a7454618f861c0358f81578c33c0d278",
+    "workflowRunId": "42414689846",
+    "workflowConclusion": "success",
+    "tests": "13 passed, 0 failed",
+    "chatgptAdapter": "Proven for logical session contract; native host binding Not proven",
+    "githubAdapter": "Proven for injected-client contract and fake tests; live host binding Not proven",
+    "persistenceBoundary": "Proven with test store; Raw Database integration Blocked",
+    "checkpointResume": "Proven with test store; durable shared checkpoint store Not proven",
+    "sessionClosure": "Proven for logical closure only; platform context deletion not supported or claimed",
     "mainModified": false,
     "mainMerge": "NO",
     "canonicalPromotion": "NO"
