@@ -1,50 +1,62 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-008",
-  "checkpoint_no": 8,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
-  "timestamp": "2026-11-08T10:00:00+07:00",
+  "checkpointId": "CKPT-20261108-010",
+  "checkpoint_no": 10,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-010.json",
+  "timestamp": "2026-11-08",
   "repository": "0816155422/project-workflow-manual",
   "branch": "reconstruction/operating-work-lifecycle-state",
-  "phase": "iris_implementation_completion",
+  "phase": "system_translation_extraction",
   "status": "Inconclusive",
   "operationStatus": "Inconclusive",
-  "summary": "Working-branch IRIS runtime implementation persisted. Local and GitHub Actions tests passed after a requirements correction. Actual Main AI host binding, shared central storage, authoritative data lifecycle semantics and live host E2E remain blocked.",
+  "summary": "Partial repository representation of existing user-confirmed and source-observed operating knowledge. No new architecture, workflow, module, or canonical state machine was created. Unknowns and conflicts are retained.",
   "evidence": [
-    "Checkpoint CKPT-20261108-007 read back and JSON parsed; blob SHA abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2.",
-    "Reconstruction record read back; path 04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md; blob SHA 784ee8f9c707f1be16297f6b9e3130dccc58b7f5.",
-    "Append-only operation log read back; blob SHA c66023feeb266b8e7248110f53e83774e15ed88e.",
-    "Append-only workflow evidence log read back; blob SHA 01f1066102eb86186d6023b258e17f19773dbc35.",
-    "Parent checkpoint CKPT-20261108-006 retained; blob SHA 1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e.",
-    "Source files inspected from Prasong1993/Prasong main HEAD ebf66dc13e9366fc9e47b6af2206d457cfbd32be; no runtime execution."
+    "Immutable checkpoint CKPT-20261108-010 read back and JSON parsed; blob SHA 4f8803200a886109043b02271bfe30e5b5e3e45c.",
+    "System Translation records and source/traceability registers read back; see checkpoint records map.",
+    "Append-only operation and workflow evidence logs read back after the extraction and checkpoint correction entries.",
+    "state/phase-status.json read back; system_translation_extraction status Inconclusive.",
+    "Main HEAD unchanged at 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "No workflow dispatched; no runtime execution."
   ],
-  "next_phase": "Resolve live host binding and authoritative external-state/data-lifecycle contracts",
-  "next_action": "Do not merge or promote. Verify Main AI host binding/invocation and obtain authoritative external-state and data-lifecycle contracts before live host E2E.",
+  "next_phase": "Continue source recovery and reconciliation from actual existing artifacts only",
+  "next_action": "Retrieve actual SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle source artifacts if available. Do not invent transitions, create modules, merge main, or promote canonical.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261108-007",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
-    "blobSha": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2"
+    "checkpointId": "CKPT-20261108-008",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
+    "blobSha": "717d4858250c6f40771f95104de7a92772c576f2"
   },
   "readBackVerification": {
-    "state/checkpoints/CKPT-20261108-008.json": "717d4858250c6f40771f95104de7a92772c576f2",
-    "logs/operation-log.md": "7376182f2201c9ed21010888818c262ea7517f3a",
-    "logs/workflow-evidence.md": "fefca63517d8c9c02de6c7c0c5224a638eb6f13a"
+    "immutableCheckpoint": "PASS",
+    "latestPointer": "pending",
+    "sessionState": "pending",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS",
+    "phaseStatus": "PASS"
   },
-  "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
+  "currentReconstructionFocus": "System Translation: Operating Structure + Work Lifecycle + State Network",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
-  "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
+  "currentKnowledgeStatus": "USER-CONFIRMED + SOURCE-OBSERVED / DISCOVERY / NOT CANONICAL",
   "canonicalPromotion": "NO",
-  "runtimeVerification": "LOCAL TESTS + GITHUB ACTIONS PROVEN; LIVE HOST E2E NOT PROVEN",
+  "runtimeVerification": "Repository read-back proven; full system representation remains Inconclusive",
   "reconstructionRecord": {
-    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
-    "revision": "R1",
-    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
-    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
-    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
+    "recordId": "system-translation-index",
+    "path": "04_Discovery/system-translation-index.md",
+    "blobSha": "e877c1847eda51b71dd41bf13af7365abd3b8534",
+    "commitSha": "97ce2c72cde8497678e54882e1f041de517ad2e8"
   },
   "mainMerge": "NO",
   "implementationCommit": "9694fc5b86c1f4bfca71225ea8fdd71879916502",
   "requirementsCorrectionCommit": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
   "workflowRunId": "42410383181",
-  "workflowConclusion": "success"
+  "workflowConclusion": "success",
+  "recordSet": {
+    "operatingStructure": "04_Discovery/system-translation-operating-structure.md",
+    "workLifecycle": "04_Discovery/system-translation-work-lifecycle.md",
+    "stateNetwork": "04_Discovery/system-translation-state-network.md",
+    "toolClassification": "04_Discovery/system-translation-tool-classification.md",
+    "systemRelationships": "04_Discovery/system-translation-system-relationships.md",
+    "unknownConflictRegister": "04_Discovery/system-translation-unknown-conflict-register.md",
+    "sourceRegister": "04_Discovery/system-translation-source-register.json",
+    "traceability": "08_ID_Traceability/system-translation-traceability.json"
+  }
 }
