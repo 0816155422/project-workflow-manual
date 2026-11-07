@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-007",
+  "checkpoint_no": 7,
+  "timestamp": "2026-11-08T10:00:00+07:00",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "iris_controller_operating_structure_work_lifecycle_reconstruction",
+  "status": "Proven",
+  "operationStatus": "Proven",
+  "stateClassification": "USER-CONFIRMED",
+  "knowledgeStage": "RECONSTRUCTION / DISCOVERY",
+  "canonicalStatus": "NOT CANONICAL",
+  "provenance": "USER-CONFIRMED Reconstruction Session",
+  "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-006",
+    "path": "state/checkpoints/CKPT-20261108-006.json",
+    "blobSha": "1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e"
+  },
+  "parentState": {
+    "branch": "reconstruction/operating-work-lifecycle-state",
+    "commitSha": "a533dbd1dc510ba312f920a6ac53c1f89a81983e",
+    "currentPointerBlobSha": "6087a8fe20b35b48a74e711e42053fa9994da71d",
+    "sessionStateBlobSha": "0c321f3eb82a3e1eca8a9284e358533dd12c67a1"
+  },
+  "reconstructionRecord": {
+    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
+    "revision": "R1",
+    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
+    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5",
+    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5"
+  },
+  "sourceReferences": {
+    "targetResearchBranch": "feature/init-gh-native-structure",
+    "targetResearchBranchCommit": "f4e14597f4e6c908af165a6244472344210727c0",
+    "sourceRepository": "Prasong1993/Prasong",
+    "sourceBranch": "main",
+    "sourceHead": "ebf66dc13e9366fc9e47b6af2206d457cfbd32be",
+    "controllerBlobSha": "194c81e48dadf5f89a6c5e14731b5288b86164f8",
+    "modelBlobSha": "92beff61b7f113a6395ae38712c529bad252da13",
+    "databaseBlobSha": "c3937168f3904b804948c7a090ffd8f7f43cd11c",
+    "mcpServerBlobSha": "e8851bb16101245f05eace2ead1e82868ef0c919",
+    "restApiBlobSha": "7a883223a0f5dcccf3c9fa45800ae628e6e032dc",
+    "skillBlobSha": "58828bc0cd8c565a08aa4320534362685f068790",
+    "contractBlobSha": "d5322ead6eecddac1a5ebecc57553195bbced48e"
+  },
+  "logs": {
+    "operationLogBlobSha": "c66023feeb266b8e7248110f53e83774e15ed88e",
+    "workflowEvidenceBlobSha": "01f1066102eb86186d6023b258e17f19773dbc35"
+  },
+  "summary": "Reconstructed source-backed IRIS v0.6.5 Operating Structure and Work Lifecycle events: create work, gated CHECKING/WORKING/VERIFYING/PASSED or FAILED step attempts, retained failure and same-step retry, next-step gate, final verification, delivery, and work-state retrieval. Evidence insertion/listing, broader data lifecycle, Main AI invocation, separate Step 1 package, handoff/room/resume, and post-delivery continuation remain unconnected or unknown where inspected sources do not establish them.",
+  "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
+  "currentFundamentalRelation": "State/Condition → Action → State/Condition",
+  "connectedSegments": 9,
+  "unconnectedSegments": 7,
+  "branches": "Recorded in reconstruction record",
+  "bypasses": "Recorded in reconstruction record",
+  "loopBacks": "Failed step → retained error/checkpoint/audit → retry same step",
+  "unknowns": "Recorded in reconstruction record",
+  "canonicalPromotion": "NO",
+  "mainMerge": "NO",
+  "workflowDispatched": false,
+  "runtimeExecution": "NOT PERFORMED",
+  "nextPhase": "Continue from the current source-backed reconstruction position; no future system designed.",
+  "nextAction": "Retain current reconstruction position; unknown and unconnected segments remain open without blocking the source-backed connected segments.",
+  "readBackVerification": {
+    "reconstructionRecord": "PASS",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS",
+    "immutableCheckpoint": "pending",
+    "latestPointer": "pending",
+    "sessionStatePointer": "pending"
+  }
+}
