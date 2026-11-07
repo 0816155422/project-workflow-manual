@@ -378,3 +378,19 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`
 - canonical promotion: `NO`
 - note: This entry records persistence of USER-CONFIRMED reconstruction knowledge. It is not runtime evidence, independent verification, or canonical promotion.
+
+
+## 2026-11-08 — IRIS Controller work lifecycle reconstruction (no workflow run)
+- task_id: `iris-controller-operating-work-lifecycle-reconstruction`
+- status: **Proven** for source inspection and reconstruction-record persistence/read-back only.
+- provenance: `USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL`
+- working branch: `reconstruction/operating-work-lifecycle-state`
+- target research branch evidence: `feature/init-gh-native-structure` commit `f4e14597f4e6c908af165a6244472344210727c0`
+- source repository evidence: `Prasong1993/Prasong` main HEAD `ebf66dc13e9366fc9e47b6af2206d457cfbd32be`
+- reconstruction record: `04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md`
+- record commit: `26aa182b9f7498502f349b97f15baa458dac07a5`
+- workflow name / run ID: **Not applicable — no workflow was dispatched.**
+- runtime execution: **Not performed.**
+- runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`
+- canonical promotion: `NO`
+- note: This entry records source inspection and reconstruction persistence. It is not runtime evidence, target-host binding proof, or canonical promotion.
