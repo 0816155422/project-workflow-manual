@@ -1,0 +1,84 @@
+"""GitHub workspace adapter over an injected, permission-scoped host client.
+
+The adapter does not embed credentials or assume Codespaces availability. The client
+must be supplied by an authorized host and expose the methods used below.
+"""
+from fnmatch import fnmatch
+from ..models import AdapterResult, OperationStatus, new_id
+
+class GitHubWorkspaceAdapter:
+    adapter_id="github-workspace-adapter-v1"
+    platform="github"
+    def __init__(self, client=None, *, repository, branch, allowed_scope, development_workspace=None):
+        if not repository or not branch: raise ValueError("repository and working branch are required")
+        if branch=="main": raise ValueError("main is never an allowed workspace branch")
+        self.client=client; self.repository=repository; self.branch=branch
+        self.allowed_scope=tuple(allowed_scope); self.development_workspace=development_workspace
+        self.sessions={}
+    def _result(self,op,status,ref=None,error=None,external=None):
+        return AdapterResult(self.adapter_id,self.platform,ref,op,status,external_reference=external,error=error)
+    def _in_scope(self,path):
+        return any(path==p or fnmatch(path,p) for p in self.allowed_scope)
+    def _require_client(self):
+        if self.client is None: raise RuntimeError("authorized GitHub host client is not connected")
+    def create_session(self, packet):
+        if packet.target_platform!="github": return self._result("create_session",OperationStatus.BLOCKED,error="Target platform mismatch.")
+        if not set(packet.allowed_scope).issubset(set(self.allowed_scope)):
+            return self._result("create_session",OperationStatus.BLOCKED,error="Packet scope exceeds adapter scope.")
+        sid=new_id("WSS"); self.sessions[sid]={"packet":packet,"status":"CREATED","result":None}
+        return self._result("create_session",OperationStatus.SUCCESS,f"github://{self.repository}/tree/{self.branch}",external=sid)
+    def resolve_workspace(self, reference):
+        if self.client is None: return self._result("resolve_workspace",OperationStatus.NOT_ACCESSIBLE,reference,"No authorized GitHub host client supplied.")
+        try:
+            repo=self.client.get_repository(self.repository)
+            branch=self.client.get_branch(self.repository,self.branch)
+            if self.development_workspace:
+                try: dev=self.client.get_development_workspace(self.development_workspace)
+                except (NotImplementedError,PermissionError,LookupError):
+                    dev=None
+            else: dev=None
+            return self._result("resolve_workspace",OperationStatus.SUCCESS,reference or f"github://{self.repository}/tree/{self.branch}",
+              error="Development workspace unavailable; repository working branch selected." if not dev else None,
+              external=branch.get("sha"))
+        except LookupError as exc: return self._result("resolve_workspace",OperationStatus.NOT_FOUND,reference,str(exc))
+        except PermissionError as exc: return self._result("resolve_workspace",OperationStatus.NOT_ACCESSIBLE,reference,str(exc))
+        except Exception as exc: return self._result("resolve_workspace",OperationStatus.UNKNOWN,reference,str(exc))
+    def dispatch_work(self, session, packet):
+        if session.workspace_session_id not in self.sessions: return self._result("dispatch_work",OperationStatus.NOT_FOUND,session.workspace_reference)
+        if packet.allowed_scope!=self.sessions[session.workspace_session_id]["packet"].allowed_scope:
+            return self._result("dispatch_work",OperationStatus.BLOCKED,session.workspace_reference,"Scope mismatch.")
+        self.sessions[session.workspace_session_id]["status"]="ACTIVE"
+        return self._result("dispatch_work",OperationStatus.SUCCESS,session.workspace_reference,external=session.workspace_session_id)
+    def read_file(self, path):
+        if not self._in_scope(path): raise PermissionError("path outside Allowed Scope")
+        self._require_client()
+        return self.client.get_file(self.repository,path,self.branch)
+    def write_file(self, path, content):
+        if not self._in_scope(path): raise PermissionError("path outside Allowed Scope")
+        self._require_client()
+        if self.branch=="main": raise PermissionError("writes to main are prohibited")
+        return self.client.put_file(self.repository,path,content,self.branch)
+    def run_tests(self, command, paths):
+        if not paths or any(not self._in_scope(p) for p in paths): raise PermissionError("test scope is empty or outside Allowed Scope")
+        self._require_client()
+        return self.client.run_tests(self.repository,self.branch,command,paths)
+    def commit(self, message, paths):
+        if self.branch=="main": raise PermissionError("commits to main are prohibited")
+        if not paths or any(not self._in_scope(p) for p in paths): raise PermissionError("commit includes paths outside Allowed Scope")
+        self._require_client()
+        return self.client.commit(self.repository,self.branch,message,paths)
+    def receive_result(self, session):
+        record=self.sessions.get(session.workspace_session_id)
+        if not record: return self._result("receive_result",OperationStatus.NOT_FOUND,session.workspace_reference)
+        if record["result"] is None: return self._result("receive_result",OperationStatus.UNKNOWN,session.workspace_reference,"No repository result recorded.")
+        return self._result("receive_result",OperationStatus.SUCCESS,session.workspace_reference,external=record["result"].get("commit_sha"))
+    def set_result(self, session, result):
+        self.sessions[session.workspace_session_id]["result"]=dict(result)
+    def get_session_status(self, session):
+        record=self.sessions.get(session.workspace_session_id)
+        return self._result("get_session_status",OperationStatus.NOT_FOUND,session.workspace_reference) if not record else self._result("get_session_status",OperationStatus.SUCCESS,session.workspace_reference)
+    def close_session(self, session):
+        record=self.sessions.get(session.workspace_session_id)
+        if not record: return self._result("close_session",OperationStatus.NOT_FOUND,session.workspace_reference)
+        record["status"]="CLOSED"
+        return self._result("close_session",OperationStatus.SUCCESS,session.workspace_reference,external=session.workspace_session_id)
