@@ -51,25 +51,29 @@
     "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25"
   ],
   "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
-  "currentFundamentalRelation": "State → Action → State",
+  "currentFundamentalRelation": "State/Condition → Action → State/Condition",
   "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
   "currentReconstructionRecord": {
-    "recordId": "operating-work-lifecycle-reconstruction-state",
-    "path": "04_Discovery/operating-work-lifecycle-reconstruction-state.md",
-    "blobSha": "bed59033e9af8ed74e17b142abab09fc9ccfc842",
-    "commitSha": "918489fb699e5e9dc3919c5953216b454510f92a"
+    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
+    "revision": "R1",
+    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
+    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
+    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
   },
   "currentCheckpoint": {
-    "checkpointId": "CKPT-20261108-006",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
-    "blobSha": "1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e"
+    "checkpointId": "CKPT-20261108-007",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+    "blobSha": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2"
   },
-  "reconstructionNextAction": "Do not design the next structure in advance. Continue reconstruction from the current State and observed relationships.",
+  "reconstructionNextAction": "Retain current reconstruction position. Do not design the next system. Unknown and unconnected segments remain open without blocking the source-backed connected segments.",
   "canonicalPromotion": "NO",
   "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
   "parentState": {
     "branch": "main",
     "commitSha": "48e9f64bebd7fb3821d6d03377d3713c46e51193",
     "previousCheckpointId": "CKPT-20261028-005"
-  }
+  },
+  "parentCheckpoint": "CKPT-20261108-006",
+  "reconstructionPosition": "Source-backed v0.6.5 work lifecycle connected through create, gated step execution, retained failure/retry, final verification, delivery, and retrieval. Data lifecycle, Main AI invocation, separate Step 1, handoff/room/resume, and post-delivery continuation remain unknown or unconnected.",
+  "mainMerge": "NO"
 }
