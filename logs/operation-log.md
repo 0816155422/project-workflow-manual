@@ -276,3 +276,20 @@ The following scoped state writes were each read back immediately and JSON-parse
 - workflow activity: No GitHub Actions workflow was dispatched.
 - runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`; no runtime execution performed.
 - canonical promotion: `NO`; main merge: `NO`.
+
+
+## OP-20261108-003 — Implement IRIS checkpoint resume, handoff, and MCP lifecycle runtime
+- task_id: `iris-implementation-completion`
+- status: **Inconclusive** for the complete implementation objective; source-backed lifecycle runtime, local tests, GitHub Actions tests, and repository read-back are proven.
+- branch: `reconstruction/operating-work-lifecycle-state`
+- baseline checkpoint: `CKPT-20261108-007` (retained unchanged)
+- implementation commit: `9694fc5b86c1f4bfca71225ea8fdd71879916502`
+- requirements correction commit: `e7bf889bcf1c5c24e4c0018df99f10156843ba2e`
+- files added: `iris_runtime/__init__.py`, `iris_runtime/__main__.py`, `tests/test_lifecycle.py`, `requirements.txt`, `.mcp.json`, `README_IRIS_RUNTIME.md`, `.github/workflows/iris-runtime-tests.yml`, `IMPLEMENTATION_REPORT.md`.
+- implementation: five-step state/action/state kernel; durable SQLite checkpoint records; resume position derivation; persistent handoff PENDING→ACCEPTED with designated-recipient equality check; MCP stdio entry point; final mismatch persistence.
+- test observations: first Actions run `42410342700` failed at dependency installation because requirements line endings were encoded incorrectly; correction was committed without rewriting the failed run. Second Actions run `42410383181` concluded `success` for corrected commit `e7bf889bcf1c5c24e4c0018df99f10156843ba2e`; install and pytest steps both succeeded.
+- local test observation: isolated `python -m pytest -q` returned 3 passed.
+- read-back: all 8 implementation files read back from GitHub Contents API with matching blob SHAs; branch head confirmed at implementation commit before state/log updates.
+- blockers retained: live Main AI host binding/invocation not proven; shared remote/central state not configured; handoff room/workspace transport and external identity authority not proven; Raw Collection→Review→Understanding→Mapping→Roadmap→Atomization semantics absent from inspected source and not invented; deployed host E2E not performed.
+- safety: no main edits, no merge, no canonical promotion, no historical checkpoint edits.
+- next safe action: resolve actual host binding and external-state target, and obtain the authoritative data-lifecycle schema/transition rules before implementing those blocked interfaces.
