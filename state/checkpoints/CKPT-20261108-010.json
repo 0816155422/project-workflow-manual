@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-010",
+  "checkpoint_no": 10,
+  "timestamp": "2026-11-08",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "system_translation_extraction",
+  "status": "Inconclusive",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-009",
+    "path": "state/checkpoints/CKPT-20261108-009.json",
+    "blobSha": "1a8cca61ad865ffbf2f75ace366fd5ebf8059039"
+  },
+  "parentCommitSha": "def7c6c2f15d35d36f2cfeb171b4edf893ac505b",
+  "representationCommit": "97ce2c72cde8497678e54882e1f041de517ad2e8",
+  "evidenceCommit": "d91d9ca1c9c3b29216af93de783b332be59c9521",
+  "evidence": [
+    "All nine System Translation records read back from GitHub Contents API; blob SHAs are recorded in records map below.",
+    "Source register and traceability register read back and parsed as JSON.",
+    "Append-only operation log and workflow evidence read back after translation entry and checkpoint correction entry.",
+    "state/phase-status.json read back and parsed; system_translation_extraction recorded as Inconclusive.",
+    "Target repository current branch HEAD at start of this checkpoint operation was 502d8c78411b179f2e39195b5231d8921c249aba; translation and evidence commits are on the working branch.",
+    "Target main HEAD observed unchanged at 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "IRIS source repository tree inspected at Prasong1993/Prasong main HEAD ebf66dc13e9366fc9e47b6af2206d457cfbd32be.",
+    "No workflow was dispatched and no runtime execution was performed.",
+    "CKPT-20261108-009 was read back but lacked the required top-level evidence array; it is retained unchanged and this checkpoint is the corrected immutable record."
+  ],
+  "records": {
+    "04_Discovery/system-translation-index.md": "e877c1847eda51b71dd41bf13af7365abd3b8534",
+    "04_Discovery/system-translation-operating-structure.md": "e0ea0a1ebdeb375412cc676555167e2cb91fbceb",
+    "04_Discovery/system-translation-work-lifecycle.md": "fea68780a3adcea2ef6d957d11f47ae1590af6f0",
+    "04_Discovery/system-translation-state-network.md": "8dd9e06ca903522296330e55d27a584ece325a20",
+    "04_Discovery/system-translation-tool-classification.md": "064bebad31da6ba99111cdd3af6fb1dac9bbb794",
+    "04_Discovery/system-translation-system-relationships.md": "b4dda7b009f6208111f08a401012781b0158b03e",
+    "04_Discovery/system-translation-unknown-conflict-register.md": "b76edf132cf7478de69dec37894de01a2f6a15cb",
+    "04_Discovery/system-translation-source-register.json": "42a63ff58a9e3e811bd333b7c56db5a4913fd956",
+    "08_ID_Traceability/system-translation-traceability.json": "2e631519703a5e63929ce4fc7e81c7934c14522b"
+  },
+  "logs": {
+    "logs/operation-log.md": "6aea28f64f2a0d7f165a4aeabd86857f29462340",
+    "logs/workflow-evidence.md": "210df315108b75dbe36b2b6df4b7a276a902260b"
+  },
+  "phaseStatusBlobSha": "0f1ee6cfbc71ec610ef041095eff7f7cf4ed5fd9",
+  "extracted": {
+    "operatingStructure": "Partially represented from user-confirmed and source-observed material",
+    "workLifecycle": "User-confirmed overall cycle and source-observed v0.6.5 controller sub-lifecycle recorded separately",
+    "stateNetwork": "Branches, bypass, retry loop, returns, and unknown links classified by provenance",
+    "toolsClassified": true,
+    "relationships": 20,
+    "unknowns": 18,
+    "conflicts": 7
+  },
+  "boundaries": {
+    "canonicalPromotion": "NO",
+    "mainMerge": "NO",
+    "mainModified": false,
+    "historicalCheckpointsModified": false,
+    "runtimeExecution": false,
+    "workflowDispatched": false,
+    "irisRuntimeClassification": "Working-branch implementation artifact only; not evidence of the full human operating system"
+  },
+  "readBackVerification": {
+    "records": "PASS",
+    "sourceRegisterJson": "PASS",
+    "traceabilityJson": "PASS",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS",
+    "phaseStatusJson": "PASS",
+    "immutableCheckpoint": "pending",
+    "latestPointer": "pending",
+    "sessionState": "pending"
+  },
+  "summary": "Partial repository representation of existing user-confirmed and source-observed operating knowledge. No new architecture, workflow, module, or canonical state machine was created. Unknowns and conflicts are retained.",
+  "next_phase": "Continue source recovery and reconciliation from actual existing artifacts only",
+  "next_action": "Retrieve actual SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle source artifacts if available; preserve missing transitions; do not create modules, merge main, or promote canonical."
+}
