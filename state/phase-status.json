@@ -114,6 +114,16 @@
         "MCP stdio entry point and .mcp.json read back; live Main AI host invocation not observed."
       ],
       "notes": "Source-backed lifecycle, checkpoint resume derivation, persistent handoff packet, MCP entry point and mismatch retention are implemented. Phase remains Blocked for live Main AI binding/invocation, shared central state, handoff room/workspace authority, authoritative data lifecycle contracts and live host E2E."
+    },
+    "system_translation_extraction": {
+      "status": "Inconclusive",
+      "evidence": [
+        "User-confirmed prior context recorded separately from repository-observed and source-code-observed evidence.",
+        "Discovery records and source/traceability registers committed at 97ce2c72cde8497678e54882e1f041de517ad2e8.",
+        "Target repository branch trees and IRIS source repository tree inspected; no dedicated SMPE files or actual handoff/room packets found in inspected trees.",
+        "Conflicts and missing transitions preserved in 04_Discovery/system-translation-unknown-conflict-register.md."
+      ],
+      "notes": "Partial representation of existing operating knowledge. This phase does not create or modify canonical architecture, lifecycle, modules, or state machine."
     }
   },
   "status": "Blocked",

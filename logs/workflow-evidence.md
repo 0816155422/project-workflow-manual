@@ -406,3 +406,18 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - conclusion: `success`; pip install and `python -m pytest -q` steps both concluded success.
 - local isolated test: 3 passed (checkpoint resume, handoff acceptance/rejection, five-step continuation, final delivery, failed-step resume, final mismatch retention).
 - boundary: GitHub Actions tests validate the working-branch runtime package. They do not prove live Main AI host binding, cross-room handoff, shared central storage, or deployed host E2E.
+
+
+## 2026-11-08 — System Translation extraction (no workflow run)
+- task_id: system-translation-existing-operating-system
+- status: **Inconclusive** for complete system representation; scoped record writes are pending their final read-back.
+- source: GitHub Contents API and Git Trees API for target repository branches; source repository tree and direct source-file reads; user-confirmed prior/current conversation context.
+- target repository branch HEAD at start: 502d8c78411b179f2e39195b5231d8921c249aba.
+- target main HEAD observed: 48e9f64bebd7fb3821d6d03377d3713c46e51193.
+- IRIS source repository: Prasong1993/Prasong main HEAD ebf66dc13e9366fc9e47b6af2206d457cfbd32be.
+- repository representation commit: 97ce2c72cde8497678e54882e1f041de517ad2e8.
+- source register and blob references: 04_Discovery/system-translation-source-register.json.
+- workflow name / run ID: **Not applicable — no workflow was dispatched.**
+- runtime execution: **Not performed.**
+- boundary: user-confirmed IRIS/HAP/AICC/SMPE responsibilities are separated from repository/source-code observations. No dedicated SMPE artifacts or actual handoff/room packets were found in inspected trees. Absence in inspected trees is not proof of nonexistence.
+- next safe action: create a new immutable checkpoint after records and logs are read back; update current pointer only after checkpoint read-back.

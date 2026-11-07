@@ -293,3 +293,19 @@ The following scoped state writes were each read back immediately and JSON-parse
 - blockers retained: live Main AI host binding/invocation not proven; shared remote/central state not configured; handoff room/workspace transport and external identity authority not proven; Raw Collection→Review→Understanding→Mapping→Roadmap→Atomization semantics absent from inspected source and not invented; deployed host E2E not performed.
 - safety: no main edits, no merge, no canonical promotion, no historical checkpoint edits.
 - next safe action: resolve actual host binding and external-state target, and obtain the authoritative data-lifecycle schema/transition rules before implementing those blocked interfaces.
+
+
+## OP-20261108-004 — Translate existing human operating system into repository representation
+- task_id: system-translation-existing-operating-system
+- status: **Inconclusive** for complete extraction; user-confirmed and source-observed segments represented in Discovery records.
+- timestamp: 2026-11-08
+- branch: reconstruction/operating-work-lifecycle-state
+- parent branch HEAD: 502d8c78411b179f2e39195b5231d8921c249aba
+- representation commit: 97ce2c72cde8497678e54882e1f041de517ad2e8
+- records: 04_Discovery/system-translation-index.md; operating-structure; work-lifecycle; state-network; tool-classification; system-relationships; unknown-conflict-register; source-register.json; 08_ID_Traceability/system-translation-traceability.json.
+- method: separated USER_CONFIRMED, REPOSITORY_OBSERVED, and SOURCE_CODE_OBSERVED material; retained unknown/unconnected/missing transitions and conflicts; did not create a new operating architecture or canonical record.
+- findings: IRIS user-confirmed three-part structure retained separately from v0.6.5 five-step controller package; HAP/AICC/SMPE responsibilities retained by provenance; repository HAP/AICC files indexed; no dedicated SMPE files or actual room/handoff packets found in inspected trees.
+- conflicts: controller package scope vs whole IRIS system; REST/MCP final mismatch discrepancy; CKPT-007 unconnected count; stale session lastRun reference; session/latest knowledge classification mismatch; generated iris_runtime vs reality-first instruction; CKPT-008 parent baseline vs current branch head.
+- workflow activity: No GitHub Actions workflow was dispatched. No runtime execution was performed.
+- safety: main unchanged; no merge; no canonical promotion; no historical checkpoint or source artifact rewritten.
+- next safe action: continue recovery only from additional actual source artifacts; do not fill missing transitions or create modules.
