@@ -109,7 +109,9 @@ def test_persistence_boundary_and_duplicate_protection():
     p=packet(); s=c.open_session(p,"worker"); c.dispatch(s,p)
     rp=adapter.record_result_candidate(s,p,action_performed="valid output",created_references=["docs/allowed.md"])
     c.receive(s); store=MemoryPersistenceStore()
-    boundary=PersistenceBoundary(store,authorization_check=lambda *_:True,readback_check=lambda *_:True)
+    boundary=PersistenceBoundary(store,authorization_check=lambda *_:True,readback_check=lambda *_:True,
+      state_precondition_check=lambda *_:True,target_location_check=lambda *_:True,
+      historical_protection_check=lambda *_:True)
     args=dict(work_id=p.work_id,workspace_session_id=s.workspace_session_id,result_packet=rp,
       current_state_reference=s.current_state_reference,parent_checkpoint_id=p.parent_checkpoint_id,
       allowed_scope=p.allowed_scope,target_location="approved://records",payload={"ref":"docs/allowed.md"})
@@ -164,3 +166,82 @@ def test_cross_platform_handoff_chatgpt_github_chatgpt():
     assert derive_resume(current_state_reference="git://"+commit["commit_sha"],
       pending_action=None,target_platform="chatgpt",workspace_session_status="RESULT_RECEIVED",
       result_status="OUTPUT_VALID",references_resolved=True)["resume_position"]=="STOP"
+
+def test_resume_positions_are_derived_without_execution():
+    common=dict(current_state_reference="state://s",pending_action="next",
+      required_references=["docs/allowed.md"],target_workspace_reference="workspace://x")
+    assert derive_resume(**common,target_platform="github")["resume_position"]=="RESOLVE_REFERENCES"
+    assert derive_resume(**common,target_platform="github",references_resolved=True)["resume_position"]=="DISPATCH_TO_GITHUB"
+    assert derive_resume(**common,target_platform="chatgpt",references_resolved=True)["resume_position"]=="DISPATCH_TO_CHATGPT"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      workspace_session_status="ACTIVE")["resume_position"]=="WAIT_FOR_RESULT"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      result_received=True)["resume_position"]=="VALIDATE_RESULT"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      result_received=True,result_validated=True)["resume_position"]=="PERSIST_RESULT"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      result_received=True,result_validated=True,persisted=True)["resume_position"]=="CREATE_CHECKPOINT"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      result_received=True,result_validated=True,persisted=True,checkpointed=True)["resume_position"]=="CLOSE_SESSION"
+    assert derive_resume(**common,target_platform="github",references_resolved=True,
+      workspace_session_status="BLOCKED")["resume_position"]=="BLOCKED"
+    assert derive_resume(current_state_reference="state://s",references_resolved=True)["resume_position"]=="STOP"
+
+def test_full_cross_platform_persist_checkpoint_close_resume():
+    chat=ChatGPTWorkspaceAdapter(); gh=GitHubWorkspaceAdapter(FakeGitHub(),repository="owner/repo",
+      branch="reconstruction/operating-work-lifecycle-state",allowed_scope=["docs/allowed.md"])
+    coordinator=WorkspaceCoordinator({"chatgpt":chat,"github":gh})
+    p1=packet("chatgpt",["docs/allowed.md"]); s1=coordinator.open_session(p1,"main-ai")
+    coordinator.dispatch(s1,p1)
+    chat.record_result_candidate(s1,p1,action_performed="prepare GitHub task")
+    coordinator.receive(s1)
+    handoff=create_handoff(s1,to_platform="github",to_workspace_reference="github://owner/repo/tree/work",
+      required_references=["docs/allowed.md"],allowed_scope=["docs/allowed.md"],
+      pending_action="update authorized file",return_contract="ResultPacket",checkpoint_reference="CKPT-010")
+    accept_handoff(handoff,target_platform="github",target_workspace_reference=handoff.to_workspace_reference,
+      allowed_scope=["docs/allowed.md"],authority_check=lambda _:True)
+    p2=packet("github",["docs/allowed.md"],["docs/allowed.md"],handoff.to_workspace_reference)
+    s2=coordinator.open_session(p2,"github-worker"); coordinator.dispatch(s2,p2)
+    gh.write_file("docs/allowed.md","verified content")
+    assert gh.read_file("docs/allowed.md")=="verified content"
+    gh.run_tests("pytest -q",["docs/allowed.md"])
+    commit=gh.commit("authorized update",["docs/allowed.md"],request_id="e2e-commit")
+    gh.record_result_candidate(s2,p2,action_performed="write-test-commit-readback",
+      result_references=[commit["commit_sha"]],modified_references=["docs/allowed.md"],
+      test_results=[{"passed":True}],proposed_resulting_state="git://"+commit["commit_sha"])
+    coordinator.receive(s2)
+    return_handoff=create_handoff(s2,to_platform="chatgpt",to_workspace_reference="chatgpt://current-conversation",
+      required_references=["docs/allowed.md"],allowed_scope=["docs/allowed.md"],
+      pending_action="review GitHub result",return_contract="ResultPacket",checkpoint_reference="CKPT-010")
+    accept_handoff(return_handoff,target_platform="chatgpt",
+      target_workspace_reference="chatgpt://current-conversation",allowed_scope=["docs/allowed.md"],
+      authority_check=lambda _:True)
+    p3=packet("chatgpt",["docs/allowed.md"],["docs/allowed.md"],"chatgpt://current-conversation")
+    s3=coordinator.open_session(p3,"main-ai"); coordinator.dispatch(s3,p3)
+    chat.record_result_candidate(s3,p3,action_performed="review GitHub commit",
+      result_references=[commit["commit_sha"]],proposed_resulting_state="state://after-commit")
+    coordinator.receive(s3)
+    transition(s3,SessionStatus.PERSIST_PENDING)
+    store=MemoryPersistenceStore()
+    persistence=PersistenceBoundary(store,authorization_check=lambda *_:True,readback_check=lambda *_:True,
+      state_precondition_check=lambda *_:True,target_location_check=lambda *_:True,
+      historical_protection_check=lambda _:True)
+    result=chat.get_result_packet(s3)
+    persisted=persistence.persist(work_id=p3.work_id,workspace_session_id=s3.workspace_session_id,
+      result_packet=result,current_state_reference=s3.current_state_reference,
+      parent_checkpoint_id=p3.parent_checkpoint_id,allowed_scope=p3.allowed_scope,
+      target_location="approved://workspace-results",payload={"commit":commit["commit_sha"]})
+    assert persisted["status"]=="PERSISTED"
+    transition(s3,SessionStatus.PERSISTED)
+    checkpoint_store=MemoryCheckpointStore()
+    checkpoint=CheckpointBoundary(checkpoint_store).create(checkpoint_id="CKPT-E2E-011",
+      parent_checkpoint_id="CKPT-010",session=s3,work_packet=p3,result_packet=result,
+      state_before="state://before",state_after="state://after-commit",continuation="STOP")
+    transition(s3,SessionStatus.CHECKPOINTED)
+    assert coordinator.close(s3,checkpoint["checkpoint_id"]).operation_status is OperationStatus.SUCCESS
+    assert s3.status is SessionStatus.CLOSED and checkpoint_store.get_current_pointer()=="CKPT-E2E-011"
+    resumed=derive_resume(current_state_reference="state://after-commit",last_completed_action="review GitHub commit",
+      pending_action=None,target_platform="chatgpt",workspace_session_status="CLOSED",
+      result_status="PERSISTED",cleanup_status="CLOSED",references_resolved=True,
+      result_received=True,result_validated=True,persisted=True,checkpointed=True)
+    assert resumed["resume_position"]=="STOP"
