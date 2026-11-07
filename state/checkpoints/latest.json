@@ -30,7 +30,7 @@
   },
   "readBackVerification": {
     "immutableCheckpoint": "PASS",
-    "latestPointer": "pending",
+    "latestPointer": "PASS",
     "sessionState": "PASS",
     "operationLog": "PASS",
     "workflowEvidence": "PASS",
