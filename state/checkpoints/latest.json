@@ -13,7 +13,7 @@
   "evidence": [
     "Immutable child checkpoint CKPT-20261108-011 read back and parsed; blob SHA e192352ad2a32dcc9beb8dbe434de1c54e1fd609.",
     "Implementation and Test Result records read back; all 17 package/test/workflow records and both append-only logs read back.",
-    "GitHub Actions run 42414689846 concluded success for tested commit cce74615a7454618f861c035f5e8e4e9.",
+    "GitHub Actions run 42414689846 concluded success for tested commit cce74615a7454618f861c0358f81578c33c0d278.",
     "13 tests passed, 0 failed. See workspace_lifecycle/records/test-result.md.",
     "Main HEAD remains 48e9f64bebd7fb3821d6d03377d3713c46e51193; no merge or canonical promotion."
   ],
@@ -49,7 +49,7 @@
     "commitSha": "97ce2c72cde8497678e54882e1f041de517ad2e8"
   },
   "mainMerge": "NO",
-  "implementationCommit": "cce74615a7454618f861c035f5e8e4e9",
+  "implementationCommit": "cce74615a7454618f861c0358f81578c33c0d278",
   "requirementsCorrectionCommit": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
   "workflowRunId": "42414689846",
   "workflowConclusion": "success",
