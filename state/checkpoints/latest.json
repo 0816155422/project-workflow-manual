@@ -1,15 +1,15 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-007",
-  "checkpoint_no": 7,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+  "checkpointId": "CKPT-20261108-008",
+  "checkpoint_no": 8,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
   "timestamp": "2026-11-08T10:00:00+07:00",
   "repository": "0816155422/project-workflow-manual",
   "branch": "reconstruction/operating-work-lifecycle-state",
-  "phase": "iris_controller_operating_structure_work_lifecycle_reconstruction",
-  "status": "Proven",
-  "operationStatus": "Proven",
-  "summary": "Current reconstruction pointer references the source-backed IRIS Controller Operating Structure + Work Lifecycle network. Unknown and unconnected segments are retained without blocking the connected source-backed segments.",
+  "phase": "iris_implementation_completion",
+  "status": "Inconclusive",
+  "operationStatus": "Inconclusive",
+  "summary": "Working-branch IRIS runtime implementation persisted. Local and GitHub Actions tests passed after a requirements correction. Actual Main AI host binding, shared central storage, authoritative data lifecycle semantics and live host E2E remain blocked.",
   "evidence": [
     "Checkpoint CKPT-20261108-007 read back and JSON parsed; blob SHA abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2.",
     "Reconstruction record read back; path 04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md; blob SHA 784ee8f9c707f1be16297f6b9e3130dccc58b7f5.",
@@ -18,29 +18,33 @@
     "Parent checkpoint CKPT-20261108-006 retained; blob SHA 1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e.",
     "Source files inspected from Prasong1993/Prasong main HEAD ebf66dc13e9366fc9e47b6af2206d457cfbd32be; no runtime execution."
   ],
-  "next_phase": "Operating Structure + Work Lifecycle reconstruction",
-  "next_action": "Retain current reconstruction position; continue only from additional source information when available. Do not design a future system.",
+  "next_phase": "Resolve live host binding and authoritative external-state/data-lifecycle contracts",
+  "next_action": "Do not merge or promote. Verify Main AI host binding/invocation and obtain authoritative external-state and data-lifecycle contracts before live host E2E.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261108-006",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
-    "blobSha": "6087a8fe20b35b48a74e711e42053fa9994da71d"
+    "checkpointId": "CKPT-20261108-007",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+    "blobSha": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2"
   },
   "readBackVerification": {
-    "state/checkpoints/CKPT-20261108-007.json": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2",
-    "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
-    "logs/operation-log.md": "c66023feeb266b8e7248110f53e83774e15ed88e",
-    "logs/workflow-evidence.md": "01f1066102eb86186d6023b258e17f19773dbc35"
+    "state/checkpoints/CKPT-20261108-008.json": "717d4858250c6f40771f95104de7a92772c576f2",
+    "logs/operation-log.md": "7376182f2201c9ed21010888818c262ea7517f3a",
+    "logs/workflow-evidence.md": "fefca63517d8c9c02de6c7c0c5224a638eb6f13a"
   },
   "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
   "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
   "canonicalPromotion": "NO",
-  "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
+  "runtimeVerification": "LOCAL TESTS + GITHUB ACTIONS PROVEN; LIVE HOST E2E NOT PROVEN",
   "reconstructionRecord": {
     "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
     "revision": "R1",
     "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
     "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
     "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
-  }
+  },
+  "mainMerge": "NO",
+  "implementationCommit": "9694fc5b86c1f4bfca71225ea8fdd71879916502",
+  "requirementsCorrectionCommit": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+  "workflowRunId": "42410383181",
+  "workflowConclusion": "success"
 }
