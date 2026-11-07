@@ -240,3 +240,20 @@ The following scoped state writes were each read back immediately and JSON-parse
 - existing verified state remains: latest pointer read-back references `CKPT-20261028-005` (blob SHA `61c1dd579229776f8251a767cb9f254e4a4d25e1`); checkpoint 005 read-back blob SHA `c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28`.
 - workflow activity: No GitHub Actions workflow was dispatched.
 - next_safe_action: Read back all six required state/log files and report any stale session-state evidence references without claiming an unverified update.
+
+
+## OP-20261108-001 — Persist user-confirmed Operating Structure + Work Lifecycle reconstruction
+- task_id: `operating-work-lifecycle-reconstruction-state`
+- status: **Proven** for reconstruction record creation and immediate GitHub read-back; no runtime verification performed or required for this reconstruction stage.
+- created_at: `2026-11-08`
+- provenance: `USER-CONFIRMED Reconstruction Session`
+- parent branch: `main`
+- parent commit: `48e9f64bebd7fb3821d6d03377d3713c46e51193`
+- working branch: `reconstruction/operating-work-lifecycle-state`
+- reconstruction record: `04_Discovery/operating-work-lifecycle-reconstruction-state.md`
+- record creation commit: `918489fb699e5e9dc3919c5953216b454510f92a`
+- record read-back blob SHA: `bed59033e9af8ed74e17b142abab09fc9ccfc842`
+- classification: `USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL`
+- workflow activity: No GitHub Actions workflow was dispatched for this operation.
+- historical state: Existing checkpoint 002–005 and main state were retained; no historical record was edited.
+- next safe action: Create a new immutable checkpoint referencing the reconstruction record, then update the working-branch current-state pointer and read back all changed files.
