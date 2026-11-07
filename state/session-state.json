@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "repository": "0816155422/project-workflow-manual",
   "repositoryId": 1432201372,
-  "branch": "main",
-  "updatedAt": "2026-10-28",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "updatedAt": "2026-11-08",
   "currentPhase": "phase_5_approval_gated_sync",
   "overallStatus": "Blocked",
   "lastRun": {
@@ -49,5 +49,27 @@
     "logs/workflow-evidence.md (final read-back blob SHA 82f86cb41765d69dacdd9b8c27bcb258a8bbed84)",
     "skills/resume-state-guard/SKILL.md (blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df)",
     "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25"
-  ]
+  ],
+  "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
+  "currentFundamentalRelation": "State → Action → State",
+  "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
+  "currentReconstructionRecord": {
+    "recordId": "operating-work-lifecycle-reconstruction-state",
+    "path": "04_Discovery/operating-work-lifecycle-reconstruction-state.md",
+    "blobSha": "bed59033e9af8ed74e17b142abab09fc9ccfc842",
+    "commitSha": "918489fb699e5e9dc3919c5953216b454510f92a"
+  },
+  "currentCheckpoint": {
+    "checkpointId": "CKPT-20261108-006",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
+    "blobSha": "1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e"
+  },
+  "reconstructionNextAction": "Do not design the next structure in advance. Continue reconstruction from the current State and observed relationships.",
+  "canonicalPromotion": "NO",
+  "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
+  "parentState": {
+    "branch": "main",
+    "commitSha": "48e9f64bebd7fb3821d6d03377d3713c46e51193",
+    "previousCheckpointId": "CKPT-20261028-005"
+  }
 }
