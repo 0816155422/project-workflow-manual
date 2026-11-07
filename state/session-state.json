@@ -4,7 +4,7 @@
   "repositoryId": 1432201372,
   "branch": "reconstruction/operating-work-lifecycle-state",
   "updatedAt": "2026-11-08",
-  "currentPhase": "iris_implementation_completion",
+  "currentPhase": "system_translation_extraction",
   "overallStatus": "Blocked",
   "lastRun": {
     "workflow": "Validate OpenAI research evidence",
@@ -13,7 +13,7 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Verify actual Main AI host binding and invocation; establish the authoritative shared-state target and data-lifecycle contract before live host E2E. Do not merge or promote.",
+  "nextAction": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
@@ -31,17 +31,23 @@
     "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment.",
     "2026-11-08: Implementation Completion started from CKPT-20261108-007. Working-branch IRIS lifecycle runtime, checkpoint resume, handoff packet, MCP entry point and local/CI tests added. Live host integration and authoritative data lifecycle remain blocked."
   ],
-  "status": "Blocked",
-  "current_phase": "iris_implementation_completion",
+  "status": "Inconclusive",
+  "current_phase": "system_translation_extraction",
   "last_verified_phase": "iris_local_and_github_actions_tests",
-  "next_action": "Verify actual Main AI host binding and invocation; establish the authoritative shared-state target and data-lifecycle contract before live host E2E. Do not merge or promote.",
-  "blocker": "Live Main AI host binding/invocation, shared remote/central state, handoff room/workspace authority, and authoritative Raw Collection-to-Atomization transition contracts are not proven.",
+  "next_action": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
+  "blocker": "Full representation remains incomplete because exact prior-conversation source locators, dedicated SMPE artifacts, actual handoff/room packets, Raw Database and Temporary Workspace implementation locations, and several lifecycle transitions are not available in the inspected repository/source trees. Existing IRIS implementation host/runtime limitations remain separately blocked.",
   "missing_inputs": [
     "main_ai_mcp_host_binding_and_invocation_evidence",
     "authoritative_shared_external_state_target",
     "handoff_room_workspace_and_identity_authority_contract",
     "raw_collection_to_atomization_schema_and_transition_rules",
-    "live_host_end_to_end_execution_evidence"
+    "live_host_end_to_end_execution_evidence",
+    "dedicated_smpe_source_artifacts_or_authoritative_repository_locator",
+    "actual_room_handoff_packet_records_and_transfer_contract",
+    "raw_database_physical_location_and_access_contract",
+    "temporary_workspace_runtime_location_and_cleanup_evidence",
+    "iris_storage_lifecycle_source_artifacts_and_mapping_to_workflow_lifecycle",
+    "exact_exportable_source_locators_for_prior_user_confirmed_conversation_records"
   ],
   "evidence_ref": [
     "state/checkpoints/CKPT-20261028-004.json (blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f)",
@@ -57,24 +63,36 @@
     "logs/operation-log.md (blob 7376182f2201c9ed21010888818c262ea7517f3a)",
     "logs/workflow-evidence.md (blob fefca63517d8c9c02de6c7c0c5224a638eb6f13a)",
     "state/checkpoints/CKPT-20261108-008.json (blob 717d4858250c6f40771f95104de7a92772c576f2)",
-    "state/checkpoints/latest.json (blob 036eb0d50a42b7fb83629c5428b55792088a8a05)"
+    "state/checkpoints/latest.json (blob 036eb0d50a42b7fb83629c5428b55792088a8a05)",
+    "04_Discovery/system-translation-index.md (blob e877c1847eda51b71dd41bf13af7365abd3b8534)",
+    "04_Discovery/system-translation-operating-structure.md (blob e0ea0a1ebdeb375412cc676555167e2cb91fbceb)",
+    "04_Discovery/system-translation-work-lifecycle.md (blob fea68780a3adcea2ef6d957d11f47ae1590af6f0)",
+    "04_Discovery/system-translation-state-network.md (blob 8dd9e06ca903522296330e55d27a584ece325a20)",
+    "04_Discovery/system-translation-tool-classification.md (blob 064bebad31da6ba99111cdd3af6fb1dac9bbb794)",
+    "04_Discovery/system-translation-system-relationships.md (blob b4dda7b009f6208111f08a401012781b0158b03e)",
+    "04_Discovery/system-translation-unknown-conflict-register.md (blob b76edf132cf7478de69dec37894de01a2f6a15cb)",
+    "04_Discovery/system-translation-source-register.json (blob 42a63ff58a9e3e811bd333b7c56db5a4913fd956)",
+    "08_ID_Traceability/system-translation-traceability.json (blob 2e631519703a5e63929ce4fc7e81c7934c14522b)",
+    "state/checkpoints/CKPT-20261108-010.json (blob 4f8803200a886109043b02271bfe30e5b5e3e45c)",
+    "state/checkpoints/latest.json (blob 83cc99d5bd77eb028e47fbe454f2e91b2874db71)",
+    "logs/operation-log.md (blob 6aea28f64f2a0d7f165a4aeabd86857f29462340)",
+    "logs/workflow-evidence.md (blob 210df315108b75dbe36b2b6df4b7a276a902260b)"
   ],
-  "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
+  "currentReconstructionFocus": "System Translation: Operating Structure + Work Lifecycle + State Network",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
-  "currentKnowledgeStatus": "IMPLEMENTATION / WORKING BRANCH / NOT CANONICAL",
+  "currentKnowledgeStatus": "USER-CONFIRMED + SOURCE-OBSERVED / DISCOVERY / NOT CANONICAL",
   "currentReconstructionRecord": {
-    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
-    "revision": "R1",
-    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
-    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
-    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
+    "recordId": "system-translation-index",
+    "path": "04_Discovery/system-translation-index.md",
+    "blobSha": "e877c1847eda51b71dd41bf13af7365abd3b8534",
+    "creationCommitSha": "97ce2c72cde8497678e54882e1f041de517ad2e8"
   },
   "currentCheckpoint": {
-    "checkpointId": "CKPT-20261108-008",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
-    "blobSha": "717d4858250c6f40771f95104de7a92772c576f2"
+    "checkpointId": "CKPT-20261108-010",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-010.json",
+    "blobSha": "4f8803200a886109043b02271bfe30e5b5e3e45c"
   },
-  "reconstructionNextAction": "Retain current reconstruction position. Do not design the next system. Unknown and unconnected segments remain open without blocking the source-backed connected segments.",
+  "reconstructionNextAction": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
   "canonicalPromotion": "NO",
   "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
   "parentState": {
@@ -83,7 +101,7 @@
     "previousCheckpointId": "CKPT-20261028-005"
   },
   "parentCheckpoint": "CKPT-20261108-006",
-  "reconstructionPosition": "Source-backed v0.6.5 work lifecycle connected through create, gated step execution, retained failure/retry, final verification, delivery, and retrieval. Data lifecycle, Main AI invocation, separate Step 1, handoff/room/resume, and post-delivery continuation remain unknown or unconnected.",
+  "reconstructionPosition": "Partial repository representation of the existing user-confirmed operating structure and source-observed IRIS Controller v0.6.5 sub-lifecycle. Operating roles and relationships are separated by provenance; tools are classified; 20 relationships, 18 unknowns, and 7 conflicts are recorded. Actual SMPE artifacts, handoff/room packets, Raw Database and Temporary Workspace implementation locations, and several lifecycle transitions remain unresolved.",
   "mainMerge": "NO",
   "previousTaskContext": {
     "currentPhase": "phase_5_approval_gated_sync",
@@ -119,6 +137,27 @@
       "Raw Collection-to-Atomization contract",
       "Live host E2E"
     ],
+    "mainMerge": "NO",
+    "canonicalPromotion": "NO"
+  },
+  "previousReconstructionRecord": {
+    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
+    "revision": "R1",
+    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
+    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
+    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
+  },
+  "systemTranslation": {
+    "status": "Inconclusive",
+    "recordIndex": "04_Discovery/system-translation-index.md",
+    "recordCommit": "97ce2c72cde8497678e54882e1f041de517ad2e8",
+    "checkpoint": "CKPT-20261108-010",
+    "relationships": 20,
+    "unknowns": 18,
+    "conflicts": 7,
+    "workflowDispatched": false,
+    "runtimeExecuted": false,
+    "mainModified": false,
     "mainMerge": "NO",
     "canonicalPromotion": "NO"
   }
