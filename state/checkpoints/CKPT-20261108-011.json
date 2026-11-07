@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-011",
+  "checkpoint_no": 11,
+  "timestamp": "2026-11-08",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "cross_platform_workspace_lifecycle",
+  "status": "Inconclusive",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-010",
+    "path": "state/checkpoints/CKPT-20261108-010.json",
+    "blobSha": "4f8803200a886109043b02271bfe30e5b5e3e45c"
+  },
+  "parentCommitSha": "0e26dd136ca24269631e68676b3115ee579a832c",
+  "implementationRecord": {
+    "path": "workspace_lifecycle/records/implementation-record.md",
+    "blobSha": "d0b1adb11fd8367801a10530f272c3082ffb8330"
+  },
+  "testResultRecord": {
+    "path": "workspace_lifecycle/records/test-result.md",
+    "blobSha": "93f5900dfd6aaeb24f5ad5dbe9a32faa2ce51562"
+  },
+  "testEvidence": {
+    "workflow": "IRIS Working Runtime Tests",
+    "runId": "42414689846",
+    "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/42414689846",
+    "testedCommit": "cce74615a7454618f861c0358f81578c33c0d278",
+    "conclusion": "success",
+    "command": "python -m pytest -q",
+    "result": "13 passed, 0 failed"
+  },
+  "evidence": [
+    "All workspace_lifecycle package files were fetched from the target working branch after writes; blob SHAs are listed in records map.",
+    "Implementation Record and Test Result Record were fetched and read back.",
+    "tests/test_workspace_lifecycle.py was fetched and read back; GitHub Actions executed the suite and reported 13 passed, 0 failed.",
+    "GitHub Actions workflow file was fetched and read back with workspace_lifecycle/** in the branch-scoped path filter.",
+    "Append-only operation log and workflow evidence log were fetched and read back after appending this operation's evidence.",
+    "GitHub Actions failures during development were retained in the Test Result Record and workflow evidence log.",
+    "Target working branch HEAD before checkpoint creation was 0e26dd136ca24269631e68676b3115ee579a832c.",
+    "Main HEAD observed unchanged at 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "No Raw Database write, live ChatGPT host binding, live Codespace execution, merge, or canonical promotion was performed."
+  ],
+  "records": {
+    "workspace_lifecycle/__init__.py": "a6ef7e5db155ddd08189c589ba554f91770c6b6c",
+    "workspace_lifecycle/models.py": "637c1d1c7f884b1252f1f6fb652896d71784c8fd",
+    "workspace_lifecycle/transitions.py": "3a2cd9605d547de58679b87ad11be37157de46ab",
+    "workspace_lifecycle/packets.py": "6ffcf2b90e552e70b9ac3ccec83f0af767114d5c",
+    "workspace_lifecycle/session.py": "5e0bfa40a5c872e29a4c80030c0fc43f5a5fd4f0",
+    "workspace_lifecycle/handoff.py": "4b73e1771e6e36df47fbef62d62b016090ed2897",
+    "workspace_lifecycle/persistence.py": "fe41fed79237fd34f8add2fae9f444d44ddb44ec",
+    "workspace_lifecycle/checkpoint.py": "b658fd99ed75756ffe57d7982776309decfeccb9",
+    "workspace_lifecycle/resume.py": "2a1f705c73fa0fa27b7aef5037a9ca6a3d350afa",
+    "workspace_lifecycle/adapters/__init__.py": "8dd8d58c2595f7426600f23631a3423891d8efd1",
+    "workspace_lifecycle/adapters/base.py": "0d40610675f2901d742c035833dba93ad1ba4e4f",
+    "workspace_lifecycle/adapters/chatgpt.py": "3982ec3c400ab33d16ad97c2277f47f4998d7591",
+    "workspace_lifecycle/adapters/github.py": "20dd7d0740af1c61fc339cfeb2de03c9725a801a",
+    "workspace_lifecycle/records/implementation-record.md": "d0b1adb11fd8367801a10530f272c3082ffb8330",
+    "workspace_lifecycle/records/test-result.md": "93f5900dfd6aaeb24f5ad5dbe9a32faa2ce51562",
+    "tests/test_workspace_lifecycle.py": "dc2b0734ae8f1905163a9415bc8de548063dd8e4",
+    ".github/workflows/iris-runtime-tests.yml": "5bec34ce1df420b093981986b817f0ac4b66d751"
+  },
+  "logs": {
+    "logs/operation-log.md": "27ff2ef9805ba3f2e054ad8551efd3c6aef78847",
+    "logs/workflow-evidence.md": "83f00489995ced230d58e9b0c7f0eaf5d524063e"
+  },
+  "implementation": {
+    "workspaceSessionModel": "Proven",
+    "transitionFunction": "Proven",
+    "chatgptAdapter": "Proven for logical session contract and Fake/test behavior; native host binding Not proven",
+    "githubAdapter": "Proven for injected-client contract and Fake/test behavior; live host client binding Not proven",
+    "workPacket": "Proven",
+    "resultPacket": "Proven",
+    "handoff": "Proven for target/scope/authority predicate checks",
+    "persistenceBoundary": "Proven for validation logic with in-memory test store; external Raw Database persistence Blocked",
+    "checkpointResume": "Proven for immutable/read-back ordering in test store; durable shared checkpoint store Not proven",
+    "sessionClosure": "Proven for logical closure; platform context deletion Not supported or claimed"
+  },
+  "boundaries": {
+    "codespaceRuntime": "Not accessible / not proven; repository working branch fallback tested with fake client",
+    "rawDatabaseLocation": "UNKNOWN",
+    "mainModified": false,
+    "mainMerge": "NO",
+    "canonicalPromotion": "NO",
+    "historicalCheckpointsModified": false,
+    "rawDatabaseWritten": false,
+    "liveChatGPTHostBound": false,
+    "liveGitHubAdapterHostBound": false
+  },
+  "readBackVerification": {
+    "implementationFiles": "PASS",
+    "implementationRecord": "PASS",
+    "testResultRecord": "PASS",
+    "tests": "PASS",
+    "workflowDefinition": "PASS",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS",
+    "immutableCheckpoint": "pending",
+    "latestPointer": "pending",
+    "sessionState": "pending",
+    "phaseStatus": "pending",
+    "lastRun": "pending"
+  },
+  "summary": "The cross-platform coordination layer and platform adapter contracts were implemented on the designated working branch. Thirteen isolated GitHub Actions tests passed. Native host integration and durable Raw Database binding remain blocked; this checkpoint does not claim live cross-platform runtime integration.",
+  "next_phase": "runtime_integration",
+  "next_action": "Obtain and verify authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace access if available, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E."
+}
