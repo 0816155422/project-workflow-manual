@@ -15,7 +15,11 @@
     "Implementation and Test Result records read back; all 17 package/test/workflow records and both append-only logs read back.",
     "GitHub Actions run 42414689846 concluded success for tested commit cce74615a7454618f861c0358f81578c33c0d278.",
     "13 tests passed, 0 failed. See workspace_lifecycle/records/test-result.md.",
-    "Main HEAD remains 48e9f64bebd7fb3821d6d03377d3713c46e51193; no merge or canonical promotion."
+    "Main HEAD remains 48e9f64bebd7fb3821d6d03377d3713c46e51193; no merge or canonical promotion.",
+    "state/session-state.json read back and parsed; current phase cross_platform_workspace_lifecycle; blob SHA 97ce775fcbbac4a63f18fb16968a1626246319ab.",
+    "state/phase-status.json read back and parsed; workspace lifecycle phase Inconclusive and runtime integration Blocked; blob SHA 4211a72e22336f48bd4f72910b8ddf6b9cfc2605.",
+    "state/last-run.json read back and parsed; latestWorkspaceLifecycleRun references Actions run 42414689846; blob SHA 6ce48035e082968f0752b0a85c95a8eb7b8ade6f.",
+    "Append-only logs read back after evidence append; operation log blob 27ff2ef9805ba3f2e054ad8551efd3c6aef78847; workflow evidence blob 83f00489995ced230d58e9b0c7f0eaf5d524063e."
   ],
   "next_phase": "runtime_integration",
   "next_action": "Verify authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace availability, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E.",
@@ -27,15 +31,16 @@
   "readBackVerification": {
     "immutableCheckpoint": "PASS",
     "latestPointer": "pending",
-    "sessionState": "pending",
+    "sessionState": "PASS",
     "operationLog": "PASS",
     "workflowEvidence": "PASS",
-    "phaseStatus": "pending",
+    "phaseStatus": "PASS",
     "implementationFiles": "PASS",
     "implementationRecord": "PASS",
     "testResultRecord": "PASS",
     "tests": "PASS",
-    "workflowDefinition": "PASS"
+    "workflowDefinition": "PASS",
+    "lastRun": "PASS"
   },
   "currentReconstructionFocus": "Cross-Platform Workspace Lifecycle coordination layer",
   "currentFundamentalRelation": "State → Action → State",
