@@ -2,7 +2,7 @@ name: IRIS Working Runtime Tests
 on:
   push:
     branches: [reconstruction/operating-work-lifecycle-state]
-    paths: ['iris_runtime/**','tests/**','requirements.txt','.github/workflows/iris-runtime-tests.yml']
+    paths: ['iris_runtime/**','workspace_lifecycle/**','tests/**','requirements.txt','.github/workflows/iris-runtime-tests.yml']
 jobs:
   test:
     runs-on: ubuntu-latest
