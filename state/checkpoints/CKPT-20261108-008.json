@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-008",
+  "checkpoint_no": 8,
+  "timestamp": "2026-11-08T10:00:00+07:00",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "iris_implementation_completion",
+  "status": "Inconclusive",
+  "operationStatus": "Inconclusive",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-007",
+    "path": "state/checkpoints/CKPT-20261108-007.json",
+    "blobSha": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2"
+  },
+  "parentCommitSha": "6fd54ee02a6439edd2006accb05a7e9864764180",
+  "implementationCommit": "9694fc5b86c1f4bfca71225ea8fdd71879916502",
+  "requirementsCorrectionCommit": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+  "implementationFiles": {
+    "iris_runtime/__init__.py": "0fafb4bcef17afb832c0f9b643ae7bc5276ff35d",
+    "iris_runtime/__main__.py": "35c87445db4c703ffc700febde896843eaee91b2",
+    "tests/test_lifecycle.py": "5f74d7d24ee4355049ffce50f685e451c8033f7e",
+    "requirements.txt": "6e7e15cefd6454b990c8d1a69ddd21e3e2b1249e",
+    ".mcp.json": "750e5d2d345928fc15a0c1f86229a41f05f2e388",
+    "README_IRIS_RUNTIME.md": "3306f185541727fd6ff9f736ba60ea41d9f9f909",
+    ".github/workflows/iris-runtime-tests.yml": "d6fe6dc33506e63429a938e9849d5d0abf95854c",
+    "IMPLEMENTATION_REPORT.md": "07500bdb6f5269c924a77d604c77b2ec9fdd4d6f"
+  },
+  "logs": {
+    "operationLogBlobSha": "7376182f2201c9ed21010888818c262ea7517f3a",
+    "workflowEvidenceBlobSha": "fefca63517d8c9c02de6c7c0c5224a638eb6f13a"
+  },
+  "tests": {
+    "local": {
+      "status": "Proven",
+      "command": "python -m pytest -q",
+      "result": "3 passed"
+    },
+    "githubActions": {
+      "status": "Proven",
+      "workflow": "IRIS Working Runtime Tests",
+      "runId": "42410383181",
+      "conclusion": "success",
+      "commitSha": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+      "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/42410383181"
+    },
+    "initialFailure": {
+      "runId": "42410342700",
+      "conclusion": "failure",
+      "cause": "requirements.txt contained literal escaped newline characters; corrected in a later commit and preserved in logs."
+    },
+    "liveMainAIHostE2E": "Not proven"
+  },
+  "componentsCompleted": [
+    "Five-step State → Action → State SQLite runtime",
+    "Checkpoint → Resume position derivation",
+    "Persistent Handoff PENDING → ACCEPTED packet with designated-recipient equality check",
+    "MCP stdio entry point and tool registry",
+    "Final mismatch persistence in verification/error/checkpoint/audit without delivery",
+    "Local integration tests and GitHub Actions tests"
+  ],
+  "componentsStillBlocked": [
+    "Actual Main AI host binding and invocation trace",
+    "Shared remote/central external state service",
+    "Handoff room/workspace transport and external identity authorization",
+    "Raw Collection → Review → Understanding → Mapping → Roadmap → Atomization semantics and schemas",
+    "Live deployed host End-to-End cycle"
+  ],
+  "runtimeBoundary": "SQLite persistence is implemented for IRIS_DB_PATH; this does not prove remote shared storage. MCP server and .mcp.json are present; actual host connection is not proven.",
+  "historicalCheckpoint007": "Retained unchanged. Its unconnectedSegments metadata discrepancy against the reconstruction record remains historical and is not rewritten.",
+  "mainHead": "48e9f64bebd7fb3821d6d03377d3713c46e51193",
+  "mainModified": false,
+  "mainMerge": "NO",
+  "canonicalPromotion": "NO",
+  "summary": "Partial implementation persisted. Source-backed state/action transitions, checkpoint resume, handoff packet and MCP entry point were added. Local tests and the GitHub Actions test workflow passed after correcting requirements line endings. Actual host binding, shared central state, authoritative data-lifecycle semantics and deployed host E2E remain blocked.",
+  "next_phase": "Resolve actual Main AI host binding and authoritative external-state/data-lifecycle contracts",
+  "next_action": "Do not merge or promote. Obtain verifiable host binding/invocation and authoritative data-lifecycle schemas; then execute live host E2E.",
+  "readBackVerification": {
+    "immutableCheckpoint": "pending",
+    "latestPointer": "pending",
+    "sessionState": "pending",
+    "phaseStatus": "pending",
+    "lastRun": "pending",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS"
+  }
+}
