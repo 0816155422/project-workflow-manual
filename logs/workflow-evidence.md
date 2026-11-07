@@ -421,3 +421,12 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - runtime execution: **Not performed.**
 - boundary: user-confirmed IRIS/HAP/AICC/SMPE responsibilities are separated from repository/source-code observations. No dedicated SMPE artifacts or actual handoff/room packets were found in inspected trees. Absence in inspected trees is not proof of nonexistence.
 - next safe action: create a new immutable checkpoint after records and logs are read back; update current pointer only after checkpoint read-back.
+
+
+## 2026-11-08 — Checkpoint metadata correction (no workflow run)
+- task_id: system-translation-existing-operating-system
+- status: **Proven** for read-back detection of missing top-level evidence array in CKPT-20261108-009.
+- observed checkpoint: state/checkpoints/CKPT-20261108-009.json, blob SHA 1a8cca61ad865ffbf2f75ace366fd5ebf8059039.
+- preservation: CKPT-009 remains immutable and unchanged; it is not selected by latest.json.
+- corrective action: create a new immutable CKPT-20261108-010 with all required checkpoint fields and explicit evidence array.
+- workflow name / run ID: **Not applicable — no workflow was dispatched.**

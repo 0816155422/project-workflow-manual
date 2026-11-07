@@ -309,3 +309,13 @@ The following scoped state writes were each read back immediately and JSON-parse
 - workflow activity: No GitHub Actions workflow was dispatched. No runtime execution was performed.
 - safety: main unchanged; no merge; no canonical promotion; no historical checkpoint or source artifact rewritten.
 - next safe action: continue recovery only from additional actual source artifacts; do not fill missing transitions or create modules.
+
+
+## OP-20261108-005 — Checkpoint metadata correction
+- task_id: system-translation-existing-operating-system
+- status: **Proven** for detection and preservation of the checkpoint metadata issue; corrected checkpoint is a separate immutable record.
+- observation: CKPT-20261108-009 read back and parsed, but its JSON does not include the required top-level evidence array. The checkpoint is retained unchanged and will not be used as the current pointer target.
+- action: Create CKPT-20261108-010 as a new immutable child record with the required evidence array. No historical checkpoint is rewritten.
+- source checkpoint: state/checkpoints/CKPT-20261108-009.json, blob SHA 1a8cca61ad865ffbf2f75ace366fd5ebf8059039.
+- branch: reconstruction/operating-work-lifecycle-state
+- workflow activity: No workflow was dispatched.
