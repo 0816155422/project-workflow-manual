@@ -363,3 +363,18 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - Actor: 0816155422
 - Task: scheduled evidence capture
 - Note: Scheduled evidence capture; consult linked run for final conclusion.
+
+
+## 2026-11-08 — Reconstruction state persistence (no workflow run)
+- task_id: `operating-work-lifecycle-reconstruction-state`
+- status: **Proven** for reconstruction record write/read-back only.
+- provenance: `USER-CONFIRMED Reconstruction Session`
+- branch: `reconstruction/operating-work-lifecycle-state`
+- parent commit: `48e9f64bebd7fb3821d6d03377d3713c46e51193`
+- reconstruction record: `04_Discovery/operating-work-lifecycle-reconstruction-state.md`
+- record commit: `918489fb699e5e9dc3919c5953216b454510f92a`
+- record blob SHA after read-back: `bed59033e9af8ed74e17b142abab09fc9ccfc842`
+- workflow name / run ID / workflow commit SHA: **Not applicable — no workflow was dispatched.**
+- runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`
+- canonical promotion: `NO`
+- note: This entry records persistence of USER-CONFIRMED reconstruction knowledge. It is not runtime evidence, independent verification, or canonical promotion.
