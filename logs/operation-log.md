@@ -257,3 +257,22 @@ The following scoped state writes were each read back immediately and JSON-parse
 - workflow activity: No GitHub Actions workflow was dispatched for this operation.
 - historical state: Existing checkpoint 002–005 and main state were retained; no historical record was edited.
 - next safe action: Create a new immutable checkpoint referencing the reconstruction record, then update the working-branch current-state pointer and read back all changed files.
+
+
+## OP-20261108-002 — Reconstruct IRIS Controller Operating Structure + Work Lifecycle
+- task_id: `iris-controller-operating-work-lifecycle-reconstruction`
+- status: **Proven** for source-backed reconstruction record creation and read-back only.
+- created_at: `2026-11-08`
+- provenance: `USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL`
+- parent checkpoint: `CKPT-20261108-006`
+- working branch: `reconstruction/operating-work-lifecycle-state`
+- target research branch inspected: `feature/init-gh-native-structure` at `f4e14597f4e6c908af165a6244472344210727c0`
+- source repository inspected: `Prasong1993/Prasong` main at `ebf66dc13e9366fc9e47b6af2206d457cfbd32be`
+- reconstruction record: `04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md`
+- record creation commit: `26aa182b9f7498502f349b97f15baa458dac07a5`
+- source scope: IRIS Controller v0.6.5 runtime/controller, model, database, MCP server, REST API, skill, five-step contract, README, validation record; target repository IRIS source audit and freshness review.
+- result boundary: v0.6.5 work creation, gated step execution, failure retention/retry, final verification, delivery and retrieval path reconstructed. Data lifecycle and Main AI invocation remain unconnected/unknown where source did not establish links.
+- discrepancy retained: REST and MCP final mismatch persistence differ in inspected source despite parity wording in one contract/review record.
+- workflow activity: No GitHub Actions workflow was dispatched.
+- runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`; no runtime execution performed.
+- canonical promotion: `NO`; main merge: `NO`.
