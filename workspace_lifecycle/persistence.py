@@ -2,7 +2,7 @@
 from .models import OutputStatus
 
 class PersistenceBoundary:
-    REQUIRED=("work_id","workspace_session_id","result_packet_id","current_state_reference",
+    REQUIRED=("work_id","workspace_session_id","current_state_reference",
               "parent_checkpoint_id","allowed_scope","target_location")
     def __init__(self, store, *, authorization_check, readback_check,
                  state_precondition_check, target_location_check, historical_protection_check):
@@ -20,7 +20,7 @@ class PersistenceBoundary:
         if missing: raise ValueError("missing persistence fields: "+", ".join(missing))
         if result_packet.work_id!=work_id or result_packet.workspace_session_id!=workspace_session_id:
             raise PermissionError("work/session identity mismatch")
-        if result_packet.result_packet_id is None:
+        if not result_packet.result_packet_id:
             raise PermissionError("Result Packet identity missing")
         if result_packet.result_status not in (OutputStatus.OUTPUT_VALID,OutputStatus.PERSIST_PENDING):
             raise PermissionError("only validated output may be persisted")
