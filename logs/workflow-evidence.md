@@ -430,3 +430,22 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - preservation: CKPT-009 remains immutable and unchanged; it is not selected by latest.json.
 - corrective action: create a new immutable CKPT-20261108-010 with all required checkpoint fields and explicit evidence array.
 - workflow name / run ID: **Not applicable — no workflow was dispatched.**
+
+
+## 2026-11-08 — Cross-Platform Workspace Lifecycle Tests
+
+- task_id: `cross-platform-workspace-lifecycle`
+- workflow: `IRIS Working Runtime Tests`
+- run ID: `42414689846`
+- URL: https://github.com/0816155422/project-workflow-manual/actions/runs/42414689846
+- tested commit: `cce74615a7454618f861c0358f81578c33c0d278`
+- branch: `reconstruction/operating-work-lifecycle-state`
+- conclusion: **success**
+- dependency installation: success
+- test command: `python -m pytest -q`
+- result: **13 passed, 0 failed**
+- test record: `workspace_lifecycle/records/test-result.md`
+- test coverage: ChatGPT logical session; GitHub fake-client branch/scope/file/test/commit/result; cross-platform handoff; resume derivation; duplicate protections; scope/main blocking; persistence/checkpoint read-back; end-to-end fake lifecycle and logical closure.
+- failure history preserved: runs `42414567681`, `42414571452`, and `42414620102` were failures during development; final success followed correction.
+- limitation: tests used Fake Adapters and in-memory stores. No live ChatGPT host API, Codespace, GitHub adapter host binding, or Raw Database integration was tested.
+- workflow run proves the tested repository package and isolated test suite only; it does not prove live platform integration.
