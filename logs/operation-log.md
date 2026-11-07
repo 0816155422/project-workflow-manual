@@ -319,3 +319,21 @@ The following scoped state writes were each read back immediately and JSON-parse
 - source checkpoint: state/checkpoints/CKPT-20261108-009.json, blob SHA 1a8cca61ad865ffbf2f75ace366fd5ebf8059039.
 - branch: reconstruction/operating-work-lifecycle-state
 - workflow activity: No workflow was dispatched.
+
+
+## OP-20261108-006 — Cross-Platform Workspace Lifecycle implementation
+
+- task_id: `cross-platform-workspace-lifecycle`
+- status: **Proven** for repository implementation and isolated test evidence; live host integration remains **Blocked**.
+- baseline: `CKPT-20261108-010`.
+- branch: `reconstruction/operating-work-lifecycle-state`.
+- implementation: `workspace_lifecycle/` coordination package, platform adapter contract, ChatGPT logical adapter, GitHub injected-client adapter, packet/handoff contracts, persistence/checkpoint boundaries, and pure resume derivation.
+- test record: `workspace_lifecycle/records/test-result.md`.
+- implementation record: `workspace_lifecycle/records/implementation-record.md`.
+- test result: GitHub Actions run `42414689846`, commit `cce74615a7454618f861c0358f81578c33c0d278`, 13 passed, 0 failed.
+- failure history: runs `42414567681`, `42414571452`, and `42414620102` retained; final successful run followed the recorded corrections.
+- integration boundary: ChatGPT context deletion, live ChatGPT host binding, Codespace runtime, actual GitHub runtime adapter binding, and Raw Database physical target are not proven. Fake adapters and in-memory stores are test-only.
+- branch HEAD at start of evidence persistence: `c899e9aee32f28790a2f838f1a55e42a02ef1fed`; Main HEAD observed unchanged: `48e9f64bebd7fb3821d6d03377d3713c46e51193`.
+- main modified: NO; merge: NO; canonical promotion: NO; historical checkpoints modified: NO.
+- workflow activity for this log write: no workflow dispatched by this operation; the cited test run is the separate actual Actions run above.
+- next safe action: read back implementation/test records and logs, create immutable child checkpoint 011, then update latest pointer and state sequentially.
