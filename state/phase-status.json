@@ -124,6 +124,27 @@
         "Conflicts and missing transitions preserved in 04_Discovery/system-translation-unknown-conflict-register.md."
       ],
       "notes": "Partial representation of existing operating knowledge. This phase does not create or modify canonical architecture, lifecycle, modules, or state machine."
+    },
+    "cross_platform_workspace_lifecycle": {
+      "status": "Inconclusive",
+      "evidence": [
+        "workspace_lifecycle package files read back from the designated working branch.",
+        "Implementation Record and Test Result Record read back.",
+        "GitHub Actions run 42414689846 succeeded for tested commit cce74615a7454618f861c0358f81578c33c0d278; 13 passed, 0 failed.",
+        "Fake Adapter end-to-end test covers ChatGPT to GitHub to ChatGPT, persistence test boundary, checkpoint read-back, logical closure, and resume STOP.",
+        "Main HEAD observed unchanged at 48e9f64bebd7fb3821d6d03377d3713c46e51193."
+      ],
+      "notes": "Repository implementation and isolated tests are proven. Native ChatGPT host binding, live GitHub adapter host-client binding, Codespace runtime, and durable Raw Database persistence are not proven; therefore full runtime integration remains separately Blocked."
+    },
+    "workspace_lifecycle_runtime_integration": {
+      "status": "Blocked",
+      "evidence": [
+        "No authorized ChatGPT host API invocation was observed.",
+        "GitHub adapter requires an injected authorized host client; live runtime injection was not observed.",
+        "Codespace/development workspace access was not observed; only Fake client fallback was tested.",
+        "Raw Database physical location and write authorization contract remain unresolved."
+      ],
+      "notes": "Do not enable durable persistence or claim live cross-platform E2E until the missing platform permissions and source-of-record mapping are verified."
     }
   },
   "status": "Blocked",
