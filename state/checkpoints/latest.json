@@ -1,44 +1,46 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-006",
-  "checkpoint_no": 6,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
-  "timestamp": "2026-11-08T02:32:00+07:00",
+  "checkpointId": "CKPT-20261108-007",
+  "checkpoint_no": 7,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+  "timestamp": "2026-11-08T10:00:00+07:00",
   "repository": "0816155422/project-workflow-manual",
   "branch": "reconstruction/operating-work-lifecycle-state",
-  "phase": "operating_structure_work_lifecycle_reconstruction",
+  "phase": "iris_controller_operating_structure_work_lifecycle_reconstruction",
   "status": "Proven",
   "operationStatus": "Proven",
-  "summary": "Current reconstruction state points to the user-confirmed Operating Structure + Work Lifecycle Discovery record. Historical pipeline phase and prior checkpoint remain preserved in their own records.",
+  "summary": "Current reconstruction pointer references the source-backed IRIS Controller Operating Structure + Work Lifecycle network. Unknown and unconnected segments are retained without blocking the connected source-backed segments.",
   "evidence": [
-    "Immutable checkpoint state/checkpoints/CKPT-20261108-006.json read back and parsed; blob SHA 1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e.",
-    "Reconstruction record 04_Discovery/operating-work-lifecycle-reconstruction-state.md read back; blob SHA bed59033e9af8ed74e17b142abab09fc9ccfc842.",
-    "Previous checkpoint CKPT-20261028-005 retained; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
-    "Append-only operation log read back; blob SHA f99e15f929c18b4c07b5627fc67bc55532574abe.",
-    "Append-only workflow evidence log read back; blob SHA 39a9c248e9f92177bada6191b7a7d03c1c532cf9.",
-    "No workflow was dispatched; runtime verification is not required for the current reconstruction stage."
+    "Checkpoint CKPT-20261108-007 read back and JSON parsed; blob SHA abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2.",
+    "Reconstruction record read back; path 04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md; blob SHA 784ee8f9c707f1be16297f6b9e3130dccc58b7f5.",
+    "Append-only operation log read back; blob SHA c66023feeb266b8e7248110f53e83774e15ed88e.",
+    "Append-only workflow evidence log read back; blob SHA 01f1066102eb86186d6023b258e17f19773dbc35.",
+    "Parent checkpoint CKPT-20261108-006 retained; blob SHA 1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e.",
+    "Source files inspected from Prasong1993/Prasong main HEAD ebf66dc13e9366fc9e47b6af2206d457cfbd32be; no runtime execution."
   ],
   "next_phase": "Operating Structure + Work Lifecycle reconstruction",
-  "next_action": "Resume reconstruction from the current USER-CONFIRMED Discovery record and observed relationships; do not design the next structure in advance.",
+  "next_action": "Retain current reconstruction position; continue only from additional source information when available. Do not design a future system.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261028-005",
-    "checkpointPath": "state/checkpoints/CKPT-20261028-005.json"
+    "checkpointId": "CKPT-20261108-006",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
+    "blobSha": "6087a8fe20b35b48a74e711e42053fa9994da71d"
   },
   "readBackVerification": {
-    "state/checkpoints/CKPT-20261108-006.json": "1c5bdc0ef38c3b4caf5e94dfd8a25fcb0700b04e",
-    "04_Discovery/operating-work-lifecycle-reconstruction-state.md": "bed59033e9af8ed74e17b142abab09fc9ccfc842",
-    "logs/operation-log.md": "f99e15f929c18b4c07b5627fc67bc55532574abe",
-    "logs/workflow-evidence.md": "39a9c248e9f92177bada6191b7a7d03c1c532cf9"
+    "state/checkpoints/CKPT-20261108-007.json": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2",
+    "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
+    "logs/operation-log.md": "c66023feeb266b8e7248110f53e83774e15ed88e",
+    "logs/workflow-evidence.md": "01f1066102eb86186d6023b258e17f19773dbc35"
   },
   "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
-  "currentFundamentalRelation": "State → Action → State",
+  "currentFundamentalRelation": "State/Condition → Action → State/Condition",
   "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
   "canonicalPromotion": "NO",
   "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
   "reconstructionRecord": {
-    "recordId": "operating-work-lifecycle-reconstruction-state",
-    "path": "04_Discovery/operating-work-lifecycle-reconstruction-state.md",
-    "blobSha": "bed59033e9af8ed74e17b142abab09fc9ccfc842",
-    "commitSha": "918489fb699e5e9dc3919c5953216b454510f92a"
+    "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
+    "revision": "R1",
+    "path": "04_Discovery/iris-controller-operating-work-lifecycle-reconstruction.md",
+    "blobSha": "784ee8f9c707f1be16297f6b9e3130dccc58b7f5",
+    "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
   }
 }
