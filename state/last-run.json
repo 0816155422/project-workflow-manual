@@ -50,5 +50,17 @@
     "tests": "python -m pytest -q",
     "result": "passed",
     "liveHostE2E": "Not proven"
+  },
+  "latestWorkspaceLifecycleRun": {
+    "status": "Proven",
+    "workflow": "IRIS Working Runtime Tests",
+    "runId": "42414689846",
+    "conclusion": "success",
+    "commitSha": "cce74615a7454618f861c0358f81578c33c0d278",
+    "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/42414689846",
+    "branch": "reconstruction/operating-work-lifecycle-state",
+    "command": "python -m pytest -q",
+    "result": "13 passed, 0 failed",
+    "scope": "Isolated Fake Adapter and in-memory store tests; not live platform integration."
   }
 }
