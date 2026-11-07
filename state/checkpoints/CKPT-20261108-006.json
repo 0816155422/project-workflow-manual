@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-006",
+  "checkpoint_no": 6,
+  "timestamp": "2026-11-08T02:32:00+07:00",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "parentState": {
+    "branch": "main",
+    "commitSha": "48e9f64bebd7fb3821d6d03377d3713c46e51193",
+    "sessionStateBlobSha": "564a9311a537ff11e05f4fb72ad3e1dbfc2cdefa",
+    "phaseStatusBlobSha": "824d14e5f5e25f08dbacb016d6f2437572d96952",
+    "lastRunBlobSha": "b4737c986caf09c7c756cf94829a52f6ac8900eb",
+    "latestPointerBlobSha": "25192b62da3de684858c2f2585bb2164ea264bd0"
+  },
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261028-005",
+    "checkpointPath": "state/checkpoints/CKPT-20261028-005.json",
+    "blobSha": "c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28"
+  },
+  "reconstructionRecord": {
+    "recordId": "operating-work-lifecycle-reconstruction-state",
+    "path": "04_Discovery/operating-work-lifecycle-reconstruction-state.md",
+    "commitSha": "918489fb699e5e9dc3919c5953216b454510f92a",
+    "blobSha": "bed59033e9af8ed74e17b142abab09fc9ccfc842"
+  },
+  "status": "Proven",
+  "operationStatus": "Proven",
+  "stateClassification": "USER-CONFIRMED",
+  "knowledgeStage": "RECONSTRUCTION / DISCOVERY",
+  "canonicalStatus": "NOT CANONICAL",
+  "provenance": "USER-CONFIRMED Reconstruction Session",
+  "runtimeVerification": "NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE",
+  "summary": "Persisted user-confirmed Operating Structure + Work Lifecycle reconstruction state as a new Discovery record on a dedicated working branch. Existing main state and historical checkpoints remain unchanged.",
+  "evidence": [
+    "Main HEAD read from GitHub: 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "Previous latest immutable checkpoint CKPT-20261028-005 read back; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
+    "Reconstruction record created on working branch and read back; path 04_Discovery/operating-work-lifecycle-reconstruction-state.md; blob SHA bed59033e9af8ed74e17b142abab09fc9ccfc842.",
+    "Append-only operation log update commit 6f42d66cecd05ea10fb4f1bafc31f4584dffb311; blob SHA f99e15f929c18b4c07b5627fc67bc55532574abe.",
+    "Append-only workflow evidence update commit 9450c1afcbb5d2c31b62a6e45400d94da579076f; blob SHA 39a9c248e9f92177bada6191b7a7d03c1c532cf9.",
+    "No GitHub Actions workflow was dispatched."
+  ],
+  "next_phase": "Operating Structure + Work Lifecycle reconstruction",
+  "next_action": "Resume reconstruction from the current USER-CONFIRMED Discovery record and observed relationships; do not design the next structure in advance.",
+  "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
+  "currentFundamentalRelation": "State → Action → State",
+  "readBackVerification": {
+    "reconstructionRecord": "PASS",
+    "operationLog": "pending",
+    "workflowEvidence": "pending",
+    "immutableCheckpoint": "pending"
+  }
+}
