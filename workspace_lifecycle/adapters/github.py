@@ -4,7 +4,7 @@ The adapter does not embed credentials or assume Codespaces availability. The cl
 must be supplied by an authorized host and expose the methods used below.
 """
 from fnmatch import fnmatch
-from ..models import AdapterResult, OperationStatus, new_id
+from ..models import AdapterResult, OperationStatus, OutputStatus, new_id\nfrom ..packets import create_result_packet
 
 class GitHubWorkspaceAdapter:
     adapter_id="github-workspace-adapter-v1"
@@ -73,7 +73,7 @@ class GitHubWorkspaceAdapter:
         record=self.sessions.get(session.workspace_session_id)
         if not record: return self._result("receive_result",OperationStatus.NOT_FOUND,session.workspace_reference)
         if record["result"] is None: return self._result("receive_result",OperationStatus.UNKNOWN,session.workspace_reference,"No repository result recorded.")
-        return self._result("receive_result",OperationStatus.SUCCESS,session.workspace_reference,external=record["result"].get("commit_sha"))
+        return self._result("receive_result",OperationStatus.SUCCESS,session.workspace_reference,external=(record["result"].get("commit_sha") if isinstance(record["result"],dict) else record["result"].result_packet_id))
     def set_result(self, session, result):
         record=self.sessions[session.workspace_session_id]
         if record["result"] is not None: raise FileExistsError("duplicate repository Result Packet blocked")
