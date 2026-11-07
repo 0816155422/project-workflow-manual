@@ -394,3 +394,15 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - runtime verification: `NOT REQUIRED FOR CURRENT RECONSTRUCTION STAGE`
 - canonical promotion: `NO`
 - note: This entry records source inspection and reconstruction persistence. It is not runtime evidence, target-host binding proof, or canonical promotion.
+
+
+## 2026-11-08 — IRIS Working Runtime Tests
+- task_id: `iris-implementation-completion`
+- workflow: `IRIS Working Runtime Tests`
+- first run: `42410342700`, commit `9694fc5b86c1f4bfca71225ea8fdd71879916502`, conclusion `failure`; dependency install failed because requirements.txt contained literal escaped newline characters. This failure is retained as evidence.
+- corrective commit: `e7bf889bcf1c5c24e4c0018df99f10156843ba2e`; requirements.txt read back with actual line breaks, blob `6e7e15cefd6454b990c8d1a69ddd21e3e2b1249e`.
+- second run: `42410383181`, URL https://github.com/0816155422/project-workflow-manual/actions/runs/42410383181
+- tested commit: `e7bf889bcf1c5c24e4c0018df99f10156843ba2e`
+- conclusion: `success`; pip install and `python -m pytest -q` steps both concluded success.
+- local isolated test: 3 passed (checkpoint resume, handoff acceptance/rejection, five-step continuation, final delivery, failed-step resume, final mismatch retention).
+- boundary: GitHub Actions tests validate the working-branch runtime package. They do not prove live Main AI host binding, cross-room handoff, shared central storage, or deployed host E2E.
