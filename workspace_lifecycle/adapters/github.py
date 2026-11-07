@@ -14,7 +14,7 @@ class GitHubWorkspaceAdapter:
         if branch=="main": raise ValueError("main is never an allowed workspace branch")
         self.client=client; self.repository=repository; self.branch=branch
         self.allowed_scope=tuple(allowed_scope); self.development_workspace=development_workspace
-        self.sessions={}
+        self.sessions={}; self.branch_head=None; self.commit_requests={}
     def _result(self,op,status,ref=None,error=None,external=None):
         return AdapterResult(self.adapter_id,self.platform,ref,op,status,external_reference=external,error=error)
     def _in_scope(self,path):
@@ -30,16 +30,16 @@ class GitHubWorkspaceAdapter:
     def resolve_workspace(self, reference):
         if self.client is None: return self._result("resolve_workspace",OperationStatus.NOT_ACCESSIBLE,reference,"No authorized GitHub host client supplied.")
         try:
-            repo=self.client.get_repository(self.repository)
+            self.client.get_repository(self.repository)
             branch=self.client.get_branch(self.repository,self.branch)
+            self.branch_head=branch.get("sha")
+            dev=None
             if self.development_workspace:
                 try: dev=self.client.get_development_workspace(self.development_workspace)
-                except (NotImplementedError,PermissionError,LookupError):
-                    dev=None
-            else: dev=None
+                except (NotImplementedError,PermissionError,LookupError): dev=None
             return self._result("resolve_workspace",OperationStatus.SUCCESS,reference or f"github://{self.repository}/tree/{self.branch}",
-              error="Development workspace unavailable; repository working branch selected." if not dev else None,
-              external=branch.get("sha"))
+              error="Development workspace unavailable or inaccessible; repository working branch selected." if not dev else None,
+              external=self.branch_head)
         except LookupError as exc: return self._result("resolve_workspace",OperationStatus.NOT_FOUND,reference,str(exc))
         except PermissionError as exc: return self._result("resolve_workspace",OperationStatus.NOT_ACCESSIBLE,reference,str(exc))
         except Exception as exc: return self._result("resolve_workspace",OperationStatus.UNKNOWN,reference,str(exc))
@@ -51,8 +51,7 @@ class GitHubWorkspaceAdapter:
         return self._result("dispatch_work",OperationStatus.SUCCESS,session.workspace_reference,external=session.workspace_session_id)
     def read_file(self, path):
         if not self._in_scope(path): raise PermissionError("path outside Allowed Scope")
-        self._require_client()
-        return self.client.get_file(self.repository,path,self.branch)
+        self._require_client(); return self.client.get_file(self.repository,path,self.branch)
     def write_file(self, path, content):
         if not self._in_scope(path): raise PermissionError("path outside Allowed Scope")
         self._require_client()
@@ -60,20 +59,25 @@ class GitHubWorkspaceAdapter:
         return self.client.put_file(self.repository,path,content,self.branch)
     def run_tests(self, command, paths):
         if not paths or any(not self._in_scope(p) for p in paths): raise PermissionError("test scope is empty or outside Allowed Scope")
-        self._require_client()
-        return self.client.run_tests(self.repository,self.branch,command,paths)
-    def commit(self, message, paths):
+        self._require_client(); return self.client.run_tests(self.repository,self.branch,command,paths)
+    def commit(self, message, paths, *, request_id):
         if self.branch=="main": raise PermissionError("commits to main are prohibited")
+        if not request_id: raise ValueError("idempotency request_id is required")
+        if request_id in self.commit_requests: raise FileExistsError("duplicate commit request blocked")
         if not paths or any(not self._in_scope(p) for p in paths): raise PermissionError("commit includes paths outside Allowed Scope")
         self._require_client()
-        return self.client.commit(self.repository,self.branch,message,paths)
+        result=self.client.commit(self.repository,self.branch,message,paths)
+        self.commit_requests[request_id]=result
+        return result
     def receive_result(self, session):
         record=self.sessions.get(session.workspace_session_id)
         if not record: return self._result("receive_result",OperationStatus.NOT_FOUND,session.workspace_reference)
         if record["result"] is None: return self._result("receive_result",OperationStatus.UNKNOWN,session.workspace_reference,"No repository result recorded.")
         return self._result("receive_result",OperationStatus.SUCCESS,session.workspace_reference,external=record["result"].get("commit_sha"))
     def set_result(self, session, result):
-        self.sessions[session.workspace_session_id]["result"]=dict(result)
+        record=self.sessions[session.workspace_session_id]
+        if record["result"] is not None: raise FileExistsError("duplicate repository Result Packet blocked")
+        record["result"]=dict(result)
     def get_session_status(self, session):
         record=self.sessions.get(session.workspace_session_id)
         return self._result("get_session_status",OperationStatus.NOT_FOUND,session.workspace_reference) if not record else self._result("get_session_status",OperationStatus.SUCCESS,session.workspace_reference)
