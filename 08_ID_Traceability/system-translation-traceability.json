@@ -1,0 +1,21 @@
+{
+  "recordId": "SYS-TRACE-001",
+  "classification": "DISCOVERY_NOT_CANONICAL",
+  "rule": "Every represented object resolves through ID -> Reference -> Relationship -> Source location. Where the source location is unavailable, the locator remains UNKNOWN.",
+  "records": [
+    {"id":"SYS-TR-INDEX-001","reference":"04_Discovery/system-translation-index.md","relationships":["SYS-OPS-001","SYS-LIFE-001","SYS-NET-001","SYS-TOOLS-001","SYS-REL-001","SYS-UNK-001","SYS-SRC-001"],"source":"User instructions and repository/source evidence indexed in SYS-SRC-001"},
+    {"id":"SYS-OPS-001","reference":"04_Discovery/system-translation-operating-structure.md","relationships":["REL-001","REL-002","REL-003","REL-004","REL-005","REL-006","REL-007"],"source":"SYS-SRC-001"},
+    {"id":"SYS-LIFE-001","reference":"04_Discovery/system-translation-work-lifecycle.md","relationships":["IRIS-SRC-WORK-001","IRIS-SRC-WORK-002","IRIS-SRC-WORK-003","IRIS-SRC-WORK-004","IRIS-SRC-WORK-005","IRIS-SRC-WORK-006","IRIS-SRC-WORK-007"],"source":"SYS-SRC-001"},
+    {"id":"SYS-NET-001","reference":"04_Discovery/system-translation-state-network.md","relationships":["SYS-LIFE-001","SYS-REL-001","SYS-UNK-001"],"source":"SYS-SRC-001"},
+    {"id":"SYS-TOOLS-001","reference":"04_Discovery/system-translation-tool-classification.md","relationships":["SYS-OPS-001","SYS-LIFE-001"],"source":"SYS-SRC-001"},
+    {"id":"SYS-REL-001","reference":"04_Discovery/system-translation-system-relationships.md","relationships":["REL-001","REL-002","REL-003","REL-004","REL-005","REL-006","REL-007","REL-008","REL-009","REL-010","REL-011","REL-012","REL-013","REL-014","REL-015","REL-016","REL-017","REL-018","REL-019","REL-020"],"source":"SYS-SRC-001"},
+    {"id":"SYS-UNK-001","reference":"04_Discovery/system-translation-unknown-conflict-register.md","relationships":["UNKNOWNS","CONFLICTS"],"source":"SYS-SRC-001"},
+    {"id":"SYS-SRC-001","reference":"04_Discovery/system-translation-source-register.json","relationships":["SOURCE_REFERENCES"],"source":"Exact GitHub repository paths/blob SHAs and user-confirmed conversation provenance"},
+    {"id":"SYS-TRACE-001","reference":"08_ID_Traceability/system-translation-traceability.json","relationships":["ALL_TRANSLATION_RECORDS"],"source":"SYS-SRC-001"}
+  ],
+  "unresolvedSourceLocations": [
+    {"id":"SRC-USER-001","locator":"UNKNOWN: prior conversation content is not a repository file in the inspected tree"},
+    {"id":"SRC-USER-002","locator":"UNKNOWN: prior conversation content is not a repository file in the inspected tree"},
+    {"id":"SRC-USER-003","locator":"UNKNOWN: current task context is not committed as a standalone source artifact"}
+  ]
+}
