@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-009",
+  "checkpoint_no": 9,
+  "timestamp": "2026-11-08",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "system_translation_extraction",
+  "status": "Inconclusive",
+  "operationStatus": "Inconclusive",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-008",
+    "path": "state/checkpoints/CKPT-20261108-008.json",
+    "blobSha": "717d4858250c6f40771f95104de7a92772c576f2"
+  },
+  "parentCommitSha": "502d8c78411b179f2e39195b5231d8921c249aba",
+  "representationCommit": "97ce2c72cde8497678e54882e1f041de517ad2e8",
+  "evidenceCommit": "d91d9ca1c9c3b29216af93de783b332be59c9521",
+  "records": {
+    "04_Discovery/system-translation-index.md": "e877c1847eda51b71dd41bf13af7365abd3b8534",
+    "04_Discovery/system-translation-operating-structure.md": "e0ea0a1ebdeb375412cc676555167e2cb91fbceb",
+    "04_Discovery/system-translation-work-lifecycle.md": "fea68780a3adcea2ef6d957d11f47ae1590af6f0",
+    "04_Discovery/system-translation-state-network.md": "8dd9e06ca903522296330e55d27a584ece325a20",
+    "04_Discovery/system-translation-tool-classification.md": "064bebad31da6ba99111cdd3af6fb1dac9bbb794",
+    "04_Discovery/system-translation-system-relationships.md": "b4dda7b009f6208111f08a401012781b0158b03e",
+    "04_Discovery/system-translation-unknown-conflict-register.md": "b76edf132cf7478de69dec37894de01a2f6a15cb",
+    "04_Discovery/system-translation-source-register.json": "42a63ff58a9e3e811bd333b7c56db5a4913fd956",
+    "08_ID_Traceability/system-translation-traceability.json": "2e631519703a5e63929ce4fc7e81c7934c14522b"
+  },
+  "logs": {
+    "logs/operation-log.md": "0ab9e1ace92df0ed399beb9442ba3ab066702e6a",
+    "logs/workflow-evidence.md": "183474779ba6f6b1fe66ad392e5d78510667cda8"
+  },
+  "phaseStatusBlobSha": "0f1ee6cfbc71ec610ef041095eff7f7cf4ed5fd9",
+  "extracted": {
+    "operatingStructure": "Partially represented from user-confirmed and repository/source-observed material",
+    "workLifecycle": "User-confirmed overall cycle and source-observed v0.6.5 controller sub-lifecycle recorded separately",
+    "stateNetwork": "Known branches/bypasses/retry loop represented; overall system branches and returns remain partly unknown",
+    "toolClassification": "Operating structure, lifecycle activities, and supporting tools separated",
+    "relationships": 20,
+    "unknowns": 18,
+    "conflicts": 7
+  },
+  "boundaries": {
+    "canonicalPromotion": "NO",
+    "mainMerge": "NO",
+    "mainModified": false,
+    "historicalCheckpointsModified": false,
+    "runtimeExecution": false,
+    "workflowDispatched": false,
+    "irisRuntimeClassification": "Working-branch implementation artifact only; not evidence of the full human operating system"
+  },
+  "readBackVerification": {
+    "records": "PASS",
+    "sourceRegisterJson": "PASS",
+    "traceabilityJson": "PASS",
+    "operationLog": "PASS",
+    "workflowEvidence": "PASS",
+    "phaseStatusJson": "PASS",
+    "immutableCheckpoint": "pending",
+    "latestPointer": "pending",
+    "sessionState": "pending"
+  },
+  "summary": "Translated currently accessible user-confirmed and source-observed operating knowledge into linked Discovery and traceability records. The representation is partial: exact source locators for prior conversations, SMPE artifacts, room/handoff packets, Raw Database and Temporary Workspace implementation, and several lifecycle transitions remain unavailable. Conflicts are preserved rather than normalized.",
+  "next_phase": "Continue source recovery and reconciliation from actual existing artifacts only",
+  "next_action": "Retrieve actual SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle source artifacts if available; do not invent missing transitions, create modules, merge main, or promote canonical."
+}
