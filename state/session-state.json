@@ -4,7 +4,7 @@
   "repositoryId": 1432201372,
   "branch": "reconstruction/operating-work-lifecycle-state",
   "updatedAt": "2026-11-08",
-  "currentPhase": "phase_5_approval_gated_sync",
+  "currentPhase": "iris_implementation_completion",
   "overallStatus": "Blocked",
   "lastRun": {
     "workflow": "Validate OpenAI research evidence",
@@ -13,7 +13,7 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "nextAction": "Verify actual Main AI host binding and invocation; establish the authoritative shared-state target and data-lifecycle contract before live host E2E. Do not merge or promote.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
@@ -28,17 +28,20 @@
     "ResumeStateGuard hardened to plugin version 0.1.1; plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25.",
     "Created immutable checkpoint CKPT-20261028-004 and read it back; prior checkpoint CKPT-20261028-003 retained.",
     "Repository skill read-back confirms all five core function contracts, allowed status taxonomy, immutable checkpoint order, and read-back after each write.",
-    "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment."
+    "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment.",
+    "2026-11-08: Implementation Completion started from CKPT-20261108-007. Working-branch IRIS lifecycle runtime, checkpoint resume, handoff packet, MCP entry point and local/CI tests added. Live host integration and authoritative data lifecycle remain blocked."
   ],
   "status": "Blocked",
-  "current_phase": "phase_5_approval_gated_sync",
-  "last_verified_phase": "resume_state_guard_skill",
-  "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
-  "blocker": "No verified real course records, source URL/provenance, or explicit authorized approval; sync must remain blocked.",
+  "current_phase": "iris_implementation_completion",
+  "last_verified_phase": "iris_local_and_github_actions_tests",
+  "next_action": "Verify actual Main AI host binding and invocation; establish the authoritative shared-state target and data-lifecycle contract before live host E2E. Do not merge or promote.",
+  "blocker": "Live Main AI host binding/invocation, shared remote/central state, handoff room/workspace authority, and authoritative Raw Collection-to-Atomization transition contracts are not proven.",
   "missing_inputs": [
-    "real_course_records",
-    "source_url_provenance",
-    "approval_note"
+    "main_ai_mcp_host_binding_and_invocation_evidence",
+    "authoritative_shared_external_state_target",
+    "handoff_room_workspace_and_identity_authority_contract",
+    "raw_collection_to_atomization_schema_and_transition_rules",
+    "live_host_end_to_end_execution_evidence"
   ],
   "evidence_ref": [
     "state/checkpoints/CKPT-20261028-004.json (blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f)",
@@ -48,11 +51,17 @@
     "logs/operation-log.md (final read-back blob SHA fdc4bacc5f0ad2909b889d7133369081084988d4)",
     "logs/workflow-evidence.md (final read-back blob SHA 82f86cb41765d69dacdd9b8c27bcb258a8bbed84)",
     "skills/resume-state-guard/SKILL.md (blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df)",
-    "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25"
+    "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25",
+    "IMPLEMENTATION_REPORT.md (blob 07500bdb6f5269c924a77d604c77b2ec9fdd4d6f)",
+    "GitHub Actions run 42410383181 (success; commit e7bf889bcf1c5c24e4c0018df99f10156843ba2e)",
+    "logs/operation-log.md (blob 7376182f2201c9ed21010888818c262ea7517f3a)",
+    "logs/workflow-evidence.md (blob fefca63517d8c9c02de6c7c0c5224a638eb6f13a)",
+    "state/checkpoints/CKPT-20261108-008.json (blob 717d4858250c6f40771f95104de7a92772c576f2)",
+    "state/checkpoints/latest.json (blob 036eb0d50a42b7fb83629c5428b55792088a8a05)"
   ],
   "currentReconstructionFocus": "Operating Structure + Work Lifecycle",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
-  "currentKnowledgeStatus": "USER-CONFIRMED / RECONSTRUCTION / NOT CANONICAL",
+  "currentKnowledgeStatus": "IMPLEMENTATION / WORKING BRANCH / NOT CANONICAL",
   "currentReconstructionRecord": {
     "recordId": "iris-controller-operating-work-lifecycle-reconstruction",
     "revision": "R1",
@@ -61,9 +70,9 @@
     "creationCommitSha": "26aa182b9f7498502f349b97f15baa458dac07a5"
   },
   "currentCheckpoint": {
-    "checkpointId": "CKPT-20261108-007",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
-    "blobSha": "abaea404fa2a5b4fcf6b4c8afe1e1f152faf8cf2"
+    "checkpointId": "CKPT-20261108-008",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
+    "blobSha": "717d4858250c6f40771f95104de7a92772c576f2"
   },
   "reconstructionNextAction": "Retain current reconstruction position. Do not design the next system. Unknown and unconnected segments remain open without blocking the source-backed connected segments.",
   "canonicalPromotion": "NO",
@@ -75,5 +84,42 @@
   },
   "parentCheckpoint": "CKPT-20261108-006",
   "reconstructionPosition": "Source-backed v0.6.5 work lifecycle connected through create, gated step execution, retained failure/retry, final verification, delivery, and retrieval. Data lifecycle, Main AI invocation, separate Step 1, handoff/room/resume, and post-delivery continuation remain unknown or unconnected.",
-  "mainMerge": "NO"
+  "mainMerge": "NO",
+  "previousTaskContext": {
+    "currentPhase": "phase_5_approval_gated_sync",
+    "current_phase": "phase_5_approval_gated_sync",
+    "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+    "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+    "overallStatus": "Blocked",
+    "status": "Blocked",
+    "blocker": "No verified real course records, source URL/provenance, or explicit authorized approval; sync must remain blocked."
+  },
+  "implementationCompletion": {
+    "status": "Inconclusive",
+    "branch": "reconstruction/operating-work-lifecycle-state",
+    "implementationCommit": "9694fc5b86c1f4bfca71225ea8fdd71879916502",
+    "requirementsCorrectionCommit": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+    "localTests": "3 passed",
+    "githubActions": {
+      "runId": "42410383181",
+      "conclusion": "success",
+      "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/42410383181"
+    },
+    "completed": [
+      "State-Action-State lifecycle runtime",
+      "Checkpoint resume derivation",
+      "Persistent handoff packet and designated recipient check",
+      "MCP stdio entry point",
+      "Final mismatch error/checkpoint/audit persistence"
+    ],
+    "blocked": [
+      "Live Main AI host binding",
+      "Shared remote/central state",
+      "Handoff room/workspace identity authority",
+      "Raw Collection-to-Atomization contract",
+      "Live host E2E"
+    ],
+    "mainMerge": "NO",
+    "canonicalPromotion": "NO"
+  }
 }
