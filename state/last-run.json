@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "updatedAt": "2026-10-28",
-  "workflow": "Validate OpenAI research evidence",
-  "runId": "40625614203",
+  "updatedAt": "2026-11-08",
+  "workflow": "IRIS Working Runtime Tests",
+  "runId": "42410383181",
   "status": "success",
   "conclusion": "success",
-  "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
-  "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203",
-  "note": "This is the latest confirmed relevant successful workflow run observed in the audit. It validates OpenAI research evidence, not course data. Resume audit note: no workflow was triggered in this operation. Latest observed run remains generic Repository Validation run 40626365897 (success) for SHA 5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7; not evidence of course validation, approval, or sync.",
+  "commitSha": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+  "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/42410383181",
+  "note": "Latest observed GitHub Actions run for IRIS implementation tests. Passed dependency installation and pytest on the corrected requirements commit. This does not prove live Main AI host binding, shared central storage, handoff room/workspace authority, or live host E2E.",
   "resumeGuardOperation": {
     "status": "Proven",
     "note": "No workflow was dispatched for ResumeStateGuard creation; the existing last-run workflow record remains unchanged and is not presented as evidence for this operation.",
@@ -30,5 +30,25 @@
     "workflowEvidenceLogBlobSha": "edf14dbef1d0d718d040fc1eb0064f4b9c866701",
     "workflowDispatched": false,
     "note": "This operation updated the private plugin and repository state/evidence-control layer only. No GitHub Actions workflow was dispatched. The prior workflow fields above remain the observed historical run record and are not evidence of pipeline success."
+  },
+  "previousLastRun": {
+    "workflow": "Validate OpenAI research evidence",
+    "runId": "40625614203",
+    "status": "success",
+    "conclusion": "success",
+    "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
+    "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203",
+    "note": "This is the latest confirmed relevant successful workflow run observed in the audit. It validates OpenAI research evidence, not course data. Resume audit note: no workflow was triggered in this operation. Latest observed run remains generic Repository Validation run 40626365897 (success) for SHA 5648bfc88f0aa85e2c48bd8bb73c7ef6e0ea46e7; not evidence of course validation, approval, or sync."
+  },
+  "operationStatus": "Proven",
+  "irisImplementationRun": {
+    "status": "Proven",
+    "workflowRunId": "42410383181",
+    "commitSha": "e7bf889bcf1c5c24e4c0018df99f10156843ba2e",
+    "conclusion": "success",
+    "workflowDispatched": true,
+    "tests": "python -m pytest -q",
+    "result": "passed",
+    "liveHostE2E": "Not proven"
   }
 }
