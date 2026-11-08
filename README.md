@@ -2,6 +2,25 @@
 
 This repository is a shared AI memory workspace and approved knowledge archive for multi-platform AI collaboration.
 
+## Quick Access Workspace
+
+These are navigation shortcuts to the current working areas. A shortcut only opens a destination; it does not prove that a service, integration, workflow, runner, or synchronization process is connected or operational.
+
+| Area | Shortcut | Purpose |
+|---|---|---|
+| GitHub Workspace | [Open the active Codespace](https://miniature-fortnight-r4xxv97qrqxj2xwg6.github.dev/) | Main browser-based development workspace supplied for this project |
+| Repository | [Open repository](https://github.com/0816155422/project-workflow-manual) | Source of truth and project files |
+| Actions dashboard | [All workflow runs](https://github.com/0816155422/project-workflow-manual/actions) | Inspect executions, status, and logs |
+| Python / read-only runner | [API Runner workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/api-runner.yml) | Manually request supported read-only repository operations |
+| Repository validation | [Validation workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/validate.yml) | Inspect repository and dashboard validation |
+| Approved synchronization | [Sync workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/sync-approved-memory.yml) | Approval-gated course-data synchronization; do not dispatch without a separate explicit approval |
+| Usage and evidence logging | [Usage log workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/generate-usage-log.yml) | Append workflow execution evidence; this workflow writes to the repository |
+| Actions configuration | [Repository Actions settings](https://github.com/0816155422/project-workflow-manual/settings/actions) | Review Actions permissions and runner settings |
+| GitHub Pages configuration | [Pages settings](https://github.com/0816155422/project-workflow-manual/settings/pages) | Review static-site publishing configuration |
+| Notion | [Open Notion](https://www.notion.so/) | Open the Notion service; workspace-specific destination is not yet verified |
+| GitHub Actions documentation | [Actions documentation](https://docs.github.com/actions) | Official workflow and runner reference |
+| GitHub Codespaces documentation | [Codespaces documentation](https://docs.github.com/codespaces) | Official workspace and environment reference |
+
 ## Principles
 - The repository is a source of approved memory, not a live database.
 - GitHub Pages serves a public static UI.
