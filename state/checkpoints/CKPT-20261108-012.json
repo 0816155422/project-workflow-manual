@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-012",
+  "checkpoint_no": 12,
+  "timestamp": "2026-11-08",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "reconstruction/operating-work-lifecycle-state",
+  "phase": "security_surface_discovery",
+  "status": "Inconclusive",
+  "parentCheckpoint": {
+    "checkpointId": "CKPT-20261108-011",
+    "path": "state/checkpoints/CKPT-20261108-011.json",
+    "blobSha": "e192352ad2a32dcc9beb8dbe434de1c54e1fd609"
+  },
+  "parentCommitSha": "8901ceb1807163681cd49731588bcf7a2cf98b10",
+  "taskSequence": {
+    "TASK-010": "Complete; revision discovery snapshot read-back verified",
+    "TASK-011": "Complete; provenance discovery snapshot read-back verified",
+    "TASK-012": "Complete; verification discovery snapshot read-back verified",
+    "TASK-013": "Complete; traceability discovery snapshot read-back verified",
+    "TASK-SEC-001": "Security surface discovery snapshot persisted and read-back verified; overall posture Inconclusive"
+  },
+  "stateAlignment": {
+    "status": "Inconclusive",
+    "observations": [
+      "Working branch state files identify reconstruction/operating-work-lifecycle-state and current phase cross_platform_workspace_lifecycle.",
+      "Working branch latest pointer before this checkpoint referenced CKPT-20261108-011.",
+      "TASK-010 through TASK-013 discovery snapshots were committed after CKPT-011 and were not represented by that checkpoint.",
+      "Main HEAD is 2e9eac7cb54823c9ede9efb630798bd6eb06497b; working branch HEAD before this checkpoint was 8901ceb1807163681cd49731588bcf7a2cf98b10.",
+      "Main and working branch remain separate; no merge or canonical promotion was performed."
+    ],
+    "mainHead": "2e9eac7cb54823c9ede9efb630798bd6eb06497b",
+    "workingBranchHeadBeforeCheckpoint": "8901ceb1807163681cd49731588bcf7a2cf98b10"
+  },
+  "revisionEvidence": {
+    "status": "Inconclusive",
+    "report": "13_Discovery/REVISION_DISCOVERY.md",
+    "reportBlobSha": "8bec41df33e960deabf2186dc7132ee5454cbdca",
+    "verifiedPathHistory": [
+      {
+        "path": "project-workflow-manual.html",
+        "creationCommit": "d28ccecb5114ec8fb26fde0f87e6fce6a64397e2"
+      },
+      {
+        "path": "project-workflow-manual-v1.0.0.html",
+        "creationCommit": "8d245effe4956031ec2b1ce41c1fd66e88fb12b6"
+      },
+      {
+        "path": "00_CONTROL/project-workflow-manual-v1.1.html",
+        "creationCommit": "de0a038b7b23bc0e4b8bcdcceb8a80e3e909b456"
+      }
+    ],
+    "releases": "Empty list returned",
+    "tagInventory": "Unknown",
+    "unresolved": [
+      "Filename v1.0.0 conflicts with embedded v1.1 content.",
+      "Two distinct files identify as v1.1 with different blob SHAs and paths.",
+      "Package version 1.0.0 relation to manual revision 1.1 is unknown.",
+      "No approved revision register or superseded archive record was found in inspected folders."
+    ]
+  },
+  "securityDiscovery": {
+    "report": "17_Discovery/SECURITY_SURFACE_DISCOVERY.md",
+    "reportBlobSha": "824deb9c198705e6ebc0e39d35065555b4ae0870",
+    "reportCommit": "8901ceb1807163681cd49731588bcf7a2cf98b10",
+    "overallStatus": "Inconclusive",
+    "provenObservations": [
+      "Repository is public.",
+      "All seven returned branches have protected=false.",
+      "Repository rulesets endpoint returned an empty array.",
+      "Two workflows declare contents:write.",
+      "CodeQL matrix includes JavaScript/TypeScript only.",
+      "Secret scanner is heuristic and path-limited.",
+      "MCP source requires bearer auth for non-health requests and has restricted path checks.",
+      "MCP write_file is not restricted to a narrow writable-path allowlist.",
+      "Durable audit append failure does not necessarily fail the MCP operation response."
+    ],
+    "missingEvidence": [
+      "GitHub security alert/settings inventory.",
+      "Complete collaborator and outside-collaborator inventory.",
+      "Complete history-wide secret scan.",
+      "Vercel project settings, environment variables, and deployed runtime evidence.",
+      "Runtime auth/rate-limit and durable audit-persistence verification."
+    ]
+  },
+  "evidence": [
+    "TASK-010 report 13_Discovery/REVISION_DISCOVERY.md read back; blob SHA 8bec41df33e960deabf2186dc7132ee5454cbdca.",
+    "TASK-011 report 14_Discovery/PROVENANCE_DISCOVERY.md read back; blob SHA 0b5cad91f2647a8eee0a131be2efd0221acdeb30.",
+    "TASK-012 report 15_Discovery/VERIFICATION_DISCOVERY.md read back; blob SHA 826d129f8e47adb61b06d016d42955699d5ca6fb.",
+    "TASK-013 report 16_Discovery/TRACEABILITY_DISCOVERY.md read back; blob SHA 0c0b727b9b7f81d851af24976b9e648d1dfe66f1.",
+    "TASK-SEC-001 report read back and closure line verified; blob SHA 824deb9c198705e6ebc0e39d35065555b4ae0870.",
+    "Append-only operation log read back; blob SHA b0c1bff65356f0ab86438fb8130d8d0e7304fcec.",
+    "Append-only workflow evidence log read back; blob SHA 503b6fe9b1a7f25742be48c82eded8a309738e95.",
+    "No GitHub Actions workflow was dispatched; no Vercel runtime request or deployment was initiated.",
+    "Prior immutable checkpoints CKPT-20261028-002 through CKPT-20261108-011 were retained."
+  ],
+  "next_phase": "security_surface_discovery",
+  "next_action": "Obtain independent GitHub security-alert/settings evidence and deployed Vercel runtime evidence; reconcile them with the source-level discovery before any security group is considered for closure.",
+  "boundaries": {
+    "mainModified": false,
+    "mainMerge": "NO",
+    "canonicalPromotion": "NO",
+    "workflowDispatched": false,
+    "deploymentInitiated": false,
+    "applicationCodeModified": false,
+    "securitySettingsModified": false,
+    "historicalCheckpointsModified": false
+  }
+}
