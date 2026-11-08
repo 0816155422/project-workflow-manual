@@ -401,3 +401,14 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - scope: ACC-REF-001 through ACC-REF-004 and `foil-bite-584`.
 - workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
 - limitation: This entry records the platform assertion only. It does not prove that the connected Notion integration can see each account or any particular workspace.
+
+
+## 2026-11-08 — Notion connection identity and identifier searches (read-only)
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for the connected identity/workspace response and query outputs; referenced-account membership **Not verified**.
+- connected user: `prasong seelaprasong` / `prasong5843@gmail.com`.
+- connected workspace: `prasong seelaprasong’s Space` / `320089a7-5dad-81c4-b5e0-00039875cd52`.
+- Notion user lookup: zero returned user records for each of the four supplied email references.
+- content search: zero results for `foil-bite-584`; candidate pages were returned for email-string queries, but exact-string inspection of two fetched pages found none of the identifiers.
+- scope limitation: One connected workspace only; search results do not prove absence from other Notion workspaces or account membership.
+- workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
