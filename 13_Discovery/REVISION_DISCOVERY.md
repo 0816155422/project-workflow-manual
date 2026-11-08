@@ -23,7 +23,9 @@
 ### REV-001 — Unversioned Manual
 - Path: `project-workflow-manual.html`
 - Path version label: NONE
-- Blob SHA: `<not separately recorded in this discovery>`
+- Embedded document version: v1.0
+- Embedded document date: 2026-10-25
+- Blob SHA: `daf533d591958984a499c6c00ad2c04888e12111`
 - Creation commit: `d28ccecb5114ec8fb26fde0f87e6fce6a64397e2`
 - Commit date: `2026-10-25T07:06:13Z`
 - Commit message: Create project-workflow-manual.html
