@@ -102,6 +102,15 @@
       ],
       "notes": "Resume protocol is installed as a private ChatGPT plugin and repository skill. Course-data pipeline remains blocked independently.",
       "legacyStatus": "proven"
+    },
+    "account_workspace_inventory": {
+      "status": "Inconclusive",
+      "evidence": [
+        "research/account-workspace-inventory/source-register.md read back; blob SHA 88884ad958ed75059c257d7ba1a4032d45c7b827.",
+        "Four email addresses and identifier foil-bite-584 were supplied by the user and recorded with source attribution.",
+        "No external account/platform access or workspace count was verified."
+      ],
+      "notes": "Repository source capture is verified. External account identity, platform mapping, access, and workspace inventory remain unverified."
     }
   },
   "status": "Blocked",
