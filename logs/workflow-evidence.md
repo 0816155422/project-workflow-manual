@@ -422,3 +422,12 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - connected integration identity remains an observed connection identity only; relationship to the supplied emails is unknown.
 - `foil-bite-584` remains an unclassified separate identifier.
 - no account mutation, workspace mutation, or GitHub Actions workflow dispatch occurred.
+
+
+## 2026-11-08 — Workspace-name semantics correction
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- source: User explicitly stated `foil-bite-584` is the name of a workspace inside an account.
+- corrected classification: `workspace_name`.
+- account/access email association and workspace ID remain UNKNOWN.
+- prior classification as an account-like identifier is superseded.
+- no Notion mutation and no GitHub Actions workflow dispatch occurred.
