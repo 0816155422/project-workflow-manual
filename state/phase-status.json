@@ -107,11 +107,11 @@
       "status": "Inconclusive",
       "evidence": [
         "Four supplied emails are USER-PROVIDED Notion access/login emails, not account names.",
-        "foil-bite-584 is USER-PROVIDED as a workspace name inside a Notion account.",
-        "The access email associated with that workspace and its workspace ID remain UNKNOWN.",
-        "Source register, operation log, workflow evidence, and checkpoint 012 record the corrected semantics."
+        "foil-bite-584 is USER-PROVIDED as the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001).",
+        "Workspace display name and independent Notion API verification remain UNKNOWN.",
+        "Source register, operation log, workflow evidence, and checkpoint 013 record the correction."
       ],
-      "notes": "Corrected field classification. Next action is to map workspace foil-bite-584 to the correct Notion account/access email using authorized evidence."
+      "notes": "Next action: verify workspace ID foil-bite-584 through authorized Notion access for ACC-REF-001; collect display name and other visible workspace IDs."
     }
   },
   "status": "Blocked",
