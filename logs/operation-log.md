@@ -317,3 +317,14 @@ The following scoped state writes were each read back immediately and JSON-parse
 - `foil-bite-584` remains a separate identifier with unknown field semantics.
 - file changed: `research/account-workspace-inventory/source-register.md`.
 - boundary: No external account settings or data were changed; no access credentials were requested.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-SEMANTICS-002 — Correct workspace-name classification
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** that the user clarified `foil-bite-584` is a workspace name inside a Notion account.
+- date: `2026-11-08`
+- corrected field: `workspace_name`, not account name, account ID, access email, or login identifier.
+- unresolved: Which of the four access emails corresponds to the account containing this workspace; workspace ID; whether the current Notion connection can see it.
+- prior interpretation as an account-like identifier is superseded.
+- file changed: `research/account-workspace-inventory/source-register.md`.
+- boundary: No Notion data or account settings changed; no workflow dispatched.
