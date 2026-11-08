@@ -161,6 +161,6 @@ This task discovered existing provenance records, source locators, recorded hash
 ## Task Closure
 - TASK-011: COMPLETE
 - Snapshot: PERSISTED
-- Read-back: PENDING
+- Read-back: VERIFIED
 - TASK-012: NOT STARTED
 - WORKSPACE: EMPTY
