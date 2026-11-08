@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-014",
+  "checkpoint_no": 14,
+  "timestamp": "2026-11-08",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "main",
+  "phase": "account_workspace_inventory",
+  "status": "Blocked",
+  "operationStatus": "Proven",
+  "summary": "The user-confirmed mapping remains: workspace ID foil-bite-584 is under the first Notion access email Prasong5841@gmail.com (ACC-REF-001). Read-only Notion inspection was attempted, but all Notion tool calls failed before returning data with 'link_id must identify an eligible linked account'. No user-facing authorization prompt or recovery URL was returned. This is a connector execution/eligible-link blocker, not evidence that the account or workspace is absent.",
+  "evidence": [
+    "User-provided mapping: foil-bite-584 is workspace ID under Prasong5841@gmail.com (ACC-REF-001).",
+    "Notion tool-access inspection, current-user/workspace lookup, and read-only search were attempted.",
+    "Each attempted Notion call returned connector error: link_id must identify an eligible linked account.",
+    "No approval/sign-in dialog or recovery URL was surfaced to the assistant.",
+    "Operation log and workflow evidence append the observed failure; no Notion mutation occurred."
+  ],
+  "next_phase": "account_workspace_inventory",
+  "next_action": "Resume read-only Notion inspection when an eligible linked account is available or the connector presents an authorization flow; then verify foil-bite-584 and collect workspace display name.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261108-013",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-013.json"
+  }
+}
