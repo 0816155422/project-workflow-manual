@@ -294,3 +294,14 @@ The following scoped state writes were each read back immediately and JSON-parse
 - file changed: `research/account-workspace-inventory/source-register.md`.
 - boundary: No Notion content was read by this repository update; no workspace count or membership is claimed.
 - next_safe_action: Use the authorized Notion connection to inspect the accessible workspace and record only visible, source-backed workspace details.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-NOTION-READ-001 — Read-only Notion connection and identifier search
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for connected Notion identity and search responses; mapping of the four supplied references to this workspace **Not verified**.
+- date: `2026-11-08`
+- connected Notion identity: `prasong seelaprasong` / `prasong5843@gmail.com`.
+- connected workspace: `prasong seelaprasong’s Space`, ID `320089a7-5dad-81c4-b5e0-00039875cd52`.
+- searches: Notion user lookup for each of the four supplied email references returned no user records; content search for `foil-bite-584` returned no results. Content search for the four emails returned candidate pages, but exact-string inspection of two fetched candidates found none of the four emails or `foil-bite-584`.
+- limitation: Search results are not exhaustive proof of membership or non-membership. Only one connected workspace was inspected. The connected identity `prasong5843@gmail.com` is not equated with any supplied reference.
+- next_safe_action: Determine whether other Notion workspaces/accounts exist for the four references and obtain authorized connections or source evidence for each. Continue read-only.
