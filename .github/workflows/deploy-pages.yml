@@ -32,11 +32,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout exact triggering commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: ${{ github.sha }}
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
       - name: Validate approved dataset if present
         shell: bash
         run: |
@@ -47,12 +47,12 @@ jobs:
             echo "Awaiting approved dataset; deployment may publish the UI's visible pending state."
           fi
       - name: Upload dashboard
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
           path: ./hap-aicc
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
       - name: Create deployment evidence artifact
         if: success()
         env:
@@ -80,7 +80,7 @@ jobs:
           NODE
       - name: Upload deployment evidence
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pages-deployment-evidence-${{ github.run_id }}
           path: deployment-evidence.json

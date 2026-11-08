@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Validate pending source (empty or unproven data must fail)
         run: node scripts/validate-course-data.mjs pending/course/course-source.json
       - name: Validate approved mirrors when present
