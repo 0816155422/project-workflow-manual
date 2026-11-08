@@ -1,25 +1,25 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-013",
-  "checkpoint_no": 13,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-013.json",
+  "checkpointId": "CKPT-20261108-014",
+  "checkpoint_no": 14,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-014.json",
   "timestamp": "2026-11-08",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
   "phase": "account_workspace_inventory",
-  "status": "Inconclusive",
+  "status": "Blocked",
   "operationStatus": "Proven",
-  "summary": "foil-bite-584 is the user-confirmed workspace ID under the first Notion access email, Prasong5841@gmail.com (ACC-REF-001), not the workspace name. Workspace display name and independent Notion API verification remain unknown.",
+  "summary": "Workspace ID foil-bite-584 is user-confirmed under first Notion access email Prasong5841@gmail.com (ACC-REF-001). Read-only Notion calls failed before returning data with 'link_id must identify an eligible linked account'; no user-facing approval/sign-in prompt or recovery URL was returned. This is a connector blocker, not evidence the workspace is absent.",
   "evidence": [
-    "User stated foil-bite-584 is the workspace ID under the first access email, Prasong5841@gmail.com.",
-    "Source register, operation log, and workflow evidence record the corrected classification and mapping.",
-    "No independent Notion API verification or external mutation is claimed."
+    "User-provided workspace ID/account mapping recorded in source register.",
+    "Notion tool-access inspection, self lookup, and search attempted; all failed with eligible linked account error.",
+    "No authorization prompt or recovery link surfaced; no Notion mutation."
   ],
   "next_phase": "account_workspace_inventory",
-  "next_action": "Verify workspace ID foil-bite-584 through authorized Notion access for ACC-REF-001 and collect the workspace display name and other visible workspace IDs.",
+  "next_action": "Resume read-only Notion inspection when an eligible linked account is available or the connector presents an authorization flow; verify foil-bite-584 and collect workspace display name.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261108-012",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-012.json"
+    "checkpointId": "CKPT-20261108-013",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-013.json"
   },
   "readBackVerification": {
     "state/checkpoints/CKPT-20261108-007.json": "de787cb6e4dd54867200d013fd8c42871c652c8d",
