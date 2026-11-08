@@ -384,3 +384,11 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - read-back blob SHA: `88884ad958ed75059c257d7ba1a4032d45c7b827`
 - recorded references: four email addresses and unresolved identifier `foil-bite-584`.
 - verification boundary: No platform account was accessed, no workspace count was observed, and no workflow was dispatched.
+
+## 2026-11-08 — Proton address correction (repository write; no workflow dispatched)
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for correction recorded in the repository; external Proton account **Not verified**.
+- source: User explicitly confirmed `Prasong.me@proton.me` is correct and the `.com` transcription was incorrect.
+- changed path: `research/account-workspace-inventory/source-register.md`.
+- workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
+- external access: None. No Proton account or workspace was accessed.
