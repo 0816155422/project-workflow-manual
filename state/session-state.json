@@ -31,7 +31,8 @@
     "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment.",
     "2026-11-08: User confirmed Prasong.me@proton.me is correct; prior .com transcription was superseded in the separate account/workspace source register. No external account was accessed.",
     "2026-11-08: User stated all account references and foil-bite-584 are on Notion. Recorded as USER-PROVIDED; Notion membership and workspace inventory not independently verified.",
-    "2026-11-08: User clarified foil-bite-584 is a workspace name inside a Notion account, not an account identifier. Checkpoint 012 records the corrected field semantics."
+    "2026-11-08: User clarified foil-bite-584 is a workspace name inside a Notion account, not an account identifier. Checkpoint 012 records the corrected field semantics.",
+    "2026-11-08: User clarified foil-bite-584 is the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001), not the workspace name. Checkpoint 013 records this mapping."
   ],
   "status": "Blocked",
   "current_phase": "phase_5_approval_gated_sync",
@@ -58,11 +59,11 @@
     "phase": "account_workspace_inventory",
     "status": "Inconclusive",
     "operationStatus": "Proven",
-    "summary": "The four supplied emails are Notion access/login emails, not account names. foil-bite-584 is the name of a workspace inside a Notion account. The access email associated with that workspace and its workspace ID remain unknown.",
-    "nextAction": "Map workspace foil-bite-584 to the correct Notion account/access email using authorized evidence, then verify its workspace ID.",
+    "summary": "foil-bite-584 is the user-confirmed workspace ID under the first Notion access email, Prasong5841@gmail.com (ACC-REF-001), not the workspace name.",
+    "nextAction": "Verify workspace ID foil-bite-584 through authorized Notion access for ACC-REF-001 and collect its display name and other visible workspace IDs.",
     "evidenceRef": [
       "research/account-workspace-inventory/source-register.md",
-      "state/checkpoints/CKPT-20261108-012.json"
+      "state/checkpoints/CKPT-20261108-013.json"
     ]
   }
 }
