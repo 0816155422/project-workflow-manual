@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Validate pending course source (no write-back)
         run: node scripts/validate-course-data.mjs pending/course/course-source.json
       - name: Record non-writing ingest result
