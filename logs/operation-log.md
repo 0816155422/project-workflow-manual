@@ -273,3 +273,13 @@ The following scoped state writes were each read back immediately and JSON-parse
 - observed content: Four email references recorded; `foil-bite-584` retained as an unresolved identifier; the Proton address correction from `.me` to `.com` preserved; zero platforms/accounts/workspace counts independently verified.
 - safety boundary: External accounts were not opened; no credentials collected; no account or workspace settings changed; no workflows dispatched.
 - next_safe_action: Identify each account's platform from authorized evidence, then inventory its visible workspace names/IDs/counts separately.
+
+## OP-20261108-ACCOUNT-INVENTORY-CORRECTION-001 — Correct Proton address transcription
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for repository correction and read-back; Proton account ownership/access **Not verified**.
+- date: `2026-11-08`
+- objective: Correct ACC-REF-002 to the user-confirmed `Prasong.me@proton.me` and preserve the superseded `.com` transcription as a correction history item only.
+- source: Explicit user confirmation in the current conversation that `.me` is correct.
+- file changed: `research/account-workspace-inventory/source-register.md`.
+- safety boundary: No Proton login, account lookup, settings change, credential collection, or workflow dispatch occurred.
+- next_safe_action: Obtain authorized platform/account evidence before attempting any platform mapping or workspace inventory.
