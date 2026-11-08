@@ -441,3 +441,13 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - workspace display name and independent Notion read-back remain UNKNOWN.
 - evidence class: USER-PROVIDED; no Notion API verification claimed.
 - no external mutation and no GitHub Actions workflow dispatch occurred.
+
+
+## 2026-11-08 — Notion connector access attempt blocked
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- attempted: tool-access inspection, current-user/workspace lookup, and read-only search for `foil-bite-584`.
+- observed error on each call: `link_id must identify an eligible linked account`.
+- no user-facing approval/sign-in prompt or recovery URL was provided by the connector response.
+- result: Notion source inspection could not proceed in this execution; workspace existence, membership, and account mapping remain unverified through Notion.
+- this is a connector execution/eligible-link blocker, not evidence that the target workspace is absent.
+- no Notion mutation or settings change occurred.
