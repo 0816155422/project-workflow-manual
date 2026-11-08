@@ -145,6 +145,18 @@
         "Raw Database physical location and write authorization contract remain unresolved."
       ],
       "notes": "Do not enable durable persistence or claim live cross-platform E2E until the missing platform permissions and source-of-record mapping are verified."
+    },
+    "security_surface_discovery": {
+      "status": "Inconclusive",
+      "evidence": [
+        "TASK-SEC-001 source-level discovery report 17_Discovery/SECURITY_SURFACE_DISCOVERY.md read back; blob SHA 824deb9c198705e6ebc0e39d35065555b4ae0870.",
+        "All seven returned branches have protected=false; repository rulesets endpoint returned an empty array.",
+        "Two workflows declare contents:write; CodeQL matrix includes JavaScript/TypeScript only; secret scanner is heuristic and path-limited.",
+        "MCP API source shows bearer authentication for non-health requests, restricted path checks, and a non-failing durable audit append error path.",
+        "GitHub security-alert/settings inventory and deployed Vercel runtime evidence remain unavailable or Not proven.",
+        "No workflow was dispatched and no runtime/deployment test was performed."
+      ],
+      "notes": "Source-level security surface discovery is persisted and read-back verified. Overall security posture remains Inconclusive; do not close security groups before independent settings/alert and deployed-runtime verification."
     }
   },
   "status": "Blocked",
