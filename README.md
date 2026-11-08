@@ -6,20 +6,33 @@ This repository is a shared AI memory workspace and approved knowledge archive f
 
 These are navigation shortcuts to the current working areas. A shortcut only opens a destination; it does not prove that a service, integration, workflow, runner, or synchronization process is connected or operational.
 
+### Workspace and control
 | Area | Shortcut | Purpose |
 |---|---|---|
-| GitHub Workspace | [Open the active Codespace](https://miniature-fortnight-r4xxv97qrqxj2xwg6.github.dev/) | Main browser-based development workspace supplied for this project |
+| GitHub Workspace | [Open the active Codespace](https://miniature-fortnight-r4xxv97qrqxj2xwg6.github.dev/) | Browser-based development workspace supplied for this project |
 | Repository | [Open repository](https://github.com/0816155422/project-workflow-manual) | Source of truth and project files |
-| Actions dashboard | [All workflow runs](https://github.com/0816155422/project-workflow-manual/actions) | Inspect executions, status, and logs |
-| Python / read-only runner | [API Runner workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/api-runner.yml) | Manually request supported read-only repository operations |
-| Repository validation | [Validation workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/validate.yml) | Inspect repository and dashboard validation |
-| Approved synchronization | [Sync workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/sync-approved-memory.yml) | Approval-gated course-data synchronization; do not dispatch without a separate explicit approval |
-| Usage and evidence logging | [Usage log workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/generate-usage-log.yml) | Append workflow execution evidence; this workflow writes to the repository |
-| Actions configuration | [Repository Actions settings](https://github.com/0816155422/project-workflow-manual/settings/actions) | Review Actions permissions and runner settings |
-| GitHub Pages configuration | [Pages settings](https://github.com/0816155422/project-workflow-manual/settings/pages) | Review static-site publishing configuration |
-| Notion | [Open Notion](https://www.notion.so/) | Open the Notion service; workspace-specific destination is not yet verified |
-| GitHub Actions documentation | [Actions documentation](https://docs.github.com/actions) | Official workflow and runner reference |
-| GitHub Codespaces documentation | [Codespaces documentation](https://docs.github.com/codespaces) | Official workspace and environment reference |
+| Actions dashboard | [All workflow runs](https://github.com/0816155422/project-workflow-manual/actions) | Inspect workflow executions, status, and logs |
+| Actions settings | [Repository Actions settings](https://github.com/0816155422/project-workflow-manual/settings/actions) | Review Actions permissions and runner settings |
+| Pages settings | [GitHub Pages settings](https://github.com/0816155422/project-workflow-manual/settings/pages) | Review static-site publishing configuration |
+| Notion | [Open Notion](https://www.notion.so/) | General service entry; workspace-specific URL is not yet verified |
+
+### Workflow shortcuts
+| Workflow | Shortcut | Function / caution |
+|---|---|---|
+| API Runner | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/api-runner.yml) | Manual read-only repository operations; currently no Python execution in this workflow |
+| CodeQL Advanced | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/codeql.yml) | Scheduled and event-triggered code scanning |
+| Deploy HAP/AICC | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/deploy-pages.yml) | Publishes the dashboard to GitHub Pages |
+| Usage and Evidence Log | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/generate-usage-log.yml) | Appends records and commits them to the repository |
+| Ingest Course Data | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/ingest-course-data.yml) | Validates pending data without write-back |
+| Ingest OpenAI Research | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/ingest-openai-research.yml) | Validates research evidence |
+| Sync Approved Course Data | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/sync-approved-memory.yml) | Writes approved data and audit records; requires separate explicit approval before dispatch |
+| Validate Shared Memory | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/validate-approved-memory.yml) | Read-only validation; validation is not approval |
+| Validate Course Data | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/validate-course-data.yml) | Read-only course-data validation |
+| Repository Validation | [Open workflow](https://github.com/0816155422/project-workflow-manual/actions/workflows/validate.yml) | Checks repository structure, JSON, credentials heuristics, and dashboard HTML |
+
+### Official references
+- [GitHub Actions documentation](https://docs.github.com/actions)
+- [GitHub Codespaces documentation](https://docs.github.com/codespaces)
 
 ## Principles
 - The repository is a source of approved memory, not a live database.
