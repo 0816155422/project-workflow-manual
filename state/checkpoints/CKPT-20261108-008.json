@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-008",
+  "checkpoint_no": 8,
+  "timestamp": "2026-11-08",
+  "phase": "account_workspace_inventory",
+  "status": "Inconclusive",
+  "operationStatus": "Proven",
+  "summary": "Corrected ACC-REF-002 to the user-confirmed Prasong.me@proton.me, appended correction evidence, and retained the earlier .com transcription only as superseded history. External account facts remain unverified.",
+  "evidence": [
+    "User explicitly confirmed .me is correct; evidence class USER-PROVIDED.",
+    "research/account-workspace-inventory/source-register.md corrected and read-back verification pending.",
+    "logs/operation-log.md appended with OP-20261108-ACCOUNT-INVENTORY-CORRECTION-001.",
+    "logs/workflow-evidence.md appended; no GitHub Actions workflow was dispatched.",
+    "No Proton account was accessed and no external account/workspace facts were verified."
+  ],
+  "next_phase": "account_workspace_inventory",
+  "next_action": "Only after authorized account/platform evidence is available, identify platform mappings and capture visible workspace names, IDs, and counts separately. Do not infer mappings.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261108-007",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json"
+  }
+}
