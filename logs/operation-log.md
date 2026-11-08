@@ -240,3 +240,23 @@ The following scoped state writes were each read back immediately and JSON-parse
 - existing verified state remains: latest pointer read-back references `CKPT-20261028-005` (blob SHA `61c1dd579229776f8251a767cb9f254e4a4d25e1`); checkpoint 005 read-back blob SHA `c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28`.
 - workflow activity: No GitHub Actions workflow was dispatched.
 - next_safe_action: Read back all six required state/log files and report any stale session-state evidence references without claiming an unverified update.
+
+
+## SEC-RECON-20261108-001 — Fresh security evidence reconstruction baseline
+- task_id: `SEC-RECON-20261108-001`
+- timestamp: `2026-11-08T09:01:00+07:00`
+- status: **Inconclusive** — this is an initial evidence collection, not a completed security audit.
+- objective: Re-establish a current, evidence-backed security baseline from the live repository without changing runtime behavior or promoting data.
+- repository: `0816155422/project-workflow-manual`; visibility: `public`; repository ID: `1432201372`; default branch: `main`.
+- observed main HEAD: `48e9f64bebd7fb3821d6d03377d3713c46e51193` (2026-11-07T11:08:09Z), newer than the state/checkpoint baseline dated 2026-10-28.
+- observed tree: 336 entries, 235 files, 10 GitHub Actions workflow files; tree response reported `truncated=false`.
+- observed branches: `0816155422-patch-1`, `adapter/iris-evidence-template`, `dependabot/npm_and_yarn/npm_and_yarn-11c2e24550`, `feat/github-actions-api-runner`, `feature/init-gh-native-structure`, `main`, `reconstruction/operating-work-lifecycle-state`.
+- observed rulesets endpoint: empty array. Branch-protection endpoint returned HTTP 403 `Resource not accessible by integration`; branch protection is therefore **Not proven**, not absent.
+- connected GitHub integration reports admin/maintain/push/pull/triage permissions for the repository; this is the integration's effective permission snapshot, not a complete human collaborator inventory.
+- security-relevant source read-back: `docs/security-checklist.md`, `config/privacy-policy.json`, `config/repo-policy.json`, all 10 workflow files, `api/mcp.js`, `MCP_API.md`, `.env.example`, `.gitignore`, `docs/approval-policy.md`, and `logs/mcp-audit.jsonl`.
+- initial observations: secret scanning is explicitly heuristic; CodeQL workflow matrix includes javascript-typescript only; multiple workflows grant `contents: write`; branch protection cannot be read through this integration; workflow actions use version tags such as `actions/checkout@v4` and CodeQL action tags rather than immutable commit pins.
+- MCP source observations: bearer authentication is required for non-health requests; health response exposes non-secret readiness/configuration booleans; write tool blocks workflow, environment, and audit-log paths; audit append failure is logged to platform console but the MCP action's result is not converted into a failure solely because durable audit append failed. These are source observations only; deployed runtime configuration and behavior are not proven.
+- Dependabot: a branch with a Dependabot-style name exists; no Dependabot configuration or alert status has yet been verified.
+- limitations: GitHub branch-protection API returned 403; repository-wide code-scanning/dependency alert state was not obtained; no complete history-wide secret scan or deployed MCP runtime test was performed; repository settings, Vercel environment settings, collaborators, and external integrations remain unverified.
+- no workflow was dispatched and no repository files were changed by security inspection before this evidence record.
+- next_safe_action: continue fresh inventory by examining every workflow and security-relevant source/configuration file, then inspect accessible Actions run/job evidence and separately resolve GitHub settings/runtime evidence gaps before any security group can be closed.
