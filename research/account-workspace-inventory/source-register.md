@@ -14,16 +14,21 @@ Collect account and workspace information in a separate repository area. This re
 
 | Record | Account reference | User-described significance | Evidence status |
 |---|---|---|---|
-| ACC-REF-001 | `Prasong5841@gmail.com` | User identified this as the starting point and turning point. | User-provided; account access and platform not independently verified. |
-| ACC-REF-002 | `Prasong.me@proton.me` | User described this as containing extensive AI image-generation work and methods for correcting issues before SMPE existed. | User-provided; account access and platform not independently verified. |
+| ACC-REF-001 | `Prasong5841@gmail.com` | User identified this as the starting point and turning point. | User-provided; Notion platform association stated by user; account access not independently verified. |
+| ACC-REF-002 | `Prasong.me@proton.me` | User described this as containing extensive AI image-generation work and methods for correcting issues before SMPE existed. | User-provided; Notion platform association stated by user; account access not independently verified. |
 | ACC-REF-003 | `LEK0805974491@gmail.com` | User said this account contains various usage-related information. | User-provided; details and platform not independently verified. |
 | ACC-REF-004 | `mt9w2tzs2w@privaterelay.appleid.com` | User said this account contains various usage-related information. | User-provided; details and platform not independently verified. |
+
+## User-provided platform mapping
+- The user stated that all account references and the additional identifier listed in this register are on Notion.
+- Applies to ACC-REF-001 through ACC-REF-004 and `foil-bite-584`.
+- Evidence class: USER-PROVIDED. This is not independent verification of account ownership, connected Notion identity, or workspace membership.
 
 ## Additional identifier requiring resolution
 
 | Reference | Current interpretation | Evidence status |
 |---|---|---|
-| `foil-bite-584` | User previously described this as the turning-point account associated with the creation of SMPE. Its platform/account mapping is not established. | User-provided; mapping unknown. |
+| `foil-bite-584` | User previously described this as the turning-point account associated with the creation of SMPE. The user stated that it is also on Notion; its specific Notion account/workspace mapping remains unknown. | User-provided platform assertion; specific mapping and access not independently verified. |
 
 ## Corrections preserved
 - ACC-REF-002 current user-confirmed address: `Prasong.me@proton.me`.
@@ -42,6 +47,7 @@ Collect account and workspace information in a separate repository area. This re
 |---|---|
 | Number of account references supplied | 4 email addresses |
 | Additional account-like identifier | 1 identifier: `foil-bite-584` |
+| Platform associations stated by user | Notion for all listed references |
 | Platforms independently verified | 0 |
 | Account access independently verified | 0 |
 | Workspace counts verified | 0 |
@@ -50,7 +56,7 @@ Collect account and workspace information in a separate repository area. This re
 The four email addresses must not be assumed to represent four accounts on one platform. Workspace totals remain unknown until platform-specific account and workspace evidence is available.
 
 ## Next safe action
-Continue read-only discovery by identifying which platform each reference belongs to and collecting only account/workspace names, IDs, and visible counts where authorized access is available. Keep each platform and account as a separate evidence source.
+Use the authorized Notion connection, if available, to inspect the accessible workspace and collect visible workspace names, IDs, and counts. Do not assume every listed reference maps to a distinct Notion identity.
 
 
 ## Correction confirmation
@@ -59,3 +65,10 @@ Continue read-only discovery by identifying which platform each reference belong
 - Current register value is `Prasong.me@proton.me`.
 - Prior `.com` transcription is superseded and must not be used as a current account reference.
 - Evidence class: USER-PROVIDED. No Proton account session was accessed.
+
+
+## Notion platform statement
+- Date recorded: `2026-11-08`.
+- User stated that all account references in this inventory are on Notion, including `foil-bite-584`.
+- Evidence class: USER-PROVIDED.
+- Notion account identity, workspace membership, workspace names/IDs/counts, and ownership remain independently unverified until read from the connected Notion source.
