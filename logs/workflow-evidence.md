@@ -392,3 +392,12 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - changed path: `research/account-workspace-inventory/source-register.md`.
 - workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
 - external access: None. No Proton account or workspace was accessed.
+
+
+## 2026-11-08 — User-provided Notion platform mapping (no workflow dispatched)
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for the user's statement that all listed references are on Notion; Notion account/workspace facts **Not verified**.
+- source: User statement in the current conversation.
+- scope: ACC-REF-001 through ACC-REF-004 and `foil-bite-584`.
+- workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
+- limitation: This entry records the platform assertion only. It does not prove that the connected Notion integration can see each account or any particular workspace.
