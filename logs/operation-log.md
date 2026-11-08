@@ -260,3 +260,16 @@ The following scoped state writes were each read back immediately and JSON-parse
 - limitations: GitHub branch-protection API returned 403; repository-wide code-scanning/dependency alert state was not obtained; no complete history-wide secret scan or deployed MCP runtime test was performed; repository settings, Vercel environment settings, collaborators, and external integrations remain unverified.
 - no workflow was dispatched and no repository files were changed by security inspection before this evidence record.
 - next_safe_action: continue fresh inventory by examining every workflow and security-relevant source/configuration file, then inspect accessible Actions run/job evidence and separately resolve GitHub settings/runtime evidence gaps before any security group can be closed.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-001 — Separate account/workspace source register
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for repository file creation and read-back; external account inventory **Inconclusive**.
+- objective: Preserve user-provided account references and SMPE-origin context in a separate repository area without accessing or changing external accounts.
+- source: User statements in the current conversation; no external account session or workspace data was accessed.
+- file: `research/account-workspace-inventory/source-register.md`
+- commit SHA: `0fc9227f8701a4a76fe9340194485458a5fe0f1e`
+- read-back blob SHA: `88884ad958ed75059c257d7ba1a4032d45c7b827`
+- observed content: Four email references recorded; `foil-bite-584` retained as an unresolved identifier; the Proton address correction from `.me` to `.com` preserved; zero platforms/accounts/workspace counts independently verified.
+- safety boundary: External accounts were not opened; no credentials collected; no account or workspace settings changed; no workflows dispatched.
+- next_safe_action: Identify each account's platform from authorized evidence, then inventory its visible workspace names/IDs/counts separately.
