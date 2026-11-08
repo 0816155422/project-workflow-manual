@@ -28,12 +28,13 @@ Collect account and workspace information in a separate repository area. This re
 
 | Field | Value | Meaning | Evidence status |
 |---|---|---|---|
-| Workspace name | `foil-bite-584` | Name of a workspace (พื้นที่ทำงาน) inside a Notion account. It is not an account name, access email, or login identifier. | USER-PROVIDED; explicitly clarified by the user on 2026-11-08. |
+| Workspace ID | `foil-bite-584` | Workspace identifier for the Notion workspace under the first access email, `Prasong5841@gmail.com`. | USER-PROVIDED; explicitly clarified by the user on 2026-11-08. |
 
 ## Workspace-to-account relationship
-- The user has not yet identified which of the four access emails is used to access the account containing workspace `foil-bite-584`.
-- Do not infer that the workspace belongs to the currently connected Notion identity or to any specific access email.
-- Account association, workspace ID, and visibility through the current connection remain UNKNOWN.
+- The user explicitly identified the containing account as the first access email, `Prasong5841@gmail.com`.
+- The user explicitly identified `foil-bite-584` as that account's workspace ID, not its workspace name.
+- The workspace's display name and visibility through the current Notion connection remain UNKNOWN.
+- Do not infer that this account/workspace is the same as the currently connected Notion identity.
 
 ## Corrections preserved
 - ACC-REF-002 current user-confirmed address: `Prasong.me@proton.me`.
@@ -51,14 +52,14 @@ Collect account and workspace information in a separate repository area. This re
 | Question | Result |
 |---|---|
 | Number of account references supplied | 4 email addresses |
-| Workspace name supplied by user | 1: `foil-bite-584` |
+| Workspace ID supplied by user | 1: `foil-bite-584` |
 | Platform associations stated by user | Notion for all listed references |
 | Platforms independently verified | 0 |
 | Account access independently verified | 0 |
 | Workspace counts verified | 0 |
 | Workspace names/IDs verified | 0 |
 
-The four email addresses are access/login identifiers supplied by the user, not account names. `foil-bite-584` is a user-supplied workspace name inside a Notion account, not an account identifier. The account containing that workspace has not yet been mapped to one of the access emails. Workspace totals remain unknown until the actual accessible account/workspace structure is evidenced.
+The four email addresses are access/login identifiers supplied by the user, not account names. `foil-bite-584` is a user-supplied workspace ID under the first access email, `Prasong5841@gmail.com`; it is not a workspace name or account identifier. Workspace totals remain unknown until the actual accessible account/workspace structure is evidenced.
 
 ## Next safe action
 Use the authorized Notion connection, if available, to inspect the accessible workspace and collect visible workspace names, IDs, and counts. Do not assume every listed reference maps to a distinct Notion identity.
@@ -95,14 +96,22 @@ Use the authorized Notion connection, if available, to inspect the accessible wo
 - The four email values must therefore be stored as `access_email` / `login_identifier`, never as `account_name` or Notion display name.
 - The Notion user-lookup results obtained by searching these strings do not prove that the related accounts do not exist, and do not establish workspace membership or non-membership.
 - The connected Notion identity `prasong seelaprasong` / `prasong5843@gmail.com` is an observed identity for the current integration connection only. Its relationship to the four access emails remains UNKNOWN.
-- `foil-bite-584` remains a separate user-provided identifier; its exact field meaning and relationship to any access email are UNKNOWN.
+- `foil-bite-584` is the user-confirmed workspace ID under ACC-REF-001 (`Prasong5841@gmail.com`).
 - Evidence class: USER-PROVIDED for the clarification; OBSERVED for the integration identity and returned lookup results.
 
 
 ## User clarification — workspace-name semantics
 - Date recorded: `2026-11-08`.
-- The user explicitly clarified that `foil-bite-584` is the name of a workspace (พื้นที่ทำงาน) inside an account.
-- Correct field classification: `workspace_name`.
-- It must not be classified as an account name, account ID, access email, or login identifier.
-- The account/access email containing this workspace is not yet identified.
+- This earlier clarification was refined by the user's subsequent statement on 2026-11-08: `foil-bite-584` is the workspace ID, not the workspace name.
+- The workspace is under the first access email, `Prasong5841@gmail.com`.
+- Superseded classification: `workspace_name`; current classification: `workspace_id`.
 - Evidence class: USER-PROVIDED.
+
+
+## User clarification — workspace ID and account mapping
+- Date recorded: `2026-11-08`.
+- The user explicitly stated that `foil-bite-584` is the workspace ID.
+- The user explicitly mapped this workspace ID to the first access email: `Prasong5841@gmail.com` (ACC-REF-001).
+- Current classification: `workspace_id`; not workspace name, account name, or access email.
+- Workspace display name and independent Notion read-back verification remain UNKNOWN.
+- Evidence class: USER-PROVIDED. This mapping has not been independently verified through the Notion API.
