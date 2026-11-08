@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "checkpointId": "CKPT-20261108-006",
+  "checkpoint_no": 6,
+  "timestamp": "2026-11-08T09:01:00+07:00",
+  "phase": "security_evidence_reconstruction",
+  "status": "Inconclusive",
+  "summary": "Fresh security evidence reconstruction baseline collected from current main HEAD. Repository/source inventory and initial control observations recorded; full security review remains open because GitHub settings, alerts, deployed runtime, and complete source/control verification are not yet evidenced.",
+  "evidence": [
+    "Current main HEAD observed before audit log append: 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "Recursive Git tree at that HEAD returned 336 entries, 235 files, 10 workflow files, truncated=false.",
+    "Repository metadata: ID 1432201372, public visibility, default branch main; connected integration permission snapshot admin=true, maintain=true, push=true, pull=true, triage=true.",
+    "Branch search returned seven branches, including dependabot/npm_and_yarn/npm_and_yarn-11c2e24550.",
+    "Repository rulesets endpoint returned an empty array. Branch protection endpoint returned HTTP 403 Resource not accessible by integration; branch protection remains Not proven.",
+    "Read-back source inventory and initial security observations are recorded in logs/operation-log.md entry SEC-RECON-20261108-001.",
+    "Append-only operation log entry read back; blob SHA 87c42b36fc7ab20512c35af9dbb40e2b7f23efc6.",
+    "Append-only workflow evidence no-run entry read back; blob SHA 167f2f880c71b1c77142166f7d897957536bf596.",
+    "No workflow was dispatched during this read-only investigation.",
+    "Prior immutable checkpoints CKPT-20261028-002 through CKPT-20261028-005 were retained; no prior checkpoint was modified."
+  ],
+  "next_phase": "security_evidence_reconstruction",
+  "next_action": "Continue complete source and workflow review; retrieve actual Actions run/job evidence and resolve inaccessible GitHub security settings and deployed runtime evidence before classifying or closing any security group.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261028-005",
+    "checkpointPath": "state/checkpoints/CKPT-20261028-005.json"
+  }
+}
