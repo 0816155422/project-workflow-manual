@@ -16,7 +16,7 @@ Collect account and workspace information in a separate repository area. This re
 |---|---|---|---|
 | ACC-REF-001 | `Prasong5841@gmail.com` | User identified this as the starting point and turning point. | User-provided; Notion platform association stated by user; account access not independently verified. |
 | ACC-REF-002 | `Prasong.me@proton.me` | User described this as containing extensive AI image-generation work and methods for correcting issues before SMPE existed. | User-provided; Notion platform association stated by user; account access not independently verified. |
-| ACC-REF-003 | `LEK0805974491@gmail.com` | User said this account contains various usage-related information. | User-provided; details and platform not independently verified. |
+| ACC-REF-003 | `LEK0805974491@gmail.com` | User said this account contains various usage-related information. | User-provided; Notion platform association stated by user; account access not independently verified. |
 | ACC-REF-004 | `mt9w2tzs2w@privaterelay.appleid.com` | User said this account contains various usage-related information. | User-provided; details and platform not independently verified. |
 
 ## User-provided platform mapping
@@ -72,3 +72,13 @@ Use the authorized Notion connection, if available, to inspect the accessible wo
 - User stated that all account references in this inventory are on Notion, including `foil-bite-584`.
 - Evidence class: USER-PROVIDED.
 - Notion account identity, workspace membership, workspace names/IDs/counts, and ownership remain independently unverified until read from the connected Notion source.
+
+
+## Connected Notion workspace observation — 2026-11-08
+- Read-only Notion connection identity returned: user `prasong seelaprasong`, email `prasong5843@gmail.com`.
+- Connected workspace returned: `prasong seelaprasong’s Space`, workspace ID `320089a7-5dad-81c4-b5e0-00039875cd52`.
+- This connected identity email is not the same string as any of the four account references in this register. No equivalence is inferred.
+- Notion user lookup for each of the four supplied email addresses returned no user records in this connected workspace.
+- A Notion content search for `foil-bite-584` returned no results. Content searches for the four email strings returned page results, but inspection of the two fetched candidate pages did not find the exact strings. Search results are not proof that the referenced accounts are members of this workspace.
+- Evidence class: OBSERVED from the connected Notion integration. Search scope is limited to this one connected workspace and the tool's search behavior; absence from these results does not prove absence elsewhere in Notion.
+- Workspace membership for ACC-REF-001 through ACC-REF-004 and `foil-bite-584` remains UNKNOWN.
