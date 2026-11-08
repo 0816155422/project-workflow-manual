@@ -1,26 +1,26 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-009",
-  "checkpoint_no": 9,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-009.json",
+  "checkpointId": "CKPT-20261108-012",
+  "checkpoint_no": 12,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-012.json",
   "timestamp": "2026-11-08",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
   "phase": "account_workspace_inventory",
   "status": "Inconclusive",
   "operationStatus": "Proven",
-  "summary": "Recorded the user's statement that all four email references and foil-bite-584 are on Notion. This is user-provided platform mapping only; account identity, workspace membership and workspace inventory remain unverified.",
+  "summary": "Four supplied emails are Notion access/login emails, not account names. foil-bite-584 is the name of a workspace inside a Notion account. The access email associated with that workspace and its workspace ID remain unknown.",
   "evidence": [
-    "User stated all listed account references and foil-bite-584 are on Notion; evidence class USER-PROVIDED.",
-    "research/account-workspace-inventory/source-register.md updated and read-back verification pending.",
-    "Operation log and workflow evidence appended; no GitHub Actions workflow dispatched.",
-    "No Notion workspace content or account membership was independently verified by this repository update."
+    "User-provided clarification: four emails are Notion access emails, not account names.",
+    "User-provided clarification: foil-bite-584 is a workspace name inside an account.",
+    "Source register and append-only logs updated with corrected field semantics.",
+    "No association between the connected Notion identity and supplied access emails/workspace is inferred."
   ],
   "next_phase": "account_workspace_inventory",
-  "next_action": "Inspect the authorized Notion connection read-only. Enumerate visible workspaces/pages and preserve IDs and counts with source attribution; do not assume each email maps to a separate Notion identity.",
+  "next_action": "Map workspace foil-bite-584 to the correct Notion account/access email using authorized evidence, then verify its workspace ID.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261108-008",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-008.json"
+    "checkpointId": "CKPT-20261108-011",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-011.json"
   },
   "readBackVerification": {
     "state/checkpoints/CKPT-20261108-007.json": "de787cb6e4dd54867200d013fd8c42871c652c8d",
