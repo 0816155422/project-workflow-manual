@@ -305,3 +305,15 @@ The following scoped state writes were each read back immediately and JSON-parse
 - searches: Notion user lookup for each of the four supplied email references returned no user records; content search for `foil-bite-584` returned no results. Content search for the four emails returned candidate pages, but exact-string inspection of two fetched candidates found none of the four emails or `foil-bite-584`.
 - limitation: Search results are not exhaustive proof of membership or non-membership. Only one connected workspace was inspected. The connected identity `prasong5843@gmail.com` is not equated with any supplied reference.
 - next_safe_action: Determine whether other Notion workspaces/accounts exist for the four references and obtain authorized connections or source evidence for each. Continue read-only.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-SEMANTICS-001 — Correct access-email classification
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** that the user clarified the four email values are Notion access emails, not account names.
+- date: `2026-11-08`
+- correction: ACC-REF-001 through ACC-REF-004 are `access_email` / `login_identifier` fields. They are not account names or Notion display names.
+- interpretation correction: Prior user-lookup searches against these email strings returning no records cannot establish that the accounts do not exist or that the emails cannot access other workspaces.
+- connected integration identity `prasong seelaprasong` / `prasong5843@gmail.com` remains an observed connection identity only; its relation to the supplied access emails is UNKNOWN.
+- `foil-bite-584` remains a separate identifier with unknown field semantics.
+- file changed: `research/account-workspace-inventory/source-register.md`.
+- boundary: No external account settings or data were changed; no access credentials were requested.
