@@ -373,3 +373,14 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - evidence: `logs/operation-log.md` entry `SEC-RECON-20261108-001`; tree contained 336 entries (235 files, 10 workflow files), response not truncated.
 - limitation: Branch-protection endpoint returned 403; no security alert inventory or deployed runtime validation was completed. Do not interpret this as absence of findings.
 - next safe action: Continue source and runtime evidence collection; do not close security review groups yet.
+
+
+## 2026-11-08 — Account/workspace inventory source capture (no workflow dispatched)
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** for repository source-register read-back; external account/workspace facts **Inconclusive**.
+- source: User-provided statements in this conversation only.
+- repository path: `research/account-workspace-inventory/source-register.md`
+- commit SHA: `0fc9227f8701a4a76fe9340194485458a5fe0f1e`
+- read-back blob SHA: `88884ad958ed75059c257d7ba1a4032d45c7b827`
+- recorded references: four email addresses and unresolved identifier `foil-bite-584`.
+- verification boundary: No platform account was accessed, no workspace count was observed, and no workflow was dispatched.
