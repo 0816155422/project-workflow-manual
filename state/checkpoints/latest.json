@@ -1,33 +1,32 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261028-005",
-  "checkpoint_no": 5,
-  "checkpointPath": "state/checkpoints/CKPT-20261028-005.json",
-  "timestamp": "2026-10-28T23:08:00+07:00",
+  "checkpointId": "CKPT-20261108-006",
+  "checkpoint_no": 6,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
+  "timestamp": "2026-11-08T09:01:00+07:00",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
-  "phase": "phase_5_approval_gated_sync",
+  "phase": "security_evidence_reconstruction",
   "status": "Inconclusive",
   "operationStatus": "Proven",
-  "summary": "ResumeStateGuard current-state audit recorded in immutable checkpoint 005. The checkpoint pointer now references the current append-only log read-backs; course-data pipeline remains Blocked due missing real source records and authorized approval.",
+  "summary": "Fresh security evidence reconstruction baseline stored in immutable checkpoint 006. Full security review remains open; repository settings, alert inventory, and deployed runtime evidence remain incomplete.",
   "evidence": [
-    "Immutable checkpoint CKPT-20261028-005 read back and JSON parsed; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
-    "Prior immutable checkpoint CKPT-20261028-004 retained; blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f.",
-    "pending/course/course-source.json remains empty and unapproved; blob SHA 90c325b0694e1ecc89b411787a4ae4fdd19b9295.",
-    "No GitHub Actions workflow was dispatched.",
-    "Current append-only operation log read-back blob SHA f7896778aad0a68c7a20a501dd5f56a4a2f4624a; includes OP-20261028-010 and OP-20261028-011.",
-    "Current append-only workflow evidence log read-back blob SHA 48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c; includes explicit no-workflow-dispatched observation."
+    "CKPT-20261108-006 read back and JSON parsed; blob SHA e3ff5608e11cdfcba9e8cf2d750ea77590e0175f.",
+    "Prior immutable checkpoint CKPT-20261028-005 retained; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
+    "Append-only operation log read back; blob SHA 87c42b36fc7ab20512c35af9dbb40e2b7f23efc6.",
+    "Append-only workflow evidence log read back; blob SHA 167f2f880c71b1c77142166f7d897957536bf596.",
+    "Current repository main HEAD at investigation start: 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
+    "No workflow was dispatched."
   ],
-  "next_phase": "phase_5_approval_gated_sync",
-  "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "next_phase": "security_evidence_reconstruction",
+  "next_action": "Continue complete source and workflow review; retrieve actual Actions run/job evidence and resolve inaccessible GitHub security settings and deployed runtime evidence before classifying or closing any security group.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261028-004",
-    "checkpointPath": "state/checkpoints/CKPT-20261028-004.json"
+    "checkpointId": "CKPT-20261028-005",
+    "checkpointPath": "state/checkpoints/CKPT-20261028-005.json"
   },
   "readBackVerification": {
-    "state/checkpoints/CKPT-20261028-005.json": "c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28",
-    "logs/operation-log.md": "f7896778aad0a68c7a20a501dd5f56a4a2f4624a",
-    "logs/workflow-evidence.md": "48f7bf7eb9fb80678ee3cb0221c8122ed386cc5c",
-    "pending/course/course-source.json": "90c325b0694e1ecc89b411787a4ae4fdd19b9295"
+    "state/checkpoints/CKPT-20261108-006.json": "e3ff5608e11cdfcba9e8cf2d750ea77590e0175f",
+    "logs/operation-log.md": "87c42b36fc7ab20512c35af9dbb40e2b7f23efc6",
+    "logs/workflow-evidence.md": "167f2f880c71b1c77142166f7d897957536bf596"
   }
 }
