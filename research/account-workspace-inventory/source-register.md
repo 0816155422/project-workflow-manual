@@ -24,11 +24,16 @@ Collect account and workspace information in a separate repository area. This re
 - Applies to ACC-REF-001 through ACC-REF-004 and `foil-bite-584`.
 - Evidence class: USER-PROVIDED. This is not independent verification of account ownership, connected Notion identity, or workspace membership.
 
-## Additional identifier requiring resolution
+## User-provided workspace name
 
-| Reference | Current interpretation | Evidence status |
-|---|---|---|
-| `foil-bite-584` | User previously described this as the turning-point account associated with the creation of SMPE. The user stated that it is also on Notion; its specific Notion account/workspace mapping remains unknown. | User-provided platform assertion; specific mapping and access not independently verified. |
+| Field | Value | Meaning | Evidence status |
+|---|---|---|---|
+| Workspace name | `foil-bite-584` | Name of a workspace (พื้นที่ทำงาน) inside a Notion account. It is not an account name, access email, or login identifier. | USER-PROVIDED; explicitly clarified by the user on 2026-11-08. |
+
+## Workspace-to-account relationship
+- The user has not yet identified which of the four access emails is used to access the account containing workspace `foil-bite-584`.
+- Do not infer that the workspace belongs to the currently connected Notion identity or to any specific access email.
+- Account association, workspace ID, and visibility through the current connection remain UNKNOWN.
 
 ## Corrections preserved
 - ACC-REF-002 current user-confirmed address: `Prasong.me@proton.me`.
@@ -46,14 +51,14 @@ Collect account and workspace information in a separate repository area. This re
 | Question | Result |
 |---|---|
 | Number of account references supplied | 4 email addresses |
-| Additional account-like identifier | 1 identifier: `foil-bite-584` |
+| Workspace name supplied by user | 1: `foil-bite-584` |
 | Platform associations stated by user | Notion for all listed references |
 | Platforms independently verified | 0 |
 | Account access independently verified | 0 |
 | Workspace counts verified | 0 |
 | Workspace names/IDs verified | 0 |
 
-The four email addresses are access/login identifiers supplied by the user, not account names. They must not be treated as Notion user display names or used to infer the number of accounts. Workspace totals remain unknown until the actual accessible account/workspace structure is evidenced.
+The four email addresses are access/login identifiers supplied by the user, not account names. `foil-bite-584` is a user-supplied workspace name inside a Notion account, not an account identifier. The account containing that workspace has not yet been mapped to one of the access emails. Workspace totals remain unknown until the actual accessible account/workspace structure is evidenced.
 
 ## Next safe action
 Use the authorized Notion connection, if available, to inspect the accessible workspace and collect visible workspace names, IDs, and counts. Do not assume every listed reference maps to a distinct Notion identity.
@@ -92,3 +97,12 @@ Use the authorized Notion connection, if available, to inspect the accessible wo
 - The connected Notion identity `prasong seelaprasong` / `prasong5843@gmail.com` is an observed identity for the current integration connection only. Its relationship to the four access emails remains UNKNOWN.
 - `foil-bite-584` remains a separate user-provided identifier; its exact field meaning and relationship to any access email are UNKNOWN.
 - Evidence class: USER-PROVIDED for the clarification; OBSERVED for the integration identity and returned lookup results.
+
+
+## User clarification — workspace-name semantics
+- Date recorded: `2026-11-08`.
+- The user explicitly clarified that `foil-bite-584` is the name of a workspace (พื้นที่ทำงาน) inside an account.
+- Correct field classification: `workspace_name`.
+- It must not be classified as an account name, account ID, access email, or login identifier.
+- The account/access email containing this workspace is not yet identified.
+- Evidence class: USER-PROVIDED.
