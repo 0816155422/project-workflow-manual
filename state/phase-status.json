@@ -106,11 +106,12 @@
     "account_workspace_inventory": {
       "status": "Inconclusive",
       "evidence": [
-        "User stated ACC-REF-001 through ACC-REF-004 and foil-bite-584 are all on Notion; USER-PROVIDED.",
-        "Source register and append-only logs updated; checkpoint 009 created.",
-        "No Notion workspace membership or workspace count independently verified."
+        "Four supplied emails are USER-PROVIDED Notion access/login emails, not account names.",
+        "foil-bite-584 is USER-PROVIDED as a workspace name inside a Notion account.",
+        "The access email associated with that workspace and its workspace ID remain UNKNOWN.",
+        "Source register, operation log, workflow evidence, and checkpoint 012 record the corrected semantics."
       ],
-      "notes": "Platform assertion recorded. Next step is read-only inventory through the authorized Notion connection."
+      "notes": "Corrected field classification. Next action is to map workspace foil-bite-584 to the correct Notion account/access email using authorized evidence."
     }
   },
   "status": "Blocked",
