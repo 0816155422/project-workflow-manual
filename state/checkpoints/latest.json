@@ -1,27 +1,27 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-007",
-  "checkpoint_no": 7,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+  "checkpointId": "CKPT-20261108-008",
+  "checkpoint_no": 8,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-008.json",
   "timestamp": "2026-11-08",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
   "phase": "account_workspace_inventory",
   "status": "Inconclusive",
   "operationStatus": "Proven",
-  "summary": "Separate account/workspace source register stored and read back. External account/platform/workspace facts remain unverified.",
+  "summary": "Corrected ACC-REF-002 to the user-confirmed Prasong.me@proton.me, appended correction evidence, and retained the earlier .com transcription only as superseded history. External account facts remain unverified.",
   "evidence": [
-    "Immutable checkpoint state/checkpoints/CKPT-20261108-007.json read back; blob SHA de787cb6e4dd54867200d013fd8c42871c652c8d.",
-    "Source register research/account-workspace-inventory/source-register.md read back; blob SHA 88884ad958ed75059c257d7ba1a4032d45c7b827.",
-    "Append-only operation log blob SHA 7fcac54f19cd60c3adec87dc365f04905a92d484.",
-    "Append-only workflow evidence log blob SHA 0019cc384260d24d0d5f1fb26e7c55c694558f07.",
-    "No external account was accessed and no workflow was dispatched."
+    "User explicitly confirmed .me is correct; evidence class USER-PROVIDED.",
+    "research/account-workspace-inventory/source-register.md corrected and read-back verification pending.",
+    "logs/operation-log.md appended with OP-20261108-ACCOUNT-INVENTORY-CORRECTION-001.",
+    "logs/workflow-evidence.md appended; no GitHub Actions workflow was dispatched.",
+    "No Proton account was accessed and no external account/workspace facts were verified."
   ],
   "next_phase": "account_workspace_inventory",
-  "next_action": "Identify each account's platform using authorized evidence, then record visible workspace names, IDs, and counts separately.",
+  "next_action": "Only after authorized account/platform evidence is available, identify platform mappings and capture visible workspace names, IDs, and counts separately. Do not infer mappings.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261108-006",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json"
+    "checkpointId": "CKPT-20261108-007",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-007.json"
   },
   "readBackVerification": {
     "state/checkpoints/CKPT-20261108-007.json": "de787cb6e4dd54867200d013fd8c42871c652c8d",
