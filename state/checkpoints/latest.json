@@ -1,32 +1,32 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261108-006",
-  "checkpoint_no": 6,
-  "checkpointPath": "state/checkpoints/CKPT-20261108-006.json",
-  "timestamp": "2026-11-08T09:01:00+07:00",
+  "checkpointId": "CKPT-20261108-007",
+  "checkpoint_no": 7,
+  "checkpointPath": "state/checkpoints/CKPT-20261108-007.json",
+  "timestamp": "2026-11-08",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
-  "phase": "security_evidence_reconstruction",
+  "phase": "account_workspace_inventory",
   "status": "Inconclusive",
   "operationStatus": "Proven",
-  "summary": "Fresh security evidence reconstruction baseline stored in immutable checkpoint 006. Full security review remains open; repository settings, alert inventory, and deployed runtime evidence remain incomplete.",
+  "summary": "Separate account/workspace source register stored and read back. External account/platform/workspace facts remain unverified.",
   "evidence": [
-    "CKPT-20261108-006 read back and JSON parsed; blob SHA e3ff5608e11cdfcba9e8cf2d750ea77590e0175f.",
-    "Prior immutable checkpoint CKPT-20261028-005 retained; blob SHA c35c1a8bc0f8a1bea6c3f50c689b0ef4df156b28.",
-    "Append-only operation log read back; blob SHA 87c42b36fc7ab20512c35af9dbb40e2b7f23efc6.",
-    "Append-only workflow evidence log read back; blob SHA 167f2f880c71b1c77142166f7d897957536bf596.",
-    "Current repository main HEAD at investigation start: 48e9f64bebd7fb3821d6d03377d3713c46e51193.",
-    "No workflow was dispatched."
+    "Immutable checkpoint state/checkpoints/CKPT-20261108-007.json read back; blob SHA de787cb6e4dd54867200d013fd8c42871c652c8d.",
+    "Source register research/account-workspace-inventory/source-register.md read back; blob SHA 88884ad958ed75059c257d7ba1a4032d45c7b827.",
+    "Append-only operation log blob SHA 7fcac54f19cd60c3adec87dc365f04905a92d484.",
+    "Append-only workflow evidence log blob SHA 0019cc384260d24d0d5f1fb26e7c55c694558f07.",
+    "No external account was accessed and no workflow was dispatched."
   ],
-  "next_phase": "security_evidence_reconstruction",
-  "next_action": "Continue complete source and workflow review; retrieve actual Actions run/job evidence and resolve inaccessible GitHub security settings and deployed runtime evidence before classifying or closing any security group.",
+  "next_phase": "account_workspace_inventory",
+  "next_action": "Identify each account's platform using authorized evidence, then record visible workspace names, IDs, and counts separately.",
   "previousCheckpoint": {
-    "checkpointId": "CKPT-20261028-005",
-    "checkpointPath": "state/checkpoints/CKPT-20261028-005.json"
+    "checkpointId": "CKPT-20261108-006",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-006.json"
   },
   "readBackVerification": {
-    "state/checkpoints/CKPT-20261108-006.json": "e3ff5608e11cdfcba9e8cf2d750ea77590e0175f",
-    "logs/operation-log.md": "87c42b36fc7ab20512c35af9dbb40e2b7f23efc6",
-    "logs/workflow-evidence.md": "167f2f880c71b1c77142166f7d897957536bf596"
+    "state/checkpoints/CKPT-20261108-007.json": "de787cb6e4dd54867200d013fd8c42871c652c8d",
+    "research/account-workspace-inventory/source-register.md": "88884ad958ed75059c257d7ba1a4032d45c7b827",
+    "logs/operation-log.md": "7fcac54f19cd60c3adec87dc365f04905a92d484",
+    "logs/workflow-evidence.md": "0019cc384260d24d0d5f1fb26e7c55c694558f07"
   }
 }
