@@ -106,12 +106,11 @@
     "account_workspace_inventory": {
       "status": "Inconclusive",
       "evidence": [
-        "User supplied four email references and identifier foil-bite-584; source register stored separately.",
-        "User explicitly confirmed ACC-REF-002 is Prasong.me@proton.me; prior .com transcription superseded.",
-        "Correction operation and workflow evidence appended; no GitHub Actions workflow dispatched.",
-        "No external account/platform access or workspace count was verified."
+        "User stated ACC-REF-001 through ACC-REF-004 and foil-bite-584 are all on Notion; USER-PROVIDED.",
+        "Source register and append-only logs updated; checkpoint 009 created.",
+        "No Notion workspace membership or workspace count independently verified."
       ],
-      "notes": "Repository record and correction are documented. External account identity, platform mapping, access, and workspace inventory remain unverified."
+      "notes": "Platform assertion recorded. Next step is read-only inventory through the authorized Notion connection."
     }
   },
   "status": "Blocked",
