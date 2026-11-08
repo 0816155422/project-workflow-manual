@@ -338,3 +338,14 @@ The following scoped state writes were each read back immediately and JSON-parse
 - workspace display name and independent Notion API verification remain UNKNOWN.
 - supersedes the immediately preceding interpretation that `foil-bite-584` was a workspace name.
 - boundary: User-provided mapping recorded; no external Notion mutation or workflow dispatch.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-NOTION-ACCESS-004 — Connected Notion access attempt
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- date: `2026-11-08`
+- attempted read-only actions: Notion tool-access inspection, authenticated-user/workspace lookup, and search for workspace ID `foil-bite-584`.
+- observed result: each attempted Notion tool call failed before returning Notion data with the connector error: `link_id must identify an eligible linked account`.
+- authorization UI: no approval dialog, sign-in prompt, or recovery link was returned to the assistant in these calls.
+- interpretation: current Notion connector execution is blocked at linked-account selection/eligibility; this does not prove the Notion account or workspace is absent.
+- next action: resume Notion reads if/when an eligible linked account becomes available or the connector presents a user-facing authorization flow.
+- boundary: no Notion data or settings changed; no credentials requested; no write operation attempted in Notion.
