@@ -328,3 +328,13 @@ The following scoped state writes were each read back immediately and JSON-parse
 - prior interpretation as an account-like identifier is superseded.
 - file changed: `research/account-workspace-inventory/source-register.md`.
 - boundary: No Notion data or account settings changed; no workflow dispatched.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-WORKSPACE-ID-003 — Workspace ID and access-email mapping
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** that the user identified `foil-bite-584` as a workspace ID under the first access email, `Prasong5841@gmail.com` (ACC-REF-001).
+- date: `2026-11-08`
+- corrected classification: `workspace_id`, not `workspace_name`.
+- workspace display name and independent Notion API verification remain UNKNOWN.
+- supersedes the immediately preceding interpretation that `foil-bite-584` was a workspace name.
+- boundary: User-provided mapping recorded; no external Notion mutation or workflow dispatch.
