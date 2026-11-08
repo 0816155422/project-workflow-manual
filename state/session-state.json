@@ -32,7 +32,8 @@
     "2026-11-08: User confirmed Prasong.me@proton.me is correct; prior .com transcription was superseded in the separate account/workspace source register. No external account was accessed.",
     "2026-11-08: User stated all account references and foil-bite-584 are on Notion. Recorded as USER-PROVIDED; Notion membership and workspace inventory not independently verified.",
     "2026-11-08: User clarified foil-bite-584 is a workspace name inside a Notion account, not an account identifier. Checkpoint 012 records the corrected field semantics.",
-    "2026-11-08: User clarified foil-bite-584 is the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001), not the workspace name. Checkpoint 013 records this mapping."
+    "2026-11-08: User clarified foil-bite-584 is the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001), not the workspace name. Checkpoint 013 records this mapping.",
+    "2026-11-08: Read-only Notion tool access attempt blocked. Tool-access inspection, self lookup, and search each returned 'link_id must identify an eligible linked account'; no user-facing approval/sign-in prompt or recovery URL surfaced. Checkpoint 014 records the blocker."
   ],
   "status": "Blocked",
   "current_phase": "phase_5_approval_gated_sync",
@@ -57,13 +58,15 @@
   "activeTask": {
     "taskId": "ACCOUNT-WORKSPACE-INVENTORY-001",
     "phase": "account_workspace_inventory",
-    "status": "Inconclusive",
+    "status": "Blocked",
     "operationStatus": "Proven",
-    "summary": "foil-bite-584 is the user-confirmed workspace ID under the first Notion access email, Prasong5841@gmail.com (ACC-REF-001), not the workspace name.",
-    "nextAction": "Verify workspace ID foil-bite-584 through authorized Notion access for ACC-REF-001 and collect its display name and other visible workspace IDs.",
+    "summary": "User-confirmed: workspace ID foil-bite-584 is under first Notion access email Prasong5841@gmail.com (ACC-REF-001). Read-only Notion calls currently fail with 'link_id must identify an eligible linked account'; no authorization prompt or recovery URL surfaced.",
+    "nextAction": "Resume read-only Notion inspection when an eligible linked account becomes available or an authorization flow is presented; verify workspace ID and display name.",
     "evidenceRef": [
       "research/account-workspace-inventory/source-register.md",
-      "state/checkpoints/CKPT-20261108-013.json"
+      "logs/operation-log.md",
+      "logs/workflow-evidence.md",
+      "state/checkpoints/CKPT-20261108-014.json"
     ]
   }
 }
