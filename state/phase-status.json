@@ -104,14 +104,14 @@
       "legacyStatus": "proven"
     },
     "account_workspace_inventory": {
-      "status": "Inconclusive",
+      "status": "Blocked",
       "evidence": [
-        "Four supplied emails are USER-PROVIDED Notion access/login emails, not account names.",
-        "foil-bite-584 is USER-PROVIDED as the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001).",
-        "Workspace display name and independent Notion API verification remain UNKNOWN.",
-        "Source register, operation log, workflow evidence, and checkpoint 013 record the correction."
+        "User-confirmed: foil-bite-584 is the workspace ID under first access email Prasong5841@gmail.com (ACC-REF-001).",
+        "Read-only Notion tool-access inspection, self lookup, and search attempted; all failed with 'link_id must identify an eligible linked account'.",
+        "No user-facing approval/sign-in prompt or recovery URL surfaced.",
+        "Operation log, workflow evidence, and checkpoint 014 record the connector blocker."
       ],
-      "notes": "Next action: verify workspace ID foil-bite-584 through authorized Notion access for ACC-REF-001; collect display name and other visible workspace IDs."
+      "notes": "This is a connector execution/eligible-link blocker, not evidence that the Notion account or workspace is absent. Resume reads when an eligible linked account or authorization flow is available."
     }
   },
   "status": "Blocked",
