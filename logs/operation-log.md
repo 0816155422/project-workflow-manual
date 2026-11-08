@@ -283,3 +283,14 @@ The following scoped state writes were each read back immediately and JSON-parse
 - file changed: `research/account-workspace-inventory/source-register.md`.
 - safety boundary: No Proton login, account lookup, settings change, credential collection, or workflow dispatch occurred.
 - next_safe_action: Obtain authorized platform/account evidence before attempting any platform mapping or workspace inventory.
+
+
+## OP-20261108-ACCOUNT-INVENTORY-PLATFORM-001 — User-provided Notion platform mapping
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- status: **Proven** that the user stated all listed references are on Notion; actual account/workspace mapping **Not verified**.
+- date: `2026-11-08`
+- objective: Record the user's platform clarification for ACC-REF-001 through ACC-REF-004 and `foil-bite-584` without treating it as independently verified account evidence.
+- source: User statement in the current conversation: all are on Notion.
+- file changed: `research/account-workspace-inventory/source-register.md`.
+- boundary: No Notion content was read by this repository update; no workspace count or membership is claimed.
+- next_safe_action: Use the authorized Notion connection to inspect the accessible workspace and record only visible, source-backed workspace details.
