@@ -28,7 +28,8 @@
     "ResumeStateGuard hardened to plugin version 0.1.1; plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25.",
     "Created immutable checkpoint CKPT-20261028-004 and read it back; prior checkpoint CKPT-20261028-003 retained.",
     "Repository skill read-back confirms all five core function contracts, allowed status taxonomy, immutable checkpoint order, and read-back after each write.",
-    "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment."
+    "State/log hardening did not dispatch a workflow and did not change course data, validation logic, sync logic, frontend, or deployment.",
+    "2026-11-08: User confirmed Prasong.me@proton.me is correct; prior .com transcription was superseded in the separate account/workspace source register. No external account was accessed."
   ],
   "status": "Blocked",
   "current_phase": "phase_5_approval_gated_sync",
@@ -55,11 +56,11 @@
     "phase": "account_workspace_inventory",
     "status": "Inconclusive",
     "operationStatus": "Proven",
-    "summary": "Separate source register created from user-provided account references; external accounts and workspace counts not verified.",
-    "nextAction": "Identify each account's platform from authorized evidence, then capture visible workspace names, IDs, and counts separately.",
+    "summary": "Separate account/workspace register updated with the user-confirmed Proton .me address; external accounts and workspace counts remain unverified.",
+    "nextAction": "Identify platform mappings only from authorized evidence, then capture visible workspace names, IDs, and counts separately.",
     "evidenceRef": [
       "research/account-workspace-inventory/source-register.md",
-      "state/checkpoints/CKPT-20261108-007.json"
+      "state/checkpoints/CKPT-20261108-008.json"
     ]
   }
 }
