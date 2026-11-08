@@ -159,6 +159,6 @@ The source document preserves each conflict as unresolved or historical; no conf
 ## Task Closure
 - TASK-009: COMPLETE
 - Snapshot: PERSISTED
-- Read-back: PENDING
+- Read-back: VERIFIED
 - TASK-010: NOT STARTED
 - WORKSPACE: EMPTY
