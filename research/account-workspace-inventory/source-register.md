@@ -10,9 +10,9 @@ Collect account and workspace information in a separate repository area. This re
 - Do not infer that an email address, account identifier, or platform identity belongs to the same account without direct evidence.
 - Do not record passwords, recovery codes, API keys, session tokens, or other secrets.
 
-## User-provided account references
+## User-provided access emails
 
-| Record | Account reference | User-described significance | Evidence status |
+| Record | Access email / login identifier | User-described significance | Evidence status |
 |---|---|---|---|
 | ACC-REF-001 | `Prasong5841@gmail.com` | User identified this as the starting point and turning point. | User-provided; Notion platform association stated by user; account access not independently verified. |
 | ACC-REF-002 | `Prasong.me@proton.me` | User described this as containing extensive AI image-generation work and methods for correcting issues before SMPE existed. | User-provided; Notion platform association stated by user; account access not independently verified. |
@@ -53,7 +53,7 @@ Collect account and workspace information in a separate repository area. This re
 | Workspace counts verified | 0 |
 | Workspace names/IDs verified | 0 |
 
-The four email addresses must not be assumed to represent four accounts on one platform. Workspace totals remain unknown until platform-specific account and workspace evidence is available.
+The four email addresses are access/login identifiers supplied by the user, not account names. They must not be treated as Notion user display names or used to infer the number of accounts. Workspace totals remain unknown until the actual accessible account/workspace structure is evidenced.
 
 ## Next safe action
 Use the authorized Notion connection, if available, to inspect the accessible workspace and collect visible workspace names, IDs, and counts. Do not assume every listed reference maps to a distinct Notion identity.
@@ -77,8 +77,18 @@ Use the authorized Notion connection, if available, to inspect the accessible wo
 ## Connected Notion workspace observation — 2026-11-08
 - Read-only Notion connection identity returned: user `prasong seelaprasong`, email `prasong5843@gmail.com`.
 - Connected workspace returned: `prasong seelaprasong’s Space`, workspace ID `320089a7-5dad-81c4-b5e0-00039875cd52`.
-- This connected identity email is not the same string as any of the four account references in this register. No equivalence is inferred.
-- Notion user lookup for each of the four supplied email addresses returned no user records in this connected workspace.
+- The connected integration returned this user identity. Its relationship to the four supplied access emails is UNKNOWN; no equivalence or mismatch in underlying account ownership is inferred.
+- A Notion user lookup using each supplied access email returned no user records in this connected workspace. Because these values are access emails rather than account names, this result does not establish whether the corresponding accounts exist or whether the emails can be used to access other workspaces.
 - A Notion content search for `foil-bite-584` returned no results. Content searches for the four email strings returned page results, but inspection of the two fetched candidate pages did not find the exact strings. Search results are not proof that the referenced accounts are members of this workspace.
 - Evidence class: OBSERVED from the connected Notion integration. Search scope is limited to this one connected workspace and the tool's search behavior; absence from these results does not prove absence elsewhere in Notion.
 - Workspace membership for ACC-REF-001 through ACC-REF-004 and `foil-bite-584` remains UNKNOWN.
+
+
+## User clarification — email field semantics
+- Date recorded: `2026-11-08`.
+- The user clarified that all four supplied email addresses are emails used to access Notion, not account names.
+- The four email values must therefore be stored as `access_email` / `login_identifier`, never as `account_name` or Notion display name.
+- The Notion user-lookup results obtained by searching these strings do not prove that the related accounts do not exist, and do not establish workspace membership or non-membership.
+- The connected Notion identity `prasong seelaprasong` / `prasong5843@gmail.com` is an observed identity for the current integration connection only. Its relationship to the four access emails remains UNKNOWN.
+- `foil-bite-584` remains a separate user-provided identifier; its exact field meaning and relationship to any access email are UNKNOWN.
+- Evidence class: USER-PROVIDED for the clarification; OBSERVED for the integration identity and returned lookup results.
