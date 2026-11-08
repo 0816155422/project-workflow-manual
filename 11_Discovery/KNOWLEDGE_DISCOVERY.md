@@ -150,6 +150,6 @@ Only existing knowledge-related records and their explicit statuses were discove
 ## Task Closure
 - TASK-008: COMPLETE
 - Snapshot: PERSISTED
-- Read-back: PENDING
+- Read-back: VERIFIED
 - TASK-009: NOT STARTED
 - WORKSPACE: EMPTY
