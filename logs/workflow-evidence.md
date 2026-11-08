@@ -431,3 +431,13 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - account/access email association and workspace ID remain UNKNOWN.
 - prior classification as an account-like identifier is superseded.
 - no Notion mutation and no GitHub Actions workflow dispatch occurred.
+
+
+## 2026-11-08 — Workspace ID and first access-email mapping correction
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- source: User explicitly stated `foil-bite-584` is the workspace ID under the first access email, `Prasong5841@gmail.com`.
+- corrected field classification: `workspace_id`, associated with ACC-REF-001.
+- supersedes prior classification as `workspace_name`.
+- workspace display name and independent Notion read-back remain UNKNOWN.
+- evidence class: USER-PROVIDED; no Notion API verification claimed.
+- no external mutation and no GitHub Actions workflow dispatch occurred.
