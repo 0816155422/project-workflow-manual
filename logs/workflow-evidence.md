@@ -412,3 +412,13 @@ Only append entries grounded in actual GitHub Actions runs. Each entry must incl
 - content search: zero results for `foil-bite-584`; candidate pages were returned for email-string queries, but exact-string inspection of two fetched pages found none of the identifiers.
 - scope limitation: One connected workspace only; search results do not prove absence from other Notion workspaces or account membership.
 - workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
+
+
+## 2026-11-08 — Access-email semantics correction
+- task_id: `ACCOUNT-WORKSPACE-INVENTORY-001`
+- source: User clarified that all four supplied emails are used to access Notion and are not account names.
+- corrected field meaning: `access_email` / `login_identifier`, not `account_name` / display name.
+- interpretation: No-record results from user lookup using these emails do not establish account non-existence or workspace non-membership.
+- connected integration identity remains an observed connection identity only; relationship to the supplied emails is unknown.
+- `foil-bite-584` remains an unclassified separate identifier.
+- no account mutation, workspace mutation, or GitHub Actions workflow dispatch occurred.
