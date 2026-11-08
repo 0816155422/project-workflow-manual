@@ -337,3 +337,20 @@ The following scoped state writes were each read back immediately and JSON-parse
 - main modified: NO; merge: NO; canonical promotion: NO; historical checkpoints modified: NO.
 - workflow activity for this log write: no workflow dispatched by this operation; the cited test run is the separate actual Actions run above.
 - next safe action: read back implementation/test records and logs, create immutable child checkpoint 011, then update latest pointer and state sequentially.
+
+
+## OP-20261108-007 — TASK-SEC-001 security surface discovery
+- task_id: TASK-SEC-001
+- status: **Inconclusive** for overall security posture; **Proven** for scoped repository/source observations and report read-back.
+- timestamp: 2026-11-08
+- branch: reconstruction/operating-work-lifecycle-state
+- branch HEAD before report creation: f15604217ccc9f8ff57d94368eb052b81be90388
+- report: 17_Discovery/SECURITY_SURFACE_DISCOVERY.md
+- report creation commit: 8861354a82c9251d7e1b1a57acb6c068dda931e4
+- report read-back blob SHA: f7a6e2f75442999bffe5a7ec065e2a990b63fc76
+- findings: repository is public; all seven returned branches have protected=false; rulesets endpoint returned []; two workflows declare contents:write; CodeQL matrix covers JavaScript/TypeScript only; repository secret scan is heuristic and path-limited; MCP bearer authentication and write-path controls were inspected; audit append failure does not necessarily fail the MCP response.
+- unresolved: GitHub security alert/settings inventory, complete collaborator inventory, full history-wide secret scan, Vercel deployed runtime and environment settings, runtime auth/rate-limit behavior, and durable audit persistence.
+- source evidence: GitHub repository metadata, branches API, rulesets API, recursive working-branch tree, GitHub Contents API, and source files recorded in the discovery report.
+- workflow activity: No GitHub Actions workflow was dispatched. No deployment or runtime request was initiated.
+- safety: no workflow, application code, repository security setting, credential, or deployment configuration was changed; main was not modified or merged.
+- next safe action: obtain independent GitHub security-alert/settings evidence and deployed Vercel runtime evidence; do not close security groups before reconciliation.
