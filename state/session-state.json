@@ -4,7 +4,7 @@
   "repositoryId": 1432201372,
   "branch": "reconstruction/operating-work-lifecycle-state",
   "updatedAt": "2026-11-08",
-  "currentPhase": "cross_platform_workspace_lifecycle",
+  "currentPhase": "security_surface_discovery",
   "overallStatus": "Blocked",
   "lastRun": {
     "workflow": "Validate OpenAI research evidence",
@@ -13,7 +13,7 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Obtain authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace access if available, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E.",
+  "nextAction": "Obtain independent GitHub security-alert/settings evidence and deployed Vercel runtime evidence; reconcile them with the source-level discovery before any security group is considered for closure.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
@@ -33,10 +33,10 @@
     "2026-11-08: Cross-platform Workspace Lifecycle coordination package added on designated working branch. GitHub Actions run 42414689846 passed 13 isolated Fake Adapter tests. Native ChatGPT/GitHub host binding, Codespace, and Raw Database integration remain blocked; no live cross-platform runtime integration is claimed."
   ],
   "status": "Inconclusive",
-  "current_phase": "cross_platform_workspace_lifecycle",
-  "last_verified_phase": "workspace_lifecycle_isolated_tests",
-  "next_action": "Obtain authorized ChatGPT host invocation, GitHub adapter host-client binding, Codespace access if available, and the actual Raw Database location/write contract before enabling durable persistence or claiming live E2E.",
-  "blocker": "Live ChatGPT host binding, GitHub runtime adapter host-client binding, Codespace access, and authorized durable Raw Database location/write contract are not proven. The current package and Fake Adapter tests are proven independently.",
+  "current_phase": "security_surface_discovery",
+  "last_verified_phase": "task_sec_001_source_discovery_readback",
+  "next_action": "Obtain independent GitHub security-alert/settings evidence and deployed Vercel runtime evidence; reconcile them with the source-level discovery before any security group is considered for closure.",
+  "blocker": "GitHub security-alert/settings inventory, complete collaborator inventory, full history-wide secret scan, Vercel deployed runtime/environment evidence, and durable MCP audit persistence remain Not proven or inaccessible.",
   "missing_inputs": [
     "main_ai_mcp_host_binding_and_invocation_evidence",
     "authoritative_shared_external_state_target",
@@ -48,7 +48,14 @@
     "raw_database_physical_location_and_access_contract",
     "temporary_workspace_runtime_location_and_cleanup_evidence",
     "iris_storage_lifecycle_source_artifacts_and_mapping_to_workflow_lifecycle",
-    "exact_exportable_source_locators_for_prior_user_confirmed_conversation_records"
+    "exact_exportable_source_locators_for_prior_user_confirmed_conversation_records",
+    "github_dependabot_and_code_scanning_alert_inventory",
+    "github_secret_scanning_and_push_protection_settings",
+    "complete_collaborator_and_outside_collaborator_inventory",
+    "history_wide_secret_scan_evidence",
+    "vercel_project_and_environment_configuration",
+    "deployed_mcp_runtime_auth_rate_limit_and_audit_persistence_evidence",
+    "independent_security_discovery_verification"
   ],
   "evidence_ref": [
     "state/checkpoints/CKPT-20261028-004.json (blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f)",
@@ -81,7 +88,16 @@
     "state/checkpoints/CKPT-20261108-011.json (blob SHA e192352ad2a32dcc9beb8dbe434de1c54e1fd609)",
     "GitHub Actions run 42414689846 (13 passed, 0 failed)",
     "workspace_lifecycle/records/implementation-record.md",
-    "workspace_lifecycle/records/test-result.md"
+    "workspace_lifecycle/records/test-result.md",
+    "13_Discovery/REVISION_DISCOVERY.md (blob SHA 8bec41df33e960deabf2186dc7132ee5454cbdca)",
+    "14_Discovery/PROVENANCE_DISCOVERY.md (blob SHA 0b5cad91f2647a8eee0a131be2efd0221acdeb30)",
+    "15_Discovery/VERIFICATION_DISCOVERY.md (blob SHA 826d129f8e47adb61b06d016d42955699d5ca6fb)",
+    "16_Discovery/TRACEABILITY_DISCOVERY.md (blob SHA 0c0b727b9b7f81d851af24976b9e648d1dfe66f1)",
+    "17_Discovery/SECURITY_SURFACE_DISCOVERY.md (blob SHA 824deb9c198705e6ebc0e39d35065555b4ae0870)",
+    "state/checkpoints/CKPT-20261108-012.json (blob SHA 66e4d6ea727cba602eb89f4bcd2aa9a3d9d6a22a)",
+    "state/checkpoints/latest.json (blob SHA 3e4d27f1e3f8bc53b53066b065e1ea41a0cb896c)",
+    "logs/operation-log.md (blob SHA b0c1bff65356f0ab86438fb8130d8d0e7304fcec)",
+    "logs/workflow-evidence.md (blob SHA 503b6fe9b1a7f25742be48c82eded8a309738e95)"
   ],
   "currentReconstructionFocus": "System Translation: Operating Structure + Work Lifecycle + State Network",
   "currentFundamentalRelation": "State/Condition → Action → State/Condition",
@@ -93,9 +109,9 @@
     "creationCommitSha": "97ce2c72cde8497678e54882e1f041de517ad2e8"
   },
   "currentCheckpoint": {
-    "checkpointId": "CKPT-20261108-011",
-    "checkpointPath": "state/checkpoints/CKPT-20261108-011.json",
-    "blobSha": "e192352ad2a32dcc9beb8dbe434de1c54e1fd609"
+    "checkpointId": "CKPT-20261108-012",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-012.json",
+    "blobSha": "66e4d6ea727cba602eb89f4bcd2aa9a3d9d6a22a"
   },
   "reconstructionNextAction": "Continue source recovery from existing SMPE, handoff/room packet, Raw Database, Temporary Workspace, and IRIS Storage Lifecycle artifacts if available. Do not invent missing transitions, create modules, merge main, or promote canonical.",
   "canonicalPromotion": "NO",
@@ -182,5 +198,12 @@
     "mainModified": false,
     "mainMerge": "NO",
     "canonicalPromotion": "NO"
+  },
+  "securityDiscovery": {
+    "status": "Inconclusive",
+    "report": "17_Discovery/SECURITY_SURFACE_DISCOVERY.md",
+    "readBack": "Verified",
+    "mainMerge": "NO",
+    "workflowDispatched": false
   }
 }
