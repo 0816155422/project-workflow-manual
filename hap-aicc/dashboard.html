@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HAP/AICC MCP repository dashboard">
+  <title>HAP/AICC MCP Dashboard</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#121d2e;--line:#26364b;--text:#e5edf7;--muted:#9aabc0;--cyan:#67e8f9;--green:#4ade80;--red:#fb7185;--amber:#fbbf24}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px}
+    main{max-width:1180px;margin:auto}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px}
+    header,.row,.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{font-size:1.55rem;margin:0;color:var(--cyan)}h2,h3{margin:0 0 12px}p{margin:8px 0;color:var(--muted)}small,.muted{color:var(--muted)}label{display:block;color:var(--muted);font-size:.85rem;margin-bottom:5px}
+    .grid{display:grid;grid-template-columns: minmax(240px,1fr) minmax(0,2fr);gap:18px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field-wide{grid-column:1/-1}
+    input,textarea,button{font:inherit}input,textarea{width:100%;padding:10px 12px;background:#08111e;color:var(--text);border:1px solid var(--line);border-radius:8px}textarea{min-height:320px;resize:vertical;font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+    button{border:1px solid #155e75;background:#0e7490;color:white;border-radius:8px;padding:9px 13px;cursor:pointer}button.secondary{background:#1e293b;border-color:var(--line)}button.danger{background:#9f1239;border-color:#be123c}button:disabled{opacity:.55;cursor:wait}
+    .status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--amber);font-size:.85rem}.status.ok{color:var(--green)}.status.bad{color:var(--red)}
+    ul{list-style:none;padding:0;margin:0;max-height:430px;overflow:auto}li.file{border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;overflow-wrap:anywhere}li.file button{border:0;background:transparent;color:var(--cyan);padding:0;text-align:left;width:100%}
+    .warning{border-left:4px solid var(--amber);padding:9px 12px;background:#422006;color:#fde68a;border-radius:4px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.85rem}td,th{text-align:left;padding:9px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}.error{color:var(--red);white-space:pre-wrap}.success{color:var(--green);white-space:pre-wrap}
+    @media(max-width:760px){body{padding:12px}.grid,.fields{grid-template-columns:1fr}.field-wide{grid-column:auto}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="panel">
+    <div><h1>⚡ HAP/AICC MCP Dashboard</h1><p>0816155422/project-workflow-manual · dashboard.html</p></div>
+    <div class="row"><span id="health-status" class="status">Health not checked</span><button id="health-button" class="secondary" type="button">Check health</button></div>
+  </header>
+  <section class="panel">
+    <h2>Session connection</h2>
+    <p class="warning">อย่าใช้คีย์ที่มีสิทธิ์เขียนในหน้าเว็บสาธารณะโดยไม่เข้าใจความเสี่ยง คีย์ที่กรอกจะอยู่ในหน่วยความจำของหน้าเว็บเท่านั้น แต่สคริปต์ที่ทำงานในหน้านี้หรือส่วนขยายเบราว์เซอร์อาจเข้าถึงได้ และการเรียก API จากเบราว์เซอร์อาจถูกจำกัดด้วย CORS</p>
+    <div class="fields" style="margin-top:14px">
+      <div><label for="mcp-url">MCP endpoint URL (ลงท้ายด้วย /mcp)</label><input id="mcp-url" type="url" autocomplete="url" placeholder="https://your-vercel-domain.example/mcp"></div>
+      <div><label for="mcp-key">MCP_API_KEY (ไม่ถูกบันทึกใน localStorage)</label><input id="mcp-key" type="password" autocomplete="off" placeholder="Bearer secret"></div>
+    </div>
+  </section>
+  <div class="grid">
+    <section class="panel"><div class="row"><h2>Tracked files</h2><button id="list-button" type="button">Refresh list</button></div>
+      <div class="actions" style="margin:8px 0 12px"><button id="repo-button" class="secondary" type="button">Repository status</button></div>
+      <ul id="file-list"><li class="muted">กด Refresh list เพื่อโหลดไฟล์จาก repository</li></ul>
+    </section>
+    <section class="panel"><div class="row"><h2>File editor</h2><code id="active-path" class="muted">No file selected</code></div>
+      <label for="file-editor">File content</label><textarea id="file-editor" spellcheck="false" placeholder="เลือกไฟล์จากรายการด้านซ้าย"></textarea>
+      <div class="fields" style="margin-top:12px"><div class="field-wide"><label for="commit-message">Commit message</label><input id="commit-message" maxlength="180" value="Update via HAP/AICC MCP Dashboard"></div></div>
+      <div class="actions" style="margin-top:12px"><button id="write-button" class="danger" type="button">Write file via MCP</button><span id="action-status" class="muted" role="status" aria-live="polite"></span></div>
+    </section>
+  </div>
+  <section class="panel"><div class="row"><h2>Recent audit records</h2><button id="audit-button" class="secondary" type="button">Load audit tail</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Timestamp</th><th>Tool</th><th>Path</th><th>Status</th><th>Duration</th></tr></thead><tbody id="audit-body"><tr><td colspan="5" class="muted">ยังไม่ได้โหลด audit records</td></tr></tbody></table></div>
+  </section>
+</main>
+<script>
+(() => {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  let selectedPath = '';
+  const protectedPath = (path) => path.startsWith('.github/workflows/') || /(^|\/)\.env($|\.)/.test(path) || path === 'logs/mcp-audit.jsonl' || path.startsWith('/') || path.split('/').some(part => part === '.' || part === '..') || path.includes('\\');
+  function endpoint() {
+    const value = $('mcp-url').value.trim().replace(/\/$/, '');
+    if (!value) throw new Error('Enter the MCP endpoint URL first.');
+    if (!/^https?:\/\//i.test(value)) throw new Error('Endpoint must be an absolute HTTP(S) URL.');
+    return value;
+  }
+  async function callTool(name, args = {}) {
+    const url = endpoint();
+    const key = $('mcp-key').value;
+    if (!key) throw new Error('Enter MCP_API_KEY for this session.');
+    const response = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`}, body:JSON.stringify({jsonrpc:'2.0',id:crypto.randomUUID(),method:'tools/call',params:{name,arguments:args}})});
+    const raw = await response.text();
+    let data; try { data = raw ? JSON.parse(raw) : {}; } catch { throw new Error(`Unexpected server response (HTTP ${response.status}).`); }
+    if (!response.ok) throw new Error(data.message || data.error?.message || `HTTP ${response.status}`);
+    if (data.error) throw new Error(`${data.error.message || 'MCP request failed'} (${data.error.code ?? 'unknown'})`);
+    const result = data.result;
+    if (result?.isError) throw new Error(result.content?.map(item => item.text || '').join('\n') || 'MCP tool reported an error.');
+    const text = result?.content?.find(item => item.type === 'text')?.text;
+    if (typeof text === 'string') { try { return JSON.parse(text); } catch { return text; } }
+    return result;
+  }
+  function showError(error) { $('action-status').className='error'; $('action-status').textContent=error.message || String(error); }
+  function renderFiles(result) {
+    const list = $('file-list'); list.replaceChildren();
+    const files = Array.isArray(result?.files) ? result.files : [];
+    if (!files.length) { const li=document.createElement('li'); li.className='muted'; li.textContent='No files returned.'; list.append(li); return; }
+    for (const file of files) {
+      const path = typeof file === 'string' ? file : file.path;
+      if (typeof path !== 'string') continue;
+      const li=document.createElement('li'); li.className='file'; const button=document.createElement('button'); button.type='button'; button.textContent=`📄 ${path}`; button.addEventListener('click',()=>loadFile(path)); li.append(button); list.append(li);
+    }
+  }
+  async function loadFile(path) {
+    selectedPath=path; $('active-path').textContent=path; $('action-status').textContent='Reading…';
+    try { const result=await callTool('read_file',{path}); $('file-editor').value=typeof result?.content==='string'?result.content:JSON.stringify(result,null,2); $('action-status').className='success'; $('action-status').textContent=`Loaded ${path}`; }
+    catch(error){showError(error);}
+  }
+  async function loadAudit() {
+    try {
+      const result=await callTool('audit_log_tail',{lines:20}); const records=Array.isArray(result?.records)?result.records:[]; const body=$('audit-body'); body.replaceChildren();
+      if(!records.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=5;td.className='muted';td.textContent='No audit records returned.';tr.append(td);body.append(tr);return;}
+      for(const record of records){const tr=document.createElement('tr'); for(const value of [record.timestamp,record.tool,record.path,record.status,record.duration_ms == null ? '' : `${record.duration_ms} ms`]){const td=document.createElement('td');td.textContent=value == null ? '—' : String(value);tr.append(td);} body.append(tr);}
+    } catch(error){showError(error);}
+  }
+  $('health-button').addEventListener('click',async()=>{
+    const status=$('health-status');
+    try { const base=endpoint().replace(/\/mcp$/,''); const response=await fetch(`${base}/mcp/health`); const data=await response.json(); if(!response.ok||data.ok!==true) throw new Error(`Health check failed (HTTP ${response.status}).`); status.className='status ok'; status.textContent=`Ready · ${data.repository || data.service || 'Online'}`; }
+    catch(error){status.className='status bad';status.textContent=error.message;}
+  });
+  $('list-button').addEventListener('click',async()=>{try{renderFiles(await callTool('list_files'));}catch(error){showError(error);}});
+  $('repo-button').addEventListener('click',async()=>{try{const result=await callTool('repository_status');$('action-status').className='success';$('action-status').textContent=JSON.stringify(result,null,2);}catch(error){showError(error);}});
+  $('audit-button').addEventListener('click',loadAudit);
+  $('write-button').addEventListener('click',async()=>{
+    const path=selectedPath, content=$('file-editor').value, message=$('commit-message').value.trim();
+    if(!path){showError(new Error('Select a file before writing.'));return;}
+    if(protectedPath(path)){showError(new Error('This path is protected by the dashboard guardrail.'));return;}
+    if(message.length<3||message.length>180){showError(new Error('Commit message must be 3–180 characters.'));return;}
+    if(!window.confirm(`Write ${path} to the repository? This creates a Git commit.`))return;
+    try{const result=await callTool('write_file',{path,content,message});$('action-status').className='success';$('action-status').textContent=`Write completed: ${result?.commit || 'commit created'} · ${path}`;await loadAudit();}
+    catch(error){showError(error);}
+  });
+  window.addEventListener('pagehide',()=>{$('mcp-key').value='';});
+})();
+</script>
+</body>
+</html>
