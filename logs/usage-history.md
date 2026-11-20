@@ -221,3 +221,12 @@ This file records actual workflow-run evidence only. Entries are appended by `sc
 - Commit SHA: a29c7e3b9190d90815bba42fb57437ec8b2f20e8
 - Evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/44532641137
 - Note: Scheduled evidence capture; consult linked run for final conclusion.
+
+## 2026-11-20T13:01:31.478Z — scheduled evidence capture
+- Actor: 0816155422
+- Status: Inconclusive
+- Workflow: Generate Append-only Usage and Workflow Evidence
+- Run ID: 44740666922
+- Commit SHA: d8eb798b050f50269ade0e920d822356956ca5aa
+- Evidence URL: https://github.com/0816155422/project-workflow-manual/actions/runs/44740666922
+- Note: Scheduled evidence capture; consult linked run for final conclusion.

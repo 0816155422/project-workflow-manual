@@ -254,6 +254,17 @@
       "commitSha": "a29c7e3b9190d90815bba42fb57437ec8b2f20e8",
       "evidenceUrl": "https://github.com/0816155422/project-workflow-manual/actions/runs/44532641137",
       "note": "Scheduled evidence capture; consult linked run for final conclusion."
+    },
+    {
+      "timestamp": "2026-11-20T13:01:31.478Z",
+      "actor": "0816155422",
+      "task": "scheduled evidence capture",
+      "status": "Inconclusive",
+      "workflow": "Generate Append-only Usage and Workflow Evidence",
+      "runId": "44740666922",
+      "commitSha": "d8eb798b050f50269ade0e920d822356956ca5aa",
+      "evidenceUrl": "https://github.com/0816155422/project-workflow-manual/actions/runs/44740666922",
+      "note": "Scheduled evidence capture; consult linked run for final conclusion."
     }
   ]
 }
