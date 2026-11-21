@@ -349,3 +349,27 @@ The following scoped state writes were each read back immediately and JSON-parse
 - interpretation: current Notion connector execution is blocked at linked-account selection/eligibility; this does not prove the Notion account or workspace is absent.
 - next action: resume Notion reads if/when an eligible linked account becomes available or the connector presents a user-facing authorization flow.
 - boundary: no Notion data or settings changed; no credentials requested; no write operation attempted in Notion.
+
+
+## OP-20261122-RESUMESTATEGUARD-VALIDATION-001 — Read-only ResumeStateGuard system test
+- task_id: `RESUMESTATEGUARD-TEST-001`
+- status: **Inconclusive** — required reads and checkpoint resolution passed; current state conflict prevents a coherent current-phase result.
+- timestamp: `2026-11-22T06:47:00+07:00`
+- repository: `0816155422/project-workflow-manual`
+- branch: `main`
+- observed HEAD before evidence append: `e686cdc6f16c8202dce402ac802695ae5a6e9be9`
+- objective: Exercise ResumeStateGuard readCurrentState/getNextAction decision rules against the configured repository without modifying business data or dispatching workflows.
+- checks:
+  - PASS: all six required state/log files were readable from GitHub Contents API.
+  - PASS: `state/checkpoints/latest.json` resolved to `state/checkpoints/CKPT-20261108-014.json`; checkpoint ID and path matched.
+  - PASS: immutable checkpoint inventory contains checkpoints 002–005 and 006–014; no checkpoint 015 existed before this test.
+  - PASS: repository skill `skills/resume-state-guard/SKILL.md` read back; status taxonomy, required usage order, checkpoint read-back, and append-only logging rules were present.
+  - INCONCLUSIVE: `session-state.json` currentPhase is `phase_5_approval_gated_sync`, while latest checkpoint and activeTask identify `account_workspace_inventory`.
+  - INCONCLUSIVE: top-level nextAction requests real course records and approval, while latest checkpoint and activeTask nextAction request read-only Notion inspection after an eligible linked account becomes available.
+  - PASS: phase-status and latest checkpoint both show account workspace inventory as Blocked; blocker is the Notion connector error `link_id must identify an eligible linked account`.
+- derived readCurrentState result: status `Inconclusive`; blocker preserved; evidence references preserved; no destructive repair attempted.
+- derived getNextAction result: follow the latest checkpoint/activeTask next safe action only: resume read-only Notion inspection when an eligible linked account or authorization flow is available. Do not retry with an ineligible link and do not bypass the blocker.
+- workflow: no workflow was dispatched; no run ID exists for this test.
+- mutation boundary: no business files, course data, approval records, sync configuration, Notion content, or workflow definitions were changed.
+- evidence source: GitHub Contents API reads, repository tree at HEAD, and skill read-back.
+- next_step: resolve the stale top-level phase/nextAction conflict through an explicitly scoped state reconciliation; then rerun readCurrentState before resuming the blocked Notion task.
