@@ -1,25 +1,23 @@
 {
   "schemaVersion": "1.0",
-  "checkpointId": "CKPT-20261122-015",
-  "checkpoint_no": 15,
-  "checkpointPath": "state/checkpoints/CKPT-20261122-015.json",
-  "timestamp": "2026-11-22T06:47:00+07:00",
+  "checkpointId": "CKPT-20261122-016",
+  "checkpoint_no": 16,
+  "checkpointPath": "state/checkpoints/CKPT-20261122-016.json",
+  "timestamp": "2026-11-22",
   "repository": "0816155422/project-workflow-manual",
   "branch": "main",
   "phase": "account_workspace_inventory",
-  "status": "Inconclusive",
+  "status": "Proven",
   "operationStatus": "Proven",
-  "summary": "ResumeStateGuard read-only validation: required reads, latest checkpoint resolution, checkpoint inventory, and skill contract checks passed. State sources conflict on currentPhase and nextAction; no automatic repair was made.",
+  "summary": "State reconciliation verified: active account_workspace_inventory task is now the session current phase; the separate course_data_pipeline state remains explicitly Blocked and preserved.",
   "evidence": [
-    "logs/operation-log.md#OP-20261122-RESUMESTATEGUARD-VALIDATION-001",
-    "operation-log blob SHA f1039aabcd0d5157a00882bc22e1bf13ca85ef44",
-    "All six required state/log files read from main at pre-test HEAD e686cdc6f16c8202dce402ac802695ae5a6e9be9",
-    "state/checkpoints/CKPT-20261108-014.json read-back blob SHA d553cb8addb412bc8699da84b5e72b70293dab74",
-    "skills/resume-state-guard/SKILL.md read-back blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df",
-    "No workflow was dispatched; no run ID exists."
+    "state/checkpoints/CKPT-20261122-016.json blob SHA a0f101a8af577c4f4c752feb3a13848348b4d5d7",
+    "logs/operation-log.md#OP-20261122-RESUMESTATEGUARD-RECONCILIATION-001; read-back blob SHA 67347ac5f35e64850220abce3b5e8a30662b06cf",
+    "state/phase-status.json blob SHA 6e6239fbcd69bfb9476640c4ca785b37d7c7ef37",
+    "Previous checkpoint CKPT-20261122-015 retained unchanged."
   ],
   "next_phase": "account_workspace_inventory",
-  "next_action": "Resolve the stale session-state currentPhase/nextAction conflict with a scoped, evidence-preserving state reconciliation; then rerun readCurrentState. Resume read-only Notion inspection only when an eligible linked account or authorization flow is available.",
+  "next_action": "Update session-state.json to align its currentPhase and nextAction with the activeTask/checkpoint, while preserving course_data_pipeline in parallelWorkstreams; then read back all changed and required files.",
   "previousCheckpoint": {
     "checkpointId": "CKPT-20261108-014",
     "checkpointPath": "state/checkpoints/CKPT-20261108-014.json"
