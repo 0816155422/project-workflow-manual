@@ -373,3 +373,22 @@ The following scoped state writes were each read back immediately and JSON-parse
 - mutation boundary: no business files, course data, approval records, sync configuration, Notion content, or workflow definitions were changed.
 - evidence source: GitHub Contents API reads, repository tree at HEAD, and skill read-back.
 - next_step: resolve the stale top-level phase/nextAction conflict through an explicitly scoped state reconciliation; then rerun readCurrentState before resuming the blocked Notion task.
+
+
+## OP-20261122-RESUMESTATEGUARD-RECONCILIATION-001 — Separate active task from parallel pipeline state
+- task_id: `STATE-RECONCILIATION-20261122-001`
+- status: **Proven** for the evidence-backed state-structure reconciliation after read-back; Notion inventory remains **Blocked**.
+- created_at: `2026-11-22`
+- objective: Resolve the apparent phase/next-action conflict without discarding either workstream's recorded state.
+- source observations:
+  - `state/checkpoints/latest.json` points to `CKPT-20261122-015`, whose phase is `account_workspace_inventory`.
+  - `state/session-state.json` activeTask phase is `account_workspace_inventory`; its nextAction matches the latest checkpoint's Notion eligibility gate.
+  - The session-level `currentPhase` and `nextAction` previously described the separate course-data pipeline (`phase_5_approval_gated_sync`), whose status remains `Blocked` in `state/phase-status.json`.
+  - The evidence supports two distinct workstreams, not a change in either workstream's underlying status.
+- reconciliation:
+  - Set session-level `currentPhase` and `nextAction` to the active checkpoint/activeTask track: `account_workspace_inventory`.
+  - Preserve the course-data pipeline as an explicitly separate `parallelWorkstreams.course_data_pipeline` record, retaining its Blocked status, action, blocker, and missing inputs.
+  - Preserve `activeTask`, overall Blocked status, phase-status history, last-run history, and all prior checkpoints.
+- scope: state metadata only. No course records, approvals, Notion data, sync configuration, workflow definitions, or business data changed.
+- workflow name / run ID: Not applicable; no GitHub Actions workflow was dispatched.
+- next safe action: Resume read-only Notion inspection only when an eligible linked account or authorization flow is available. Course-data sync remains independently blocked pending real provenance-backed records and explicit approval.
