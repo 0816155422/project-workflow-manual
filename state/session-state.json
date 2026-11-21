@@ -3,8 +3,8 @@
   "repository": "0816155422/project-workflow-manual",
   "repositoryId": 1432201372,
   "branch": "main",
-  "updatedAt": "2026-11-08",
-  "currentPhase": "phase_5_approval_gated_sync",
+  "updatedAt": "2026-11-22",
+  "currentPhase": "account_workspace_inventory",
   "overallStatus": "Blocked",
   "lastRun": {
     "workflow": "Validate OpenAI research evidence",
@@ -13,7 +13,7 @@
     "commitSha": "97e582145e1f3e8b7bde26b5d3de60df74d4b090",
     "url": "https://github.com/0816155422/project-workflow-manual/actions/runs/40625614203"
   },
-  "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+  "nextAction": "Resume read-only Notion inspection when an eligible linked account becomes available or an authorization flow is presented; verify workspace ID and display name.",
   "notes": [
     "No state files existed before this audit; initialized without deleting prior logs.",
     "No real approved course dataset is present, so sync remains blocked.",
@@ -36,14 +36,12 @@
     "2026-11-08: Read-only Notion tool access attempt blocked. Tool-access inspection, self lookup, and search each returned 'link_id must identify an eligible linked account'; no user-facing approval/sign-in prompt or recovery URL surfaced. Checkpoint 014 records the blocker."
   ],
   "status": "Blocked",
-  "current_phase": "phase_5_approval_gated_sync",
+  "current_phase": "account_workspace_inventory",
   "last_verified_phase": "resume_state_guard_skill",
-  "next_action": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
-  "blocker": "No verified real course records, source URL/provenance, or explicit authorized approval; sync must remain blocked.",
+  "next_action": "Resume read-only Notion inspection when an eligible linked account becomes available or an authorization flow is presented; verify workspace ID and display name.",
+  "blocker": "Notion connector is not currently eligible; historical read-only calls returned 'link_id must identify an eligible linked account'.",
   "missing_inputs": [
-    "real_course_records",
-    "source_url_provenance",
-    "approval_note"
+    "eligible_notion_link_or_authorization_flow"
   ],
   "evidence_ref": [
     "state/checkpoints/CKPT-20261028-004.json (blob SHA 21687f1592ffd397a8cd1336060e491ca6ffd87f)",
@@ -53,7 +51,11 @@
     "logs/operation-log.md (final read-back blob SHA fdc4bacc5f0ad2909b889d7133369081084988d4)",
     "logs/workflow-evidence.md (final read-back blob SHA 82f86cb41765d69dacdd9b8c27bcb258a8bbed84)",
     "skills/resume-state-guard/SKILL.md (blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df)",
-    "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25"
+    "ResumeStateGuard plugin release pluginrel_6ae1712fe9d88191b456b28f0298be25",
+    "state/checkpoints/CKPT-20261122-015.json",
+    "state/checkpoints/CKPT-20261122-016.json",
+    "state/checkpoints/latest.json",
+    "logs/operation-log.md#OP-20261122-RESUMESTATEGUARD-RECONCILIATION-001"
   ],
   "activeTask": {
     "taskId": "ACCOUNT-WORKSPACE-INVENTORY-001",
@@ -68,5 +70,23 @@
       "logs/workflow-evidence.md",
       "state/checkpoints/CKPT-20261108-014.json"
     ]
-  }
+  },
+  "parallelWorkstreams": {
+    "course_data_pipeline": {
+      "phase": "phase_5_approval_gated_sync",
+      "status": "Blocked",
+      "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+      "blocker": "No verified real course records, source URL/provenance, or explicit authorized approval; sync must remain blocked.",
+      "missing_inputs": [
+        "real_course_records",
+        "source_url_provenance",
+        "approval_note"
+      ],
+      "evidence_ref": [
+        "state/phase-status.json#phase_5_approval_gated_sync",
+        "pending/course/course-source.json (historical read-back in phase-status evidence)"
+      ]
+    }
+  },
+  "reconciliationNote": "currentPhase/nextAction describe the activeTask and latest checkpoint. The course_data_pipeline is an independent parallel workstream whose Blocked status, blocker, missing inputs, and next action are preserved in parallelWorkstreams.course_data_pipeline."
 }
