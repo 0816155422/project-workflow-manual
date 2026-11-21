@@ -9,15 +9,16 @@
   "phase": "account_workspace_inventory",
   "status": "Proven",
   "operationStatus": "Proven",
-  "summary": "State reconciliation verified: active account_workspace_inventory task is now the session current phase; the separate course_data_pipeline state remains explicitly Blocked and preserved.",
+  "summary": "State reconciliation verified by read-back: active account_workspace_inventory task is the session current phase; the independent course_data_pipeline remains Blocked and preserved.",
   "evidence": [
     "state/checkpoints/CKPT-20261122-016.json blob SHA a0f101a8af577c4f4c752feb3a13848348b4d5d7",
     "logs/operation-log.md#OP-20261122-RESUMESTATEGUARD-RECONCILIATION-001; read-back blob SHA 67347ac5f35e64850220abce3b5e8a30662b06cf",
     "state/phase-status.json blob SHA 6e6239fbcd69bfb9476640c4ca785b37d7c7ef37",
-    "Previous checkpoint CKPT-20261122-015 retained unchanged."
+    "Previous checkpoint CKPT-20261122-015 retained unchanged.",
+    "state/session-state.json reconciled and read back; blob SHA 92a9cf271e0125f7abc8d5f556b3da40add041ab"
   ],
   "next_phase": "account_workspace_inventory",
-  "next_action": "Update session-state.json to align its currentPhase and nextAction with the activeTask/checkpoint, while preserving course_data_pipeline in parallelWorkstreams; then read back all changed and required files.",
+  "next_action": "Resume read-only Notion inspection only when an eligible linked account becomes available or an authorization flow is presented; verify workspace ID and display name. Keep course-data sync blocked until real provenance-backed records and explicit authorized approval exist.",
   "previousCheckpoint": {
     "checkpointId": "CKPT-20261108-014",
     "checkpointPath": "state/checkpoints/CKPT-20261108-014.json"
