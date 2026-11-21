@@ -1,0 +1,31 @@
+{
+  "checkpoint_no": 15,
+  "checkpointId": "CKPT-20261122-015",
+  "timestamp": "2026-11-22T06:47:00+07:00",
+  "phase": "account_workspace_inventory",
+  "status": "Inconclusive",
+  "summary": "ResumeStateGuard read-only validation: required reads, latest checkpoint resolution, checkpoint inventory, and skill contract checks passed. State sources conflict on currentPhase and nextAction; no automatic repair was made.",
+  "evidence": [
+    "logs/operation-log.md#OP-20261122-RESUMESTATEGUARD-VALIDATION-001",
+    "operation-log blob SHA f1039aabcd0d5157a00882bc22e1bf13ca85ef44",
+    "All six required state/log files read from main at pre-test HEAD e686cdc6f16c8202dce402ac802695ae5a6e9be9",
+    "state/checkpoints/CKPT-20261108-014.json read-back blob SHA d553cb8addb412bc8699da84b5e72b70293dab74",
+    "skills/resume-state-guard/SKILL.md read-back blob SHA f92a9b319b5c9a7fa013a38a9a4908d52ce269df",
+    "No workflow was dispatched; no run ID exists."
+  ],
+  "next_phase": "account_workspace_inventory",
+  "next_action": "Resolve the stale session-state currentPhase/nextAction conflict with a scoped, evidence-preserving state reconciliation; then rerun readCurrentState. Resume read-only Notion inspection only when an eligible linked account or authorization flow is available.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261108-014",
+    "checkpointPath": "state/checkpoints/CKPT-20261108-014.json"
+  },
+  "conflicts": [
+    "session-state.currentPhase=phase_5_approval_gated_sync conflicts with checkpoint.phase=account_workspace_inventory and activeTask.phase=account_workspace_inventory.",
+    "session-state.nextAction refers to real course records/approval; activeTask.nextAction and checkpoint.next_action refer to eligible Notion linked-account availability."
+  ],
+  "blocker": "Notion connector is not currently eligible; historical call returned 'link_id must identify an eligible linked account'.",
+  "missing_inputs": [
+    "eligible_notion_link_or_authorization_flow",
+    "state_phase_and_next_action_reconciliation"
+  ]
+}
