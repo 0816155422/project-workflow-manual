@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "checkpoint_no": 16,
+  "checkpointId": "CKPT-20261122-016",
+  "timestamp": "2026-11-22",
+  "repository": "0816155422/project-workflow-manual",
+  "branch": "main",
+  "phase": "account_workspace_inventory",
+  "status": "Proven",
+  "operationStatus": "Proven",
+  "summary": "Reconciled session state by separating the active account_workspace_inventory task from the independent course_data_pipeline workstream. Both underlying blockers and their next actions are preserved; no business or external platform data was changed.",
+  "evidence": [
+    "state/session-state.json pre-reconciliation blob SHA 91d745dfe2620f03e4df4073499ae1c733adcc53",
+    "state/phase-status.json blob SHA 6e6239fbcd69bfb9476640c4ca785b37d7c7ef37; both phase_5_approval_gated_sync and account_workspace_inventory are Blocked",
+    "state/checkpoints/CKPT-20261122-015.json blob SHA 2c655b5f9c1e04c755a69f77e34d8c844415892f",
+    "state/checkpoints/CKPT-20261108-014.json blob SHA d553cb8addb412bc8699da84b5e72b70293dab74",
+    "logs/operation-log.md entry OP-20261122-RESUMESTATEGUARD-RECONCILIATION-001 read back; blob SHA 67347ac5f35e64850220abce3b5e8a30662b06cf",
+    "No workflow was dispatched; no run ID exists."
+  ],
+  "next_phase": "account_workspace_inventory",
+  "next_action": "Resume read-only Notion inspection only when an eligible linked account becomes available or an authorization flow is presented; verify workspace ID and display name. The separate course_data_pipeline remains Blocked pending real course records, provenance, and explicit authorized approval.",
+  "previousCheckpoint": {
+    "checkpointId": "CKPT-20261122-015",
+    "checkpointPath": "state/checkpoints/CKPT-20261122-015.json"
+  },
+  "reconciliation": {
+    "currentPhase": "account_workspace_inventory",
+    "activeTaskPhase": "account_workspace_inventory",
+    "currentNextAction": "Aligned with activeTask.nextAction.",
+    "parallelWorkstreams": {
+      "course_data_pipeline": {
+        "phase": "phase_5_approval_gated_sync",
+        "status": "Blocked",
+        "nextAction": "Collect real course records with source URL/provenance and explicit authorized approval; validate before any sync.",
+        "blocker": "No verified real course records, source URL/provenance, or explicit authorized approval.",
+        "missing_inputs": [
+          "real_course_records",
+          "source_url_provenance",
+          "approval_note"
+        ]
+      }
+    }
+  }
+}
